@@ -1,0 +1,14 @@
+transformers
+datasets
+accelerate
+bitsandbytes
+sentence-transformers
+spacy
+rouge_score
+bert_score
+langchain
+langchain-community
+langchain-huggingface
+huggingface_hub
+numpy<2.0
+scipy>1.10
