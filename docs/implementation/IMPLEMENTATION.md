@@ -22,44 +22,31 @@ Typical student projects fail because they exist as a single, giant `.ipynb` fil
 ### 1.2 Detailed Directory Tree
 
 ```
-DNLP-Project/
-├── src/
-│   ├── __init__.py
-│   ├── config.py                      # Global parameters (paths, model names, thresholds)
-│   │
-│   ├── data/
-│   │   ├── __init__.py
-│   │   ├── wits_loader.py             # WITS dataset loader (Extension 2)
-│   │   ├── labeling.py                # Semantic label generation (Extension 1)
-│   │   └── fuzzy_labeling.py          # Original fuzzy baseline for comparison
-│   │
-│   ├── models/
-│   │   ├── __init__.py
-│   │   ├── sigext_model.py            # XLM-R Longformer wrapper
-│   │   └── llm_wrapper.py             # Llama-3 4-bit wrapper
-│   │
-│   ├── training/
-│   │   ├── __init__.py
-│   │   └── sigext_trainer.py          # HF Trainer with Weighted Loss
-│   │
-│   ├── inference/
-│   │   ├── __init__.py
-│   │   └── generator.py               # LangChain orchestration
-│   │
-│   ├── evaluation/
-│   │   ├── __init__.py
-│   │   └── metrics.py                 # ROUGE, BERTScore, KIR, AlignScore
-│   │
-│   └── utils/
-│       ├── __init__.py
-│       └── text_processing.py         # Italian sentence segmentation (Spacy)
+DNLPProj/
+├── docs/
+│   ├── implementation/
+│   │   ├── GUIDE.md                   # High-level implementation guide
+│   │   ├── IMPLEMENTATION.md          # This document - detailed technical guide
+│   │   └── REPORT.md                  # Final project report
+│   └── starting-paper/                # Original SIP paper reference
 │
-├── notebooks/
-│   ├── modulo1_architecture.ipynb     # Longformer architecture tests
-│   ├── modulo2_semantic_labels.ipynb  # Extension 1: Semantic labeling
-│   ├── modulo3_training.ipynb         # SigExt training
-│   ├── modulo4_italian.ipynb          # Extension 2: Italian adaptation
-│   └── master_evaluation.ipynb        # Final comparison: Baseline vs Fuzzy vs Semantic
+├── extension-italian-wits-semantic/   # Extension 2: Italian + Semantic Supervision
+│   ├── data/                          # WITS dataset and generated labels
+│   ├── training-sigext-10k.ipynb      # SigExt training (10k samples)
+│   ├── training-sigext-25k.ipynb      # SigExt training (25k samples)
+│   ├── inference-zero-shot.ipynb      # Zero-shot summarization
+│   └── inference-few-shot.ipynb       # Few-shot summarization
+│
+├── extension-english-arxiv-semantic/  # Extension 1: English ArXiv (placeholder)
+│   └── .gitkeep
+│
+├── reports/                           # Experiment outputs and visualizations
+│   └── .gitkeep
+│
+├── .env                               # Environment variables (HF tokens)
+├── .gitignore
+├── README.md
+└── requirements.txt                   # Python dependencies
 ```
 
 -----
@@ -303,48 +290,12 @@ def threshold_sweep_experiment(sample_data: List[Tuple[str, str]]):
     return results
 ```
 
-### 3.3 Fuzzy Baseline for Comparison: `src/data/fuzzy_labeling.py`
-
-```python
-"""
-Fuzzy Labeling (Original Paper Method)
-======================================
-This implements the ORIGINAL paper's labeling method.
-We use this as a BASELINE to compare against our semantic method.
-"""
-
-from fuzzywuzzy import fuzz
-from typing import List, Tuple
-
-def fuzzy_label(
-    source_sentences: List[str], 
-    summary_sentences: List[str],
-    threshold: float = 0.70
-) -> List[int]:
-    """
-    Original paper's labeling method.
-    
-    For each source sentence, compute fuzzy ratio with all summary sentences.
-    If max ratio > threshold, label as 1.
-    """
-    labels = []
-    for src_sent in source_sentences:
-        max_score = 0
-        for sum_sent in summary_sentences:
-            # Character-level fuzzy matching
-            score = fuzz.ratio(src_sent.lower(), sum_sent.lower()) / 100.0
-            max_score = max(max_score, score)
-        labels.append(1 if max_score > threshold else 0)
-    return labels
-```
-
-### 3.4 Notebook: `notebooks/modulo2_semantic_labels.ipynb`
+### 3.3 Notebook Experiments
 
 Key experiments to run:
 1. **Threshold Sweep:** Test θ ∈ {0.50, 0.55, 0.60, 0.65, 0.70}
 2. **Distribution Analysis:** Plot histogram of salient vs non-salient sentences
 3. **Qualitative Check:** Manually verify 20 random labels for correctness
-4. **Comparison:** Generate both Fuzzy and Semantic labels for same 1000 documents, compare overlap
 
 -----
 
