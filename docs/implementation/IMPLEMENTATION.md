@@ -31,11 +31,24 @@ DNLPProj/
 │   └── starting-paper/                # Original SIP paper reference
 │
 ├── extension-italian-wits-semantic/   # Extension 2: Italian + Semantic Supervision
-│   ├── data/                          # WITS dataset and generated labels
-│   ├── training-sigext-10k.ipynb      # SigExt training (10k samples)
-│   ├── training-sigext-25k.ipynb      # SigExt training (25k samples)
-│   ├── inference-zero-shot.ipynb      # Zero-shot summarization
-│   └── inference-few-shot.ipynb       # Few-shot summarization
+│   ├── training/                      # SigExt training notebooks
+│   │   ├── training-sigext-10k-060t.ipynb  # 10k samples, threshold 0.60
+│   │   ├── training-sigext-25k-060t.ipynb  # 25k samples, threshold 0.60
+│   │   ├── training-sigext-25k-065t.ipynb  # 25k samples, threshold 0.65
+│   │   └── training-sigext-25k-070t.ipynb  # 25k samples, threshold 0.70
+│   └── inference/                     # Inference notebooks organized by model
+│       ├── 10k-60t/                   # Inference for 10k samples, threshold 0.60
+│       │   ├── inference-zero-shot.ipynb
+│       │   └── inference-few-shot.ipynb
+│       ├── 25k-60t/                   # Inference for 25k samples, threshold 0.60
+│       │   ├── inference-zero-shot.ipynb
+│       │   └── inference-few-shot.ipynb
+│       ├── 25k-65t/                   # Inference for 25k samples, threshold 0.65
+│       │   ├── inference-zero-shot.ipynb
+│       │   └── inference-few-shot.ipynb
+│       └── 25k-70t/                   # Inference for 25k samples, threshold 0.70
+│           ├── inference-zero-shot.ipynb
+│           └── inference-few-shot.ipynb
 │
 ├── extension-english-arxiv-semantic/  # Extension 1: English ArXiv (placeholder)
 │   └── .gitkeep
