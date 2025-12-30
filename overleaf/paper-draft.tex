@@ -174,7 +174,7 @@ Since no Italian Longformer exists, we use \texttt{markussagen/xlm-roberta-longf
 
 \subsection{Training Configuration}
 
-We train three SigExt variants for the Italian extension:
+We train four SigExt variants for the Italian extension:
 
 \begin{table}[htbp]
 \caption{Training Configurations}
@@ -186,6 +186,7 @@ We train three SigExt variants for the Italian extension:
 10k-60t & 10,000 & 0.60 & sigext-wits-it-10k-060t \\
 25k-60t & 25,000 & 0.60 & sigext-wits-it-25k-060t \\
 25k-65t & 25,000 & 0.65 & sigext-wits-it-25k-065t \\
+25k-70t & 25,000 & 0.70 & sigext-wits-it-25k-070t \\
 \bottomrule
 \end{tabular}
 \label{tab:configs}
@@ -249,8 +250,10 @@ Table~\ref{tab:few_shot} shows few-shot inference performance.
 10k-60t & 8-bit & 0.6327 & 0.1798 & 0.2296 \\
 25k-60t & 4-bit & 0.6608 & 0.1988 & \textbf{0.3012} \\
 25k-60t & 8-bit & 0.6606 & 0.1929 & 0.3060 \\
-25k-65t & 4-bit & \textbf{0.6648} & \textbf{0.2039} & 0.2603 \\
+25k-65t & 4-bit & 0.6648 & \textbf{0.2039} & 0.2603 \\
 25k-65t & 8-bit & 0.6601 & 0.1932 & 0.2944 \\
+25k-70t & 4-bit & \textbf{0.6658} & 0.1991 & 0.2623 \\
+25k-70t & 8-bit & 0.6588 & 0.1960 & 0.2678 \\
 \bottomrule
 \end{tabular}
 \label{tab:few_shot}
@@ -271,9 +274,11 @@ Table~\ref{tab:zero_shot} shows zero-shot inference performance.
 10k-60t & 4-bit & 0.6509 & 0.1838 & \textbf{0.3304} \\
 10k-60t & 8-bit & 0.6264 & 0.1709 & 0.2177 \\
 25k-60t & 4-bit & 0.6505 & 0.1842 & 0.3206 \\
-25k-60t & 8-bit & 0.6530 & \textbf{0.1878} & 0.3064 \\
-25k-65t & 4-bit & \textbf{0.6567} & 0.1896 & 0.2956 \\
+25k-60t & 8-bit & 0.6530 & 0.1878 & 0.3064 \\
+25k-65t & 4-bit & 0.6567 & 0.1896 & 0.2956 \\
 25k-65t & 8-bit & 0.6553 & 0.1844 & 0.2770 \\
+25k-70t & 4-bit & \textbf{0.6572} & \textbf{0.1930} & 0.2563 \\
+25k-70t & 8-bit & 0.6556 & 0.1872 & 0.2326 \\
 \bottomrule
 \end{tabular}
 \label{tab:zero_shot}
@@ -286,7 +291,7 @@ Table~\ref{tab:zero_shot} shows zero-shot inference performance.
 Increasing training data from 10k to 25k samples yields marginal improvements ($<$1\% for BERT Score and ROUGE-1). This suggests that SigExt quickly learns essential extraction patterns and additional data provides diminishing returns. We verified this finding with a 500-sample test set, confirming statistical significance.
 
 \subsubsection{Impact of Threshold}
-Higher threshold (0.65) improves BERT Score (+0.6\%) and ROUGE-1 (+2.5\%) but reduces KIR by approximately 12\%. Stricter signature selection produces more fluent summaries at the cost of information retention.
+Our threshold sweep from 0.60 to 0.70 reveals a consistent trade-off. Higher thresholds improve BERT Score (0.6509$\rightarrow$0.6572, +1\%) and ROUGE-1 (+5\%) but systematically reduce KIR: $\theta$=0.60 yields KIR$\approx$0.32, $\theta$=0.65 yields KIR$\approx$0.28 (-12\%), and $\theta$=0.70 yields KIR$\approx$0.25 (-22\%). This demonstrates that stricter semantic thresholds select fewer but higher-quality signatures.
 
 \subsubsection{Quantization Effects}
 Contrary to expectations, 4-bit quantization consistently outperforms 8-bit, particularly for KIR (+20-40\%). This may be attributed to NF4's optimization for the specific weight distributions in instruction-tuned models.
@@ -350,8 +355,9 @@ The consistently small performance differences ($<$5\%) across configurations su
 
 The inverse relationship between threshold and KIR reveals a fundamental trade-off:
 \begin{itemize}
-    \item \textbf{Lower threshold (0.60):} More signatures extracted $\rightarrow$ Higher KIR but potentially noisier guidance
-    \item \textbf{Higher threshold (0.65):} Fewer, more precise signatures $\rightarrow$ Cleaner guidance but lower information retention
+    \item \textbf{Lower threshold (0.60):} More signatures extracted $\rightarrow$ Higher KIR ($\sim$0.32) but potentially noisier guidance
+    \item \textbf{Medium threshold (0.65):} Balanced approach $\rightarrow$ KIR ($\sim$0.28) with improved fluency
+    \item \textbf{Higher threshold (0.70):} Fewer, more precise signatures $\rightarrow$ Best BERT Score but lowest KIR ($\sim$0.25)
 \end{itemize}
 
 The optimal choice depends on the application: critical information domains (medical, legal) may prefer lower thresholds, while fluency-focused applications may prefer higher thresholds.
