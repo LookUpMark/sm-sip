@@ -1,0 +1,384 @@
+{
+  "run_info": {
+    "timestamp": "2025-12-31T11:32:36.547142",
+    "sigext_model": "LookUpMark/sigext-wits-it-10k-060t",
+    "llm_model": "meta-llama/Llama-3.1-8B-Instruct",
+    "num_samples": 10,
+    "prompt_type": "optimized_abstractive_v2"
+  },
+  "metrics": {
+    "bert": {
+      "mean": 0.6561357855796814,
+      "std": 0.04587727372355417
+    },
+    "rouge": {
+      "mean": 0.1914841873027151,
+      "std": 0.0815046508660647
+    },
+    "kir": {
+      "mean": 0.47474969474969486,
+      "std": 0.3092847419733007
+    },
+    "abstraction": {
+      "mean": 0.8120197908252905,
+      "std": 0.1307067455566745
+    },
+    "compression": {
+      "mean": 0.2628058944933727,
+      "std": 0.12165868484408698
+    },
+    "novel_ngrams": {
+      "mean": 0.6763353642764989,
+      "std": 0.17090679721138083
+    },
+    "judge_faithfulness": {
+      "mean": 4.0,
+      "std": 0.0
+    },
+    "judge_completeness": {
+      "mean": 3.9,
+      "std": 0.3
+    },
+    "judge_conciseness": {
+      "mean": 3.0,
+      "std": 0.4472135954999579
+    },
+    "judge_abstraction": {
+      "mean": 2.1,
+      "std": 0.3
+    },
+    "judge_overall": {
+      "mean": 3.25,
+      "std": 0.22360679774997896
+    }
+  },
+  "samples": [
+    {
+      "source": "''1,039/Smoothed Out Slappy Hours'' raccoglie i pezzi del primo album ''39/Smooth'', ed i pezzi dei due EP ''1,000 Hours'' e ''Slappy'', più l'inedita ''I Want to Be Alone'', presente nella compilation ''The Big One: San Francisco/Los Angeles''.\n\nPubblicato dalla Lookout! Records, questa compilation presenta ancora il batterista Al Sobrante, alias John Kiffmeyer, che successivamente decise di lasciare la band per frequentare il college.\n\nL'album è stato pubblicato nel 1991, anche se c'è traccia ...",
+      "reference": "\n\n\n'''''1,039/Smoothed Out Slappy Hours''''' è una compilation della punk rock band statunitense Green Day, pubblicata nel 1991 dalla Lookout! Records.\n",
+      "salient_sentences": [
+        "''1,039/Smoothed Out Slappy Hours'' raccoglie i pezzi del primo album ''39/Smooth'', ed i pezzi dei due EP ''1,000 Hours'' e ''Slappy'', più l'inedita ''I Want to Be Alone'', presente nella compilation ''The Big One:",
+        "San Francisco/Los Angeles''.",
+        "Pubblicato dalla Lookout!",
+        "Records, questa compilation presenta ancora il batterista Al Sobrante, alias John Kiffmeyer, che successivamente decise di lasciare la band per frequentare il college.",
+        "L'album è stato pubblicato nel 1991, anche se c'è traccia di un avviso copyright del 1990, e molte fonti citano il 1990 come data di pubblicazione dell'album.",
+        "Nell'agosto del 2005, il gruppo ha ritirato tutto il suo catalogo discografico precedente al 1994 dall'etichetta Lookout!",
+        "Il 9 gennaio 2007 è stato riedito dalla nuova etichetta discografica.",
+        "Nel pezzo ''409 in your coffeemaker'' Billie Joe Armstrong racconta di una volta in cui lui e Mike Dirnt hanno messo una dose di 409, un detergente potentissimo nella macchina da caffè del loro professore.",
+        "Testi di Billie Joe Armstrong e musiche di Billie Joe Armstrong, Mike Dirnt e John Kiffmeyer, eccetto dove è indicato.",
+        "John Kiffmeyer – musica:",
+        "Operation Ivy) – cover degli Operation Ivy\n# ''1,000 Hours'' – 2:26\n# ''Dry Ice ''– 3:45\n# ''Only of You'' – 2:46\n# ''The One I Want'' – 3:01 (testo:",
+        "Billie Joe Armstrong, Mike Dirnt – musica:",
+        "Billie Joe Armstrong, Mike Dirnt, John Kiffmeyer)\n# ''I Want to Be Alone'' – 3:09\n\n* Billie Joe Armstrong - voce, chitarra\n* Mike Dirnt - basso, cori\n* John Kiffmeyer - batteria, percussioni, cori"
+      ],
+      "generated_summary": "1,039/Smoothed Out Slappy Hours è una compilation di Green Day che raccoglie i pezzi del primo album 39/Smooth, dei due EP 1,000 Hours e Slappy, più l'inedita I Want to Be Alone. Pubblicato dalla Lookout! Records nel 1991, presenta il batterista Al Sobrante, alias John Kiffmeyer, che successivamente lascia la band per frequentare il college. L'album è stato ristampato nel 2004 e ha venduto oltre mezzo milione di copie in America, prima di essere ritirato nel 2005 dalla Lookout! Records per mancanza di pagamenti delle royalties alla band. Nel 2007 è stato riedito da una nuova etichetta discografica. Il pezzo 409 in your coffeemaker racconta una storia di Billie Joe Armstrong e Mike Dirnt che mettono un detergente potente nella macchina da caffè del loro professore.",
+      "scores": {
+        "bert": 0.7034103870391846,
+        "rouge": 0.21333333333333335,
+        "kir": 0.6923076923076923,
+        "abstraction": 0.6935483870967742,
+        "compression": 0.3556985294117647,
+        "novel_ngrams": 0.528,
+        "judge": {
+          "faithfulness": 4,
+          "completeness": 4,
+          "conciseness": 3,
+          "abstraction": 2
+        }
+      }
+    },
+    {
+      "source": "Mancano notizie sulla prima parte della vita e sulla sua formazione iniziale. Entrato nell'ordine dei gesuiti venne inviato dall'ordine a Roma nel 1597, per perfezionare i suoi studi di architettura, forse iniziati a Messina, visto al momento della sua chiamata presso la sede centrale dell'ordine aveva già un'età matura. Probabilmente quindi Masuccio ebbe modo di avviare la sua prima formazione in un ambiente culturale molto vivace, come era l'ordine gesuitico a Messina, e può essere stato in co...",
+      "reference": "Il portale del Monte di Pietà a Messina\n\nFu uno degli architetti più importanti in Sicilia nel passaggio tra il manierismo ed il barocco.\n",
+      "salient_sentences": [
+        "Entrato nell'ordine dei gesuiti venne inviato dall'ordine a Roma nel 1597, per perfezionare i suoi studi di architettura, forse iniziati a Messina, visto al momento della sua chiamata presso la sede centrale dell'ordine aveva già un'età matura.",
+        "Probabilmente quindi Masuccio ebbe modo di avviare la sua prima formazione in un ambiente culturale molto vivace, come era l'ordine gesuitico a Messina, e può essere stato in contatto con Andrea Calamech, che collaborò anche con i gesuiti e che aveva portato a Messina i modi del manierismo toscano, che influenzarono e caratterizzarono l'opera di Masuccio.",
+        "Altrettanto evidente l'influsso dello stile michelangiolesco di Giacomo Del Duca attivo a Messina nell'ultimo decennio del secolo.",
+        "Non è comunque escluso che Masuccio abbia compiuto un viaggio a Roma anche prima del 1597.",
+        "A Roma Masuccio ebbe modo di consolidare la sua formazione tecnica, di conoscere le più recenti ricerche architettoniche che spaziavano fino ai primi episodi barocchi e di essere a contatto con personalità come Giacomo della Porta.",
+        "Nel travagliato viaggio di ritorno fu catturato dai corsari e poi liberato da una nave dei Cavalieri di Malta con i quali giunse a La Valletta dove gli sono attribuiti progetti d'idraulica.",
+        "Al suo ritorno in Sicilia nel 1602 venne utilizzato nella progettazione e nella supervisione dei lavori relativi alle realizzazioni edilizie dei gesuiti, come era consuetudine dell'ordine, divenendo il primo architetto della Provincia gesuitica di Sicilia.",
+        "Risulta documentata la sua attività per il cantiere del collegio di Caltanissetta, per il progetto di quello di Mineo e per il cantiere del noviziato dei gesuiti al noviziato al monte Tirone a Messina.",
+        "Nel 1603 è a Palermo dove interviene significativamente sul cantiere della chiesa della sede palermitana dei gesuiti, la cosiddetta ''Casa Professa''.",
+        "Nello stesso periodo progetta il noviziato di Palermo in cui utilizza il consolidato schema gesuitico basato su due cortili interni.",
+        "Uno dei suoi primi incarichi fu anche la progettazione del collegio dei gesuiti di Messina,  prototipo per tutti gli altri che venivano costruiti nell'isola, caratterizzati da un modello severo, con semplici lesene e fasce marcapiano, ed in cui il rilievo plastico è concentrato esclusivamente nel portale d'ingresso.",
+        "Lavorò esclusivamente in Sicilia e oltre che a Messina e Palermo, realizzò opere anche a Trapani, Sciacca e altrove.",
+        "Nel 1616, a seguito di un violento contrasto con il Padre provinciale, venne espulso dall'ordine, divenne architetto del Senato messinese che già nel 1611 lo aveva incaricato di realizzare un nuovo acquedotto cittadino e nello stesso anno progettò la sua opera più conosciuta, il Monte di Pietà di Messina che, compiuto per quel che riguarda il piano terra, fu completato dopo la sua morte e di cui rimagono alcuni resti, unica testimonianza, insieme al portale del collegio gesuitico, delle sue opere messinesi, per il resto completamente distrutte dal terremoto del 1908.\n\n\n* ''Chiesa di San Nicolò dei Gentiluomini'' lavori di ristrutturazione della primitiva sede gesuitica, 1595.\n* ''Collegio e chiesa dei Gesuiti'' di Caltanissetta, 1602.\n* ''Collegio e chiesa dei Gesuiti'' di Mineo, progetto (1600 - 1602).",
+        "* ''Noviziato di Monte Tirone'' o Casa di Prima Probazione e Noviziato dei Padri Gesuiti sotto il titolo di «''Santa Maria della Natività''» al monte Tirone, progetto, 1603.\n\n* Progetto di trasformazione della ''chiesa di Casa Professa'' a Palermo (1603 - 1606).",
+        "Intervenenedo sul cantiere già avviato, dimostrò autonomia culturale ed autorevolezza, modificando lo schema planimetrico del primo progetto, conforme al consolidato modello gesuitico della chiesa ad un'unica navata,  eliminando i divisori tra le previste cappelle laterali e trasformando così la pianta della chiesa nello schema a tre navate.",
+        "L'interno diviene, nelle successive trasformazioni, prototipo della fastosità pittorico-decorativa delle chiese gesuitiche e di altri ordini religiosi di Sicilia, soprattutto nella decorazione a marmi mischi che in seguito caratterizzò tutto il barocco siciliano.",
+        "Il collegio dei gesuiti a Messina\n* ''Collegio e chiesa dei Gesuiti'' di Messina (dal 1604, oggi distrutto).",
+        "Fu progettato con il collaudato schema planimetrico a 2 cortili che prevedeva l'ubicazione delle scale all'incrocio dei corpi di fabbrica, i corridoi sui prospetti e le aule e i dormitori sui cortili interni, secondo un modello che la Compagnia definiva “modo nostro” e che derivato dal chiostro benedettino medioevale mirava a rendere collegate e organizzate, pur nella loro autonomia funzionale, le 3 parti dell'edificio:",
+        "quella destinata alle scuole (''area scholarum''), quella per i religiosi (''area collegii'') e quella per la chiesa.",
+        "I resti del palazzo del Monte di Pietà a Messina.\n \n* ''Collegio e chiesa dei Gesuiti'' di Trapani (già iniziata nel 1614 gli viene attribuito pur in assenza di documentazione):",
+        "la facciata  (attribuita da Marco Nobile a Tommaso Blandino) della chiesa ripropone lo spirito di molte chiese tardo-cinquecentesche romane cioè l'ordinato telaio di lesene semplici e binate distribuite in un doppio ordine.",
+        "Ma Masuccio dà un risalto nuovo e vibrante a questo telaio.",
+        "L'architetto attinse al manierismo fiorentino e senese attraverso la mediazione romana (cfr.",
+        "''Collegio dei Gesuiti'' a Noto vecchia (progetto del 1611);",
+        "in stato di rudere a seguito del terremoto del 1693 ed al successivo abbandono dell'intero centro abitato.\n\n* ''Noviziato dei Gesuiti'' e ''Chiesa di San Stanislao Kostka'' a Palermo (1603 - 1607): destinato a quartiere militare dopo la cacciata dei Gesuiti dall'isola nel 1767, fu devastato durante i moti del 1848 e successivamente andò in rovina.",
+        "a La Valletta Malta, opera incompleta, 1610.\n* ''Acquedotto'' a Messina, 1611.\n\n* Il ''Monte di Pietà'' a Messina (a partire dal 1616).",
+        "Progettato su incarico dell'Arciconfraternita degli Azzurri, alla sua morte risultava costruito il solo piano terreno caratterizzato da portale e cantonali a bugne rustiche riferibili al manierismo toscano."
+      ],
+      "generated_summary": "Masuccio è un architetto siciliano del XVI-XVII secolo, il cui percorso professionale è strettamente legato all'ordine dei gesuiti. Entrato nell'ordine nel 1597, si recò a Roma per perfezionare i suoi studi di architettura, dove ebbe modo di consolidare la sua formazione tecnica e di conoscere le più recenti ricerche architettoniche. Tornato in Sicilia, divenne il primo architetto della Provincia gesuitica di Sicilia e si distinse per la sua attività progettuale, realizzando opere significative come il collegio e la chiesa dei gesuiti a Caltanissetta, il noviziato di Monte Tirone e la chiesa di Casa Professa a Palermo. La sua opera più conosciuta è il Monte di Pietà di Messina, progettato nel 1616 e completato dopo la sua morte.",
+      "scores": {
+        "bert": 0.6745620965957642,
+        "rouge": 0.18439716312056736,
+        "kir": 0.2222222222222222,
+        "abstraction": 0.7478260869565218,
+        "compression": 0.11146352514725873,
+        "novel_ngrams": 0.5431034482758621,
+        "judge": {
+          "faithfulness": 4,
+          "completeness": 4,
+          "conciseness": 3,
+          "abstraction": 2
+        }
+      }
+    },
+    {
+      "source": "* '''2284 San Juan''' – asteroide della fascia principale\n\n=== Argentina ===\n* '''San Juan''' – capoluogo dell'omonima provincia\n* '''Provincia di San Juan''' – provincia\n\n=== Colombia ===\n* '''San Juan de Arama''' – comune nel dipartimento di Meta\n* '''San Juan de Betulia''' – comune nel dipartimento di Sucre\n* '''San Juan de Pasto''' – capoluogo del dipartimento di Nariño\n* '''San Juan de Rioseco''' – comune nel dipartimento di Cundinamarca\n* '''San Juan de Urabá''' – comune nel dipartimento d...",
+      "reference": "\n'''San Juan''', in lingua spagnola corrispondente a san Giovanni, può significare:\n",
+      "salient_sentences": [
+        "* '''2284 San Juan''' – asteroide della fascia principale\n\n=== Argentina ===\n* '''San Juan''' – capoluogo dell'omonima provincia\n* '''Provincia di San Juan''' – provincia\n\n=== Colombia ===\n* '''San Juan de Arama''' – comune nel dipartimento di Meta\n* '''San Juan de Betulia''' – comune nel dipartimento di Sucre\n* '''San Juan de Pasto''' – capoluogo del dipartimento di Nariño\n* '''San Juan de Rioseco''' – comune nel dipartimento di Cundinamarca\n* '''San Juan de Urabá''' – comune nel dipartimento di Antioquia\n* '''San Juan del Cesar''' – comune del dipartimento di La Guajira\n* '''San Juan Nepomuceno''' – comune del dipartimento di Bolívar\n\n=== Costa Rica ===\n* '''San Juan''' – distretto capoluogo del cantone di Tibás\n* '''San Juan''' – distretto del cantone di Abangares\n* '''San Juan''' – distretto del cantone di La Unión\n* '''San Juan''' – distretto del cantone di Naranjo\n* '''San Juan''' – distretto del cantone di Poás\n* '''San Juan''' – distretto del cantone di San Ramón\n* '''San Juan''' – distretto del cantone di Santa Bárbara\n* '''San Juan de Dios''' – distretto del cantone di Desamparados\n* '''San Juan de Mata''' – distretto del cantone di Turrubares\n* '''San Juan Grande''' – distretto del cantone di Esparza\n\n=== Cuba ===\n* '''Colle San Juan''' – teatro di battaglia della guerra ispano-americana\n\n=== Repubblica Dominicana ===\n* '''San Juan''' – provincia\n* '''San Juan de la Maguana''' – città\n\n=== El Salvador ===\n* '''San Juan Nonualco''' – città del dipartimento di La Paz.\n* '''San Juan Talpa''' – città del dipartimento di La Paz.\n* '''San Juan Tepezontes''' – città del dipartimento di La Paz.",
+        "=== Filippine ===\n* '''San Juan''' – città dell'area metropolitana di Manila.\n* '''San Juan''' – municipalità della Provincia di Abra\n* '''San Juan''' – municipalità della Provincia di Batangas\n* '''San Juan''' – municipalità della Provincia di Ilocos Sur\n* '''San Juan''' – municipalità della Provincia di La Union\n* '''San Juan''' – municipalità della Provincia di Leyte Meridionale\n* '''San Juan''' – municipalità della Provincia di Siquijor\n\n=== Guatemala ===\n* '''San Juan Alotenango''' – comune del dipartimento di Sacatepéquez\n* '''San Juan Atitán''' – comune del dipartimento di Huehuetenango\n* '''San Juan Bautista''' – comune del dipartimento di Suchitepéquez\n* '''San Juan Chamelco''' – comune del dipartimento di Alta Verapaz\n* '''San Juan Comalapa''' – comune del dipartimento di Chimaltenango\n* '''San Juan Cotzal''' – comune del dipartimento di Quiché\n* '''San Juan Ermita''' – comune del dipartimento di Chiquimula\n* '''San Juan Ixcoy''' – comune del dipartimento di Huehuetenango\n* '''San Juan La Laguna''' – comune del dipartimento di Sololá\n* '''San Juan Olintepeque''' – comune del dipartimento di Quetzaltenango\n* '''San Juan Ostuncalco''' – comune del dipartimento di Quetzaltenango\n* '''San Juan Sacatepéquez''' – comune del dipartimento di Guatemala\n* '''San Juan Tecuaco''' – comune del dipartimento di Santa Rosa\n\n=== Honduras ===\n* '''San Juan''' – comune del dipartimento di Intibucá\n* '''San Juan''' – comune del dipartimento di La Paz\n* '''San Juan de Flores''' – comune del dipartimento di Francisco Morazán\n* '''San Juan de Opoa''' – comune del dipartimento di Copán\n* '''San Juan Guarita''' – comune del dipartimento di Lempira\n\n=== Messico ===\n* '''San Juan (Campeche)''' – città dello stato messicano di Campeche\n* '''San Juan (Chihuahua)''' – città dello stato messicano di Chihuahua\n* '''San Juan (Coahuila)''' – città dello stato messicano di Coahuila\n* '''San Juan (San Luis Potosí)''' – città dello stato messicano di San Luis Potosí\n* '''San Juan (Sonora)''' – città dello stato messicano di Sonora\n* '''San Juan Bautista Tuxtepec''' – città dello stato messicano di Oaxaca\n\n=== Nicaragua ===\n* '''San Juan de Limay''' – comune del dipartimento di Estelí\n* '''San Juan de Nicaragua''' – comune del dipartimento di Río San Juan\n* '''San Juan de Oriente''' – comune del dipartimento di Masaya\n* '''San Juan del Río Coco''' – comune del dipartimento di Madriz\n* '''San Juan del Sur''' – comune del dipartimento di Rivas\n\n=== Panama ===\n* '''San Juan''' – comune del Panama\n\n=== Paraguay ===\n* '''San Juan Bautista''' – capoluogo del dipartimento di Misiones\n* '''San Juan Bautista de Ñeembucú''' – distretto del dipartimento di Ñeembucú\n* '''San Juan del Paraná''' – distretto del dipartimento di Itapúa\n* '''San Juan Nepomuceno''' – città e distretto del dipartimento di Caazapá\n\n=== Perù ===\n* '''San Juan''' – città\n\n=== Porto Rico ===\n* '''San Juan''' – capitale del Commonwealth di Porto Rico.\n\n=== Spagna ===\n* '''San Juan''' – comune delle Baleari\n* '''San Juan de Aznalfarache''' – città dell'Andalusia\n* '''San Juan de Énova''' – città della Comunità Valenzana\n* '''San Juan de Gredos''' – città della Castiglia e León\n* '''San Juan de la Encinilla''' – città della Castiglia e León\n* '''San Juan de la Nava''' – città della Castiglia e León\n* '''San Juan de la Rambla''' – città delle Isole Canarie\n* '''San Juan de Plan''' – città dell'Aragona\n* '''San Juan del Molinillo''' – città della Castiglia e León\n* '''San Juan del Monte''' – città della Castiglia e León\n* '''San Juan del Olmo''' – città della Castiglia e León\n* '''San Juan del Puerto''' – città dell'Andalusia\n\n=== Stati Uniti d'America ===\n* '''San Juan (Alaska)''' – città dell'Alaska\n* '''San Juan (Nuovo Messico)''' – città del Nuovo Messico\n* '''San Juan''' – città della Contea di Hidalgo, Texas\n* '''San Juan''' – census-designated place della Contea di Starr, Texas\n* '''San Juan Islands''' – arcipelago al largo dello stato di Washington\n* '''San Juan Island''' – isola dell'arcipelago suddetto\n* '''Monti San Juan''' – in Colorado\n\n=== Trinidad e Tobago ===\n* '''San Juan''' – città\n\n;",
+        "Argentina\n* '''San Juan'''\n;",
+        "Canada\n* '''San Juan'''\n;",
+        "Colombia\n* '''San Juan'''\n;",
+        "Cuba\n* '''San Juan'''\n;",
+        "Filippine\n* '''San Juan''', immissario del lago Laguna de Bay\n* '''San Juan''', affluente del fiume Pasig\n;",
+        "Guatemala\n* '''San Juan'''\n;",
+        "Messico\n* '''San Juan''', affluente del Rio Grande attraversa gli Stati di Coahuila, Nuevo León e Tamaulipas\n* '''San Juan''', nello Stato di Veracruz\n;",
+        "Nicaragua\n* '''San Juan'''\n;",
+        "Stati Uniti d'America\n* '''San Juan'''\n;",
+        "Uruguay\n* '''San Juan'''\n;",
+        "Venezuela\n* '''San Juan'''\n\n* '''Aeroporto di San Juan''' – disambigua che si riferisce a due aeroporti di Porto Rico.\n* '''Metropolitana di San Juan''' – metropolitana di Porto Rico.\n* '''Porto di San Juan''' – il principale porto di Porto Rico.\n\n* '''San Juan''' – capo Apache\n* '''San Juan''' – gioco di carte per tre o quattro giocatori\n* '''San Juan de Ulúa''' – fortezza messicana\n* '''Sito storico nazionale di San Juan''' – patrimonio dell'UNESCO in Porto Rico\n\n* Saint-Jean\n* San Giovanni\n* Sankt Johann\n* São João"
+      ],
+      "generated_summary": "San Juan è un nome di luogo comune in diverse regioni del mondo, spesso associato a città, province, dipartimenti o comuni. In Argentina, ad esempio, San Juan è il capoluogo di una provincia, mentre in Colombia esistono diversi comuni con questo nome, tra cui San Juan de Arama e San Juan de Pasto. In Costa Rica, San Juan è un distretto capoluogo del cantone di Tibás, mentre in Porto Rico è la capitale del Commonwealth. In Spagna, San Juan è un comune delle Baleari, mentre in Messico esistono città con questo nome in diversi stati, tra cui Campeche e San Luis Potosí. Inoltre, San Juan è anche un nome di luogo comune in altri paesi, come Filippine, Guatemala, Honduras, Nicaragua, Panama, Paraguay, Perù, Stati Uniti d'America e Trinidad e Tobago.",
+      "scores": {
+        "bert": 0.5902847647666931,
+        "rouge": 0.072992700729927,
+        "kir": 0.46153846153846156,
+        "abstraction": 0.9609375,
+        "compression": 0.11157208475329679,
+        "novel_ngrams": 0.8372093023255814,
+        "judge": {
+          "faithfulness": 4,
+          "completeness": 4,
+          "conciseness": 3,
+          "abstraction": 2
+        }
+      }
+    },
+    {
+      "source": "Allegoria del trattato dei Pirenei, «frutto delle vittorie», di Giovanni Francesco Romanelli, dipinto nel palazzo del Louvre\n\nLa pace dei Pirenei pose fine alla guerra fra il regno di Francia e l'impero spagnolo, che era proseguita dopo la pace di Westfalia, cui la Spagna non aveva aderito.\n\nDa una parte la Francia era intervenuta militarmente in Spagna fra il 1640 ed il 1652 a sostegno dei rivoltosi catalani (il che aveva portato all'annessione alla Francia, prima della città di Perpignano e po...",
+      "reference": "\n\nLa '''pace dei Pirenei'''  è un trattato stipulato il 7 novembre 1659 tra Francia e Spagna a chiusura della Guerra franco-spagnola. La pace fu sottoscritta dal generale spagnolo don Luis de Haro e dal cardinale Mazzarino, primo ministro di Francia.\n\nMedaglia del 1660 celebrante la pace\n",
+      "salient_sentences": [
+        "Allegoria del trattato dei Pirenei, «frutto delle vittorie», di Giovanni Francesco Romanelli, dipinto nel palazzo del Louvre\n\nLa pace dei Pirenei pose fine alla guerra fra il regno di Francia e l'impero spagnolo, che era proseguita dopo la pace di Westfalia, cui la Spagna non aveva aderito.",
+        "Da una parte la Francia era intervenuta militarmente in Spagna fra il 1640 ed il 1652 a sostegno dei rivoltosi catalani (il che aveva portato all'annessione alla Francia, prima della città di Perpignano e poi di tutta la regione del Rossiglione) ma dall'altra la Spagna aveva sostenuto la rivolta della Fronda.",
+        "La mancata adesione della Spagna al trattato di Vestfalia adombrava il prosieguo della guerra ad oltranza, tanto che gli spagnoli avevano occupato il porto di Dunkerque nelle Fiandre, ma il Cardinale Mazzarino si alleò con l'Inghilterra, promettendole, in caso di vittoria, Dunkerque e la Giamaica e l'esercito francese, al comando del maresciallo di Francia Henri de La Tour d'Auvergne, visconte di Turenne, inflisse una sonora sconfitta agli spagnoli, guidati dal ''Gran Condé'', nella battaglia delle Dune, presso Dunkerque (14 giugno 1658).",
+        "Questo indusse Filippo IV ad accettare le trattative di pace, che si svolsero su un isolotto del fiume Bidasoa, al confine fra i due stati, fra le cittadine di Irun ed Hendaye, chiamata isola dei Fagiani.",
+        "La Spagna dovette cedere alla Francia parte delle Fiandre, dell'Artois, della provincia dell'Hainaut e del Lussemburgo, oltre ad accettare la definitiva acquisizione da parte francese della Catalogna del Nord (ad eccezione della città di Llívia), che includeva la città di Perpignano, e l'intera regione del Rossiglione (la prima già occupata dai francesi nel 1640 e la seconda nel 1652).",
+        "La catena montuosa dei Pirenei divenne così la nuova frontiera che separava la Spagna dalla Francia.",
+        "Inoltre l'isola dei Fagiani diventava un condominio franco-spagnolo.",
+        "Inoltre veniva stabilito un matrimonio che avrebbe dovuto consolidare l'unione fra le due corone:",
+        "la figlia del re di Spagna Filippo IV, Maria Teresa (1638 –1683), fu promessa in sposa a Luigi XIV.",
+        "Tuttavia ciò comportava la rinuncia al trono di Spagna da parte di Maria Teresa, rinuncia che Maria Teresa fece in cambio della corresponsione di una dote particolarmente elevata da parte del regno di Spagna, di 500.000 scudi d'oro.",
+        "Dopo l'estinzione del ramo spagnolo della dinastia degli Asburgo a causa della morte senza successori di Carlo II, i Borbone rivendicarono per la loro casata nel 1700, sulla base del trattato dei Pirenei, il diritto al trono di Spagna, che avrebbe dovuto andare al nipote di Luigi XIV, Filippo d'Angiò.",
+        "L'ascesa al trono di quest'ultimo, con il nome di Filippo V, diede origine alla guerra di successione spagnola.",
+        "Di conseguenza la pace dei Pirenei sancì definitivamente la decadenza della Spagna.",
+        "Catalonia2.png|Spartizione della Catalogna a seguito della pace dei Pirenei.",
+        "Tratado_Pirineos_1659.jpg|Le modifiche territoriali a favore della Francia a seguito del trattato."
+      ],
+      "generated_summary": "La pace dei Pirenei, firmata nel 1659, pose fine alla guerra tra Francia e Spagna, ponendo fine a una serie di conflitti che erano proseguiti dopo la pace di Westfalia. La Francia aveva sostenuto i rivoltosi catalani, annettendo la Catalogna del Nord e la regione del Rossiglione, mentre la Spagna aveva sostenuto la rivolta della Fronda e occupato il porto di Dunkerque. La sconfitta degli spagnoli nella battaglia delle Dune indusse Filippo IV a accettare le trattative di pace, che portarono alla cessione di territori francesi e alla definitiva acquisizione della Catalogna del Nord e del Rossiglione. La pace sancì la decadenza della Spagna e la creazione di un condominio franco-spagnolo sull'isola dei Fagiani. Inoltre, la figlia di Filippo IV, Maria Teresa, fu promessa in sposa a Luigi XIV, rinunciando al trono di Spagna in cambio di una dote elevata. La pace dei",
+      "scores": {
+        "bert": 0.6841437816619873,
+        "rouge": 0.26178010471204194,
+        "kir": 0.7333333333333333,
+        "abstraction": 0.7730496453900709,
+        "compression": 0.28745472505762265,
+        "novel_ngrams": 0.5352112676056338,
+        "judge": {
+          "faithfulness": 4,
+          "completeness": 4,
+          "conciseness": 3,
+          "abstraction": 2
+        }
+      }
+    },
+    {
+      "source": "=== Argentina ===\n* '''Santa Fe''' – capoluogo dell'omonima provincia\n* '''Provincia di Santa Fe'''\n\n=== Brasile ===\n* '''Santa Fé''' – comune dello Stato di Paraná\n* '''Santa Fé de Goiás''' – comune dello Stato di Goiás\n* '''Santa Fé de Minas''' – comune dello Stato di Minas Gerais\n* '''Santa Fé do Araguaia''' – comune dello Stato di Tocantins\n* '''Santa Fé do Sul''' – comune dello Stato di San Paolo\n* '''Bonito de Santa Fé''' – comune dello Stato della Paraíba\n\n=== Colombia ===\n* '''Santa Fe d...",
+      "reference": "\n'''Santa Fe'''  o '''Santa Fé'''  può riferirsi a:\n",
+      "salient_sentences": [
+        "=== Argentina ===\n* '''Santa Fe''' – capoluogo dell'omonima provincia\n* '''Provincia di Santa Fe'''\n\n=== Brasile ===\n* '''Santa Fé''' – comune dello Stato di Paraná\n* '''Santa Fé de Goiás''' – comune dello Stato di Goiás\n* '''Santa Fé de Minas''' – comune dello Stato di Minas Gerais\n* '''Santa Fé do Araguaia''' – comune dello Stato di Tocantins\n* '''Santa Fé do Sul''' – comune dello Stato di San Paolo\n* '''Bonito de Santa Fé''' – comune dello Stato della Paraíba\n\n=== Colombia ===\n* '''Santa Fe de Antioquia''' – comune del dipartimento di Antioquia\n* '''Santa Fe de Bogotá''', o anche '''Santafé de Bogotá''' – vecchio nome della capitale\n\n=== Ecuador ===\n* '''Isola di Santa Fe''' – isola dell'arcipelago delle Galápagos\n\n=== Filippine ===\n* '''Santa Fe''' – municipalità della Provincia di Cebu\n* '''Santa Fe''' – municipalità della Provincia di Leyte\n* '''Santa Fe''' – municipalità della Provincia di Nueva Vizcaya\n* '''Santa Fe''' – municipalità della Provincia di Romblon\n\n=== Honduras ===\n* '''Santa Fe''' – comune del dipartimento di Colón\n* '''Santa Fe''' – comune del dipartimento di Ocotepeque\n\n=== Messico ===\n* '''Santa Fe''' – distretto di Città del Messico\n* '''Santa Fe''' – località dello Stato della Bassa California del Sud\n* '''Santa Fe''' – località dello Stato di Chihuahua\n* '''Santa Fe''' – località dello Stato di Coahuila\n* '''Santa Fe''' – località dello Stato di Guanajuato\n* '''Santa Fe''' – località dello Stato di Jalisco\n* '''Santa Fe''' – località dello Stato di Michoacán\n* '''Santa Fe''' – località dello Stato di Nayarit\n* '''Santa Fe''' – località dello Stato di Nuevo León\n* '''Santa Fe''' – località dello Stato di Sinaloa\n* '''Santa Fe''' – località dello Stato di Veracruz\n\n=== Panama ===\n* '''Santa Fé''' – comune del distretto di Chepigana della provincia di Darién\n* '''Santa Fé''' – comune del distretto di Santa Fé della provincia di Veraguas\n* '''Distretto di Santa Fé''' – distretto della provincia di Veraguas\n\n=== Spagna ===\n* '''Santa Fe''' – comune della provincia di Granada\n* '''Santa Fe de Mondújar''' – comune della provincia di Almería\n* '''Santa Fe del Penedès''' – comune della provincia di Barcellona\n\n=== Stati Uniti ===\n* '''Santa Fe''' – capitale del Nuovo Messico\n* '''Santa Fe''' – comune del Texas\n* '''Santa Fe''' – località del Missouri\n* '''Santa Fe''' – località dell'Ohio\n* '''Santa Fe''' – località del Tennessee\n* '''Rancho Santa Fe''' – località della California\n* '''Contea di Santa Fe''' – contea del Nuovo Messico\n\n* '''''Santa Fe''''' – film prodotto dalla Nestor Film Company (1912)\n* '''''Santa Fe''''' – film diretto da Sergio Garcia (1972) \n* '''''Santa Fe''''' – film diretto da Jun Aristorenas (1973)\n\n* '''Santa-Fe''' – brano di Bob Dylan del 1967\n*'''Santa Fe''' – soprannome della Atchison, Topeka and Santa Fe Railway\n* '''Hyundai Santa Fe''' – Sport Utility Vehicle prodotto da Hyundai\n* '''USS Santa Fe''' – nome di due navi della Marina militare statunitense, derivato dalla città di Santa Fe, Nuovo Messico"
+      ],
+      "generated_summary": "Santa Fe è un nome toponomastico di origine spagnola, che indica una città o un luogo di culto dedicato a santa Fè, una santa cristiana. Il nome è presente in diversi paesi, tra cui Argentina, Brasile, Colombia, Ecuador, Filippine, Honduras, Messico, Panama, Spagna e Stati Uniti, dove indica sia città o comuni che località o distretti. In alcuni casi, il nome è anche associato a isole, come l'isola di Santa Fe nelle Galápagos. Il nome è anche utilizzato come soprannome per una nave della Marina militare statunitense e per un brano musicale di Bob Dylan.",
+      "scores": {
+        "bert": 0.5680930614471436,
+        "rouge": 0.11881188118811882,
+        "kir": 0.0,
+        "abstraction": 0.989247311827957,
+        "compression": 0.18614718614718614,
+        "novel_ngrams": 0.9361702127659575,
+        "judge": {
+          "faithfulness": 4,
+          "completeness": 4,
+          "conciseness": 3,
+          "abstraction": 2
+        }
+      }
+    },
+    {
+      "source": "Era uno dei tre figli della ''magnifica'' Margaritella de' Mariconda e del ''magnifico'' Loise (Luigi), membro della nobile famiglia sorrentina dei Guardati, titolata del feudo di Torricella fin dal 1181. Nato sotto il segno dell'Ariete, come egli stesso ricorda nel suo ''Novellino'', dunque tra marzo e aprile, era forse il figlio primogenito. Infatti, come imponeva la tradizione dell'epoca, portava il nome del nonno paterno. Il fratello Francesco fu un medico, mentre la sorella Ippolita sposò i...",
+      "reference": "\n\nLa sua opera più nota è ''Il Novellino'', una raccolta di 50 racconti, ciascuno preceduto da una lettera di dedica a un personaggio famoso e con un epilogo contenente la \"morale\" della storia. I racconti presentano una tendenza fortemente anticlericale che portò il libro ad essere incluso nel primo Indice dei libri proibiti nel 1557. La XXXIII novella, ''Mariotto e Ganozza'', ispirò indirettamente il ''Romeo e Giulietta'' di Shakespeare.\n",
+      "salient_sentences": [
+        "Era uno dei tre figli della ''magnifica'' Margaritella de' Mariconda e del ''magnifico'' Loise (Luigi), membro della nobile famiglia sorrentina dei Guardati, titolata del feudo di Torricella fin dal 1181.",
+        "Nato sotto il segno dell'Ariete, come egli stesso ricorda nel suo ''Novellino'', dunque tra marzo e aprile, era forse il figlio primogenito.",
+        "Il fratello Francesco fu un medico, mentre la sorella Ippolita sposò il giurista Bernuccio Quaranta da Salerno.",
+        "quindi si trasferì a Napoli, presso la corte di Alfonso d'Aragona, dove si integrò ben presto nell'ambiente umanista.",
+        "Il poeta Giovanni Pontano, in un celebre epitaffio, affermò che Masuccio Salernitano era nato e deceduto nella stessa città, motivo per cui le incertezze storiche circa il luogo di nascita del novellista si risolvono nell'indicazione di Salerno (dove certamente morì), con probabilità inferiore su Sorrento, terra d'origine di suo padre.",
+        "Non molto dopo il 1440, Masuccio sposò la nobile Cristina de Pandis, nativa di Manfredonia, da cui ebbe cinque figli:",
+        "di conseguenza si estinse il ramo principale della Famiglia Guardati rispettivamente nelle famiglie Fagella e Quaranta.",
+        "Dopo il 1463, ritornò a Salerno e fu segretario del principe Roberto Sanseverino.",
+        "Secondo lo storico salernitano Matteo Fiore, sarebbe sepolto a Salerno nell'antica Chiesa di Santa Maria de Alimundo, in una nicchia al centro del pavimento e priva di iscrizioni.",
+        "Secondo altre ipotesi invece sarebbe stato sepolto in terra sconsacrata fuori le mura della Città di Salerno, poiché a causa delle sue opere, ritenute troppo audaci, pare fosse deceduto senza poter ricevere i sacramenti religiosi, e forse solo successivamente il corpo fu traslato in qualche chiesa della Città di Salerno, probabilmente Santa Maria de Alimundo  dai figli tutti religiosi che, per sfuggire a ripercussioni lasciarono il sepolcro privo di iscrizione.",
+        "Masuccio Salernitano è ricordato esclusivamente come autore del ''Novellino'', raccolta di cinquanta racconti satirici e grotteschi, pubblicata peraltro postuma nel 1476.",
+        "Il testo del ''Novellino'', impregnato di forte carattere anticlericale, figura nel primo Indice dei libri proibiti promulgato dalla Santa Congregazione dell'Inquisizione romana.",
+        "La pubblicazione dell'opera, dedicata alla nobildonna Ippolita Sforza, fu curata da Francesco del Tuppo.",
+        "Una delle sue novelle, ''Mariotto e Ganozza'' (novella XXXIII), ispirò indirettamente il ''Romeo e Giulietta'' di Shakespeare."
+      ],
+      "generated_summary": "Masuccio Salernitano è ricordato come autore del \"Novellino\", una raccolta di cinquanta racconti satirici e grotteschi pubblicata postuma nel 1476. Nato tra marzo e aprile, probabilmente sotto il segno dell'Ariete, era figlio della nobile famiglia dei Guardati e fratello di un medico e di una nobildonna. Si trasferì a Napoli, dove si integrò nell'ambiente umanista e strinse amicizie con esponenti della famiglia reale e della corte. Sposò la nobile Cristina de Pandis e ebbe cinque figli, che si estinsero nelle famiglie Fagella e Quaranta. Dopo il 1463, ritornò a Salerno e fu segretario del principe Roberto Sanseverino. La sua opera, impregnata di forte carattere anticlericale, figura nel primo Indice dei libri proibiti della Santa Congregazione dell'Inquisizione romana. Una delle sue novelle, \"Mariotto e Ganozza\", ispirò indirettamente",
+      "scores": {
+        "bert": 0.7232338190078735,
+        "rouge": 0.3571428571428571,
+        "kir": 0.5714285714285714,
+        "abstraction": 0.5887096774193548,
+        "compression": 0.27494312642183943,
+        "novel_ngrams": 0.448,
+        "judge": {
+          "faithfulness": 4,
+          "completeness": 4,
+          "conciseness": 4,
+          "abstraction": 3
+        }
+      }
+    },
+    {
+      "source": "\nIl commissario Montalbano, sconcertato dai comportamenti della polizia e dalla politica italiana in merito ai fatti del G8 di Genova, prende la decisione di dimettersi dalla sua carica, anche se i suoi colleghi disapprovano la cosa. Nel frattempo però si impiglia in un nuovo caso: trova un cadavere mentre fa la consueta nuotata nelle acque di Marinella.\n\nIl cadavere appare in condizioni tali che il commissario, anche in base al parere di un suo amico marinaio, dubita che sia morto veramente aff...",
+      "reference": "\n\n'''''Il giro di boa''''' è un romanzo di Andrea Camilleri, pubblicato nel 2003 dalla casa editrice Sellerio.\n\nÈ il settimo romanzo della serie dedicata al Commissario Montalbano. Il romanzo ha una precisa ambientazione temporale, a differenza di molti altri della serie di Montalbano: si apre, infatti, con una forte invettiva contro una certa parte delle forze dell'ordine italiane, colpevoli, nelle parole del protagonista del romanzo, di aver infangato il nome della Polizia nella gestione dei fatti del G8 di Genova , in particolare il commissario fa riferimento all'irruzione nella scuola Diaz.\n",
+      "salient_sentences": [
+        "Il commissario Montalbano, sconcertato dai comportamenti della polizia e dalla politica italiana in merito ai fatti del G8 di Genova, prende la decisione di dimettersi dalla sua carica, anche se i suoi colleghi disapprovano la cosa.",
+        "trova un cadavere mentre fa la consueta nuotata nelle acque di Marinella.",
+        "Il cadavere appare in condizioni tali che il commissario, anche in base al parere di un suo amico marinaio, dubita che sia morto veramente affogato.",
+        "Per vari motivi il momento della presentazione delle dimissioni viene sempre rimandato.",
+        "Nel frattempo Montalbano ha occasione di prendere parte ad un'operazione di smistamento ai centri di raccolta di extracomunitari arrivati da chissà dove.",
+        "Montalbano insegue e porta indietro un ragazzo che cercava di fuggire, notando però che questi voleva inspiegabilmente fuggire da sua madre.",
+        "Un capo mafioso tunisino che si voleva \"vendicare\" per ciò che ha fatto l'uomo affogato e per ciò che ha fatto il ragazzo.",
+        "Romanzi con Montalbano\nCategoria:",
+        "Romanzi ambientati in Sicilia"
+      ],
+      "generated_summary": "Il commissario Montalbano, sconcertato dai comportamenti della polizia e dalla politica italiana in merito ai fatti del G8 di Genova, è sul punto di dimettersi dalla sua carica, ma i suoi colleghi disapprovano la cosa. Nel frattempo, mentre fa la sua solita nuotata nelle acque di Marinella, trova un cadavere che sembra non essere morto per annegamento. Montalbano si impegna in un nuovo caso, partecipando ad un'operazione di smistamento di extracomunitari e inseguito un ragazzo che cerca di fuggire, ma si rende conto che il ragazzo voleva scappare da sua madre. Questo caso si intreccia con un altro, in cui un capo mafioso tunisino cerca di \"vendicare\" la morte di un uomo e di un ragazzo, che si scopre essere stati uccisi dalla stessa persona.",
+      "scores": {
+        "bert": 0.6640146374702454,
+        "rouge": 0.23255813953488372,
+        "kir": 0.6666666666666666,
+        "abstraction": 0.6991869918699187,
+        "compression": 0.4428066037735849,
+        "novel_ngrams": 0.5483870967741935,
+        "judge": {
+          "faithfulness": 4,
+          "completeness": 3,
+          "conciseness": 2,
+          "abstraction": 2
+        }
+      }
+    },
+    {
+      "source": "* '''San Luis''', provincia dell'Argentina\n* '''San Luis''', capoluogo dell'omonima provincia\n\n*'''Lago San Luis'''\n\n*'''São Luís Gonzaga do Maranhão''', comune dello stato del Maranhão\n*'''São Luiz Gonzaga''', comune dello stato del Rio Grande do Sul\n\n*'''San Luis''', comune nel dipartimento di Antioquia\n*'''San Luis''', comune nel dipartimento di Tolima\n*'''San Luis de Gaceno''', comune nel dipartimento di Boyacá\n*'''San Luis de Palenque''', comune nel dipartimento di Casanare\n*'''San Luis de ...",
+      "reference": "\n'''San Luis''', , è un toponimo comune in parti del mondo dove si parla spagnolo:\n",
+      "salient_sentences": [
+        "* '''San Luis''', provincia dell'Argentina\n* '''San Luis''', capoluogo dell'omonima provincia\n\n*'''",
+        "Lago San Luis'''\n\n*'''São Luís Gonzaga do Maranhão''', comune dello stato del Maranhão\n*'''São Luiz Gonzaga''', comune dello stato del Rio Grande do Sul\n\n*'''San Luis''', comune nel dipartimento di Antioquia\n*'''San Luis''', comune nel dipartimento di Tolima\n*'''San Luis de Gaceno''', comune nel dipartimento di Boyacá\n*'''San Luis de Palenque''', comune nel dipartimento di Casanare\n*'''San Luis de Sincé''', comune del dipartimento di Sucre\n\n*'''San Luis''', distretto del cantone di Turrubares\n\n* '''San Luis''', nella provincia di Santiago di Cuba\n\n* '''San Luis''' – La Paz\n* '''San Luis La Herradura'''\n* '''San Luis de la Reina'''\n* '''San Luis del Carmen'''\n\n* '''San Luis''', municipalità della provincia di Agusan del Sur\n* '''San Luis''', municipalità della provincia di Aurora\n* '''San Luis''', municipalità della provincia di Batangas\n* '''San Luis''', municipalità della provincia di Pampanga\n\n* '''San Luis''', comune del dipartimento di Petén\n* '''San Luis Jilotepeque''', comune del dipartimento di Jalapa\n\n* '''San Luis''', comune del dipartimento di Comayagua\n* '''San Luis''', comune del dipartimento di Santa Bárbara\n\n* '''San Luis''' – Chihuahua\n* '''San Luis''' – Coahuila\n* '''San Luis''' – Michoacán\n* '''San Luis''' – Sonora\n* '''San Luis Potosí (stato)''', uno stato\n* '''San Luis Potosí''', la capitale dello stato omonimo \n\n* '''San Luis''', capoluogo della provincia di Carlos Fermín Fitzcarrald nell'Ancash\n* Il distretto di San Luis, nella provincia di Lima\n* Il distretto di San Luis, nella provincia di Cañete\n\n* La San Luis Valley in Colorado\n* '''San Luis''' – Arizona\n* '''San Luis''' – Colorado\n* '''San Luis Obispo''', California\n\n* '''San Luis'''\n\n*San Luigi\n*Saint-Louis"
+      ],
+      "generated_summary": "San Luis è un nome geografico diffuso in diversi paesi, spesso riferito a luoghi e comuni. È presente in Argentina come provincia e capoluogo, e in altri paesi come comune, distretto o municipalità. In Brasile, São Luís Gonzaga do Maranhão e São Luiz Gonzaga sono due comuni nello stato del Maranhão e del Rio Grande do Sul. In Colombia, San Luis è presente in diversi dipartimenti, tra cui Antioquia e Tolima. Inoltre, è presente in vari stati messicani, tra cui Chihuahua, Coahuila, Michoacán e Sonora. Negli Stati Uniti, San Luis è presente in Colorado e California, mentre San Luis Obispo è una città della California. Il nome è anche associato a luoghi come la San Luis Valley in Colorado e la città di San Luis Potosí, capitale dello stato omonimo in Messico.",
+      "scores": {
+        "bert": 0.6339710354804993,
+        "rouge": 0.08333333333333334,
+        "kir": 1.0,
+        "abstraction": 0.9230769230769231,
+        "compression": 0.4224185532854776,
+        "novel_ngrams": 0.8320610687022901,
+        "judge": {
+          "faithfulness": 4,
+          "completeness": 4,
+          "conciseness": 3,
+          "abstraction": 2
+        }
+      }
+    },
+    {
+      "source": "=== Argentina ===\n*'''Santa Cruz''' La Rioja, cittadina del dipartimento di Famatina nella provincia di La Rioja\n* Santa Cruz, fiume\n* '''Provincia di Santa Cruz'''\n\n=== Bolivia ===\n* '''Santa Cruz de la Sierra'''\n* '''Dipartimento di Santa Cruz'''\n\n=== Brasile ===\n* '''Santa Cruz''', comune nello Stato della Paraíba\n* '''Santa Cruz''', comune nello Stato del Pernambuco\n* '''Santa Cruz''', comune nello Stato del Rio Grande do Norte\n* '''Santa Cruz do Arari''', comune nello Stato di Pará\n* '''San...",
+      "reference": "\n'''Santa Cruz''' , è il nome di diverse città, regioni e altri luoghi nel mondo:\n",
+      "salient_sentences": [
+        "=== Argentina ===\n*'''Santa Cruz''' La Rioja, cittadina del dipartimento di Famatina nella provincia di La Rioja\n* Santa Cruz, fiume\n* '''Provincia di Santa Cruz'''\n\n=== Bolivia ===\n* '''Santa Cruz de la Sierra'''\n* '''Dipartimento di Santa Cruz'''\n\n=== Brasile ===\n* '''Santa Cruz''', comune nello Stato della Paraíba\n* '''Santa Cruz''', comune nello Stato del Pernambuco\n* '''Santa Cruz''', comune nello Stato del Rio Grande do Norte\n* '''Santa Cruz do Arari''', comune nello Stato di Pará\n* '''Santa Cruz da Baixa Verde''', comune nello Stato del Pernambuco\n* '''Santa Cruz Cabrália''', comune nello Stato di Bahia\n* '''Santa Cruz do Capibaribe''', comune nello Stato del Pernambuco\n* '''Santa Cruz da Conceição''', comune nello Stato di San Paolo\n* '''Santa Cruz do Escalvado''', comune nello Stato del Minas Gerais\n* '''Santa Cruz da Esperança''', comune nello Stato di San Paolo\n* '''Santa Cruz de Goiás''', comune nello Stato del Goiás\n* '''Santa Cruz dos Milagres''', comune nello Stato del Piauí\n* '''Santa Cruz de Minas''', comune nello Stato del Minas Gerais\n* '''Santa Cruz de Monte Castelo''', comune nello Stato del Paraná\n* '''Santa Cruz das Palmeiras''', comune nello Stato di San Paolo\n* '''Santa Cruz do Piauí''', comune nello Stato del Piauí\n* '''Santa Cruz do Rio Pardo''', comune nello Stato di San Paolo\n* '''Santa Cruz de Salinas''', comune nello Stato del Minas Gerais\n* '''Santa Cruz do Sul''', comune nello Stato del Rio Grande do Sul\n* '''Santa Cruz da Vitória''', comune nello Stato di Bahia\n* '''Santa Cruz''', quartiere della città di Rio de Janeiro\n\n=== Capo Verde ===\n* '''contea di Santa Cruz'''\n\n=== Cile ===\n* '''Santa Cruz''', comune della provincia di Colchagua\n\n=== Colombia ===\n* '''Santa Cruz''', comune del dipartimento di Nariño\n* '''Santa Cruz de Lorica''', comune del dipartimento di Córdoba\n\n=== Costa Rica ===\n* '''Cantone di Santa Cruz''', cantone della provincia di Guanacaste\n* '''Santa Cruz''', distretto del cantone di León Cortés\n* '''Santa Cruz''', distretto capoluogo del cantone omonimo\n* '''Santa Cruz''', distretto del cantone di Turrialba\n\n=== Cuba ===\n* '''Santa Cruz del Norte'''\n* '''Santa Cruz del Sur'''\n\n=== Repubblica Dominicana ===\n* '''Santa Cruz de El Seibo'''\n\n=== Ecuador ===\n* '''Isola Santa Cruz (Galápagos)''', Galápagos\n\n=== Filippine ===\n* '''Santa Cruz''', municipalità nella provincia di Davao del Sur\n* '''Santa Cruz''', municipalità nella provincia di Ilocos Sur\n* '''Santa Cruz''', municipalità nella provincia di Laguna\n* '''Santa Cruz''', municipalità nella provincia di Marinduque\n* '''Santa Cruz''', municipalità nella provincia di Mindoro Occidentale\n* '''Santa Cruz''', municipalità nella provincia di Zambales\n\n=== Guatemala ===\n* '''Santa Cruz Balanyá''', comune del dipartimento di Chimaltenango\n* '''Santa Cruz Barillas''', comune del dipartimento di Huehuetenango\n* '''Santa Cruz del Quiché''', capoluogo del dipartimento di Quiché\n* '''Santa Cruz el Chol''', comune del dipartimento di Baja Verapaz\n* '''Santa Cruz la Laguna''', comune del dipartimento di Sololá\n* '''Santa Cruz Muluá''', comune del dipartimento di Retalhuleu\n* '''Santa Cruz Naranjo''', comune del dipartimento di Santa Rosa\n* '''Santa Cruz Verapaz''', comune del dipartimento di Alta Verapaz\n\n=== Honduras ===\n*'''Santa Cruz''', comune del dipartimento di Lempira\n* '''Santa Cruz de Yojoa''', comune del dipartimento di Cortés\n\n=== India ===\n*'''Santa Cruz''', un sobborgo di Mumbai\n*'''Santa Cruz''', una città nello Stato di Goa\n\n=== Messico ===\n* '''Santa Cruz de Juventino Rosas'''\n* '''Santa Cruz''', municipalità nello Stato di Sonora\n\n=== Perù ===\n* '''Santa Cruz de Flores''', dipartimento della regione di Lima\n* '''Santa Cruz''', provincia della regione di Cajamarca\n* '''Santa Cruz''', capitale della regione di Cajamarca\n\n=== Portogallo ===\n*'''Santa Cruz''', comune della regione autonoma di Madera\n* '''Santa Cruz da Graciosa''', comune della regione autonoma delle Azzorre\n*'''Santa Cruz''', freguesia del comune di Almodôvar\n*'''Santa Cruz''', freguesia del comune di Armamar\n*'''Santa Cruz''', freguesia del comune di Coimbra\n*'''Santa Cruz''', freguesia del comune di Santa Cruz, Madera\n*'''Santa Cruz''', freguesia del comune di Lagoa, Azzorre\n*'''Santa Cruz''', freguesia del comune di Praia da Vitória, Azzorre\n*'''Santa Cruz''', freguesia del comune di Santiago do Cacém\n*'''Santa Cruz''', freguesia del comune di Vinhais\n*'''Santa Cruz da Graciosa''', freguesia del comune di Santa Cruz da Graciosa\n*'''Santa Cruz das Flores''', freguesia dell'isola e comune di Flores, Azzorre\n*'''Santa Cruz da Trapa''', freguesia del comune di São Pedro do Sul \n*'''Santa Cruz do Bispo''', freguesia del comune di Matosinhos \n*'''Santa Cruz do Douro''', freguesia del comune di Baião \n*'''Santa Cruz do Lima''', freguesia del comune di Ponte de Lima \n*'''Santa Cruz - Trindade''', freguesia del comune di Chaves\n\n=== Isole Salomone ===\n* '''Isole Santa Cruz''",
+        "'\n\n=== Spagna ===\n* '''Santa Cruz del Valle de los Caídos''', Madrid\n* '''Santa Cruz de Boedo''', Palencia\n* '''Santa Cruz de Bezana''', Cantabria\n* '''Santa Cruz de Grío''', Saragozza\n* '''Santa Cruz de la Salceda''', Burgos\n* '''Santa Cruz de la Serós''', Huesca\n* '''Santa Cruz de Tenerife''', una città delle Canarie\n* '''Santa Cruz de Tenerife''', una provincia delle Canarie\n* '''Santa Cruz de la Palma''', capitale dell'isola di La Palma, Canarie\n\n=== Stati Uniti d'America ===\n* '''Santa Cruz''', capoluogo della Contea di Santa Cruz, California\n* '''Santa Cruz''', census-designated place della Contea di Santa Fe, Nuovo Messico\n* '''Santa Cruz''', census-designated place della Contea di Starr, Texas\n* '''Santa Cruz''', fiume dell'Arizona\n** '''Contea di Santa Cruz''', contea della California\n** '''Contea di Santa Cruz''', contea dell'Arizona\n* '''Isola di Santa Cruz''' – California\n=== Venezuela ===\n* '''Santa Cruz del Zulia''', Venezuela\n\n* '''Santa Cruz Futebol Clube''', squadra di calcio brasiliana\n* ''",
+        "'Roque Santa Cruz''', calciatore paraguaiano\n* Santa Cruz, noto produttore statunitense di biciclette\n* '''Santa Cruz''', gruppo musicale finlandese"
+      ],
+      "generated_summary": "Santa Cruz è un toponimo diffuso in diversi paesi del mondo, spesso associato a luoghi di culto o di rilievo storico. In Argentina, si trova una cittadina nel dipartimento di Famatina, nella provincia di La Rioja, e un fiume. In Bolivia, è presente una città e un dipartimento. Nel Brasile, si trovano numerosi comuni in diversi stati, tra cui la Paraíba, il Pernambuco e il Rio Grande do Norte. Inoltre, il nome è presente in altre nazioni, come Bolivia, Cile, Colombia, Costa Rica, Cuba, Repubblica Dominicana, Ecuador, Filippine, Guatemala, Honduras, India, Messico, Perù, Portogallo, Isole Salomone, Spagna, Stati Uniti d'America e Venezuela.",
+      "scores": {
+        "bert": 0.643731415271759,
+        "rouge": 0.1754385964912281,
+        "kir": 0.0,
+        "abstraction": 0.96,
+        "compression": 0.10588428126536634,
+        "novel_ngrams": 0.8910891089108911,
+        "judge": {
+          "faithfulness": 4,
+          "completeness": 4,
+          "conciseness": 3,
+          "abstraction": 2
+        }
+      }
+    },
+    {
+      "source": "\n\nL'origine dei Sicani resta tuttora una ''vexata quaestio'': secondo la fonte di Diodoro Siculo, i Sicani che si stabilirono in Sicilia determinarono il mutamento del toponimo dell'isola da ''Trinacria'' a ''Sikania''.\n\nDiodoro Siculo parlando dei Sicani riporta le testimonianze di Filisto di Siracusa e di Timeo di Tauromenio. Il Siracusano informa che i Sicani erano un popolo di origine iberica, mentre dal frammento timaico si apprende che la loro origine era piuttosto autoctona. Diodoro sembr...",
+      "reference": "\n\nI '''Sicani'''  erano un popolo della Sicilia stanziato anticamente su gran parte dell'isola. In seguito all'avvento dei Siculi, i Sicani occuparono una regione centro-meridionale dell'isola, delimitata dai fiumi Himera e Halykos e chiamata Sicania. Le poche e frammentarie notizie storiche pervenuteci sui Sicani provengono principalmente dagli storiografi greci.\n",
+      "salient_sentences": [
+        "L'origine dei Sicani resta tuttora una ''vexata quaestio'':",
+        "secondo la fonte di Diodoro Siculo, i Sicani che si stabilirono in Sicilia determinarono il mutamento del toponimo dell'isola da ''Trinacria'' a ''Sikania''.",
+        "Diodoro Siculo parlando dei Sicani riporta le testimonianze di Filisto di Siracusa e di Timeo di Tauromenio.",
+        "Il Siracusano informa che i Sicani erano un popolo di origine iberica, mentre dal frammento timaico si apprende che la loro origine era piuttosto autoctona.",
+        "Diodoro sembra appoggiare l'opinione di Timeo..",
+        "Tucidide, come in seguito Filisto, afferma invece che i Sicani fossero Iberi.",
+        "Resta da capire se questo popolo giunse dalla Spagna alla Sicilia navigando per mare o piuttosto vi giunse via terra.",
+        "Se vi fossero giunti via mare si spiegherebbe perché si stanziarono nella parte occidentale dell'isola:",
+        "quella che si affaccia proprio sull'Iberia.",
+        "Ma sia la testimonianza di Tucidide — il quale informa che essi un tempo erano in tutta l'isola — e sia la loro cacciata dalla terra originaria a causa dei Liguri, farebbero propendere piuttosto per un raggiungimento via terra.",
+        "I Sicani, stanziati lungo la ''paralia'' che divideva l'Iberia dalla Gallia e dall'Italia, vennero, probabilmente, cacciati dai Liguri che giunsero in quel luogo.",
+        "La provenienza iberica si ritrova pure in Dionigi di Alicarnasso.",
+        "Lo storico romano, attraverso le sue fonti, riporta come i Sicani fossero originari dell'Iberia;",
+        "arrivati in Sicilia per sfuggire ai Liguri.",
+        "La testimonianza di una migrazione di Sicani via terra viene sostenuta da Pausania il Periegeta, il quale non sembra dipendere da Tucidide quando asserisce che in Sicilia giunsero tre popoli (per cui nessuna autoctonia come vorrebbe invece Timeo):",
+        "Sicani e Siculi e Frigi:",
+        "i primi due giunsero dall'Italia, mentre il terzo giunse dalla Troade.",
+        "La scienza archeologica sembrerebbe confermare quanto tramandato dalla tradizione letteraria sull'anteriorità dei Sicani rispetto ai Siculi nonché sui contrasti e le lotte tra le due etnie, quest'ultimo aspetto verosimilmente confermato dalla violenta distruzione dei villaggi di Mokarta e Sabucina.",
+        "Secondo una tradizionale visione invasionista, i Sicani sarebbero stati una popolazione di origine pre-indoeuropea.",
+        "Secondo invece una visione continuista, i Sicani rappresenterebbero un ramo meridionale di un sostrato etno-linguistico molto antico, ma comunque indoeuropeo, che avrebbe occupato tutta l'area tirrenica, dalla Liguria (Liguri) alla Sicilia, passando per l'Italia meridionale (Enotri), costituendo dunque lo strato ''ligure-sicano''."
+      ],
+      "generated_summary": "L'origine dei Sicani è un tema dibattuto tra gli storici e gli studiosi, con diverse fonti che offrono testimonianze contrastanti. Secondo Diodoro Siculo, i Sicani avrebbero determinato il mutamento del toponimo dell'isola da \"Trinacria\" a \"Sikania\", ma la loro origine è ancora oggetto di discussione. Alcuni, come Filisto di Siracusa e Tucidide, li considerano un popolo di origine iberica, mentre altri, come Timeo di Tauromenio, li ritengono autoctoni. La scienza archeologica sembra confermare l'anteriorità dei Sicani rispetto ai Siculi e i contrasti tra le due etnie, ma la questione della loro provenienza e del loro arrivo in Sicilia rimane aperta. Secondo alcune fonti, i Sicani sarebbero stati cacciati dai Liguri e si sarebbero stanziati in Sicilia via terra, mentre altre li considerano un ramo meridionale di un sostrato etno-linguistico indoeuropeo che av",
+      "scores": {
+        "bert": 0.6759128570556641,
+        "rouge": 0.21505376344086022,
+        "kir": 0.4,
+        "abstraction": 0.7846153846153846,
+        "compression": 0.32967032967032966,
+        "novel_ngrams": 0.6641221374045801,
+        "judge": {
+          "faithfulness": 4,
+          "completeness": 4,
+          "conciseness": 3,
+          "abstraction": 2
+        }
+      }
+    }
+  ]
+}
