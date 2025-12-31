@@ -122,8 +122,8 @@ Italian NLP resources are limited compared to English. The WITS dataset~\cite{ca
 SM-SIP follows a two-stage neuro-symbolic architecture:
 
 \begin{enumerate}
-    \item \textbf{Extractor (SigExt):} A fine-tuned transformer that identifies salient sentences in the source document, outputting binary labels (0/1) per sentence.
-    \item \textbf{Generator (LLM):} Llama-3.1-8B-Instruct with 4-bit or 8-bit quantization, conditioned on extracted keyphrases via dynamic prompting.
+    \item \textbf{Extractor (SigExt):} A fine-tuned transformer that identifies salient content in the source document. The model outputs token-level binary predictions, which are aggregated to sentence-level salience scores during inference.
+    \item \textbf{Generator (LLM):} Llama-3.1-8B-Instruct with 4-bit or 8-bit quantization~\cite{dettmers2022llm}, conditioned on extracted keyphrases via dynamic prompting.
 \end{enumerate}
 
 \subsection{Extension 1: Semantic Supervision}
@@ -209,10 +209,10 @@ For each configuration, we evaluate:
     \item \textbf{Few-Shot:} 3 demonstration examples
 \end{itemize}
 
-With two quantization levels:
+With two quantization levels~\cite{dettmers2022llm}:
 \begin{itemize}
-    \item \textbf{4-bit:} NF4 with double quantization
-    \item \textbf{8-bit:} Standard LLM.int8()
+    \item \textbf{4-bit:} NF4 with double quantization (bitsandbytes)
+    \item \textbf{8-bit:} LLM.int8() with mixed-precision decomposition
 \end{itemize}
 
 \subsection{Evaluation Metrics}
@@ -298,6 +298,70 @@ The best overall configuration is \textbf{10k-60t with 8-bit quantization}, achi
 \textbf{Quantization Effects.} Perhaps surprisingly, 4-bit and 8-bit quantization produce nearly identical results. The average BERT Score difference is only 0.0002 (0.6611 vs 0.6609), and KIR differs by less than 0.4 percentage points (45.40\% vs 45.05\%). This finding validates the use of aggressive quantization for deployment, enabling the full pipeline to run on consumer GPUs with approximately 8GB of VRAM without sacrificing quality.
 
 \textbf{Prompting Strategy.} An interesting trade-off emerges between zero-shot and few-shot prompting. Zero-shot achieves higher KIR (47.12\% vs 43.33\%), suggesting that examples may actually distract the model from focusing on the extracted signatures. Conversely, few-shot provides marginally higher BERT Score (0.6621 vs 0.6599), likely because the examples guide the model toward more fluent output. The optimal choice depends on the application: domains where missing critical information is costly (medical, legal) should prefer zero-shot, while applications prioritizing stylistic consistency may benefit from few-shot demonstrations.
+
+\subsection{Abstraction Quality Analysis}
+
+Traditional metrics like ROUGE and BERT Score measure similarity to reference summaries but do not capture whether the model truly \textit{abstracts} information or merely extracts and rearranges it. To address this limitation, we introduce additional evaluation dimensions that specifically target abstraction quality.
+
+\textbf{Abstraction Metrics.} We compute three complementary measures on a subset of 10 samples using an optimized abstractive prompt: (1) \textit{Abstraction Score} = 1 minus the trigram overlap between generated summary and source, where higher values indicate less verbatim copying (observed: 0.81); (2) \textit{Novel N-grams} = percentage of bigrams in the summary not present in the source, measuring lexical novelty (observed: 67.6\%); (3) \textit{Compression Ratio} = summary length divided by source length, indicating conciseness (observed: 26.3\%).
+
+\textbf{LLM-as-Judge.} Following recent work on using LLMs for evaluation~\cite{goyal2022news}, we employ the same Llama-3.1-8B model with a dedicated evaluation prompt to rate generated summaries on four dimensions, each on a 1--5 scale. Table~\ref{tab:llm_judge} presents the results.
+
+\begin{table}[htbp]
+\caption{LLM-as-Judge Evaluation (1--5 scale)}
+\begin{center}
+\begin{tabular}{lcc}
+\toprule
+\textbf{Dimension} & \textbf{Mean} & \textbf{Std} \\
+\midrule
+Faithfulness & 4.00 & 0.00 \\
+Completeness & 3.90 & 0.30 \\
+Conciseness & 3.00 & 0.45 \\
+Abstraction & 2.10 & 0.30 \\
+\midrule
+\textbf{Overall} & \textbf{3.25} & -- \\
+\bottomrule
+\end{tabular}
+\label{tab:llm_judge}
+\end{center}
+\end{table}
+
+The results reveal an important insight: while the model achieves high Faithfulness (4.0/5), indicating strong factual accuracy, the Abstraction score is notably lower (2.1/5). This gap suggests that the model tends to reformulate source content with minor lexical changes rather than performing true semantic synthesis---a known limitation of current LLMs that are optimized for fluency rather than conceptual reorganization.
+
+\subsection{Qualitative Example}
+
+To illustrate the complete SM-SIP pipeline, we present a concrete example from our evaluation set. Table~\ref{tab:example} shows a Wikipedia article about the Sicilian architect Masuccio, the sentences extracted by SigExt, and the summary generated by Llama-3.1-8B.
+
+\begin{table*}[htbp]
+\caption{Pipeline Example: Architect Masuccio}
+\begin{center}
+\begin{tabular}{p{2.5cm}p{13cm}}
+\toprule
+\textbf{Stage} & \textbf{Content} \\
+\midrule
+\textbf{Source} (excerpt) & ``Mancano notizie sulla prima parte della vita e sulla sua formazione iniziale. Entrato nell'ordine dei gesuiti venne inviato dall'ordine a Roma nel 1597, per perfezionare i suoi studi di architettura [...] Altrettanto evidente l'influsso dello stile michelangiolesco di Giacomo Del Duca attivo a Messina...'' \\
+\midrule
+\textbf{SigExt Extraction} & 
+\begin{tabular}[t]{@{}l@{}}
+1. ``Entrato nell'ordine dei gesuiti venne inviato [...] a Roma nel 1597'' \\
+2. ``per perfezionare i suoi studi di architettura'' \\
+3. ``Altrettanto evidente l'influsso dello stile michelangiolesco''
+\end{tabular} \\
+\midrule
+\textbf{Generated Summary} & ``Masuccio \`e un architetto siciliano del XVI-XVII secolo, il cui percorso professionale \`e strettamente legato all'ordine dei gesuiti. Entrato nell'ordine nel 1597, si rec\`o a Roma per perfezionare i suoi studi di architettura, dove ebbe modo di consolidare la sua formazione tecnica...'' \\
+\midrule
+\textbf{Evaluation} & 
+\begin{tabular}[t]{@{}l@{}}
+BERT Score: 0.675 \quad ROUGE-1: 0.184 \quad KIR: 22.2\% \\
+LLM Judge: Faithfulness=4, Completeness=4, Conciseness=3, Abstraction=2
+\end{tabular} \\
+\bottomrule
+\end{tabular}
+\label{tab:example}
+\end{center}
+\end{table*}
+
+The example demonstrates both the strengths and limitations of the approach. The summary maintains factual accuracy (Faithfulness=4/5) and covers the key biographical events. The relatively lower KIR (22.2\%) indicates that not all extracted keyphrases appear verbatim in the summary---the model paraphrases some concepts. Meanwhile, the sentence structure closely mirrors the source: phrases like ``Entrato nell'ordine nel 1597'' are preserved nearly verbatim, resulting in a moderate Abstraction score (2/5). This pattern, where the model maintains accuracy but struggles with true paraphrasing, was consistent across our evaluation set.
 
 %% ============================================================
 %% SECTION 5: DISCUSSION
