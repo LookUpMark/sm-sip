@@ -8,15 +8,15 @@ Extension of the SigExt framework for controllable abstractive summarization wit
 DNLPProj/
 ├── extension-italian-wits-semantic/
 │   ├── training/
-│   │   └── training-unified.ipynb     # SigExt model training
+│   │   └── training-standard.ipynb      # SigExt model training
 │   └── inference/
-│       ├── inference-unified.ipynb    # Main inference pipeline (16 configs)
+│       ├── inference-standard.ipynb     # Main inference pipeline (16 configs)
 │       ├── inference-prompt-enhanced.ipynb  # Enhanced prompts + LLM-as-Judge
-│       ├── analyze_results.py         # Results analysis script
-│       ├── results/                   # Standard inference results
-│       └── results_enhanced/          # Enhanced prompt results
+│       ├── analyze_results.py           # Results analysis script
+│       ├── results/                     # Standard inference results
+│       └── results_enhanced/            # Enhanced prompt results
 └── overleaf/
-    └── paper-draft.tex                # Paper manuscript
+    └── paper-draft.tex                  # Paper manuscript
 ```
 
 ## Key Results (Italian WITS Dataset)
@@ -46,13 +46,13 @@ DNLPProj/
 ### Training
 ```bash
 # Run training notebook on Kaggle/Colab with GPU
-jupyter notebook extension-italian-wits-semantic/training/training-unified.ipynb
+jupyter notebook extension-italian-wits-semantic/training/training-standard.ipynb
 ```
 
 ### Inference
 ```bash
 # Run inference (requires ~8GB VRAM for 4-bit, ~16GB for 8-bit)
-jupyter notebook extension-italian-wits-semantic/inference/inference-unified.ipynb
+jupyter notebook extension-italian-wits-semantic/inference/inference-standard.ipynb
 ```
 
 ### Analysis

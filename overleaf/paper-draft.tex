@@ -303,7 +303,7 @@ The best overall configuration is \textbf{10k-60t with 8-bit quantization}, achi
 
 Traditional metrics like ROUGE and BERT Score measure similarity to reference summaries but do not capture whether the model truly \textit{abstracts} information or merely extracts and rearranges it. To address this limitation, we introduce additional evaluation dimensions that specifically target abstraction quality.
 
-\textbf{Abstraction Metrics.} We compute three complementary measures on a subset of 10 samples using an optimized abstractive prompt: (1) \textit{Abstraction Score} = 1 minus the trigram overlap between generated summary and source, where higher values indicate less verbatim copying (observed: 0.81); (2) \textit{Novel N-grams} = percentage of bigrams in the summary not present in the source, measuring lexical novelty (observed: 67.6\%); (3) \textit{Compression Ratio} = summary length divided by source length, indicating conciseness (observed: 26.3\%).
+\textbf{Abstraction Metrics.} We compute three complementary measures on 100 samples using an optimized abstractive prompt: (1) \textit{Abstraction Score} = 1 minus the trigram overlap between generated summary and source, where higher values indicate less verbatim copying (observed: 0.72); (2) \textit{Novel N-grams} = percentage of bigrams in the summary not present in the source, measuring lexical novelty (observed: 56.6\%); (3) \textit{Compression Ratio} = summary length divided by source length, indicating conciseness (observed: 27.0\%).
 
 \textbf{LLM-as-Judge.} Following recent work on using LLMs for evaluation~\cite{goyal2022news}, we employ the same Llama-3.1-8B model with a dedicated evaluation prompt to rate generated summaries on four dimensions, each on a 1--5 scale. Table~\ref{tab:llm_judge} presents the results.
 
@@ -314,19 +314,19 @@ Traditional metrics like ROUGE and BERT Score measure similarity to reference su
 \toprule
 \textbf{Dimension} & \textbf{Mean} & \textbf{Std} \\
 \midrule
-Faithfulness & 4.00 & 0.00 \\
-Completeness & 3.90 & 0.30 \\
-Conciseness & 3.00 & 0.45 \\
-Abstraction & 2.10 & 0.30 \\
+Faithfulness & 3.81 & 0.59 \\
+Completeness & 3.54 & 0.61 \\
+Conciseness & 3.10 & 0.83 \\
+Abstraction & 2.24 & 0.78 \\
 \midrule
-\textbf{Overall} & \textbf{3.25} & -- \\
+\textbf{Overall} & \textbf{3.17} & -- \\
 \bottomrule
 \end{tabular}
 \label{tab:llm_judge}
 \end{center}
 \end{table}
 
-The results reveal an important insight: while the model achieves high Faithfulness (4.0/5), indicating strong factual accuracy, the Abstraction score is notably lower (2.1/5). This gap suggests that the model tends to reformulate source content with minor lexical changes rather than performing true semantic synthesis---a known limitation of current LLMs that are optimized for fluency rather than conceptual reorganization.
+The results reveal an important insight: while the model achieves good Faithfulness (3.81/5), indicating solid factual accuracy, the Abstraction score is notably lower (2.24/5). This gap suggests that the model tends to reformulate source content with minor lexical changes rather than performing true semantic synthesis---a known limitation of current LLMs that are optimized for fluency rather than conceptual reorganization.
 
 \subsection{Qualitative Example}
 
