@@ -65,7 +65,7 @@ The advent of Large Language Models (LLMs) such as GPT-4, Llama 3, and Mistral h
 
 \begin{itemize}
     \item \textbf{Omission of Critical Details:} The model overlooks entities or events that, while statistically rare, are fundamental to understanding.
-    \item \textbf{Hallucination:} Without strong constraints, the model generates plausible but factually incorrect content.
+    \item \textbf{Hallucination:} Without strong constraints, the model generates plausible but factually incorrect content~\cite{maynez2020faithfulness, cao2022hallucination}.
 \end{itemize}
 
 Xu et al.~\cite{xu2024sip} proposed \textbf{Salient Information Prompting (SIP)} to address this issue. The approach decouples salience identification from generation by using a dedicated extractor (\textbf{SigExt}) to identify key phrases, which are then injected into the LLM prompt as ``soft constraints.'' This hybrid neuro-symbolic approach represents the current frontier of industrial summarization research.
@@ -326,7 +326,7 @@ Abstraction & 2.24 & 0.78 \\
 \end{center}
 \end{table}
 
-The results reveal an important insight: while the model achieves good Faithfulness (3.81/5), indicating solid factual accuracy, the Abstraction score is notably lower (2.24/5). This gap suggests that the model tends to reformulate source content with minor lexical changes rather than performing true semantic synthesis---a known limitation of current LLMs that are optimized for fluency rather than conceptual reorganization.
+The results reveal an important insight: while the model achieves good Faithfulness (3.81/5), indicating solid factual accuracy, the Abstraction score is notably lower (2.24/5). This gap suggests that the model tends to reformulate source content with minor lexical changes rather than performing true semantic synthesis---a known limitation of current LLMs, where progress in fluency often comes at the expense of factual consistency~\cite{ladhak2022faithful, tang2024faithfulness}.
 
 \subsection{Qualitative Example}
 
@@ -428,6 +428,10 @@ This work was conducted as part of the Deep Natural Language Processing course a
 \bibitem{xu2020query} Y. Xu and M. Lapata, ``Coarse-to-Fine Query Focused Multi-Document Summarization,'' in \textit{Proc. EMNLP}, pp. 3632--3645, 2020.
 \bibitem{goyal2022news} T. Goyal, J. J. Li, and G. Durrett, ``News Summarization and Evaluation in the Era of GPT-3,'' \textit{arXiv preprint arXiv:2209.12356}, 2022.
 \bibitem{dettmers2022llm} T. Dettmers, M. Lewis, Y. Belkada, and L. Zettlemoyer, ``LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale,'' in \textit{Proc. NeurIPS}, 2022.
+\bibitem{maynez2020faithfulness} J. Maynez, S. Narayan, B. Bohnet, and R. McDonald, ``On Faithfulness and Factuality in Abstractive Summarization,'' in \textit{Proc. ACL}, pp. 1906--1919, 2020.
+\bibitem{cao2022hallucination} M. Cao, Y. Dong, and J. Cheung, ``Hallucinated but Factual! Inspecting the Factuality of Hallucinations in Abstractive Summarization,'' in \textit{Proc. ACL}, pp. 3340--3354, 2022.
+\bibitem{ladhak2022faithful} F. Ladhak, E. Durmus, H. He, C. Cardie, and K. McKeown, ``Faithful or Extractive? On Mitigating the Faithfulness-Abstractiveness Trade-off in Abstractive Summarization,'' in \textit{Proc. ACL}, pp. 1410--1421, 2022.
+\bibitem{tang2024faithfulness} L. Tang, S. Goyal, A. Fabbri, P. Laban, J. Xu, Y. Dong, K. McKeown, and W. Yin, ``Understanding Factual Errors in Summarization: Errors, Summarizers, Datasets, Error Detectors,'' in \textit{Proc. ACL}, 2024.
 \end{thebibliography}
 
 \end{document}
