@@ -1,6 +1,6 @@
 {
   "run_info": {
-    "timestamp": "2026-01-03T14:08:47.074526",
+    "timestamp": "2026-01-03T15:08:08.381835",
     "sigext_model": "LookUpMark/sigext-wits-it-10k-060t",
     "llm_model": "meta-llama/Llama-3.1-8B-Instruct",
     "num_samples": 10,
@@ -8,48 +8,48 @@
   },
   "metrics": {
     "bert": {
-      "mean": 0.6560753405094146,
-      "std": 0.05192416965140914
+      "mean": 0.6596252381801605,
+      "std": 0.04828459564084678
     },
     "rouge": {
-      "mean": 0.1810909642464792,
-      "std": 0.09000052710189749
+      "mean": 0.19485350220153683,
+      "std": 0.09702972451372059
     },
     "kir": {
-      "mean": 0.48016483516483516,
-      "std": 0.2433478659477328
+      "mean": 0.48913919413919416,
+      "std": 0.24587572115165882
     },
     "abstraction": {
-      "mean": 0.8556616387862441,
-      "std": 0.11149160687238391
+      "mean": 0.8247372763266346,
+      "std": 0.14119255612225254
     },
     "compression": {
-      "mean": 0.25654127756580153,
-      "std": 0.10836148627416724
+      "mean": 0.262782967107848,
+      "std": 0.12087030227913362
     },
     "novel_ngrams": {
-      "mean": 0.7070990669056773,
-      "std": 0.15528604124527406
+      "mean": 0.6776043308812285,
+      "std": 0.1719429778153051
     },
     "judge_faithfulness": {
       "mean": 4.2,
-      "std": 0.8717797887081347
+      "std": 0.39999999999999997
     },
     "judge_completeness": {
       "mean": 4.4,
-      "std": 0.66332495807108
+      "std": 0.4898979485566356
     },
     "judge_conciseness": {
-      "mean": 3.6,
-      "std": 0.48989794855663565
+      "mean": 3.2,
+      "std": 0.6
     },
     "judge_abstraction": {
-      "mean": 2.0,
-      "std": 0.4472135954999579
+      "mean": 2.4,
+      "std": 0.66332495807108
     },
     "judge_overall": {
       "mean": 3.55,
-      "std": 0.4974937185533099
+      "std": 0.4301162633521313
     }
   },
   "samples": [
@@ -71,23 +71,23 @@
         "Billie Joe Armstrong, Mike Dirnt – musica:",
         "Billie Joe Armstrong, Mike Dirnt, John Kiffmeyer)\n# ''I Want to Be Alone'' – 3:09\n\n* Billie Joe Armstrong - voce, chitarra\n* Mike Dirnt - basso, cori\n* John Kiffmeyer - batteria, percussioni, cori"
       ],
-      "generated_summary": "Green Day è un gruppo musicale punk rock statunitense, fondato nel 1987 a Berkeley, California. Il loro primo album, 1,039/Smoothed Out Slappy Hours, è una raccolta di pezzi del loro primo album 39/Smooth, dei due EP 1,000 Hours e Slappy, e dell'inedita I Want to Be Alone. Pubblicato dalla Lookout! Records nel 1991, l'album presenta il batterista John Kiffmeyer, che successivamente lasciò la band per frequentare il college. Nel 2005, il gruppo ritirò il suo catalogo discografico precedente al 1994 dalla Lookout! Records, a causa della mancata pagamento delle royalties. L'album è stato riedito nel 2007 dalla nuova etichetta discografica.",
+      "generated_summary": "Green Day è un gruppo musicale punk rock statunitense, fondato nel 1987 a Berkeley, California. Il loro primo album, 1,039/Smoothed Out Slappy Hours, raccoglie i pezzi del primo album 39/Smooth, dei due EP 1,000 Hours e Slappy, e l'inedita I Want to Be Alone. Pubblicato dalla Lookout! Records nel 1991, l'album presenta il batterista Al Sobrante, alias John Kiffmeyer, che lascia la band per frequentare il college. Nel 2005, il gruppo ritira il suo catalogo discografico precedente al 1994 dalla Lookout! Records, e nel 2007 viene riedito da una nuova etichetta discografica.",
       "scores": {
-        "bert": 0.7148600220680237,
-        "rouge": 0.304,
+        "bert": 0.7181670665740967,
+        "rouge": 0.3050847457627119,
         "kir": 0.46153846153846156,
-        "abstraction": 0.7959183673469388,
-        "compression": 0.2959558823529412,
-        "novel_ngrams": 0.6363636363636364,
+        "abstraction": 0.7222222222222222,
+        "compression": 0.26516544117647056,
+        "novel_ngrams": 0.5934065934065934,
         "judge": {
           "faithfulness": 4,
-          "faithfulness_reason": "Most facts are correct, but the mention of John Kiffmeyer leaving the band is not directly related to the album 1,039/Smoothed Out Slappy Hours.",
+          "faithfulness_reason": "Most facts are correct, but the album release year is not mentioned and the band's founding year is mentioned instead of the album's release year.",
           "completeness": 4,
-          "completeness_reason": "The summary covers the album's release, content, and label, but omits the album's impact and reception.",
+          "completeness_reason": "Main contribution and results are captured, but some details are missing, such as the album's tracklist and the reason for Al Sobrante's departure.",
           "conciseness": 3,
-          "conciseness_reason": "The summary is somewhat verbose, with unnecessary details about the band's history and label issues.",
+          "conciseness_reason": "The summary is somewhat verbose and could be condensed, but it's still readable.",
           "abstraction": 2,
-          "abstraction_reason": "The summary mostly copies the source text, with some minor rephrasing, but lacks a novel synthesis of the information."
+          "abstraction_reason": "The summary mostly copies the reference text, with some minor rephrasing, but doesn't provide a novel synthesis of the information."
         }
       }
     },
@@ -123,23 +123,23 @@
         "a La Valletta Malta, opera incompleta, 1610.\n* ''Acquedotto'' a Messina, 1611.\n\n* Il ''Monte di Pietà'' a Messina (a partire dal 1616).",
         "Progettato su incarico dell'Arciconfraternita degli Azzurri, alla sua morte risultava costruito il solo piano terreno caratterizzato da portale e cantonali a bugne rustiche riferibili al manierismo toscano."
       ],
-      "generated_summary": "Masuccio fu un architetto gesuitico attivo in Sicilia tra la fine del XVI e l'inizio del XVII secolo. Entrato nell'ordine dei gesuiti, venne inviato a Roma per perfezionare i suoi studi di architettura, dove ebbe modo di consolidare la sua formazione tecnica e di conoscere le più recenti ricerche architettoniche. Tornato in Sicilia, divenne il primo architetto della Provincia gesuitica di Sicilia e lavorò su vari progetti, tra cui il collegio e la chiesa dei gesuiti a Caltanissetta, il noviziato di Monte Tirone e la chiesa di Casa Professa a Palermo. La sua opera più conosciuta è il Monte di Pietà di Messina, progettato nel 1616 e completato dopo la sua morte. Masuccio fu un architetto innovativo che attinse al manierismo toscano e senese, e la sua opera influenzò lo stile barocco siciliano.",
+      "generated_summary": "Masuccio fu un architetto gesuitico attivo in Sicilia tra la fine del XVI e l'inizio del XVII secolo. Entrato nell'ordine dei gesuiti, venne inviato a Roma per perfezionare i suoi studi di architettura, dove ebbe modo di consolidare la sua formazione tecnica e di conoscere le più recenti ricerche architettoniche. Tornato in Sicilia, divenne il primo architetto della Provincia gesuitica di Sicilia e lavorò su vari progetti, tra cui il collegio e la chiesa dei gesuiti a Caltanissetta, il noviziato di Monte Tirone e la chiesa di Casa Professa a Palermo. La sua opera più conosciuta è il Monte di Pietà di Messina, progettato nel 1616 e completato dopo la sua morte. Masuccio fu un architetto innovativo che attinse al manierismo toscano e senese e che utilizzò la decorazione a marmi mischi per creare un stile unico e caratteristico del barocco siciliano.",
       "scores": {
-        "bert": 0.7004806399345398,
-        "rouge": 0.21518987341772153,
+        "bert": 0.6979318857192993,
+        "rouge": 0.2035928143712575,
         "kir": 0.3333333333333333,
-        "abstraction": 0.7633587786259541,
-        "compression": 0.12112973871016462,
-        "novel_ngrams": 0.553030303030303,
+        "abstraction": 0.7714285714285715,
+        "compression": 0.1297387101646277,
+        "novel_ngrams": 0.5602836879432624,
         "judge": {
           "faithfulness": 4,
-          "faithfulness_reason": "The generated summary is mostly factually aligned with the reference, but it mentions Masuccio as a 'gesuitico' architect, which is not present in the reference.",
+          "faithfulness_reason": "The generated summary is mostly accurate, but it mentions Masuccio as a 'gesuitico' architect, which is not present in the reference. Also, it does not mention the transition from manierismo to barocco.",
           "completeness": 5,
-          "completeness_reason": "The generated summary captures the main contribution and results of Masuccio's work, including his notable projects and architectural style.",
+          "completeness_reason": "The generated summary covers all the main points mentioned in the reference, including the Monte di Pietà, the Collegio e chiesa dei gesuiti, the noviziato di Monte Tirone, and the chiesa di Casa Professa.",
           "conciseness": 4,
-          "conciseness_reason": "The generated summary is generally concise, but it could be improved by removing some repetitive information and focusing on the most important points.",
+          "conciseness_reason": "The generated summary is clear and easy to follow, but it could be more concise by removing some repetitive information and focusing on the most important points.",
           "abstraction": 3,
-          "abstraction_reason": "The generated summary provides some rephrased concepts, but it mostly presents a straightforward retelling of the facts, without a novel synthesis or deeper analysis."
+          "abstraction_reason": "The generated summary provides some original phrasing, but it does not offer a novel synthesis of the information. It mostly presents a rephrased version of the reference text."
         }
       }
     },
@@ -161,23 +161,23 @@
         "Uruguay\n* '''San Juan'''\n;",
         "Venezuela\n* '''San Juan'''\n\n* '''Aeroporto di San Juan''' – disambigua che si riferisce a due aeroporti di Porto Rico.\n* '''Metropolitana di San Juan''' – metropolitana di Porto Rico.\n* '''Porto di San Juan''' – il principale porto di Porto Rico.\n\n* '''San Juan''' – capo Apache\n* '''San Juan''' – gioco di carte per tre o quattro giocatori\n* '''San Juan de Ulúa''' – fortezza messicana\n* '''Sito storico nazionale di San Juan''' – patrimonio dell'UNESCO in Porto Rico\n\n* Saint-Jean\n* San Giovanni\n* Sankt Johann\n* São João"
       ],
-      "generated_summary": "San Juan è un nome comune per luoghi e località in diversi paesi del mondo, spesso riferito a santi o a luoghi sacri. In Argentina, San Juan è il capoluogo di una provincia, mentre in Colombia, Costa Rica, El Salvador, Filippine, Guatemala, Honduras, Messico, Nicaragua, Panama, Paraguay, Perù, Porto Rico, Spagna, Stati Uniti d'America e Trinidad e Tobago, San Juan è un nome di città, comuni, distretti o municipalità. Inoltre, San Juan è anche il nome di un asteroide della fascia principale e di un arcipelago al largo dello stato di Washington.",
+      "generated_summary": "San Juan è un nome comune a numerosi luoghi in tutto il mondo, compresi paesi, città, comuni, distretti e località. In Argentina, ad esempio, San Juan è il capoluogo di una provincia, mentre in Colombia esistono diversi comuni con questo nome, tra cui San Juan de Arama e San Juan de Pasto. In Costa Rica, San Juan è un distretto capoluogo di diversi cantoni, mentre in Cuba è il nome di un teatro di battaglia della guerra ispano-americana. Inoltre, San Juan è anche il nome di una provincia in Repubblica Dominicana e di una città in Porto Rico, che è anche la capitale del Commonwealth di Porto Rico. Inoltre, il nome San Juan è presente in molti altri paesi, tra cui Filippine, Guatemala, Honduras, Messico, Nicaragua, Panama, Paraguay, Perù, Spagna, Stati Uniti d'America e Trinidad e Tobago.",
       "scores": {
-        "bert": 0.5833231210708618,
-        "rouge": 0.09999999999999999,
-        "kir": 0.46153846153846156,
-        "abstraction": 0.9222222222222223,
-        "compression": 0.08134538450140762,
-        "novel_ngrams": 0.8351648351648352,
+        "bert": 0.5869444608688354,
+        "rouge": 0.06993006993006994,
+        "kir": 0.38461538461538464,
+        "abstraction": 0.9407407407407408,
+        "compression": 0.11809156912135131,
+        "novel_ngrams": 0.8235294117647058,
         "judge": {
           "faithfulness": 5,
-          "faithfulness_reason": "The generated summary aligns perfectly with the reference, covering the same information and using the same examples.",
+          "faithfulness_reason": "The generated summary aligns perfectly with the reference, covering all mentioned locations and their respective types.",
           "completeness": 5,
-          "completeness_reason": "The generated summary captures all the main points mentioned in the reference, including the various countries and places with the name San Juan.",
+          "completeness_reason": "The summary captures the main contribution and results of the reference, including all mentioned locations and their types.",
           "conciseness": 4,
-          "conciseness_reason": "The generated summary is mostly concise, but could be improved by removing some repetitive phrases and condensing the information further.",
+          "conciseness_reason": "The summary is mostly concise, but could be improved by removing some repetitive phrases and condensing the information.",
           "abstraction": 2,
-          "abstraction_reason": "The generated summary mostly copies the reference's structure and wording, with some minor rephrasing, but does not provide a novel synthesis of the information."
+          "abstraction_reason": "The summary mostly copies the reference, with some minor rephrasing, but does not provide a novel synthesis of the information."
         }
       }
     },
@@ -201,23 +201,23 @@
         "Catalonia2.png|Spartizione della Catalogna a seguito della pace dei Pirenei.",
         "Tratado_Pirineos_1659.jpg|Le modifiche territoriali a favore della Francia a seguito del trattato."
       ],
-      "generated_summary": "La pace dei Pirenei pose fine alla guerra tra Francia e Spagna, proseguita dopo la pace di Westfalia, e sancì la decadenza della Spagna. La Francia aveva sostenuto i rivoltosi catalani, annettendo la Catalogna del Nord e il Rossiglione, mentre la Spagna aveva sostenuto la Fronda e occupato Dunkerque. La sconfitta spagnola nella battaglia delle Dune indusse Filippo IV a accettare le trattative di pace, che portarono alla cessione di territori francesi e alla definitiva acquisizione della Catalogna del Nord e del Rossiglione da parte della Francia. La pace stabilì anche un matrimonio tra Maria Teresa, figlia di Filippo IV, e Luigi XIV, con la rinuncia di Maria Teresa al trono di Spagna in cambio di una dote. La pace dei Pirenei diede origine alla guerra di successione spagnola, quando i Borbone rivendicarono il trono di Spagna per il nipote di Luigi XIV, Filippo d'Angiò.",
+      "generated_summary": "La pace dei Pirenei pose fine alla guerra tra Francia e Spagna, che era proseguita dopo la pace di Westfalia, cui la Spagna non aveva aderito. La Francia aveva sostenuto i rivoltosi catalani, occupando la Catalogna del Nord e la regione del Rossiglione, mentre la Spagna aveva sostenuto la rivolta della Fronda e occupato il porto di Dunkerque. La sconfitta degli spagnoli nella battaglia delle Dune indusse Filippo IV a accettare le trattative di pace, che portarono alla cessione di territori spagnoli alla Francia, alla definitiva acquisizione della Catalogna del Nord e alla creazione di un condominio franco-spagnolo sull'isola dei Fagiani. La pace sancì anche un matrimonio tra Maria Teresa, figlia di Filippo IV, e Luigi XIV, ma comportò la rinuncia di Maria Teresa al trono di Spagna in cambio di una dote. La pace dei Pirenei sancì definitivamente la decadenza della Spagna e diede origine",
       "scores": {
-        "bert": 0.6755247116088867,
-        "rouge": 0.22916666666666663,
-        "kir": 0.6,
-        "abstraction": 0.7342657342657343,
-        "compression": 0.2900889035232137,
-        "novel_ngrams": 0.5069444444444444,
+        "bert": 0.6739128828048706,
+        "rouge": 0.23711340206185566,
+        "kir": 0.6666666666666666,
+        "abstraction": 0.6875,
+        "compression": 0.29568653276259466,
+        "novel_ngrams": 0.45517241379310347,
         "judge": {
           "faithfulness": 4,
-          "faithfulness_reason": "The generated summary is mostly factually aligned with the reference, but it includes some additional information not present in the reference, such as the mention of the 'guerra di successione spagnola'.",
+          "faithfulness_reason": "Most facts are aligned, but some details are not mentioned, like the signatories of the treaty.",
           "completeness": 4,
-          "completeness_reason": "The generated summary captures the main contribution and results of the Treaty of the Pyrenees, but it could be more comprehensive in its explanation of the treaty's terms and consequences.",
+          "completeness_reason": "Main contributions and results are captured, but some nuances are missing, like the specific territories ceded to France.",
           "conciseness": 3,
-          "conciseness_reason": "The generated summary is somewhat verbose and repetitive, with some sentences that could be condensed or rephrased for better clarity.",
+          "conciseness_reason": "The summary is somewhat verbose and repetitive, with some sentences being unnecessary.",
           "abstraction": 2,
-          "abstraction_reason": "The generated summary does not provide a novel synthesis of the information, but rather a rephrased version of the original text with some additional details."
+          "abstraction_reason": "The summary mostly copies the reference text, with some minor rephrasing, but lacks a novel synthesis of the information."
         }
       }
     },
@@ -227,23 +227,23 @@
       "salient_sentences": [
         "=== Argentina ===\n* '''Santa Fe''' – capoluogo dell'omonima provincia\n* '''Provincia di Santa Fe'''\n\n=== Brasile ===\n* '''Santa Fé''' – comune dello Stato di Paraná\n* '''Santa Fé de Goiás''' – comune dello Stato di Goiás\n* '''Santa Fé de Minas''' – comune dello Stato di Minas Gerais\n* '''Santa Fé do Araguaia''' – comune dello Stato di Tocantins\n* '''Santa Fé do Sul''' – comune dello Stato di San Paolo\n* '''Bonito de Santa Fé''' – comune dello Stato della Paraíba\n\n=== Colombia ===\n* '''Santa Fe de Antioquia''' – comune del dipartimento di Antioquia\n* '''Santa Fe de Bogotá''', o anche '''Santafé de Bogotá''' – vecchio nome della capitale\n\n=== Ecuador ===\n* '''Isola di Santa Fe''' – isola dell'arcipelago delle Galápagos\n\n=== Filippine ===\n* '''Santa Fe''' – municipalità della Provincia di Cebu\n* '''Santa Fe''' – municipalità della Provincia di Leyte\n* '''Santa Fe''' – municipalità della Provincia di Nueva Vizcaya\n* '''Santa Fe''' – municipalità della Provincia di Romblon\n\n=== Honduras ===\n* '''Santa Fe''' – comune del dipartimento di Colón\n* '''Santa Fe''' – comune del dipartimento di Ocotepeque\n\n=== Messico ===\n* '''Santa Fe''' – distretto di Città del Messico\n* '''Santa Fe''' – località dello Stato della Bassa California del Sud\n* '''Santa Fe''' – località dello Stato di Chihuahua\n* '''Santa Fe''' – località dello Stato di Coahuila\n* '''Santa Fe''' – località dello Stato di Guanajuato\n* '''Santa Fe''' – località dello Stato di Jalisco\n* '''Santa Fe''' – località dello Stato di Michoacán\n* '''Santa Fe''' – località dello Stato di Nayarit\n* '''Santa Fe''' – località dello Stato di Nuevo León\n* '''Santa Fe''' – località dello Stato di Sinaloa\n* '''Santa Fe''' – località dello Stato di Veracruz\n\n=== Panama ===\n* '''Santa Fé''' – comune del distretto di Chepigana della provincia di Darién\n* '''Santa Fé''' – comune del distretto di Santa Fé della provincia di Veraguas\n* '''Distretto di Santa Fé''' – distretto della provincia di Veraguas\n\n=== Spagna ===\n* '''Santa Fe''' – comune della provincia di Granada\n* '''Santa Fe de Mondújar''' – comune della provincia di Almería\n* '''Santa Fe del Penedès''' – comune della provincia di Barcellona\n\n=== Stati Uniti ===\n* '''Santa Fe''' – capitale del Nuovo Messico\n* '''Santa Fe''' – comune del Texas\n* '''Santa Fe''' – località del Missouri\n* '''Santa Fe''' – località dell'Ohio\n* '''Santa Fe''' – località del Tennessee\n* '''Rancho Santa Fe''' – località della California\n* '''Contea di Santa Fe''' – contea del Nuovo Messico\n\n* '''''Santa Fe''''' – film prodotto dalla Nestor Film Company (1912)\n* '''''Santa Fe''''' – film diretto da Sergio Garcia (1972) \n* '''''Santa Fe''''' – film diretto da Jun Aristorenas (1973)\n\n* '''Santa-Fe''' – brano di Bob Dylan del 1967\n*'''Santa Fe''' – soprannome della Atchison, Topeka and Santa Fe Railway\n* '''Hyundai Santa Fe''' – Sport Utility Vehicle prodotto da Hyundai\n* '''USS Santa Fe''' – nome di due navi della Marina militare statunitense, derivato dalla città di Santa Fe, Nuovo Messico"
       ],
-      "generated_summary": "Santa Fe è un nome comune per luoghi e oggetti in diversi paesi del mondo. In Argentina, è il capoluogo della provincia omonima. Nel Brasile, ci sono diversi comuni con questo nome, tra cui Santa Fé, Santa Fé de Goiás, Santa Fé de Minas e Santa Fé do Araguaia. In Colombia, Santa Fe de Antioquia è un comune del dipartimento di Antioquia, mentre Santa Fe de Bogotá è il vecchio nome della capitale. In Ecuador, l'Isola di Santa Fe è un'isola dell'arcipelago delle Galápagos. In Filippine, ci sono diverse municipalità con questo nome, tra cui Santa Fe nella Provincia di Cebu e Santa Fe nella Provincia di Leyte. In Honduras, ci sono due comuni con questo nome, mentre in Messico ci sono diverse località con questo nome, tra cui Santa Fe nel distretto di Città del Messico e Santa Fe nella Bassa California del Sud. In Panama, ci sono due comuni con questo nome, mentre in Spagna ci sono tre comuni con questo nome, tra cui Santa Fe nella provincia",
+      "generated_summary": "Santa Fe è un nome comune in diversi paesi del mondo, spesso associato a città, comuni, province o distretti. In Argentina, ad esempio, Santa Fe è la capitale della provincia omonima, mentre in Brasile ci sono diversi comuni con questo nome, tra cui Santa Fé de Goiás e Santa Fé de Minas. In Colombia, Santa Fe de Antioquia è un comune del dipartimento di Antioquia, mentre in Ecuador l'Isola di Santa Fe è un'isola dell'arcipelago delle Galápagos. In Messico, Santa Fe è un distretto di Città del Messico e ci sono anche località con questo nome in diversi stati, come Chihuahua e Nuevo León. Inoltre, Santa Fe è anche il nome di una capitale, quella del Nuovo Messico, e di una contea nello stesso stato.",
       "scores": {
-        "bert": 0.5525634288787842,
-        "rouge": 0.0449438202247191,
+        "bert": 0.5734195113182068,
+        "rouge": 0.09022556390977444,
         "kir": 1.0,
-        "abstraction": 0.9523809523809523,
-        "compression": 0.31601731601731603,
-        "novel_ngrams": 0.7988165680473372,
+        "abstraction": 0.959349593495935,
+        "compression": 0.2350982350982351,
+        "novel_ngrams": 0.8145161290322581,
         "judge": {
           "faithfulness": 5,
-          "faithfulness_reason": "The generated summary aligns perfectly with the reference, mentioning the same locations and their respective connections to the name 'Santa Fe'.",
+          "faithfulness_reason": "The generated summary aligns perfectly with the reference, mentioning the same cities, states, and regions with the name 'Santa Fe' in various countries.",
           "completeness": 5,
-          "completeness_reason": "The generated summary captures all the main contributions and results mentioned in the reference, including the various locations and their respective connections.",
+          "completeness_reason": "The generated summary captures all the main contributions and results mentioned in the reference, including the different countries and locations with the name 'Santa Fe'.",
           "conciseness": 4,
-          "conciseness_reason": "The generated summary is mostly concise, but it could be improved by removing some repetitive phrases and condensing the information into a more fluid narrative.",
-          "abstraction": 2,
-          "abstraction_reason": "The generated summary mostly copies the information from the reference, with some minor rephrasing, but does not provide a novel synthesis of the concepts."
+          "conciseness_reason": "The generated summary is mostly concise, but could be slightly improved by removing some repetitive phrases and condensing the information into shorter sentences.",
+          "abstraction": 4,
+          "abstraction_reason": "The generated summary rephrases the original text, but could be more novel in its synthesis, as it still follows a similar structure and sentence order as the reference."
         }
       }
     },
@@ -266,23 +266,23 @@
         "La pubblicazione dell'opera, dedicata alla nobildonna Ippolita Sforza, fu curata da Francesco del Tuppo.",
         "Una delle sue novelle, ''Mariotto e Ganozza'' (novella XXXIII), ispirò indirettamente il ''Romeo e Giulietta'' di Shakespeare."
       ],
-      "generated_summary": "Masuccio Salernitano è un autore italiano del Rinascimento, figlio di Margaritella de' Mariconda e Luigi Guardati, membro della nobile famiglia dei Guardati. Nato probabilmente tra marzo e aprile, si dedicò agli studi ecclesiastici, ma poi abbandonò la carriera per intraprendere la politica e si trasferì a Napoli, dove si integrò nell'ambiente umanista. Sposò Cristina de Pandis e ebbe cinque figli, che si estinsero nelle famiglie Fagella e Quaranta. Masuccio Salernitano è noto per il suo \"Novellino\", una raccolta di cinquanta racconti satirici e grotteschi pubblicata postuma nel 1476, che figura nell'Indice dei libri proibiti dell'Inquisizione romana. La sua opera ispirò indirettamente \"Romeo e Giulietta\" di Shakespeare.",
+      "generated_summary": "Masuccio Salernitano è un autore italiano del Rinascimento, figlio di Margaritella de' Mariconda e Luigi Guardati, membro della nobile famiglia dei Guardati. Nato probabilmente tra marzo e aprile, si dedicò agli studi ecclesiastici, ma poi abbandonò la carriera per intraprendere la politica e si trasferì a Napoli, dove si integrò nell'ambiente umanista. Sposò Cristina de Pandis e ebbe cinque figli, che si estinsero nelle famiglie Fagella e Quaranta. Masuccio è noto per il suo \"Novellino\", una raccolta di cinquanta racconti satirici e grotteschi pubblicata postuma nel 1476, che figura nell'Indice dei libri proibiti dell'Inquisizione romana. La sua opera ispirò indirettamente \"Romeo e Giulietta\" di Shakespeare.",
       "scores": {
-        "bert": 0.7209198474884033,
-        "rouge": 0.3428571428571428,
+        "bert": 0.7220035791397095,
+        "rouge": 0.3448275862068966,
         "kir": 0.42857142857142855,
-        "abstraction": 0.7692307692307692,
-        "compression": 0.23724406889827754,
-        "novel_ngrams": 0.580952380952381,
+        "abstraction": 0.7766990291262136,
+        "compression": 0.2333441663958401,
+        "novel_ngrams": 0.5961538461538461,
         "judge": {
           "faithfulness": 4,
-          "faithfulness_reason": "Most facts are correct, but the birth date and family details are not mentioned in the reference.",
+          "faithfulness_reason": "Most facts are correct, but some details are missing or incorrect, e.g., birth date, wife's name, and family legacy.",
           "completeness": 4,
-          "completeness_reason": "Main contribution and results are captured, but some minor details are missing.",
+          "completeness_reason": "Main contributions and results are covered, but some minor details are missing, e.g., the anticlerical tendency and the exact date of the Index of Prohibited Books.",
           "conciseness": 3,
-          "conciseness_reason": "The summary is clear, but some sentences are a bit long and could be rephrased for better flow.",
+          "conciseness_reason": "The summary is somewhat verbose and repetitive, with some unnecessary details, e.g., the exact date of publication and the family legacy.",
           "abstraction": 2,
-          "abstraction_reason": "Some sentences are direct copies from the reference, but there is some rephrasing and reorganization of ideas."
+          "abstraction_reason": "The summary mostly copies the reference text without rephrasing or adding novel insights, but some minor rewording is present."
         }
       }
     },
@@ -300,23 +300,23 @@
         "Romanzi con Montalbano\nCategoria:",
         "Romanzi ambientati in Sicilia"
       ],
-      "generated_summary": "Il commissario Montalbano, sconcertato dai comportamenti della polizia e dalla politica italiana, prende la decisione di dimettersi dalla sua carica, ma i suoi colleghi disapprovano la cosa e il momento delle dimissioni viene rimandato. Intanto, mentre fa la sua consueta nuotata a Marinella, trova un cadavere che sembra non essere morto per annegamento. Montalbano inizia a indagare e scopre che il caso è collegato a un altro omicidio, quello di un ragazzo che cercava di fuggire da sua madre, e che entrambi i delitti sono stati commessi da un capo mafioso tunisino che si voleva vendicare per ciò che aveva fatto l'uomo affogato e il ragazzo.",
+      "generated_summary": "Il commissario Montalbano, sconcertato dai comportamenti della polizia e dalla politica italiana in merito ai fatti del G8 di Genova, è sul punto di dimettersi dalla sua carica, ma il momento della presentazione delle dimissioni viene rimandato. Nel frattempo, mentre fa la sua consueta nuotata nelle acque di Marinella, trova un cadavere che sembra non essere morto per annegamento. Montalbano inizia a indagare e scopre che il caso è collegato a un altro omicidio, quello di un ragazzo che cercava di fuggire da sua madre. L'indagine porta il commissario a scoprire che l'assassino è un capo mafioso tunisino che si è vendicato per ciò che ha fatto l'uomo affogato e per ciò che ha fatto il ragazzo.",
       "scores": {
-        "bert": 0.6429656147956848,
-        "rouge": 0.18367346938775508,
+        "bert": 0.6598925590515137,
+        "rouge": 0.30097087378640774,
         "kir": 0.6666666666666666,
-        "abstraction": 0.6826923076923077,
-        "compression": 0.38148584905660377,
-        "novel_ngrams": 0.5238095238095238,
+        "abstraction": 0.5391304347826087,
+        "compression": 0.41332547169811323,
+        "novel_ngrams": 0.4051724137931034,
         "judge": {
-          "faithfulness": 2,
-          "faithfulness_reason": "The generated summary introduces a plot twist (the Tunisian mafia boss) not present in the reference, and also changes the tone and focus of the original story.",
-          "completeness": 3,
-          "completeness_reason": "The generated summary captures the main plot points, but omits the specific details about the G8 protests and the school Diaz incident.",
-          "conciseness": 4,
-          "conciseness_reason": "The generated summary is clear and easy to follow, but could be more concise by removing some repetitive phrases.",
-          "abstraction": 1,
-          "abstraction_reason": "The generated summary is largely a copy-paste from the original text, with minimal rephrasing or synthesis of concepts."
+          "faithfulness": 4,
+          "faithfulness_reason": "The generated summary is mostly faithful to the reference, but it introduces some minor inaccuracies, such as the reason for the commissario's distress and the identity of the assassin.",
+          "completeness": 4,
+          "completeness_reason": "The generated summary captures the main plot points and the investigation, but it omits some details about the setting and the tone of the novel.",
+          "conciseness": 3,
+          "conciseness_reason": "The generated summary is somewhat verbose and repetitive, with some unnecessary details and phrases.",
+          "abstraction": 2,
+          "abstraction_reason": "The generated summary does not rephrase the original text in a novel way, but rather presents a straightforward retelling of the plot."
         }
       }
     },
@@ -327,23 +327,23 @@
         "* '''San Luis''', provincia dell'Argentina\n* '''San Luis''', capoluogo dell'omonima provincia\n\n*'''",
         "Lago San Luis'''\n\n*'''São Luís Gonzaga do Maranhão''', comune dello stato del Maranhão\n*'''São Luiz Gonzaga''', comune dello stato del Rio Grande do Sul\n\n*'''San Luis''', comune nel dipartimento di Antioquia\n*'''San Luis''', comune nel dipartimento di Tolima\n*'''San Luis de Gaceno''', comune nel dipartimento di Boyacá\n*'''San Luis de Palenque''', comune nel dipartimento di Casanare\n*'''San Luis de Sincé''', comune del dipartimento di Sucre\n\n*'''San Luis''', distretto del cantone di Turrubares\n\n* '''San Luis''', nella provincia di Santiago di Cuba\n\n* '''San Luis''' – La Paz\n* '''San Luis La Herradura'''\n* '''San Luis de la Reina'''\n* '''San Luis del Carmen'''\n\n* '''San Luis''', municipalità della provincia di Agusan del Sur\n* '''San Luis''', municipalità della provincia di Aurora\n* '''San Luis''', municipalità della provincia di Batangas\n* '''San Luis''', municipalità della provincia di Pampanga\n\n* '''San Luis''', comune del dipartimento di Petén\n* '''San Luis Jilotepeque''', comune del dipartimento di Jalapa\n\n* '''San Luis''', comune del dipartimento di Comayagua\n* '''San Luis''', comune del dipartimento di Santa Bárbara\n\n* '''San Luis''' – Chihuahua\n* '''San Luis''' – Coahuila\n* '''San Luis''' – Michoacán\n* '''San Luis''' – Sonora\n* '''San Luis Potosí (stato)''', uno stato\n* '''San Luis Potosí''', la capitale dello stato omonimo \n\n* '''San Luis''', capoluogo della provincia di Carlos Fermín Fitzcarrald nell'Ancash\n* Il distretto di San Luis, nella provincia di Lima\n* Il distretto di San Luis, nella provincia di Cañete\n\n* La San Luis Valley in Colorado\n* '''San Luis''' – Arizona\n* '''San Luis''' – Colorado\n* '''San Luis Obispo''', California\n\n* '''San Luis'''\n\n*San Luigi\n*Saint-Louis"
       ],
-      "generated_summary": "San Luis è un nome geografico diffuso in diversi paesi del mondo, spesso associato a luoghi con una forte connotazione religiosa o storica. In Argentina, San Luis è una provincia e il suo capoluogo, mentre in Brasile esistono comuni con questo nome nello stato del Maranhão e nel Rio Grande do Sul. In Colombia, San Luis è presente in diversi dipartimenti, tra cui Antioquia e Tolima, mentre in Cuba è un distretto nella provincia di Santiago di Cuba. Negli Stati Uniti, San Luis è presente in Arizona, California e Colorado, mentre in Messico è un comune nello stato di Chihuahua e una città nello stato di San Luis Potosí. Inoltre, San Luis è anche un nome associato a diverse municipalità nelle Filippine e a diversi comuni in Guatemala e Honduras.",
+      "generated_summary": "San Luis è un nome geografico diffuso in diversi paesi del mondo, che si riferisce a città, province, comuni, distretti e municipalità. In Argentina, San Luis è una provincia e il suo capoluogo. In Brasile, São Luís Gonzaga do Maranhão e São Luiz Gonzaga sono due comuni nello stato del Maranhão e del Rio Grande do Sul. In Colombia, San Luis è presente in diversi dipartimenti, tra cui Antioquia, Tolima, Boyacá, Casanare e Sucre. Inoltre, San Luis è presente in diversi stati messicani, tra cui Chihuahua, Coahuila, Michoacán e Sonora, nonché nello stato di San Luis Potosí, che ospita la capitale omonima. In Perù, San Luis è una provincia e un distretto nella regione di Ancash e Lima. Negli Stati Uniti, la San Luis Valley si trova nel Colorado, mentre San Luis è presente in Arizona e California. Infine, San Luis è anche il nome di una municipalità in Filippine e di una città in Cuba.",
       "scores": {
-        "bert": 0.6440173983573914,
-        "rouge": 0.10218978102189782,
+        "bert": 0.6270231604576111,
+        "rouge": 0.08333333333333333,
         "kir": 0.5,
-        "abstraction": 0.9609375,
-        "compression": 0.4146880176697957,
-        "novel_ngrams": 0.8837209302325582,
+        "abstraction": 0.961038961038961,
+        "compression": 0.49254555494202096,
+        "novel_ngrams": 0.8709677419354839,
         "judge": {
-          "faithfulness": 5,
-          "faithfulness_reason": "The generated summary aligns perfectly with the reference, including all mentioned countries and regions.",
+          "faithfulness": 4,
+          "faithfulness_reason": "The generated summary is mostly factually accurate, but it includes some minor errors in the names of cities and states (e.g., 'São Luís Gonzaga do Maranhão' instead of 'São Luís').",
           "completeness": 5,
-          "completeness_reason": "The summary captures all the main contributions and results mentioned in the reference, including the various countries and regions where 'San Luis' is a toponym.",
-          "conciseness": 4,
-          "conciseness_reason": "The summary is mostly concise, but could be slightly improved by removing some repetitive phrases and condensing the information.",
+          "completeness_reason": "The generated summary captures all the main contributions and results mentioned in the reference, including the various locations where 'San Luis' is used as a toponym.",
+          "conciseness": 3,
+          "conciseness_reason": "The generated summary is somewhat verbose, as it lists multiple locations where 'San Luis' is used, but it could be condensed into a more fluid and efficient text.",
           "abstraction": 2,
-          "abstraction_reason": "The summary rephrases some concepts, such as 'nome geografico diffuso' instead of 'toponimo comune', but does not provide a novel synthesis of the information."
+          "abstraction_reason": "The generated summary mostly copies the reference text, with some minor rephrasing, but it does not provide a novel synthesis or new insights."
         }
       }
     },
@@ -355,23 +355,23 @@
         "'\n\n=== Spagna ===\n* '''Santa Cruz del Valle de los Caídos''', Madrid\n* '''Santa Cruz de Boedo''', Palencia\n* '''Santa Cruz de Bezana''', Cantabria\n* '''Santa Cruz de Grío''', Saragozza\n* '''Santa Cruz de la Salceda''', Burgos\n* '''Santa Cruz de la Serós''', Huesca\n* '''Santa Cruz de Tenerife''', una città delle Canarie\n* '''Santa Cruz de Tenerife''', una provincia delle Canarie\n* '''Santa Cruz de la Palma''', capitale dell'isola di La Palma, Canarie\n\n=== Stati Uniti d'America ===\n* '''Santa Cruz''', capoluogo della Contea di Santa Cruz, California\n* '''Santa Cruz''', census-designated place della Contea di Santa Fe, Nuovo Messico\n* '''Santa Cruz''', census-designated place della Contea di Starr, Texas\n* '''Santa Cruz''', fiume dell'Arizona\n** '''Contea di Santa Cruz''', contea della California\n** '''Contea di Santa Cruz''', contea dell'Arizona\n* '''Isola di Santa Cruz''' – California\n=== Venezuela ===\n* '''Santa Cruz del Zulia''', Venezuela\n\n* '''Santa Cruz Futebol Clube''', squadra di calcio brasiliana\n* ''",
         "'Roque Santa Cruz''', calciatore paraguaiano\n* Santa Cruz, noto produttore statunitense di biciclette\n* '''Santa Cruz''', gruppo musicale finlandese"
       ],
-      "generated_summary": "Santa Cruz è un nome comune in diversi paesi del mondo, che si riferisce a città, fiumi, province, dipartimenti e comuni. In Argentina, Bolivia e Brasile, si trova una provincia e diversi comuni con questo nome. In Colombia e Costa Rica, ci sono comuni e distretti con il nome di Santa Cruz. In Ecuador, ci sono un'isola e un cantone con questo nome. In Filippine, Guatemala, Honduras, India, Messico, Perù e Spagna, ci sono comuni e municipalità con il nome di Santa Cruz. In Portogallo, ci sono comuni e freguesie con questo nome, mentre in Isole Salomone, ci sono un arcipelago con questo nome. Negli Stati Uniti d'America, ci sono una contea e una città con il nome di Santa Cruz. In Venezuela, ci sono un comune con questo nome.",
+      "generated_summary": "Santa Cruz è un nome comune in diversi paesi del mondo, che si riferisce a città, comuni, fiumi, province e isole. In Argentina, Bolivia e Brasile, Santa Cruz è un nome di città e province, mentre in Cile, Colombia e Costa Rica si riferisce a comuni e cantoni. In Ecuador, Filippine e Guatemala, Santa Cruz è un nome di municipalità e comuni, mentre in Honduras e India si riferisce a comuni e sobborghi. In Messico e Perù, Santa Cruz è un nome di municipalità e province, mentre in Portogallo si riferisce a comuni e freguesie. In Spagna, Santa Cruz è un nome di città e province, mentre negli Stati Uniti d'America si riferisce a capoluoghi di contea e fiumi.",
       "scores": {
-        "bert": 0.6467934846878052,
-        "rouge": 0.1111111111111111,
+        "bert": 0.6545031666755676,
+        "rouge": 0.109375,
         "kir": 0.0,
-        "abstraction": 1.0,
-        "compression": 0.12014423864940174,
-        "novel_ngrams": 0.9457364341085271,
+        "abstraction": 0.9914529914529915,
+        "compression": 0.1083428946074414,
+        "novel_ngrams": 0.9322033898305084,
         "judge": {
-          "faithfulness": 5,
-          "faithfulness_reason": "The generated summary aligns perfectly with the reference, covering all the locations with the name 'Santa Cruz' worldwide.",
-          "completeness": 5,
-          "completeness_reason": "The summary captures all the main contributions and results, listing all the countries and types of locations with the name 'Santa Cruz'.",
-          "conciseness": 4,
-          "conciseness_reason": "The summary is mostly concise, but some repetition occurs when listing multiple countries with the same type of location (e.g., 'comuni' and'municipalità').",
+          "faithfulness": 4,
+          "faithfulness_reason": "Most information is accurate, but some minor details are not perfectly aligned, e.g., 'cantoni' instead of 'comuni' in Cile.",
+          "completeness": 4,
+          "completeness_reason": "Captures main contributions and results, but some minor details are missing, e.g., specific examples of cities or provinces.",
+          "conciseness": 3,
+          "conciseness_reason": "Some repetitive phrasing and long sentences make it slightly verbose.",
           "abstraction": 2,
-          "abstraction_reason": "The summary mostly copies the reference, with some minor rephrasing of concepts, but does not provide a novel synthesis or new insights."
+          "abstraction_reason": "Mostly copy-paste, with some minor rephrasing, but lacks novel synthesis and original expression."
         }
       }
     },
@@ -400,23 +400,23 @@
         "Secondo una tradizionale visione invasionista, i Sicani sarebbero stati una popolazione di origine pre-indoeuropea.",
         "Secondo invece una visione continuista, i Sicani rappresenterebbero un ramo meridionale di un sostrato etno-linguistico molto antico, ma comunque indoeuropeo, che avrebbe occupato tutta l'area tirrenica, dalla Liguria (Liguri) alla Sicilia, passando per l'Italia meridionale (Enotri), costituendo dunque lo strato ''ligure-sicano''."
       ],
-      "generated_summary": "I Sicani sono un popolo la cui origine rimane ancora oggi un enigma storico. Secondo Diodoro Siculo, la loro presenza in Sicilia avrebbe determinato il cambio del nome dell'isola da Trinacria a Sikania. Le fonti storiche sono discordanti sulla loro provenienza: Filisto di Siracusa li descrive come un popolo iberico, mentre Timeo di Tauromenio li considera autoctoni. Tucidide e Dionigi di Alicarnasso concordano sulla loro origine iberica, ma si discostano sulla modalità del loro arrivo in Sicilia, con alcuni che suggeriscono un'immigrazione via terra e altri via mare. La scienza archeologica sembra confermare la loro presenza in Sicilia prima dei Siculi e la loro lotta con quest'ultimi, ma la loro origine etnica rimane ancora oggetto di dibattito tra una visione invasionista e una visione continuista.",
+      "generated_summary": "I Sicani sono un popolo la cui origine rimane ancora un mistero. Secondo Diodoro Siculo, la loro presenza in Sicilia avrebbe determinato il cambio del nome dell'isola da Trinacria a Sikania. Le fonti storiche sono discordanti sulla loro origine: Filisto di Siracusa li descrive come un popolo iberico, mentre Timeo di Tauromenio li considera autoctoni. Tucidide e Dionigi di Alicarnasso concordano sul fatto che i Sicani siano originari dell'Iberia, ma non è chiaro se siano arrivati in Sicilia via mare o via terra. La scienza archeologica sembra confermare la loro presenza in Sicilia prima dei Siculi e la loro lotta con quest'ultimi, come dimostrato dalla distruzione dei villaggi di Mokarta e Sabucina. Due sono le teorie sulla loro origine: una li considera una popolazione pre-indoeuropea, l'altra li vede come un ramo meridionale di un sostrato etno-linguistico indoeuropeo che si",
       "scores": {
-        "bert": 0.6793051362037659,
-        "rouge": 0.17777777777777778,
-        "kir": 0.35,
-        "abstraction": 0.975609756097561,
-        "compression": 0.30731337627889355,
-        "novel_ngrams": 0.8064516129032258,
+        "bert": 0.6824541091918945,
+        "rouge": 0.20408163265306123,
+        "kir": 0.45,
+        "abstraction": 0.8978102189781022,
+        "compression": 0.33649109511178477,
+        "novel_ngrams": 0.7246376811594203,
         "judge": {
           "faithfulness": 4,
-          "faithfulness_reason": "The generated summary aligns with the reference, but mentions additional sources (Diodoro Siculo, Filisto di Siracusa, Timeo di Tauromenio, Tucidide, Dionigi di Alicarnasso) not present in the reference.",
+          "faithfulness_reason": "The generated summary is mostly aligned with the reference, but it includes additional information not present in the reference, such as the mention of specific historical sources and archaeological evidence.",
           "completeness": 4,
-          "completeness_reason": "The generated summary captures the main points of the reference, including the Sicani's presence in Sicily, their conflict with the Siculi, and the debate on their origin, but omits some details.",
-          "conciseness": 3,
-          "conciseness_reason": "The generated summary is not excessively verbose, but could be more concise by removing some repetitive phrases and focusing on the main ideas.",
-          "abstraction": 2,
-          "abstraction_reason": "The generated summary rephrases some concepts, but mostly presents a straightforward summary of the reference without adding new insights or novel synthesis."
+          "completeness_reason": "The generated summary captures the main points of the reference, including the Sicani's presence in Sicily, their conflict with the Siculi, and the uncertainty surrounding their origin, but it does not cover all the details mentioned in the reference.",
+          "conciseness": 2,
+          "conciseness_reason": "The generated summary is verbose and repetitive, with some sentences being unnecessary or redundant.",
+          "abstraction": 3,
+          "abstraction_reason": "The generated summary rephrases some of the information from the reference, but it does not provide a novel synthesis or a new perspective on the topic."
         }
       }
     }
