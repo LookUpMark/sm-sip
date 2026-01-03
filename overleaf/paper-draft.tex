@@ -49,7 +49,7 @@ author5@studenti.polito.it}
 \maketitle
 
 \begin{abstract}
-We present SM-SIP (Semantic \& Multilingual Salient Information Prompting), an extension of the SigExt framework for controllable abstractive summarization. Modern Large Language Models (LLMs) produce fluent summaries but often suffer from hallucination and omission of critical information. The SigExt approach addresses this by extracting salient keyphrases to guide LLM generation. However, the original method relies on character-level fuzzy matching for training label generation, which fails to capture semantic paraphrasing. We propose two key extensions: (1) \textbf{Semantic Supervision}, replacing fuzzy matching with Sentence-BERT embeddings for training label generation, and (2) \textbf{Multilingual Adaptation}, validating the approach on Italian using the WITS dataset with XLM-RoBERTa-Longformer. Our experiments on the Italian extension demonstrate robust performance across configurations, with BERT Score averaging 0.66 and Key Information Retention (KIR) reaching up to 49\%. Results show that the smallest configuration (10k samples) achieves the best performance, suggesting efficient learning of signature extraction patterns.
+We present SM-SIP (Semantic \& Multilingual Salient Information Prompting), an extension of the SigExt framework for controllable abstractive summarization. Modern Large Language Models (LLMs) produce fluent summaries but often suffer from hallucination and omission of critical information. The SigExt approach addresses this by extracting salient keyphrases to guide LLM generation. However, the original method relies on character-level fuzzy matching for training label generation, which fails to capture semantic paraphrasing. We propose two key extensions: (1) \textbf{Semantic Supervision}, replacing fuzzy matching with Sentence-BERT embeddings for training label generation, and (2) \textbf{Multilingual Adaptation}, validating the approach on Italian using the WITS dataset with XLM-RoBERTa-Longformer. Our experiments on the Italian extension demonstrate robust performance across configurations, with BERT Score averaging 0.67 and Key Information Retention (KIR) reaching up to 46\%. A notable finding is the discrepancy between high algorithmic abstraction scores (71\%) and low LLM-judge evaluations (1.87/5), indicating that current models achieve lexical novelty but limited conceptual synthesis. Results show that the smallest configuration (10k samples) achieves the best performance, suggesting efficient learning of signature extraction patterns.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -303,7 +303,7 @@ The best overall configuration is \textbf{10k-60t with 8-bit quantization}, achi
 
 Traditional metrics like ROUGE and BERT Score measure similarity to reference summaries but do not capture whether the model truly \textit{abstracts} information or merely extracts and rearranges it. To address this limitation, we introduce additional evaluation dimensions that specifically target abstraction quality.
 
-\textbf{Abstraction Metrics.} We compute three complementary measures on 100 samples using an optimized abstractive prompt: (1) \textit{Abstraction Score} = 1 minus the trigram overlap between generated summary and source, where higher values indicate less verbatim copying (observed: 0.72); (2) \textit{Novel N-grams} = percentage of bigrams in the summary not present in the source, measuring lexical novelty (observed: 56.6\%); (3) \textit{Compression Ratio} = summary length divided by source length, indicating conciseness (observed: 27.0\%).
+\textbf{Abstraction Metrics.} We compute three complementary measures on 100 samples using an optimized abstractive prompt: (1) \textit{Abstraction Score} = 1 minus the trigram overlap between generated summary and source, where higher values indicate less verbatim copying (observed: 0.71); (2) \textit{Novel N-grams} = percentage of bigrams in the summary not present in the source, measuring lexical novelty (observed: 55.7\%); (3) \textit{Compression Ratio} = summary length divided by source length, indicating conciseness (observed: 27.3\%).
 
 \textbf{LLM-as-Judge.} Following recent work on using LLMs for evaluation~\cite{goyal2022news}, we employ the same Llama-3.1-8B model with a dedicated evaluation prompt to rate generated summaries on four dimensions, each on a 1--5 scale. Table~\ref{tab:llm_judge} presents the results.
 
@@ -314,19 +314,19 @@ Traditional metrics like ROUGE and BERT Score measure similarity to reference su
 \toprule
 \textbf{Dimension} & \textbf{Mean} & \textbf{Std} \\
 \midrule
-Faithfulness & 3.81 & 0.59 \\
-Completeness & 3.54 & 0.61 \\
-Conciseness & 3.10 & 0.83 \\
-Abstraction & 2.24 & 0.78 \\
+Faithfulness & 3.13 & 1.05 \\
+Completeness & 3.65 & 0.70 \\
+Conciseness & 3.03 & 0.97 \\
+Abstraction & 1.87 & 0.84 \\
 \midrule
-\textbf{Overall} & \textbf{3.17} & -- \\
+\textbf{Overall} & \textbf{2.92} & 0.72 \\
 \bottomrule
 \end{tabular}
 \label{tab:llm_judge}
 \end{center}
 \end{table}
 
-The results reveal an important insight: while the model achieves good Faithfulness (3.81/5), indicating solid factual accuracy, the Abstraction score is notably lower (2.24/5). This gap suggests that the model tends to reformulate source content with minor lexical changes rather than performing true semantic synthesis---a known limitation of current LLMs, where progress in fluency often comes at the expense of factual consistency~\cite{ladhak2022faithful, tang2024faithfulness}.
+The results reveal an important insight: while the model achieves moderate Faithfulness (3.13/5), the Abstraction score is notably lower (1.87/5). This gap highlights a key finding: despite high algorithmic abstraction scores (71\% based on n-gram novelty), the LLM judge identifies that generated summaries often employ superficial paraphrasing rather than true semantic synthesis. This discrepancy between lexical novelty and conceptual originality represents a known limitation of current LLMs~\cite{ladhak2022faithful, tang2024faithfulness}. The higher standard deviations (0.84--1.05) compared to initial 10-sample tests indicate substantial variability across document types, suggesting that source complexity significantly influences summary quality.
 
 \subsection{Qualitative Example}
 
@@ -407,7 +407,7 @@ For applications where missing information carries high cost---such as medical o
 
 This paper presented SM-SIP, an extension of the Salient Information Prompting framework that introduces semantic supervision for training label generation and validates the approach on Italian, a morphologically rich language where traditional fuzzy matching fails.
 
-Our experiments on the WITS dataset demonstrate that the approach achieves competitive performance, with BERT Score of 0.66 and Key Information Retention reaching 49\%. More importantly, the results reveal that the signature extraction task is learnable with minimal training data---the best-performing configuration uses only 10,000 samples, outperforming models trained on 25,000 examples. This finding suggests that semantic supervision provides sufficiently clean labels that the extractor converges quickly.
+Our experiments on the WITS dataset demonstrate that the approach achieves competitive performance, with BERT Score of 0.67 and Key Information Retention reaching 46\%. More importantly, the results reveal that the signature extraction task is learnable with minimal training data---the best-performing configuration uses only 10,000 samples, outperforming models trained on 25,000 examples. A key finding emerges from comparing algorithmic and LLM-judge abstraction metrics: while n-gram novelty reaches 71\%, the LLM judge rates abstraction at only 1.87/5, revealing that generated summaries achieve lexical diversity but limited conceptual synthesis.
 
 The practical implications are significant. The pipeline runs efficiently on consumer GPUs using 4-bit quantization without quality loss. The robustness to hyperparameter choices (threshold, quantization, prompting strategy) simplifies deployment. And the data efficiency reduces the annotation burden for organizations seeking to adopt the approach.
 
