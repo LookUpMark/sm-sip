@@ -150,7 +150,10 @@ def analyze_enhanced_results():
     print()
     print("Traditional:")
     print(f"  BERT:  {m['bert']['mean']:.4f} +/- {m['bert']['std']:.4f}")
-    print(f"  ROUGE: {m['rouge']['mean']:.4f} +/- {m['rouge']['std']:.4f}")
+    if "rouge1" in m:
+        print(f"  ROUGE-1: {m['rouge1']['mean']:.4f} +/- {m['rouge1']['std']:.4f}")
+    if "rouge" in m:
+        print(f"  ROUGE: {m['rouge']['mean']:.4f} +/- {m['rouge']['std']:.4f}")
     print(f"  KIR:   {m['kir']['mean']:.2%}")
     print()
     print("Abstraction:")
