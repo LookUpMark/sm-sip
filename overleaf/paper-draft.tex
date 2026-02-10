@@ -291,22 +291,18 @@ The best overall configuration is \textbf{10k-60t with 8-bit quantization}, achi
 test set. Table \ref{tab:hyperparameters} presents the selected hyperparameters.\\
 The hyperparameter selection was tailored to prioritize factual accuracy. A low \textbf{Temperature} ($0.1$ and $0.2$) was employed to maintain a high deterministic approach while allowing minimal variation in the stochastic generation. To refine the output, \textbf{Top-p} sampling was set to $0.9$ to avoid long tail of low-probability tokens, while a \textbf{Repetition Penalty} of $1.10$ was employed to prevent critical repetition or cyclic loops. 
 \begin{table}[h]
-\centering
-\resizebox{\columnwidth}{!}{
-\begin{tabular}{|l|c|c|c|c|}
-\hline
-\textbf{Configuration} & \textbf{Decoding Type} & \textbf{Temperature} & \textbf{Top-p} & \textbf{Repetition Penalty} \\
-\hline
-Config. 1 & Greedy & - & - & 1.10 \\
-\hline
-Config. 2 & Stochastic & 0.1 & 0.9 & 1.10 \\
-\hline
-Config. 3 & Stochastic & 0.2 & 0.9 & 1.10 \\
-\hline
-\end{tabular}% 
-}
 \caption{Hyperparameter settings for the experimental configurations.}
 \label{tab:hyperparameters}
+\centering
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Configuration} & \textbf{Decoding Type} & \textbf{Temperature} & \textbf{Top-p} & \textbf{Repetition Penalty} \\
+\midrule
+Config. 1 & Greedy & - & - & 1.10 \\
+Config. 2 & Stochastic & 0.1 & 0.9 & 1.10 \\
+Config. 3 & Stochastic & 0.2 & 0.9 & 1.10 \\
+\bottomrule
+\end{tabular}
 \end{table}
 
 \subsection{Prompt engineering}
@@ -319,11 +315,13 @@ Inside this prompt, three primary sections can be recognized:
 \end{enumerate}
 While this prompt successfully reduces hallucinations, it exhibits dual behavior concerning model refusals. Under Stochastic Decoding configurations, it effectively minimizes the occurrence of refusals; conversely, under Greedy Decoding, it tends to act as a trigger, inadvertently provoking the model to refuse the task.
 \begin{table}[h]
+\caption{Prompt template for summarization with Llama-3.1-8B.}
+\label{tab:prompt_template}
 \centering
-\begin{tabular}{|p{0.95\columnwidth}|}
-\hline
+\begin{tabular}{p{0.95\columnwidth}}
+\toprule
 \textbf{Prompt Template (Optimized Abstractive v3)} \\
-\hline
+\midrule
 \small
 \\Sei un riassuntore esperto e FEDELE di articoli enciclopedici. Stai riassumendo informazioni storiche e imparziali.\\
 I tuoi riassunti devono contenere SOLO fatti presenti nella fonte.\\
@@ -353,10 +351,8 @@ CONCETTI CHIAVE DA INTEGRARE (tutti dalla fonte sopra):\\
 {keyphrases}\\
 
 ISTRUZIONI: Genera il riassunto seguendo rigorosamente le regole sopra. Assicurati che ogni affermazione sia verificabile nel testo fonte. \\
-\hline
+\bottomrule
 \end{tabular}
-\caption{Prompt template for summarization with Llama-3.1-8B.}
-\label{tab:prompt_template}
 \end{table}
 
 \subsection{Abstraction Quality Analysis}
@@ -371,25 +367,25 @@ The evaluation phase was characterized by a significant refinement process of th
 A manual audit of 800+ samples across Greedy and Stochastic (T=0.1, 0.2) decoding configurations confirmed the judge's high reliability. In particular, the judge demonstrated 100\% recall in identifying model refusals (\textit{e.g.}, the ``Shackles'' movie case), consistently assigning scores of 1/5 across all dimensions. Furthermore, the judge successfully pinpointed factual hallucinations; for instance, it correctly penalized a Greedy-decoded summary of ``Terzi di Siena'' that hallucinated specific details about the Palio not present in the source. This qualitative verification validates the judge as a robust proxy for human evaluation, especially in safety-critical and fact-heavy domains.
 
 \begin{table}[h]
-\centering
-\small % Riduce leggermente il font in modo controllato
-\begin{tabularx}{\columnwidth}{|l|X|X|} % X forza il testo a capo per riempire lo spazio
-\hline
-\textbf{Feature} & \textbf{Baseline Judge Prompt} & \textbf{Optimized Source-Aware Prompt} \\
-\hline
-\textbf{Evaluation Method} & General assessment. & "Sentence-by-Sentence" audit. \\
-\hline
-\textbf{Evidence} & None (simple justification). & Mandatory quoting of source snippets. \\
-\hline
-\textbf{Reasoning} & Strictly limited (Max 15 words). & Unconstrained. \\
-\hline
-\textbf{Scoring} & Broad definitions. & Specific anchor points for intermediate scores. \\
-\hline
-\textbf{Focus} & Comparison between source and reference. & Strict priority to the Source Document. \\
-\hline
-\end{tabularx}
 \caption{Comparison of the evaluation prompts.}
 \label{tab:prompt_evolution}
+\centering
+\small
+\begin{tabularx}{\columnwidth}{lXX}
+\toprule
+\textbf{Feature} & \textbf{Baseline Judge Prompt} & \textbf{Optimized Source-Aware Prompt} \\
+\midrule
+\textbf{Evaluation Method} & General assessment. & "Sentence-by-Sentence" audit. \\
+\midrule
+\textbf{Evidence} & None (simple justification). & Mandatory quoting of source snippets. \\
+\midrule
+\textbf{Reasoning} & Strictly limited (Max 15 words). & Unconstrained. \\
+\midrule
+\textbf{Scoring} & Broad definitions. & Specific anchor points for intermediate scores. \\
+\midrule
+\textbf{Focus} & Comparison between source and reference. & Strict priority to the Source Document. \\
+\bottomrule
+\end{tabularx}
 \end{table}
 
 Table~\ref{tab:llm_judge} presents the results obtained with the Greedy Decoding configuration.
@@ -425,7 +421,8 @@ To illustrate the complete SM-SIP pipeline, we present a concrete example from o
 
 \begin{table*}[htbp]
 \caption{Pipeline Example: Architect Masuccio}
-\begin{center}
+\label{tab:example}
+\centering
 \begin{tabular}{p{2.5cm}p{13cm}}
 \toprule
 \textbf{Stage} & \textbf{Content} \\
@@ -448,8 +445,6 @@ LLM Judge: Faithfulness=5, Completeness=5, Conciseness=5, Abstraction=5
 \end{tabular} \\
 \bottomrule
 \end{tabular}
-\label{tab:example}
-\end{center}
 \end{table*}
 
 The example demonstrates both the strengths and limitations of the approach. The summary maintains factual accuracy (Faithfulness=5/5) and covers the key biographical events. The relatively lower KIR (25.9\%) indicates that not all extracted keyphrases appear verbatim in the summary---the model paraphrases some concepts. Meanwhile, the sentence structure closely mirrors the source: phrases like `` venne inviato a Roma nel 1597 per perfezionare i suoi studi di architettura'' are preserved nearly verbatim, resulting in a moderate Abstraction that is not highlighted by the judge. This pattern, where the model maintains accuracy but struggles with true paraphrasing, was consistent across our evaluation set.
@@ -458,21 +453,19 @@ The example demonstrates both the strengths and limitations of the approach. The
 Table \ref{tab:results_summary} summarizes the result obtained with the configurations described in \ref{model config}. While all the configurations achieve high \textbf{Faithfulness} scores, the best performance was achieved with \textit{Config.2} (Temperature$=0.1$), suggesting a strong factual reliability under the optimized prompt. Notably, the Greedy Decoding configuration (Config.1) exhibited a lower completeness scores with respect to the Stochastic configurations, probably because of the dual-behavior in refusals trigger: introducing a controlled level of randomness (Temperature of $0.1$ or $0.2$) mitigates the refusals.
 
 \begin{table}[h]
-\centering
-\small
-\begin{tabularx}{\columnwidth}{|l|X|X|X|X|c|c|}
-\hline
-\textbf{Config.} & \textbf{Faith. (J)} & \textbf{Compl. (J)} & \textbf{Conc. (J)} & \textbf{Abst. (J)} & \textbf{BERT} & \textbf{KIR} \\
-\hline
-Config. 1 & 4.867 & 4.844 & 4.889 & 4.867 & 0.660 & 0.575 \\
-\hline
-Config. 2 & \textbf{4.896} & \textbf{4.896} & \textbf{4.896} & 4.865 & \textbf{0.665} & 0.498 \\
-\hline
-Config. 3 & 4.854 & 4.875 & \textbf{4.896} & 4.865 & 0.662 & 0.504 \\
-\hline
-\end{tabularx}
 \caption{Comparative performance metrics across different decoding configurations (J denotes Judge scores).}
 \label{tab:results_summary}
+\centering
+\small
+\begin{tabularx}{\columnwidth}{lXXXXcc}
+\toprule
+\textbf{Config.} & \textbf{Faith. (J)} & \textbf{Compl. (J)} & \textbf{Conc. (J)} & \textbf{Abst. (J)} & \textbf{BERT} & \textbf{KIR} \\
+\midrule
+Config. 1 & 4.867 & 4.844 & 4.889 & 4.867 & 0.660 & 0.575 \\
+Config. 2 & \textbf{4.896} & \textbf{4.896} & \textbf{4.896} & 4.865 & \textbf{0.665} & 0.498 \\
+Config. 3 & 4.854 & 4.875 & \textbf{4.896} & 4.865 & 0.662 & 0.504 \\
+\bottomrule
+\end{tabularx}
 \end{table}
 
 %% ============================================================
