@@ -7,16 +7,20 @@ Extension of the SigExt framework for controllable abstractive summarization wit
 ```
 DNLPProj/
 ├── extension-italian-wits-semantic/     # Italian Wikipedia (WITS)
+│   ├── README.md                        # Italian extension docs
 │   ├── training/
 │   │   └── training-standard.ipynb      # SigExt model training
 │   └── inference/
 │       ├── inference-standard.ipynb     # Standard inference (16 configs)
-│       ├── inference-prompt-enhanced.ipynb  # Enhanced + LLM-as-Judge
-│       └── results_enhanced/            # Results with justifications
+│       ├── inference-prompt-enhanced.ipynb # Enhanced + LLM-as-Judge
+│       └── analyze_results.py           # Analysis script
 ├── extension-english-arxiv-semantic/    # English ArXiv
 │   └── inference/
-│       ├── inference-prompt-enhanced.ipynb  # ArXiv evaluation
-│       └── results_enhanced.json        # ArXiv results
+│       ├── inference-prompt-enhanced.ipynb # ArXiv evaluation
+│       └── analyze_results.py           # Analysis script
+├── results/                             # Consolidated results
+│   ├── italian/                         # Metrics, plots, decoding
+│   └── english/                         # metrics
 └── overleaf/
     └── paper-draft.tex                  # Paper manuscript
 ```
