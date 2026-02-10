@@ -294,15 +294,15 @@ The hyperparameter selection was tailored to prioritize factual accuracy. A low 
 \caption{Hyperparameter settings for the experimental configurations.}
 \label{tab:hyperparameters}
 \centering
-\begin{tabular}{lcccc}
+\begin{tabularx}{\columnwidth}{lXXXX}
 \toprule
-\textbf{Configuration} & \textbf{Decoding Type} & \textbf{Temperature} & \textbf{Top-p} & \textbf{Repetition Penalty} \\
+\textbf{Config.} & \textbf{Decoding Type} & \textbf{Temp.} & \textbf{Top-p} & \textbf{Penalty} \\
 \midrule
-Config. 1 & Greedy & - & - & 1.10 \\
+Config. 1 & Greedy & -- & -- & 1.10 \\
 Config. 2 & Stochastic & 0.1 & 0.9 & 1.10 \\
 Config. 3 & Stochastic & 0.2 & 0.9 & 1.10 \\
 \bottomrule
-\end{tabular}
+\end{tabularx}
 \end{table}
 
 \subsection{Prompt engineering}
