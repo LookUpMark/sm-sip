@@ -9,16 +9,15 @@ import os
 from pathlib import Path
 import numpy as np
 
-ENHANCED_DIR = Path("results_enhanced")
+RESULTS_FILE = Path("../../results/english/arxiv_enhanced.json")
 
 def analyze_enhanced_results():
     """Analyze enhanced results with abstraction metrics."""
-    enhanced_file = ENHANCED_DIR / "results_enhanced.json"
-    if not enhanced_file.exists():
-        print(f"\n[ERROR] Results file not found at: {enhanced_file}")
+    if not RESULTS_FILE.exists():
+        print(f"\n[ERROR] Results file not found at: {RESULTS_FILE}")
         return
     
-    with open(enhanced_file) as f:
+    with open(RESULTS_FILE) as f:
         data = json.load(f)
     
     print("\n[6] ENHANCED RESULTS (Optimized Prompt)")
