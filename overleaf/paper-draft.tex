@@ -16,20 +16,35 @@
 
 \title{SM-SIP: Semantic and Multilingual Salient Information Prompting for Abstractive Summarization}
 
-\author{\IEEEauthorblockN{Marc'Antonio Lopez}
-\IEEEauthorblockA{\textit{Politecnico di Torino} \\
+\author{\IEEEauthorblockN{1\textsuperscript{st} Marc'Antonio Lopez}
+\IEEEauthorblockA{\textit{Dept. of Control and Computer Eng.} \\
+\textit{Politecnico di Torino}\\
 Torino, Italy \\
-marc'antonio.lopez@studenti.polito.it}
+s336362@studenti.polito.it}
 \and
-\IEEEauthorblockN{Chiara Lunazzi}
-\IEEEauthorblockA{\textit{Politecnico di Torino} \\
+\IEEEauthorblockN{2\textsuperscript{nd} Author Two}
+\IEEEauthorblockA{\textit{Dept. of Control and Computer Eng.} \\
+\textit{Politecnico di Torino}\\
 Torino, Italy \\
-chiara.lunazzi@studenti.polito.it}
+author2@studenti.polito.it}
 \and
-\IEEEauthorblockN{Luca Desderi}
-\IEEEauthorblockA{\textit{Politecnico di Torino} \\
+\IEEEauthorblockN{3\textsuperscript{rd} Author Three}
+\IEEEauthorblockA{\textit{Dept. of Control and Computer Eng.} \\
+\textit{Politecnico di Torino}\\
 Torino, Italy \\
-luca.desderi@studenti.polito.it}
+author3@studenti.polito.it}
+\and
+\IEEEauthorblockN{4\textsuperscript{th} Author Four}
+\IEEEauthorblockA{\textit{Dept. of Control and Computer Eng.} \\
+\textit{Politecnico di Torino}\\
+Torino, Italy \\
+author4@studenti.polito.it}
+\and
+\IEEEauthorblockN{5\textsuperscript{th} Author Five}
+\IEEEauthorblockA{\textit{Dept. of Control and Computer Eng.} \\
+\textit{Politecnico di Torino}\\
+Torino, Italy \\
+author5@studenti.polito.it}
 }
 
 \maketitle
@@ -47,14 +62,7 @@ abstractive summarization, salient information prompting, semantic supervision, 
 %% ============================================================
 \section{Introduction}
 
-The advent of Large Language Models (LLMs) such as GPT-4, Llama 3, and Mistral has revolutionized abstractive summarization. These models generate fluent, coherent text in zero-shot or few-shot settings. However, this flexibility introduces a critical problem: \textbf{controllability}. When a user requests ``summarize this text,'' the model relies entirely on internal attention weights to determine what is ``salient,'' often leading to two failure modes:
-
-\begin{itemize}
-    \item \textbf{Omission of Critical Details:} The model overlooks entities or events that, while statistically rare, are fundamental to understanding.
-    \item \textbf{Hallucination:} Without strong constraints, the model generates plausible but factually incorrect content~\cite{maynez2020faithfulness, cao2022hallucination}.
-\end{itemize}
-
-Xu et al.~\cite{xu2024sip} proposed \textbf{Salient Information Prompting (SIP)} to address this issue. The approach decouples salience identification from generation by using a dedicated extractor (\textbf{SigExt}) to identify key phrases, which are then injected into the LLM prompt as ``soft constraints.'' This hybrid neuro-symbolic approach represents the current frontier of industrial summarization research.
+The advent of Large Language Models (LLMs) such as GPT-4, Llama 3, and Mistral has revolutionized abstractive summarization. However, this flexibility introduces \textbf{controllability} issues, often leading to the \textbf{omission of critical details} or \textbf{hallucinated} content ~\cite{maynez2020faithfulness, cao2022hallucination}. To address this, Xu et al.~\cite{xu2024sip} proposed \textbf{Salient Information Prompting (SIP)}. The approach decouples salience identification from generation by using a dedicated extractor (\textbf{SigExt}) to identify key phrases, which are then injected into the LLM prompt as ``soft constraints.'' This hybrid neuro-symbolic approach represents the current frontier of industrial summarization research.
 
 \subsection{Limitations of the Original Approach}
 
@@ -283,45 +291,47 @@ The best overall configuration is \textbf{10k-60t with 8-bit quantization}, achi
 
 \textbf{Similarity Threshold.} The semantic similarity threshold $\theta$ shows minimal impact on downstream performance. Across all three thresholds tested (0.60, 0.65, 0.70), BERT Score varies by less than 1\%, and KIR differences remain within 3 percentage points. This robustness to hyperparameter choices is encouraging, as it suggests that practitioners need not invest significant effort in threshold tuning. The slight advantage of $\theta$=0.60 in KIR (approximately 47\% vs 46\% for higher thresholds) indicates that a more permissive threshold captures additional relevant signatures without introducing excessive noise.
 
-\textbf{Quantization Effects.} Perhaps surprisingly, 4-bit and 8-bit quantization produce nearly identical results. The average BERT Score difference is only 0.0002 (0.6611 vs 0.6609), and KIR differs by less than 0.4 percentage points (45.40\% vs 45.05\%). This finding validates the use of aggressive quantization for deployment, enabling the full pipeline to run on consumer GPUs with approximately 8GB of VRAM without sacrificing quality. Considering this, we decide to employ the 4-bit configuration for our experiments, effectively preventing GPU \textit{Out of Memory} issues. 
+\textbf{Quantization Effects.} Perhaps surprisingly, 4-bit and 8-bit quantization produce nearly identical results. The average BERT Score difference is only 0.0002 (0.6611 vs 0.6609), and KIR differs by less than 0.4 percentage points (45.40\% vs 45.05\%). This finding validates the use of aggressive quantization for deployment, enabling the full pipeline to run on consumer GPUs with approximately 8GB of VRAM without sacrificing quality. Considering this, we decide to employ the 4-bit configuration for our experiments, actually preventing GPUs \textit{Out of Memory} problems. 
 
 \textbf{Prompting Strategy.} An interesting trade-off emerges between zero-shot and few-shot prompting. Zero-shot achieves higher KIR (47.12\% vs 43.33\%), suggesting that examples may actually distract the model from focusing on the extracted signatures. Conversely, few-shot provides marginally higher BERT Score (0.6621 vs 0.6599), likely because the examples guide the model toward more fluent output. The optimal choice depends on the application: domains where missing critical information is costly (medical, legal) should prefer zero-shot, while applications prioritizing stylistic consistency may benefit from few-shot demonstrations.
 
 \subsection{Model Configurations} \label{model config}
-test set. Table \ref{tab:hyperparameters} presents the selected hyperparameters.\\
-The hyperparameter selection was tailored to prioritize factual accuracy. A low \textbf{Temperature} ($0.1$ and $0.2$) was employed to maintain a high deterministic approach while allowing minimal variation in the stochastic generation. To refine the output, \textbf{Top-p} sampling was set to $0.9$ to avoid long tail of low-probability tokens, while a \textbf{Repetition Penalty} of $1.10$ was employed to prevent critical repetition or cyclic loops. 
+Three distinct configurations were evaluated on a test set comprising \(100\) new samples. Specifically, two categories of decoding strategies can be distinguished: \textbf{Greedy Decoding}, in which the model selects the token with the highest probability at each iteration, and \textbf{Stochastic Decoding}, where the token selection is based on a probability distribution influenced by the specific parameters employed. Table \ref{tab:hyperparameters} presents the selected hyperparameters.\\
+The hyperparameter selection was tailored to prioritize factual accuracy. A low \textbf{Temperature} ($0.1$ and $0.2$) was employed to maintain a high deterministic approach while allowing minimal variation in the stochastic generation. To refine the output, \textbf{Top-p} sampling was set to $0.9$ to avoid long tail of low-probability tokens, while a \textbf{Repetition Penalty} of $1.10$ was employed to prevent critical repetition or cyclic loop. 
 \begin{table}[h]
+\centeringù
+\resizebox{\columnwidth}{!}{
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+\textbf{Configuration} & \textbf{Decoding Type} & \textbf{Temperature} & \textbf{Top-p} & \textbf{Repetition Penalty} \\
+\hline
+Config. 1 & Greedy & - & - & 1.10 \\
+\hline
+Config. 2 & Stochastic & 0.1 & 0.9 & 1.10 \\
+\hline
+Config. 3 & Stochastic & 0.2 & 0.9 & 1.10 \\
+\hline
+\end{tabular}% 
+}
 \caption{Hyperparameter settings for the experimental configurations.}
 \label{tab:hyperparameters}
-\centering
-\begin{tabularx}{\columnwidth}{lXXXX}
-\toprule
-\textbf{Config.} & \textbf{Decoding Type} & \textbf{Temp.} & \textbf{Top-p} & \textbf{Penalty} \\
-\midrule
-Config. 1 & Greedy & -- & -- & 1.10 \\
-Config. 2 & Stochastic & 0.1 & 0.9 & 1.10 \\
-Config. 3 & Stochastic & 0.2 & 0.9 & 1.10 \\
-\bottomrule
-\end{tabularx}
 \end{table}
 
 \subsection{Prompt engineering}
 Due to the higher result obtained with zero-shot prompting, a rigorous process of prompt engineering was conducted and the results were validated over the test set  Table \ref{tab:prompt_template} shows the latest version of the prompt, that reaches the best results.\\
-Inside this prompt, three primary sections can be recognized:
+Inside this prompt, three primary sections can be recognize:
 \begin{enumerate}
     \item \textbf{Security rules} ('REGOLE DI SICUREZZA'): aim to bypass the model's safety filters regarding sensitive or medical information. The core strategy is to frame the task as a purely objective summarization exercise, devoid of any promotional or harmful intent;
     \item  \textbf{Accuracy rules} ('REGOLE CRITICHE DI FEDELTÀ'): this section is designed to mitigate hallucinations from the model. The central theme is strict adherence to the source text: any information not explicitly present in the provided source must be excluded from the generated summary;
     \item \textbf{Writing rules} ('REGOLE DI SCRITTURA'): these instructions define the stylistic requirements of the summary. Furthermore, they serve to prevent the model from simply copying and pasting segments of the original text.
 \end{enumerate}
-While this prompt successfully reduces hallucinations, it exhibits dual behavior concerning model refusals. Under Stochastic Decoding configurations, it effectively minimizes the occurrence of refusals; conversely, under Greedy Decoding, it tends to act as a trigger, inadvertently provoking the model to refuse the task.
+While this prompt successfully reduces hallucinations, it exhibits dual behaviour concerning model refusals. Under Stochastic Decoding configurations, it effectively minimizes the occurrence of refusals; conversely, under Greedy Decoding, it tends to act as a trigger, inadvertently provoking the model to refuse the task.
 \begin{table}[h]
-\caption{Prompt template for summarization with Llama-3.1-8B.}
-\label{tab:prompt_template}
 \centering
-\begin{tabular}{p{0.95\columnwidth}}
-\toprule
+\begin{tabular}{|p{0.95\columnwidth}|}
+\hline
 \textbf{Prompt Template (Optimized Abstractive v3)} \\
-\midrule
+\hline
 \small
 \\Sei un riassuntore esperto e FEDELE di articoli enciclopedici. Stai riassumendo informazioni storiche e imparziali.\\
 I tuoi riassunti devono contenere SOLO fatti presenti nella fonte.\\
@@ -351,8 +361,10 @@ CONCETTI CHIAVE DA INTEGRARE (tutti dalla fonte sopra):\\
 {keyphrases}\\
 
 ISTRUZIONI: Genera il riassunto seguendo rigorosamente le regole sopra. Assicurati che ogni affermazione sia verificabile nel testo fonte. \\
-\bottomrule
+\hline
 \end{tabular}
+\caption{Prompt template for summarization with Llama-3.1-8B.}
+\label{tab:prompt_template}
 \end{table}
 
 \subsection{Abstraction Quality Analysis}
@@ -362,30 +374,28 @@ Traditional metrics like ROUGE and BERT Score measure similarity to reference su
 \textbf{Abstraction Metrics.} We compute three complementary measures on 100 samples using an optimized abstractive prompt: (1) \textit{Abstraction Score} = 1 minus the trigram overlap between generated summary and source, where higher values indicate less verbatim copying (observed: 0.57); (2) \textit{Novel N-grams} = percentage of bigrams in the summary not present in the source, measuring lexical novelty (observed: 43.3\%); (3) \textit{Compression Ratio} = summary length divided by source length, indicating conciseness (observed: 32.2\%). All the previous data are referred to the Greedy Decoding configuration.
 
 \textbf{LLM-as-Judge.} Following recent work on using LLMs for evaluation~\cite{goyal2022news}, we employ the same Llama-3.1-8B model with a dedicated evaluation prompt to rate generated summaries on four dimensions, each on a 1--5 scale. 
-The evaluation phase was characterized by a significant refinement process of the LLM-as-a-judge framework, transitioning from a baseline to a \textbf{Source-Aware} configuration. The primary differences are listed in Table \ref{tab:prompt_evolution}. This evolution was necessitated by the limitation of the initial prompt, which frequently exhibited limited discriminative power and generic feedback due to a strict 15-word constraint on reasoning. By implementing a \textbf{sentence-by-sentence} audit and mandatory source quoting, the new prompt significantly enhanced the granularity and transparency of the assessments. 
-
-A manual audit of 800+ samples across Greedy and Stochastic (T=0.1, 0.2) decoding configurations confirmed the judge's high reliability. In particular, the judge demonstrated 100\% recall in identifying model refusals (\textit{e.g.}, the ``Shackles'' movie case), consistently assigning scores of 1/5 across all dimensions. Furthermore, the judge successfully pinpointed factual hallucinations; for instance, it correctly penalized a Greedy-decoded summary of ``Terzi di Siena'' that hallucinated specific details about the Palio not present in the source. This qualitative verification validates the judge as a robust proxy for human evaluation, especially in safety-critical and fact-heavy domains.
+The evaluation phase was characterized by a significant refinement process of the LLM-as-a-judge framework, transitioning from a baseline to a \textbf{Source-Aware} configuration. The primary differences are listed in Table \ref{tab:prompt_evolution}. This evolution was necessitated by the limitation of the initial prompt, which frequently exhibited limited discriminative power and generic feedback due to a strict 15-word constraint on reasoning.  By implementing a \textbf{sentence-by-sentence} audit,the new prompt significantly enhanced the granularity and transparency of the assessments.However, the judge still exhibits performance bottleneck. In particular, it is prone to hallucinations in completeness scoring, occasionally relying on its internal parametric knowledge rather than strictly adhering to the provided source. Furthermore, a dual behaviour persists regarding model refusals: while the judge correctly penalizes most instances of the refusals, there were observed cases in which it erroneously assigned maximum scores to refusal-based outputs. These findings suggest that while prompt engineering successfully mitigates evaluation bias, the judge model still struggle to recognize total task refusals.
 
 \begin{table}[h]
+\centering
+\small % Riduce leggermente il font in modo controllato
+\begin{tabularx}{\columnwidth}{|l|X|X|} % X forza il testo a capo per riempire lo spazio
+\hline
+\textbf{Feature} & \textbf{Baseline Judge Prompt} & \textbf{Optimized Source-Aware Prompt} \\
+\hline
+\textbf{Evaluation Method} & General assessment. & "Sentence-by-Sentence" audit. \\
+\hline
+\textbf{Evidence} & None (simple justification). & Mandatory quoting of source snippets. \\
+\hline
+\textbf{Reasoning} & Strictly limited (Max 15 words). & Unconstrained. \\
+\hline
+\textbf{Scoring} & Broad definitions. & Specific anchor points for intermediate scores. \\
+\hline
+\textbf{Focus} & Comparison between source and reference. & Strict priority to the Source Document. \\
+\hline
+\end{tabularx}
 \caption{Comparison of the evaluation prompts.}
 \label{tab:prompt_evolution}
-\centering
-\small
-\begin{tabularx}{\columnwidth}{lXX}
-\toprule
-\textbf{Feature} & \textbf{Baseline Judge Prompt} & \textbf{Optimized Source-Aware Prompt} \\
-\midrule
-\textbf{Evaluation Method} & General assessment. & "Sentence-by-Sentence" audit. \\
-\midrule
-\textbf{Evidence} & None (simple justification). & Mandatory quoting of source snippets. \\
-\midrule
-\textbf{Reasoning} & Strictly limited (Max 15 words). & Unconstrained. \\
-\midrule
-\textbf{Scoring} & Broad definitions. & Specific anchor points for intermediate scores. \\
-\midrule
-\textbf{Focus} & Comparison between source and reference. & Strict priority to the Source Document. \\
-\bottomrule
-\end{tabularx}
 \end{table}
 
 Table~\ref{tab:llm_judge} presents the results obtained with the Greedy Decoding configuration.
@@ -399,7 +409,7 @@ Table~\ref{tab:llm_judge} presents the results obtained with the Greedy Decoding
 Faithfulness & 4.87 &  0.72 \\
 Completeness & 4.84 & 0.74 \\
 Conciseness & 4.89 & 0.62 \\
-Abstraction & 4.87 & 0.72 \\
+Abstraction & 4.87 & 0.69 \\
 \midrule
 \textbf{Overall} & \textbf{4.87} & -- \\
 \bottomrule
@@ -408,11 +418,8 @@ Abstraction & 4.87 & 0.72 \\
 \end{center}
 \end{table}
 
-\subsection{ArXiv Validation (English)}
-To assess the generalizability of the Semantic Supervision extension beyond Italian, we evaluated SM-SIP on the English ArXiv dataset~\cite{xu2024sip}. Using the same SigExt-Longformer architecture and the optimized abstractive prompt, the model achieved a BERT Score of 0.819 and a ROUGE-1 score of 0.295. Key Information Retention (KIR) remained high at 54.1\%. LLM-as-Judge scores mirrored the Italian results, with Faithfulness and Completeness both exceeding 4.9/5, confirming that the semantic labeling strategy effectively captures salient information across different languages and domains.
 
-
-The results provide significant insights into the model's performance: while it achieves high Faithfulness (4.87/5), indicating strong factual reliability, the equally high Abstraction score (4.87/5) presents what we define as the \textit{Abstraction Paradox}. This elevated rating contrasts with algorithmic novelty metrics, and our manual audit confirms that the judge maintains a relatively low threshold for ``abstraction,'' often rewarding 5/5 for low-variance rephrasing or near-copy-paste segments. Despite this, the judge's evaluations remain consistent across most categories. The discrepancy between perceived Faithfulness and algorithmic precision indicates that the model tends to reformulate source content through minor lexical adjustments rather than performing substantive synthesis—a recognized challenge in current LLMs, where gains in fluency often occur at the expense of rigorous factual density~\cite{ladhak2022faithful, tang2024faithfulness}.
+The results provide significant insights into the model's performance: while it achieves high Faithfulness (4.871/5), indicating strong factual reliability, the equally high Abstraction score (4.87/5) presents a paradox. This elevated Abstraction rating contrasts sharply with algorithmic metrics, suggesting a potential limitation in the judge's ability to discriminate between genuine semantic synthesis and superficial paraphrasing. Despite this, the judge’s evaluations remain consistent across most categories. The discrepancy between perceived Faithfulness and algorithmic precision indicates that the model tends to reformulate source content through minor lexical adjustments rather than performing substantive synthesis—a recognized challenge in current LLMs, where gains in fluency often occur at the expense of rigorous factual density~\cite{ladhak2022faithful, tang2024faithfulness}."
 
 
 \subsection{Qualitative Example}
@@ -421,13 +428,12 @@ To illustrate the complete SM-SIP pipeline, we present a concrete example from o
 
 \begin{table*}[htbp]
 \caption{Pipeline Example: Architect Masuccio}
-\label{tab:example}
-\centering
+\begin{center}
 \begin{tabular}{p{2.5cm}p{13cm}}
 \toprule
 \textbf{Stage} & \textbf{Content} \\
 \midrule
-\textbf{Source} (excerpt) & ``Mancano notizie sulla prima parte della vita e sulla sua formazione iniziale. Entrato nell'ordine dei gesuiti venne inviato dall'ordine a Roma nel 1597, per perfezionare i suoi studi di architettura [...]'' \\
+\textbf{Source} (excerpt) & ``Mancano notizie sulla prima parte della vita e sulla sua formazione iniziale. Entrato nell'ordine dei gesuiti venne inviato dall'ordine a Roma nel 1597, per perfezionare i suoi studi di architettura [...] Altrettanto evidente l'influsso dello stile michelangiolesco di Giacomo Del Duca attivo a Messina...'' \\
 \midrule
 \textbf{SigExt Extraction} & 
 \begin{tabular}[t]{@{}l@{}}
@@ -436,7 +442,7 @@ To illustrate the complete SM-SIP pipeline, we present a concrete example from o
 3. ``Altrettanto evidente l'influsso dello stile michelangiolesco''
 \end{tabular} \\
 \midrule
-\textbf{Generated Summary} & ``Masuccio entrò nell'ordine dei gesuiti e venne inviato a Roma nel 1597 per perfezionare i suoi studi di architettura. Probabilmente ebbe modo di avviare la sua formazione in un ambiente culturale vivace [...] Nel 1616 venne espulso dall'ordine e divenne architetto del Senato messinese, progettando il Monte di Pietà di Messina...'' \\
+\textbf{Generated Summary} & "Masuccio entrò nell'ordine dei gesuiti e venne inviato a Roma nel 1597 per perfezionare i suoi studi di architettura. Probabilmente ebbe modo di avviare la sua formazione in un ambiente culturale vivace, come era l'ordine gesuitico a Messina, e potrebbe essere stato in contatto con Andrea Calamech, che influenzò la sua opera. A Roma consolidò la sua formazione tecnica...'' \\
 \midrule
 \textbf{Evaluation} & 
 \begin{tabular}[t]{@{}l@{}}
@@ -445,27 +451,31 @@ LLM Judge: Faithfulness=5, Completeness=5, Conciseness=5, Abstraction=5
 \end{tabular} \\
 \bottomrule
 \end{tabular}
+\label{tab:example}
+\end{center}
 \end{table*}
 
 The example demonstrates both the strengths and limitations of the approach. The summary maintains factual accuracy (Faithfulness=5/5) and covers the key biographical events. The relatively lower KIR (25.9\%) indicates that not all extracted keyphrases appear verbatim in the summary---the model paraphrases some concepts. Meanwhile, the sentence structure closely mirrors the source: phrases like `` venne inviato a Roma nel 1597 per perfezionare i suoi studi di architettura'' are preserved nearly verbatim, resulting in a moderate Abstraction that is not highlighted by the judge. This pattern, where the model maintains accuracy but struggles with true paraphrasing, was consistent across our evaluation set.
 
 \subsection{Summarization results}
-Table \ref{tab:results_summary} summarizes the result obtained with the configurations described in \ref{model config}. While all the configurations achieve high \textbf{Faithfulness} scores, the best performance was achieved with \textit{Config.2} (Temperature$=0.1$), suggesting a strong factual reliability under the optimized prompt. Notably, the Greedy Decoding configuration (Config.1) exhibited a lower completeness scores with respect to the Stochastic configurations, probably because of the dual-behavior in refusals trigger: introducing a controlled level of randomness (Temperature of $0.1$ or $0.2$) mitigates the refusals.
+Table \ref{tab:results_summary} summarizes the result obtained with the configurations described in \ref{model config}. While all the configurations achieve high \textbf{Faithfulness} scores, the best performance was achieved with \textit{Config.2} (Temperature$=0.1$), suggesting a strong factual reliability under the optimized prompt. Notably, the Greeding Decoding configuration (Config.1) exhibited a lower completeness scores with respect to the Stochastic configurations, probably because of the dual-behaviour in refusals trigger: introducing a controlled level of randomness (Temperature of $0.1$ or $0.2$) mitigates the refusals.
 
 \begin{table}[h]
-\caption{Comparative performance metrics across different decoding configurations (J denotes Judge scores).}
-\label{tab:results_summary}
 \centering
 \small
-\begin{tabularx}{\columnwidth}{lXXXXcc}
-\toprule
+\begin{tabularx}{\columnwidth}{|l|X|X|X|X|c|c|}
+\hline
 \textbf{Config.} & \textbf{Faith. (J)} & \textbf{Compl. (J)} & \textbf{Conc. (J)} & \textbf{Abst. (J)} & \textbf{BERT} & \textbf{KIR} \\
-\midrule
+\hline
 Config. 1 & 4.867 & 4.844 & 4.889 & 4.867 & 0.660 & 0.575 \\
+\hline
 Config. 2 & \textbf{4.896} & \textbf{4.896} & \textbf{4.896} & 4.865 & \textbf{0.665} & 0.498 \\
+\hline
 Config. 3 & 4.854 & 4.875 & \textbf{4.896} & 4.865 & 0.662 & 0.504 \\
-\bottomrule
+\hline
 \end{tabularx}
+\caption{Comparative performance metrics across different decoding configurations (J denotes Judge scores).}
+\label{tab:results_summary}
 \end{table}
 
 %% ============================================================
