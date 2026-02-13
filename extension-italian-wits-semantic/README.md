@@ -10,10 +10,12 @@ extension-italian-wits-semantic/
 │   └── wits_train_25k.jsonl          # Semantically labeled training data (25k samples)
 ├── training/
 │   └── training-standard.ipynb       # Unified training script for SigExt models
-└── inference/
-    ├── inference-standard.ipynb      # Baseline evaluation of 16 configurations
-    ├── inference-prompt-enhanced.ipynb # Best-performing "Source-Aware" evaluation
-    └── analyze_results.py            # Results aggregation and LaTeX table generator
+├── inference/
+│   ├── inference-standard.ipynb      # Baseline evaluation of 16 configurations
+│   ├── inference-prompt-enhanced.ipynb # Best-performing "Source-Aware" evaluation
+│   ├── inference-wits-final.ipynb    # Final pipeline with LLM-as-Judge evaluation
+│   └── analyze_results.py            # Results aggregation and LaTeX table generator
+└── results/                          # Comprehensive JSON results and metrics
 ```
 
 ## Components
@@ -27,7 +29,19 @@ The `training-standard.ipynb` notebook handles the fine-tuning of the **XLM-RoBE
 ### 3. Inference (`/inference`)
 -   **Standard Pipeline**: Evaluates all combinations of quantization (4-bit, 8-bit) and prompting (zero-shot, few-shot) across the 4 trained models.
 -   **Enhanced Pipeline**: Implements the "Source-Aware" prompt with manual auditing and LLM-as-judge scoring.
+-   **Final Pipeline**: The `inference-wits-final.ipynb` notebook implements the final evaluation loop using **Qwen-2.5-14B** as a judge. It introduces abstraction-aware metrics (Compression, Novel n-grams) and qualitative scoring for Faithfulness, Completeness, Conciseness, and Abstraction.
 -   **Analysis**: `analyze_results.py` processes the JSON outputs to generate the summary metrics and LaTeX tables used in the paper.
+
+## Experimental Results
+
+The table below summarizes the performance of the best SigExt model (10k-60t) under two decoding strategies. 
+
+| Configuration | BERT-F1 | ROUGE-1 | KIR | Abstraction | Judge (Overall) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Greedy** | **0.660** | **0.197** | **0.575** | 0.566 | 4.86 |
+| **Search (Temp 0.1)** | 0.612 | 0.165 | 0.444 | **0.671** | **4.89** |
+
+*Note: Judge scores are out of 5.0.*
 
 ## Requirements
 See root `README.md` for full environment setup. Requires `it_core_news_sm` spacy model for Italian tokenization.
