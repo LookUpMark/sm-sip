@@ -7,11 +7,13 @@ This folder contains the implementation and evaluation of the SM-SIP framework o
 ```
 extension-english-arxiv-semantic/
 ├── training/
-│   └── training-standard.ipynb       # SigExt model training for English
-└── inference/
-    ├── inference-standard.ipynb      # ArXiv baseline evaluation (4 configurations)
-    ├── inference-prompt-enhanced.ipynb # Best-performing "Source-Aware" evaluation
-    └── analyze_results.py            # Results aggregation script
+│   └── training-standard.ipynb         # SigExt model training for English
+├── inference/
+│   ├── inference-standard.ipynb        # ArXiv baseline evaluation (4 configurations)
+│   ├── inference-prompt-enhanced.ipynb # Best-performing "Source-Aware" evaluation
+│   ├── inference-judge.ipynb           # LLM-as-Judge evaluation pipeline
+│   └── analyze_results.py              # Results aggregation script
+└── results/                            # Symlink to root results/english folder
 ```
 
 ## Components

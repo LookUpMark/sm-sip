@@ -7,15 +7,17 @@ This folder contains the implementation and evaluation of the SM-SIP framework o
 ```
 extension-italian-wits-semantic/
 ├── data/
-│   └── wits_train_25k.jsonl          # Semantically labeled training data (25k samples)
+│   └── wits_train_25k.jsonl            # Semantically labeled training data (25k samples)
 ├── training/
-│   └── training-standard.ipynb       # Unified training script for SigExt models
+│   └── training-standard.ipynb         # Unified training script for SigExt models
 ├── inference/
-│   ├── inference-standard.ipynb      # Baseline evaluation of 16 configurations
+│   ├── inference-standard.ipynb        # Baseline evaluation (16 configurations)
 │   ├── inference-prompt-enhanced.ipynb # Best-performing "Source-Aware" evaluation
-│   ├── inference-wits-final.ipynb    # Final pipeline with LLM-as-Judge evaluation
-│   └── analyze_results.py            # Results aggregation and LaTeX table generator
-└── results/                          # Comprehensive JSON results and metrics
+│   ├── inference-wits-final.ipynb      # Final pipeline with LLM-as-Judge evaluation
+│   ├── inference-evaluation.ipynb      # Quantitative and metrics calculation
+│   ├── inference-wits-summarization.ipynb # Summarization pipeline playground
+│   └── analyze_results.py              # Results aggregation and LaTeX table generator
+└── results/                            # Symlink to root results/italian folder
 ```
 
 ## Components
