@@ -47,7 +47,7 @@ abstractive summarization, salient information prompting, semantic supervision, 
 %% SECTION 1: INTRODUCTION
 %% ============================================================
 \section{Introduction}
-Large Language Models (LLMs) have significantly improved abstractive summarization quality, but controllability remains a core issue: generated summaries can miss critical facts or introduce unsupported statements~\cite{maynez2020faithfulness, cao2022hallucination}. Salient Information Prompting (SIP)~\cite{xu2024sip} addresses this by separating extraction and generation: a dedicated extractor (SigExt) identifies salient evidence that is injected into the generation prompt as soft constraints.
+Large Language Models (LLMs) have significantly improved abstractive summarization quality, but controllability remains a core issue: generated summaries can miss critical facts or introduce unsupported statements~\cite{maynez2020faithfulnessfactualityabstractivesummarization, cao-etal-2022-hallucinated}. Salient Information Prompting (SIP)~\cite{xu2024salientinformationpromptingsteer} addresses this by separating extraction and generation: a dedicated extractor (SigExt) identifies salient evidence that is injected into the generation prompt as soft constraints.
 
 A key limitation of the original pipeline is supervision quality. SigExt labels are derived via character-level fuzzy matching, which is brittle under paraphrase and morpho-syntactic variation. This can propagate noisy labels to training and reduce semantic generalization.
 
@@ -67,16 +67,16 @@ Empirically, the Italian extension is robust across configurations and shows str
 \section{Related Work}
 
 \subsection{Controllable Summarization}
-Traditional abstractive summarization systems~\cite{lewis2020bart, zhang2020pegasus} generate summaries without explicit control over content inclusion. Recent work has explored controllability through keywords~\cite{he2022ctrlsum}, query-focused summarization~\cite{xu2020query}, and prompt engineering~\cite{goyal2022news}.
+Traditional abstractive summarization systems~\cite{lewis2019bartdenoisingsequencetosequencepretraining, zhang2020pegasuspretrainingextractedgapsentences} generate summaries without explicit control over content inclusion. Recent work has explored controllability through keywords~\cite{he-etal-2022-ctrlsum}, query-focused summarization~\cite{xu-lapata-2020-coarse}, and prompt engineering~\cite{goyal2023newssummarizationevaluationera}.
 
 \subsection{Salient Information Prompting}
-Xu et al.~\cite{xu2024sip} introduced SigExt, a Longformer-based model trained to identify salient sentences. By injecting extracted keyphrases into LLM prompts, they achieve improved ROUGE scores while maintaining fluency. However, their reliance on lexical matching for supervision limits generalization.
+Xu et al.~\cite{xu2024salientinformationpromptingsteer} introduced SigExt, a Longformer-based model trained to identify salient sentences. By injecting extracted keyphrases into LLM prompts, they achieve improved ROUGE scores while maintaining fluency. However, their reliance on lexical matching for supervision limits generalization.
 
 \subsection{Semantic Similarity in NLP}
-Sentence-BERT~\cite{reimers2019sbert} enables efficient computation of sentence embeddings for semantic similarity tasks. Multilingual variants like \texttt{paraphrase-multilingual-mpnet-base-v2} support cross-lingual applications, making them ideal for our semantic supervision approach.
+Sentence-BERT~\cite{reimers2019sentencebertsentenceembeddingsusing} enables efficient computation of sentence embeddings for semantic similarity tasks. Multilingual variants like \texttt{paraphrase-multilingual-mpnet-base-v2} support cross-lingual applications, making them ideal for our semantic supervision approach.
 
 \subsection{Italian Text Summarization}
-Italian NLP resources are limited compared to English. The WITS dataset~\cite{casola2021wits} provides Wikipedia articles with lead sections as summaries, offering a large-scale resource for Italian summarization research.
+Italian NLP resources are limited compared to English. The WITS dataset~\cite{casola-lavelli-2021-wits} provides Wikipedia articles with lead sections as summaries, offering a large-scale resource for Italian summarization research.
 
 %% ============================================================
 %% SECTION 3: METHODOLOGY
@@ -85,7 +85,7 @@ Italian NLP resources are limited compared to English. The WITS dataset~\cite{ca
 
 \subsection{System Architecture}
 
-SM-SIP follows a two-stage neuro-symbolic architecture: the \textbf{Extractor (SigExt)} is a fine-tuned transformer that identifies salient content in the source document and outputs token-level binary predictions, which are aggregated to sentence-level salience scores during inference. The \textbf{Generator (LLM)} is Llama-3.1-8B-Instruct with 4-bit or 8-bit quantization~\cite{dettmers2022llm}, conditioned on extracted keyphrases via dynamic prompting to ensure controlled generation. To handle distinct linguistic challenges, we employ domain-specific backbones for the \textbf{Extractor}: 
+SM-SIP follows a two-stage neuro-symbolic architecture: the \textbf{Extractor (SigExt)} is a fine-tuned transformer that identifies salient content in the source document and outputs token-level binary predictions, which are aggregated to sentence-level salience scores during inference. The \textbf{Generator (LLM)} is Llama-3.1-8B-Instruct with 4-bit or 8-bit quantization~\cite{dettmers2022llmint8}, conditioned on extracted keyphrases via dynamic prompting to ensure controlled generation. To handle distinct linguistic challenges, we employ domain-specific backbones for the \textbf{Extractor}: 
 \begin{itemize}
     \item  \textbf{English (ArXiv):} We use \path{allenai/longformer-large-4096}, a long-context encoder suitable for token-classification in technical domains;
     \item  \textbf{Italian (WITS):} We use \path{markussagen/xlm-roberta-longformer-base-4096}; although the backbone supports long-context inputs, our training setup uses a maximum sequence length of 2048 tokens.
@@ -129,7 +129,7 @@ We train SigExt variants across two scales to test data efficiency:
  \begin{itemize}
      \item \textbf{Key Information Retention (KIR):} The percentage of extracted keyphrases successfully incorporated into the summary;
     \item  \textbf{Abstraction Score}: Computed as $(1 - \text{n-gram overlap})$, it measures whether the model synthesizes concepts rather than performing verbatim extraction;
-    \item \textbf{LLM-as-a-Judge:} We employ a Qwen2.5-14B judge~\cite{goyal2022news} within a G-EVAL framework~\cite{microsofteval} and Chain-of-Thought reasoning~\cite{CoT} to score Faithfulness, Completeness, Conciseness, and Abstraction on a 1-5 scale.
+    \item \textbf{LLM-as-a-Judge:} We employ a Qwen2.5-14B judge~\cite{goyal2023newssummarizationevaluationera} within a G-EVAL framework~\cite{liu-etal-2023-g-eval} and Chain-of-Thought reasoning~\cite{saha2025learning} to score Faithfulness, Completeness, Conciseness, and Abstraction on a 1-5 scale.
  \end{itemize}
 \begin{table}[h]
 \centering
@@ -195,7 +195,7 @@ We evaluate SM-SIP across both extensions using the methodology described in Sec
 \end{table}
 
 \subsection{Qualitative Analysis}
-To assess quality beyond overlap-based metrics, we employ LLM-as-Judge (Qwen2.5-14B-Instruct-AWQ) with a Source-Aware prompt structured with the G-EVAL framework and Chain-of-Thought. The Italian model achieves high scores across multiple dimensions (Faithfulness: 4.17/5, Completeness: 4.66/5). However, the notably lower Abstraction Score (1.47/5) suggests that the model tends to reformulate source content with minor lexical changes rather than performing true semantic synthesis—a known limitation of current LLMs, where progress in fluency often comes at the expense of factual consistency~\cite{ladhak2022faithful, tang2024faithfulness}.
+To assess quality beyond overlap-based metrics, we employ LLM-as-Judge (Qwen2.5-14B-Instruct-AWQ) with a Source-Aware prompt structured with the G-EVAL framework and Chain-of-Thought. The Italian model achieves high scores across multiple dimensions (Faithfulness: 4.17/5, Completeness: 4.66/5). However, the notably lower Abstraction Score (1.47/5) suggests that the model tends to reformulate source content with minor lexical changes rather than performing true semantic synthesis—a known limitation of current LLMs, where progress in fluency often comes at the expense of factual consistency~\cite{ladhak-etal-2022-faithful, tang-etal-2023-understanding}.
 
 \subsection{Impact of decoding strategies}
 Table \ref{tab:results_summary} summarizes the impact of decoding strategies on summary quality. While the \textbf{Greedy Decoding} strategy maximizes strict adherence (KIR 56.5\%), \textbf{Stochastic Sampling} with low temperature ($T=0.1$ and $T=0.2$) obtains higher overall scores. 
@@ -290,23 +290,7 @@ Table \ref{tab:qualitative_ex} illustrates the full SM-SIP pipeline on a sample 
 
 This work was conducted as part of the Deep Natural Language Processing course at the Politecnico di Torino.
 
-\begin{thebibliography}{00}
-\bibitem{xu2024sip} L. Xu, M. A. Karim, S. Dingliwal, and A. Elangovan, ``Salient Information Prompting to Steer Content in Prompt-based Abstractive Summarization,'' in \textit{Proc. EMNLP Industry Track}, pp. 35--49, 2024.
-\bibitem{lewis2020bart} M. Lewis, Y. Liu, N. Goyal, M. Ghazvininejad, A. Mohamed, O. Levy, V. Stoyanov, and L. Zettlemoyer, ``BART: Denoising Sequence-to-Sequence Pre-training for Natural Language Generation, Translation, and Comprehension,'' in \textit{Proc. ACL}, 2020.
-\bibitem{zhang2020pegasus} J. Zhang, Y. Zhao, M. Saleh, and P. J. Liu, ``PEGASUS: Pre-training with Extracted Gap-sentences for Abstractive Summarization,'' in \textit{Proc. ICML}, 2020.
-\bibitem{reimers2019sbert} N. Reimers and I. Gurevych, ``Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks,'' in \textit{Proc. EMNLP-IJCNLP}, 2019.
-\bibitem{casola2021wits} S. Casola and A. Lavelli, ``WITS: Wikipedia for Italian Text Summarization,'' in \textit{Proc. CLiC-it}, 2021.
-\bibitem{beltagy2020longformer} I. Beltagy, M. E. Peters, and A. Cohan, ``Longformer: The Long-Document Transformer,'' \textit{arXiv preprint arXiv:2004.05150}, 2020.
-\bibitem{he2022ctrlsum} J. He, W. Kryscinski, B. McCann, N. Rajani, and C. Xiong, ``CTRLsum: Towards Generic Controllable Text Summarization,'' in \textit{Proc. EMNLP}, 2022.
-\bibitem{xu2020query} Y. Xu and M. Lapata, ``Coarse-to-Fine Query Focused Multi-Document Summarization,'' in \textit{Proc. EMNLP}, pp. 3632--3645, 2020.
-\bibitem{goyal2022news} T. Goyal, J. J. Li, and G. Durrett, ``News Summarization and Evaluation in the Era of GPT-3,'' \textit{arXiv preprint arXiv:2209.12356}, 2022.
-\bibitem{dettmers2022llm} T. Dettmers, M. Lewis, Y. Belkada, and L. Zettlemoyer, ``LLM.int8(): 8-bit Matrix Multiplication for Transformers at Scale,'' in \textit{Proc. NeurIPS}, 2022.
-\bibitem{maynez2020faithfulness} J. Maynez, S. Narayan, B. Bohnet, and R. McDonald, ``On Faithfulness and Factuality in Abstractive Summarization,'' in \textit{Proc. ACL}, pp. 1906--1919, 2020.
-\bibitem{cao2022hallucination} M. Cao, Y. Dong, and J. Cheung, ``Hallucinated but Factual! Inspecting the Factuality of Hallucinations in Abstractive Summarization,'' in \textit{Proc. ACL}, pp. 3340--3354, 2022.
-\bibitem{ladhak2022faithful} F. Ladhak, E. Durmus, H. He, C. Cardie, and K. McKeown, ``Faithful or Extractive? On Mitigating the Faithfulness-Abstractiveness Trade-off in Abstractive Summarization,'' in \textit{Proc. ACL}, pp. 1410--1421, 2022.
-\bibitem{tang2024faithfulness} L. Tang, S. Goyal, A. Fabbri, P. Laban, J. Xu, Y. Dong, K. McKeown, and W. Yin, ``Understanding Factual Errors in Summarization: Errors, Summarizers, Datasets, Error Detectors,'' in \textit{Proc. ACL}, 2024.
-\bibitem{microsofteval} Y. Liu, D. Iter, Y. Xu, S. Wang, R. Xu, and C. Zhu, ``G-EVAL: NLG Evaluation using GPT-4 with Better Human Alignment,'' in \textit{Proc. EMNLP}, 2023.
-\bibitem{CoT} S. Saha, M. Ghazvininejad, J. Weston, and T. Wang, ``Learning to Plan \& Reason for Evaluation with Thinking-LLM-as-a-Judge,'' \textit{arXiv preprint arXiv:2501.18099}, 2025.
-\end{thebibliography}
+\bibliographystyle{IEEEtran}
+\bibliography{bibliography}
 
 \end{document}
