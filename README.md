@@ -7,21 +7,24 @@ Extension of the SigExt framework for controllable abstractive summarization wit
 ```
 DNLPProj/
 ├── extension-italian-wits-semantic/     # Italian Wikipedia (WITS)
-│   ├── README.md                        # Italian extension docs
 │   ├── training/
 │   │   └── training-standard.ipynb      # SigExt model training
 │   └── inference/
 │       ├── inference-standard.ipynb     # Standard inference (16 configs)
 │       ├── inference-prompt-enhanced.ipynb # Enhanced + LLM-as-Judge
-│       └── analyze_results.py           # Analysis script
+│       ├── inference-wits-summarization.ipynb # Abstractive summarization pipeline
+│       └── inference-evaluation.ipynb   # Bulk evaluation and metrics
 ├── extension-english-arxiv-semantic/    # English ArXiv
+│   ├── training/
+│   │   └── training-standard.ipynb      # SigExt model training (English)
 │   └── inference/
-│       ├── inference-prompt-enhanced.ipynb # ArXiv evaluation
-│       └── analyze_results.py           # Analysis script
+│       ├── inference-standard.ipynb     # Standard ArXiv inference
+│       ├── inference-prompt-enhanced.ipynb # Enhanced ArXiv prompts
+│       └── inference-judge.ipynb        # Qwen-based G-Eval judge pipeline
 ├── results/                             # Consolidated results
 │   ├── italian/                         # Metrics, plots, decoding
-│   └── english/                         # metrics
-└── overleaf/
+│   └── english/                         # metrics and JSON outputs
+└── overleaf/                            # Research artifacts
     └── paper-draft.tex                  # Paper manuscript
 ```
 
@@ -72,29 +75,3 @@ jupyter notebook extension-italian-wits-semantic/inference/inference-prompt-enha
 # English ArXiv inference
 jupyter notebook extension-english-arxiv-semantic/inference/inference-prompt-enhanced.ipynb
 ```
-
-## Requirements
-
-- Python 3.10+
-- PyTorch 2.0+ (CUDA)
-- transformers, accelerate, bitsandbytes
-- spacy (`it_core_news_sm`, `en_core_web_sm`)
-- langchain, langchain-huggingface
-- ~8GB VRAM (8-bit) or ~6GB VRAM (4-bit)
-
-## Citation
-
-```bibtex
-@inproceedings{smsip2024,
-  title={SM-SIP: Semantic and Multilingual Salient Information Prompting},
-  author={Lopez, Marc'Antonio et al.},
-  booktitle={Deep NLP Course Project, Politecnico di Torino},
-  year={2024}
-}
-```
-
-## References
-
-- [SigExt/SIP Paper (Xu et al., 2024)](https://aclanthology.org/2024.emnlp-industry.4/)
-- [WITS Dataset (Casola & Lavelli, 2021)](https://github.com/silvia-casola/WITS)
-- [ArXiv Summarization (Cohan et al.)](https://huggingface.co/datasets/ccdv/arxiv-summarization)
