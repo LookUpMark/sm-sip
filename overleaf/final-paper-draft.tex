@@ -20,7 +20,7 @@
 \author{\IEEEauthorblockN{Marc'Antonio Lopez}
 \IEEEauthorblockA{\textit{Politecnico di Torino} \\
 Torino, Italy \\
-marc'antonio.lopez@studenti.polito.it}
+marcantonio.lopez@studenti.polito.it}
 \and
 \IEEEauthorblockN{Chiara Lunazzi}
 \IEEEauthorblockA{\textit{Politecnico di Torino} \\
@@ -83,8 +83,8 @@ Italian NLP resources are limited compared to English. The WITS dataset~\cite{ca
 
 SM-SIP follows a two-stage neuro-symbolic architecture: the \textbf{Extractor (SigExt)} is a fine-tuned transformer that identifies salient content in the source document and outputs token-level binary predictions, which are aggregated to sentence-level salience scores during inference. The \textbf{Generator (LLM)} is Llama-3.1-8B-Instruct with 4-bit or 8-bit quantization~\cite{dettmers2022llm}, conditioned on extracted keyphrases via dynamic prompting to ensure controlled generation. To handle distinct linguistic challenges, we employ domain-specific backbones for the \textbf{Extractor}: 
 \begin{itemize}
-    \item  \textbf{English (ArXiv):} We use \path{eBERTa-V3-Small} selected for its efficient yet powerful attention mechanism, well suited for token-classification in technical domains;
-    \item  \textbf{Italian (WITS):} We introduce \path{markussagen/xlm-roberta-longformer-base-4096} with 512-token context window to handle the linguistic features effectively.
+    \item  \textbf{English (ArXiv):} We use \path{allenai/longformer-large-4096}, a long-context encoder suitable for token-classification in technical domains;
+    \item  \textbf{Italian (WITS):} We use \path{markussagen/xlm-roberta-longformer-base-4096}; although the backbone supports long-context inputs, our training setup uses a maximum sequence length of 2048 tokens.
 \end{itemize}
 
 \subsection{Extension 1: Semantic Supervision}
@@ -94,7 +94,7 @@ To overcome the limitation of fuzzy matching, we introduce Semantic Supervision.
 
 $$\text{Label}(p) = \mathbbm{1}\left( \max_{q \in S_{\text{ref}}} \cos(\vec{p}, \vec{q}) > \theta \right)$$
 
-We investigate $\theta \in \{0.60, 0.65, 0.70\}$ to identify the optimal balance between noise reduction and paraphrase retention. This implementation bridges the practical engineering components (model architectures and embeddings) with the theoretical foundation of semantic supervision, providing a coherent connection between system design and conceptual motivation.
+In the Italian extension we investigate $\theta \in \{0.60, 0.65, 0.70\}$ to identify the optimal balance between noise reduction and paraphrase retention, while in the English extension we use $\theta=0.60$. This implementation bridges the practical engineering components (model architectures and embeddings) with the theoretical foundation of semantic supervision, providing a coherent connection between system design and conceptual motivation.
 
 \subsection{Extension 2: Italian Multilingual Adaptation} \label{sec:italian}
 We validate the approach on Italian using the WITS dataset. Since traditional fuzzy matching fails with Italian morphology (e.g. verb conjugation, subject omitted, or article agreement) semantic supervision is essential.
@@ -110,12 +110,12 @@ This structured prompting was critical to achieving high Faithfulness score by g
 
 \subsection{Experimental Setup} \label{sec:exp_config}
 \textbf{1) Training Configuration} 
-We train SigExt variants aacross two scales to test data efficiency:
+We train SigExt variants across two scales to test data efficiency:
 \begin{itemize}
     \item \textbf{English (ArXiv):} 1k and 5k samples ($\theta=0.60$) to analyze semantic learning on limited data.
     \item \textbf{Italian (WITS):} 10k and 25k samples ($\theta \in \{0.60, 0.65, 0.70\}$).
 \end{itemize}
- Training utilized a batch size of 2 (gradient accumulation steps 4), a learning rate of $2 \times 10^{-5}$, FP16 mixed precision, and a positive class weight of 10.0 to address class imbalance. For the \textit{Extention II}, we compare \textbf{Greedy Deconding} against \textbf{Stochastic Sampling} (Temperature = $0.1$, $0.2$, Top\_p = $0.9$), applying Repetition Penalty of $1.10$ to prevent cyclic loops.\\
+ The English training uses per-device batch size 1, gradient accumulation 16, learning rate $1 \times 10^{-5}$, BF16 precision, and positive class weight 10.0. The Italian training uses per-device batch size 2, gradient accumulation 4, learning rate $2 \times 10^{-5}$, FP16 precision, and positive class weight 10.0. For \textit{Extension II}, we compare \textbf{Greedy Decoding} against \textbf{Stochastic Sampling} (Temperature = $0.1$, $0.2$, Top\_p = $0.9$), applying Repetition Penalty of $1.10$ to prevent cyclic loops.\\
  \textbf{2)Inference Strategies:} We assess the model using two prompting strategies to test in-context learning capabilities:
 \begin{itemize}
     \item \textbf{Zero-Shot:} Direct prompting without examples, relying solely on the extracted keyphrases.
@@ -141,10 +141,10 @@ We train SigExt variants aacross two scales to test data efficiency:
 5k-60t & 5,000 & 0.60 & LookUpMark/sigext-arxiv-en-5k-060t \\
 \midrule
 \multicolumn{4}{l}{\textit{\textbf{Extension II: Italian (WITS)}}} \\
-10k-60t & 10,000 & 0.60 & sigext-wits-it-10k-060t \\
-25k-60t & 25,000 & 0.60 & sigext-wits-it-25k-060t \\
-25k-65t & 25,000 & 0.65 & sigext-wits-it-25k-065t \\
-25k-70t & 25,000 & 0.70 & sigext-wits-it-25k-070t \\
+10k-60t & 10,000 & 0.60 & LookUpMark/sigext-wits-it-10k-060t \\
+25k-60t & 25,000 & 0.60 & LookUpMark/sigext-wits-it-25k-060t \\
+25k-65t & 25,000 & 0.65 & LookUpMark/sigext-wits-it-25k-065t \\
+25k-70t & 25,000 & 0.70 & LookUpMark/sigext-wits-it-25k-070t \\
 \bottomrule
 \end{tabular}%
 }
