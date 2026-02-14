@@ -36,7 +36,7 @@ luca.desderi@studenti.polito.it}
 \maketitle
 
 \begin{abstract}
-We present SM-SIP (Semantic \& Multilingual Salient Information Prompting), an extension of the SigExt framework for controllable abstractive summarization. Modern Large Language Models (LLMs) produce fluent summaries but often suffer from hallucination and omission of critical information. The SigExt approach addresses this by extracting salient keyphrases to guide LLM generation. However, the original method relies on character-level fuzzy matching for training label generation, which fails to capture semantic paraphrasing. We propose two key extensions: (1) \textbf{Semantic Supervision}, replacing fuzzy matching with Sentence-BERT embeddings for training label generation, and (2) \textbf{Multilingual Adaptation}, validating the approach on Italian using the WITS dataset with XLM-RoBERTa-Longformer. Our experiments on the Italian extension demonstrate robust performance across configurations, with BERT Score averaging 0.66 and Key Information Retention (KIR) reaching up to 49\%. Results show that the smallest configuration (10k samples) achieves the best performance, suggesting efficient learning of signature extraction patterns.
+We present SM-SIP (Semantic \& Multilingual Salient Information Prompting), an extension of SigExt for controllable abstractive summarization. While LLMs generate fluent text, they may omit key facts or hallucinate unsupported content. SIP mitigates this by injecting extracted salient information into the prompt, but its original supervision relies on lexical fuzzy matching. We replace this step with \textbf{semantic supervision} based on Sentence-BERT cosine similarity, and we add a \textbf{multilingual extension} to Italian (WITS). The extractor is trained with Longformer-based backbones and paired with Llama-3.1-8B-Instruct for generation. On Italian, SM-SIP is stable across configurations (average BERTScore \(\approx 0.66\)) and reaches up to 49\% KIR, with the 10k setting performing best, indicating strong data efficiency. These results support semantic label generation as a practical improvement over lexical matching and show that SIP-style controllability transfers effectively to a morphologically rich language. Code and resources are available at \url{https://github.com/LucaDesderi/DNLPProj.git}.
 \end{abstract}
 
 \begin{IEEEkeywords}
@@ -47,15 +47,19 @@ abstractive summarization, salient information prompting, semantic supervision, 
 %% SECTION 1: INTRODUCTION
 %% ============================================================
 \section{Introduction}
-The advent of Large Language Models (LLMs) such as GPT-4, Llama 3, and Mistral has revolutionized abstractive summarization. However, this flexibility introduces \textbf{controllability} issues, often leading to the \textbf{omission of critical details} or \textbf{hallucinated} content ~\cite{maynez2020faithfulness, cao2022hallucination}. To address this, Xu et al.~\cite{xu2024sip} proposed \textbf{Salient Information Prompting (SIP)}. This hybrid neuro-symbolic approach decouples salience identification from generation by using a dedicated extractor (\textbf{SigExt}) to identify key phrases, which are then injected into the LLM prompt as ``soft constraints.''\\
-While SIP demonstrates improved coverage metrics, the original SigExt training relies on \textbf{fuzzy matching} at the character level, which frequently fails to capture semantic paraphrasing. Consequently, the extractor receives noisy training labels, preventing it from learning true semantic salience.\\
-To overcome this limitation, we propose Semantic and Multilingual Salient Information Prompting \textbf{SM-SIP} introducing two scientifically significant extensions to the original framework:
+Large Language Models (LLMs) have significantly improved abstractive summarization quality, but controllability remains a core issue: generated summaries can miss critical facts or introduce unsupported statements~\cite{maynez2020faithfulness, cao2022hallucination}. Salient Information Prompting (SIP)~\cite{xu2024sip} addresses this by separating extraction and generation: a dedicated extractor (SigExt) identifies salient evidence that is injected into the generation prompt as soft constraints.
+
+A key limitation of the original pipeline is supervision quality. SigExt labels are derived via character-level fuzzy matching, which is brittle under paraphrase and morpho-syntactic variation. This can propagate noisy labels to training and reduce semantic generalization.
+
+We propose \textbf{SM-SIP}, with two extensions:
 
 \begin{enumerate}
-    \item \textbf{Extension 1: Semantic Supervision} --- Replace fuzzy matching with Sentence-BERT embeddings for training label generation. Labels are assigned based on cosine similarity exceeding a threshold $\theta$, enabling the extractor to learn \textit{concepts} rather than character patterns.
+    \item \textbf{Extension 1: Semantic Supervision} --- We replace lexical fuzzy matching with Sentence-BERT similarity for label generation, so extractor targets are based on semantic alignment rather than string overlap.
     
-    \item \textbf{Extension 2: Multilingual Adaptation} --- Validate SIP on Italian, a morphologically rich language where fuzzy matching fails even more severely due to verb conjugations, article agreement, and pro-drop structures. We use the WITS (Wikipedia for Italian Text Summarization) dataset with XLM-RoBERTa-Longformer.
+    \item \textbf{Extension 2: Multilingual Adaptation} --- We validate the framework on Italian (WITS), where richer morphology makes lexical matching particularly fragile.
 \end{enumerate}
+
+Empirically, the Italian extension is robust across configurations and shows strong data efficiency, with the 10k setup matching or outperforming larger variants.
 
 %% ============================================================
 %% SECTION 2: RELATED WORK
@@ -106,7 +110,7 @@ To enforce controllability, we designed a rigorous "Source-Aware" prompt templat
     \item \textbf{Accuracy Rules:} Explicitly forbid external knowledge to mitigate hallucinations ("If the source doesn't mention it, omit it").
     \item \textbf{Writing Rules:} Impose stylistic constraints (e.g., max 120 words, no lists) to prevent the model from merely copying source segments.
 \end{itemize}
-This structured prompting was critical to achieving high Faithfulness score by grounding the LLM strictly in the extracted keyphrases. However, the presence of the Security Rules may inadvertently provoke the model to refuse the task when using a Greedy Configuration.
+This structured prompting was critical to achieving a high Faithfulness score by grounding the LLM strictly in the extracted keyphrases. However, the presence of the Security Rules may inadvertently provoke the model to refuse the task when using a Greedy Configuration.
 
 \subsection{Experimental Setup} \label{sec:exp_config}
 \textbf{1) Training Configuration} 
@@ -116,16 +120,16 @@ We train SigExt variants across two scales to test data efficiency:
     \item \textbf{Italian (WITS):} 10k and 25k samples ($\theta \in \{0.60, 0.65, 0.70\}$).
 \end{itemize}
  The English training uses per-device batch size 1, gradient accumulation 16, learning rate $1 \times 10^{-5}$, BF16 precision, and positive class weight 10.0. The Italian training uses per-device batch size 2, gradient accumulation 4, learning rate $2 \times 10^{-5}$, FP16 precision, and positive class weight 10.0. For \textit{Extension II}, we compare \textbf{Greedy Decoding} against \textbf{Stochastic Sampling} (Temperature = $0.1$, $0.2$, Top\_p = $0.9$), applying Repetition Penalty of $1.10$ to prevent cyclic loops.\\
- \textbf{2)Inference Strategies:} We assess the model using two prompting strategies to test in-context learning capabilities:
+ \textbf{2) Inference Strategies:} We assess the model using two prompting strategies to test in-context learning capabilities:
 \begin{itemize}
     \item \textbf{Zero-Shot:} Direct prompting without examples, relying solely on the extracted keyphrases.
     \item \textbf{Few-Shot:} Providing 3 demonstration examples to guide stylistic alignment.
 \end{itemize}
- \textbf{3) Evaluation Metric} Beyond standard metrics as ROUGE and and BERT score, we introduce other metrics to ensure semantic steerability: 
+ \textbf{3) Evaluation Metrics} Beyond standard metrics such as ROUGE and BERTScore, we introduce additional metrics to ensure semantic steerability: 
  \begin{itemize}
      \item \textbf{Key Information Retention (KIR):} The percentage of extracted keyphrases successfully incorporated into the summary;
-     \item  \textbf{Abstraction Score}: Computed as  (1 −n-gram overlap), it measures if the model synthesizes concepts rather than performing verbatim extraction;
-     \item \textbf{LLM-as-a-Judge:} We employ a Qwen2.5-14B judge~\cite{goyal2022news} within a G-EVAL framework~\cite{microsofteval} and Chain-of-Thought reasoning~\cite{CoT} to score Faithfulness, Completeness, Conciseness and Abstraction on a 1-5 scale.
+    \item  \textbf{Abstraction Score}: Computed as $(1 - \text{n-gram overlap})$, it measures whether the model synthesizes concepts rather than performing verbatim extraction;
+    \item \textbf{LLM-as-a-Judge:} We employ a Qwen2.5-14B judge~\cite{goyal2022news} within a G-EVAL framework~\cite{microsofteval} and Chain-of-Thought reasoning~\cite{CoT} to score Faithfulness, Completeness, Conciseness, and Abstraction on a 1-5 scale.
  \end{itemize}
 \begin{table}[h]
 \centering
@@ -157,8 +161,8 @@ We train SigExt variants across two scales to test data efficiency:
 \section{Experimental Results}
 \subsection{Quantitative Performance}
 We evaluate SM-SIP across both extensions using the methodology described in Section \ref{sec:exp_config}. Table \ref{tab:results_unified_full} summarizes the key performance metrics.\\
-\textbf{1) English ArXiv:} The English model exhibits strong scaling law. Increasing the training data from $1$k to $5$k yeld a performance boost, with BERT score rising to \textbf{0.886} and KIR from $73.10\%$ to $89.40\%$. Furthermore, \textbf{Few-Shot} prompting outperforms \textbf{Zero-Shot} prompting, suggesting that, in technical domains, demonstrations are crucial for an alignment between the model and the expected output.\\
-\textbf{2) Italian WITS:} Conversely, the Italian model reveals a \textbf{Data Efficiency Paradox}. The smallest configuration (\textbf{10k samples}) matches or outperforms the larger ones ($25$k samples), likely due to the cleaner semantic labels, cause the signature extraction task becomes learnable with fewer examples. Here, the prompting trade-off is inverted: \textbf{Zero-Shot} achieves the highest KIR (49.1\%), while Few-Shot tends to prioritize fluency over strict extraction.
+\textbf{1) English ArXiv:} The English model exhibits a strong scaling trend. Increasing the training data from $1$k to $5$k yields a performance boost, with BERTScore rising to \textbf{0.886} and KIR from $73.10\%$ to $89.40\%$. Furthermore, \textbf{Few-Shot} prompting outperforms \textbf{Zero-Shot} prompting, suggesting that, in technical domains, demonstrations are crucial for alignment between the model and the expected output.\\
+\textbf{2) Italian WITS:} Conversely, the Italian model reveals a \textbf{Data Efficiency Paradox}. The smallest configuration (\textbf{10k samples}) matches or outperforms the larger ones ($25$k samples), likely due to cleaner semantic labels, making the signature extraction task learnable with fewer examples. Here, the prompting trade-off is inverted: \textbf{Zero-Shot} achieves the highest KIR (49.1\%), while Few-Shot tends to prioritize fluency over strict extraction.
 \begin{table}[h]
 \centering
 \caption{Unified Results: English (ArXiv) vs Italian (WITS)}
@@ -191,10 +195,10 @@ We evaluate SM-SIP across both extensions using the methodology described in Sec
 \end{table}
 
 \subsection{Qualitative Analysis}
-To assess quality beyond overlapping metrics, we employ LLM-as-Judge (Qwen2.5-14B-Instruct-AWQ) with a source aware prompt structured with the G-EVAL framework  and Chain-of-Thought. The Italian model achieves high score over multiple dimensions (Faithfulness: 4.17/5, Completeness: 4.66/5). However, the notably lower Abstraction Score (1.47/5) suggests that the model tends to reformulate source content with minor lexical changes rather than performing true semantic synthesis—a known limitation of current LLMs, where progress in fluency often comes at the expense of factual consistency ~\cite{ladhak2022faithful}, ~\cite{tang2024faithfulness}.
+To assess quality beyond overlap-based metrics, we employ LLM-as-Judge (Qwen2.5-14B-Instruct-AWQ) with a Source-Aware prompt structured with the G-EVAL framework and Chain-of-Thought. The Italian model achieves high scores across multiple dimensions (Faithfulness: 4.17/5, Completeness: 4.66/5). However, the notably lower Abstraction Score (1.47/5) suggests that the model tends to reformulate source content with minor lexical changes rather than performing true semantic synthesis—a known limitation of current LLMs, where progress in fluency often comes at the expense of factual consistency~\cite{ladhak2022faithful, tang2024faithfulness}.
 
 \subsection{Impact of decoding strategies}
-Table \ref{tab:results_summary} summarizes the impact of decoding strategies on summary quality. While \textbf{Greedy Decoding} strategy maximizes strict adherence (KIR  56.5\%), \textbf{Stochastic Sampling} with low temperature ($T=0.1$ and $T=0.2$) obtained higher overall scores. 
+Table \ref{tab:results_summary} summarizes the impact of decoding strategies on summary quality. While the \textbf{Greedy Decoding} strategy maximizes strict adherence (KIR 56.5\%), \textbf{Stochastic Sampling} with low temperature ($T=0.1$ and $T=0.2$) obtains higher overall scores. 
 
 \begin{table}[h]
 \caption{Comparative performance metrics across different decoding configurations (J denotes Judge scores).}
@@ -216,45 +220,29 @@ Config. 3 & 4.306 & \textbf{4.667} & 3.176 & 1.776 & 0.662 & 53.8 \\
 %% SECTION 5: DISCUSSION
 %% ============================================================
 \section{Discussion}
-
-The experimental results reveal several insights that extend beyond the immediate task of Italian summarization and speak to the broader dynamics of hybrid neuro-symbolic NLP systems.
+The results suggest compact but relevant lessons for controllable multilingual summarization.
 
 \subsection{The Paradox of Data Efficiency}
-
-Perhaps the most unexpected finding is that the smallest training configuration (10k samples) consistently outperforms larger ones. This contradicts the prevailing assumption that more training data yields better models. We hypothesize two explanations for this phenomenon. First, the signature extraction task may be inherently simple once semantic supervision provides clean labels---the model learns the core pattern quickly, and additional examples offer diminishing returns. Second, larger training sets may introduce label noise: even with semantic supervision, borderline cases accumulate, and the model may learn to hedge rather than commit to clear salience predictions.
-
-This finding has significant implications for practitioners. Organizations seeking to deploy SM-SIP need not invest in massive annotation efforts; a relatively small, high-quality training set suffices. In resource-constrained settings, this represents a meaningful reduction in both computational and human annotation costs.
+The most notable result is that the 10k configuration is as good as or better than larger variants. A plausible explanation is that semantic supervision already yields sufficiently clean targets, so the extractor converges quickly and gains from additional data are limited. Another possibility is that larger sets introduce more borderline labels, increasing supervision noise. Practically, this supports a low-cost training strategy: smaller, cleaner datasets may be enough to obtain strong controllability.
 
 \subsection{Generator Dominance}
-
-The consistently narrow performance bands across all configurations (BERT Score varies by only 0.6\%) suggest that the underlying LLM---Llama-3.1-8B-Instruct---is the primary determinant of summary quality (see Figure~\ref{fig:bert_comparison}). SigExt provides useful guidance by identifying which content to prioritize, but the generator's pre-trained linguistic knowledge and summarization capabilities ultimately shape the output.
-
-This observation raises an important architectural question: if the generator dominates, what is the value of the extractor? Our KIR results provide the answer. Without signature guidance, LLMs may omit critical information or hallucinate. The extractor's role is not to improve fluency (the LLM handles that) but to ensure \textit{coverage}---that key information from the source makes it into the final summary.
+Performance differences remain narrow (BERTScore spread \(\approx 0.6\%\)), indicating that the generator largely determines fluency and overall quality. However, KIR confirms that SigExt is still essential: its value is not stylistic improvement, but coverage control. In other words, the extractor steers \textit{what} is preserved, while the LLM determines \textit{how} it is written.
 
 \subsection{Robustness and Deployment Considerations}
-
-The equivalence of 4-bit and 8-bit quantization is particularly relevant for deployment. Modern quantization techniques like NF4 preserve model quality while reducing memory requirements by approximately 50\%. Our results confirm that this holds for the summarization pipeline, enabling deployment on consumer hardware without quality degradation.
-
-Similarly, the robustness to threshold selection ($\theta \in \{0.60, 0.65, 0.70\}$) simplifies hyperparameter tuning. Practitioners can select any reasonable threshold without extensive cross-validation, accelerating the path from development to production.
+Near-equivalent behavior between 4-bit and 8-bit settings is favorable for deployment, since memory can be reduced with minimal quality impact. Robustness across threshold values ($\theta \in \{0.60, 0.65, 0.70\}$) also reduces hyperparameter sensitivity. Together, these factors make the pipeline easier to move from experimentation to production-like settings.
 
 \subsection{Zero-Shot vs Few-Shot Trade-offs}
-
-The inverse relationship between prompting strategy and metrics deserves careful interpretation. Zero-shot prompting achieves higher KIR (47\% vs 43\%), while few-shot achieves higher BERT Score. We believe this reflects a fundamental tension: few-shot examples encourage the model to mimic the stylistic patterns of demonstrations, potentially at the cost of attending closely to the extracted signatures. Zero-shot prompting, lacking such templates, forces the model to rely more heavily on the provided keyphrases.
-
-For applications where missing information carries high cost---such as medical or legal summarization---zero-shot is preferable. For applications prioritizing stylistic consistency or brand voice, few-shot offers better alignment with exemplars.
+Zero-shot and few-shot optimize different goals. Zero-shot improves KIR (better adherence to extracted content), while few-shot tends to improve style-oriented similarity metrics. This reflects a predictable trade-off between strict content control and exemplar-driven fluency. Therefore, prompt strategy should be selected by application risk: high-stakes factual settings favor zero-shot, while style-sensitive settings may benefit from few-shot.
 
 %% ============================================================
 %% SECTION 6: CONCLUSION
 %% ============================================================
 \section{Conclusion}
+This paper introduced SM-SIP, a semantic and multilingual extension of SIP. We replaced fuzzy lexical supervision with embedding-based semantic labeling and validated the full pipeline on Italian WITS with Longformer-based extraction and Llama-based generation.
 
-This paper presented SM-SIP, an extension of the Salient Information Prompting framework that introduces semantic supervision for training label generation and validates the approach on Italian, a morphologically rich language where traditional fuzzy matching fails.
+Results show competitive summarization quality (BERTScore around 0.66) and up to 49\% KIR on Italian, with the smallest setup (10k) performing best, highlighting data efficiency. We also observe practical robustness across quantization and decoding choices, supporting lightweight deployment.
 
-Our experiments on the WITS dataset demonstrate that the approach achieves competitive performance, with BERT Score of 0.66 and Key Information Retention reaching 49\%. More importantly, the results reveal that the signature extraction task is learnable with minimal training data---the best-performing configuration uses only 10,000 samples, outperforming models trained on 25,000 examples. This finding suggests that semantic supervision provides sufficiently clean labels that the extractor converges quickly.
-
-The practical implications are significant. The pipeline runs efficiently on consumer GPUs using 4-bit quantization without quality loss. The robustness to hyperparameter choices (threshold, quantization, prompting strategy) simplifies deployment. And the data efficiency reduces the annotation burden for organizations seeking to adopt the approach.
-
-Looking forward, the semantic supervision methodology opens possibilities for adaptation to other languages and domains. The key insight---that training on semantic similarity rather than string matching produces better extractors---should generalize wherever paraphrasing is common in reference summaries.
+Overall, the evidence suggests that semantic supervision is a reliable upgrade for SigExt-style training, especially in settings where paraphrase and morphology make string matching unreliable. This makes SM-SIP a strong baseline for future multilingual, controllable summarization research.
 
 \appendices
 
@@ -317,9 +305,8 @@ This work was conducted as part of the Deep Natural Language Processing course a
 \bibitem{cao2022hallucination} M. Cao, Y. Dong, and J. Cheung, ``Hallucinated but Factual! Inspecting the Factuality of Hallucinations in Abstractive Summarization,'' in \textit{Proc. ACL}, pp. 3340--3354, 2022.
 \bibitem{ladhak2022faithful} F. Ladhak, E. Durmus, H. He, C. Cardie, and K. McKeown, ``Faithful or Extractive? On Mitigating the Faithfulness-Abstractiveness Trade-off in Abstractive Summarization,'' in \textit{Proc. ACL}, pp. 1410--1421, 2022.
 \bibitem{tang2024faithfulness} L. Tang, S. Goyal, A. Fabbri, P. Laban, J. Xu, Y. Dong, K. McKeown, and W. Yin, ``Understanding Factual Errors in Summarization: Errors, Summarizers, Datasets, Error Detectors,'' in \textit{Proc. ACL}, 2024.
-\bibitem{microsofteval} Y. Liu, D. Iter, Y. Xu, S. Wang, R. Xu, C. Zhu, ``G-EVAL: NLG Evaluation using GPT-4 with Better Human Alignment'' in \textit{Proc. EMNLP}, 2023.
-\bibitem{CoT} S. Saha, M. Ghazvininejad, J.Weston, T.Wang ``Learning to Plan & Reason for Evaluation with
-Thinking-LLM-as-a-Judge'' in \textit{arXiv preprint arXiv:2501.18099}, 2025.
+\bibitem{microsofteval} Y. Liu, D. Iter, Y. Xu, S. Wang, R. Xu, and C. Zhu, ``G-EVAL: NLG Evaluation using GPT-4 with Better Human Alignment,'' in \textit{Proc. EMNLP}, 2023.
+\bibitem{CoT} S. Saha, M. Ghazvininejad, J. Weston, and T. Wang, ``Learning to Plan \& Reason for Evaluation with Thinking-LLM-as-a-Judge,'' \textit{arXiv preprint arXiv:2501.18099}, 2025.
 \end{thebibliography}
 
 \end{document}
