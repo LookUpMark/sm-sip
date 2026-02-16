@@ -20,11 +20,12 @@ sm-sip/
 │   ├── inference/                 # Summary generation (IT/EN)
 │   ├── evaluation/                # Full evaluation with judge (IT/EN)
 │   └── ablation/                  # 5 ablation studies
-├── scripts/analyze_results.py     # Unified CLI analysis
+├── scripts/analyze-results.py     # Unified CLI analysis
 ├── results/                       # Consolidated JSON results
 │   ├── italian/
 │   └── english/
 ├── data/                          # Training data (wits_train_25k.jsonl)
+├── docs/                          # Project documentation
 ├── overleaf/                      # Paper drafts
 ├── setup.py                       # Package installer
 └── requirements.txt               # Dependencies
@@ -75,13 +76,13 @@ sm-sip/
 pip install -e .
 
 # Run Italian inference (on Colab/GPU)
-jupyter notebook notebooks/inference/infer_italian_wits.ipynb
+jupyter notebook notebooks/inference/infer-italian-wits.ipynb
 
 # Run English evaluation
-jupyter notebook notebooks/evaluation/eval_english_arxiv.ipynb
+jupyter notebook notebooks/evaluation/eval-english-arxiv.ipynb
 
 # Analyze existing results (CLI)
-python scripts/analyze_results.py --lang all --latex
+python scripts/analyze-results.py --lang all --latex
 ```
 
 ## Reproducibility
