@@ -13,11 +13,16 @@ _NLP_MODELS = {}
 
 
 def _get_nlp(lang: str):
-    """Lazy-load spaCy model for the given language."""
+    """Lazy-load spaCy model for the given language. Auto-downloads if missing."""
     if lang not in _NLP_MODELS:
         import spacy
         model_name = "it_core_news_sm" if lang == "it" else "en_core_web_sm"
-        _NLP_MODELS[lang] = spacy.load(model_name)
+        try:
+            _NLP_MODELS[lang] = spacy.load(model_name)
+        except OSError:
+            print(f"  Downloading spaCy model '{model_name}'...")
+            spacy.cli.download(model_name)
+            _NLP_MODELS[lang] = spacy.load(model_name)
     return _NLP_MODELS[lang]
 
 
