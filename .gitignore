@@ -57,8 +57,7 @@ Thumbs.db
 
 # === Project Specific ===
 data/*.jsonl
-models/
-models*
+/models/
 checkpoints*
 *.log
 
