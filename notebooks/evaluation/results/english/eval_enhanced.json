@@ -1,0 +1,1609 @@
+{
+  "run_info": {
+    "timestamp": "2026-02-16T20:50:48.125608",
+    "sigext_model": "LookUpMark/sigext-arxiv-en-1k-060t",
+    "llm_model": "meta-llama/Llama-3.1-8B-Instruct",
+    "quantization": "8bit",
+    "prompt_type": "source_aware",
+    "seed": 42,
+    "num_samples": 50
+  },
+  "metrics": {
+    "bert": {
+      "mean": 0.8357041084766388,
+      "std": 0.017892830909108207
+    },
+    "rouge1": {
+      "mean": 0.4010052148396797,
+      "std": 0.08250611280416834
+    },
+    "rougeL": {
+      "mean": 0.2191437470276906,
+      "std": 0.06213579767096952
+    },
+    "kir": {
+      "mean": 0.6679999999999999,
+      "std": 0.287360400890589
+    },
+    "abstraction": {
+      "mean": 0.6444805327644978,
+      "std": 0.10533623229313753
+    },
+    "compression": {
+      "mean": 0.12462388419515508,
+      "std": 0.0834796656676866
+    },
+    "novel_ngrams": {
+      "mean": 0.45970488333798815,
+      "std": 0.08800507622940018
+    },
+    "judge_faithfulness": {
+      "mean": 4.78,
+      "std": 0.6095900261651268
+    },
+    "judge_completeness": {
+      "mean": 4.66,
+      "std": 0.6514598989960932
+    },
+    "judge_conciseness": {
+      "mean": 4.74,
+      "std": 0.6264183905346329
+    },
+    "judge_abstraction": {
+      "mean": 4.76,
+      "std": 0.6499230723708769
+    }
+  },
+  "samples": [
+    {
+      "source": "the flight management infrastructure ( fmi ) product is intended to keep the aircraft from interfering with preplanned observations on the sky . \n it predicts the ground tracks necessary to execute its mission , and corrects the plan for actual conditions while airborne . to support this , \n it contains both a planning component that can run on the ground and in the air , and an execution component that runs in the air . \n the planning component manages a set of ordered observations and optional...",
+      "reference": "sofia is a 2.5 meter airborne infrared telescope , mounted in a boeing 747sp aircraft . due to the large size of the telescope , \n only a few degrees of azimuth are available at the telescope bearing . \n this means the heading of the aircraft is fundamentally associated with the telescope s observation targets , and the ground track necessary to enable a given mission is highly complex and dependent on the coordinates , duration , and order of observations to be performed . \n we have designed and implemented a flight management infrastructure ( fmi ) product in order to plan and execute such missions in the presence of a large number of external constraints ( e.g. restricted airspace , international boundaries , elevation limits of the telescope , aircraft performance , winds at altitude , and ambient temperatures ) . \n we present an overview of the fmi , including the process , constraints and basic algorithms used to plan and execute sofia missions .",
+      "salient_sentences": [
+        "planned flight track intersections with special use airspace ( sua ) boundaries ( including non - us zones , from the us national imagery and mapping agency )",
+        "are evaluated using a quadtree - based search on the 8000 + sua boundaries for each flight segment .",
+        "while airborne , the fmi software components interact with the airborne data acquisition software to acquire the aircraft s position and attitude .",
+        "while on the ground , the planner portion of fmi interacts with observers planning software and must support multiple simultaneous planning sessions .",
+        "sofia presents a unique flight planning problem due to the nature of astronomical observation ."
+      ],
+      "generated_summary": "The Flight Management Infrastructure (FMI) product is designed to prevent aircraft interference with preplanned observations in the sky. It predicts ground tracks and corrects plans for actual conditions while airborne, using both a planning component and an execution component. The planning component manages ordered observations and optional aircraft repositioning requests, while the execution component compares the plan to actual conditions and requests headings from the autopilot. FMI requires substantial input data, including weather forecasts and aircraft performance, to accurately predict flight tracks and constraints. It also considers entire flight series at once to trade observations between flights, and uses a quadtree-based search to evaluate planned flight track intersections with special use airspace boundaries.",
+      "scores": {
+        "bert": 0.8279504179954529,
+        "rouge1": 0.4,
+        "rougeL": 0.19230769230769232,
+        "kir": 1.0,
+        "abstraction": 0.6756756756756757,
+        "compression": 0.11919019104647847,
+        "novel_ngrams": 0.5,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All information in the generated summary is verifiable in the source document.",
+          "completeness": 4,
+          "completeness_reason": "The generated summary covers the main points, but omits some details, such as the specific algorithms used in the FMI.",
+          "conciseness": 5,
+          "conciseness_reason": "The generated summary is concise and fluid, without repetitive information.",
+          "abstraction": 5,
+          "abstraction_reason": "The generated summary rephrases the information in a novel way, rather than copying it verbatim."
+        }
+      }
+    },
+    {
+      "source": "the classical method of adding two integers of @xmath1-bits takes @xmath2 bit operations but the classical method of multiplying them takes @xmath3 bit operations . \n complexity of addition is optimal in number of bit operations , whereas optimal multiplication algorithm for integers is an open problem . \n the classical approach to multiply two @xmath1-bit integers requires @xmath3 bit operations . \n karatsuba multiplication [ 9 ] uses divide - and - conquer technique to multiply two @xmath1-bit...",
+      "reference": "multiplication is one of the most important operation in computer arithmetic . \n many integer operations such as squaring , division and computing reciprocal require same order of time as multiplication whereas some other operations such as computing gcd and residue operation require at most a factor of @xmath0 time more than multiplication . we propose an integer multiplication algorithm using nikhilam method of vedic mathematics which can be used to multiply two binary numbers efficiently . \n integer multiplication , algorithm , computer arithmetic , vedic mathematics , computation",
+      "salient_sentences": [
+        "karatsuba algorithm is based on the fact that two - digit multiplication can be done with only three instead of four multiplications required by standard method .",
+        "the standard method of long multiplication requires 4 one - digit multiplication along with some addition and shift .",
+        "it can be used to convert large - digits multiplication to small - digits multiplication with the help of few extra add , subtract and shift operations .",
+        "_ nikhilamsquaring algorithm computes square of the input @xmath45 .",
+        "_ + * proof * : we prove this using induction on the bit length @xmath1 of @xmath45 ."
+      ],
+      "generated_summary": "The classical method of multiplying two integers requires 4 one-digit multiplications, whereas the classical method of adding two integers takes only 1 operation. The Karatsuba algorithm uses a divide-and-conquer technique to multiply two n-digit integers in 3n^1.585 bit operations, improving the classical bound. The Toom-Cook algorithm further improves this bound by splitting each number into multiple parts and performing operations on the parts. The Schönhage-Strassen algorithm uses the Fast Fourier Transform to multiply two n-digit integers in n log n bit operations. The Furer algorithm is the asymptotically fastest algorithm for multiplication, running in n log n / log log n bit operations, but is only useful for extremely large numbers. The Nikhilam Sutra, a method from Vedic mathematics, can be used to convert large-digit multiplication to small-digit multiplication with few extra operations.",
+      "scores": {
+        "bert": 0.8273345828056335,
+        "rouge1": 0.33035714285714285,
+        "rougeL": 0.18750000000000003,
+        "kir": 0.6,
+        "abstraction": 0.8091603053435115,
+        "compression": 0.08079106065980844,
+        "novel_ngrams": 0.5757575757575758,
+        "judge": {
+          "faithfulness": 3,
+          "completeness": 3,
+          "conciseness": 3,
+          "abstraction": 3,
+          "faithfulness_reason": "Unable to evaluate",
+          "completeness_reason": "Unable to evaluate",
+          "conciseness_reason": "Unable to evaluate",
+          "abstraction_reason": "Unable to evaluate"
+        }
+      }
+    },
+    {
+      "source": "there has been considerable recent interest on the general dynamics of the glass transitions in bulk polymer systems@xcite . \n a central experimental law which controls the rate of transition was long ago formulated by vogel , fulcher and tammann@xcite ; the empirical vft law of transition rates reads @xmath0 \\right\\ } , \\label{intro1}\\ ] ] wherein @xmath1 is the free energy of thermal activation . \n the vft thermal activation law is quite similar to the well known arrhenius@xcite thermal activa...",
+      "reference": "a derivation is given for the vogel - fulcher - tammann thermal activation law for the glassy state of a bulk polymer . \n our microscopic considerations involve the entropy of closed polymer molecular chains ( i.e. polymer closed strings ) . for thin film polymer glasses , \n one obtains open polymer strings in that the boundary surfaces serve as possible string endpoint locations . \n the vogel - fulcher - tammann thermal activation law thereby holds true for a bulk polymer glass but is modified in the neighborhood of the boundaries of thin film polymers .",
+      "salient_sentences": [
+        "for example , if one exerted a force on the given chain section , then it would become knotted with other polymer chain sections and would be rendered immobile .",
+        "the chain movements also lend strong support to `` co - operative '' motion inside the bulk .",
+        "it is also to be stressed that the dynamical glass transition temperature , @xmath42 , varies with the distance from the surface boundary through that a coherence length scale of about a few nanometers .",
+        "this surface effect is due to the fact polymer strings localized near the surface boundary are more mobile than the polymer chains embedded in the bulk .",
+        "for sufficiently thin films , \n the vft activation law thereby becomes modified as in eqs ."
+      ],
+      "generated_summary": "The Vogel-Fulcher-Tammann (VFT) law is a central experimental law governing the rate of transition in bulk polymer systems. It is similar to the Arrhenius thermal activation law, but with a temperature singularity in the denominator. This singularity occurs at a dynamical temperature, which is lower than the thermodynamic glass transition temperature. The VFT law is experimentally well obeyed in bulk polymer glasses, but its theoretical basis is not yet fully understood. A quantum mechanical approach to deriving the VFT law involves considering the transition rate per unit time as an absolute squared transition amplitude times a density of final states, with the logarithm of the density of final states representing the final entropy. The entropy of activation to a state with energy is related to the logarithm of the final state phase space magnitude. The polymer glass excitation configurations are of two types: closed chains of atoms (closed strings) and open polymer chains (open strings). The closed strings have an entropy obeying the VFT thermal activation equation, while the open string configurations obey shifted thermal activation laws. The distinction between the thermal activation properties of open and closed strings is crucial for understanding surface effects in thin films.",
+      "scores": {
+        "bert": 0.8388979434967041,
+        "rouge1": 0.3649122807017544,
+        "rougeL": 0.23157894736842105,
+        "kir": 0.6,
+        "abstraction": 0.5663265306122449,
+        "compression": 0.17128595822934453,
+        "novel_ngrams": 0.39593908629441626,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All facts are verifiable in the SOURCE.",
+          "completeness": 5,
+          "completeness_reason": "The GENERATED summary covers the main points of the SOURCE.",
+          "conciseness": 5,
+          "conciseness_reason": "The GENERATED summary is fluid and not repetitive.",
+          "abstraction": 5,
+          "abstraction_reason": "The GENERATED summary rephrases the SOURCE in a novel way, avoiding verbatim copying."
+        }
+      }
+    },
+    {
+      "source": "the mystery of the dark energy / cosmological constant persists despite great efforts of particle physicists and cosmologists to find a convincing solution . since the famous article by s. weinberg \n , it is well known that candidate models should not only explain the smallness of the cosmological constant , if it is somehow related to quantum gravity , but also what is called the coincidence problem i.e. why does dark energy become dominant quite late in the history of the universe ? \n models i...",
+      "reference": "it is a known fact that a quintessence model with @xmath0 fits the publicly available super nova ( sn ) type ia data better than a model with cosmological constant or @xmath1 . \n two types of models have this property : scalar fields with unconventional kinetic term and models with cosmological constant and a slowly decaying cold dark matter ( cdm ) . in this work \n we investigate the possibility of replacing the cosmological constant in the latter models with gradual condensation of a scalar field produced during the decay of the cdm and present some preliminary results . \n the advantage of this class of models to the ordinary quintessence is that the evolution of the dark energy and cdm are correlated and cosmological coincidence problem is solved or at least reduced to the fine tuning of the coupling between decaying cdm and quintessence field i.e the hierarchy problem . \n here we show that for part of the parameter space these models are consistent with present estimation of cosmological parameters .    * \n quintessence from a decaying dark matter + *    _ houri ziaeepour + mullard space science laboratory , + holmbury st . \n mary , dorking , surrey rh5 6nt , uk . + \n email : hz@mssl.ucl.ac.uk_",
+      "salient_sentences": [
+        "since the famous article by s. weinberg \n , it is well known that candidate models should not only explain the smallness of the cosmological constant , if it is somehow related to quantum gravity , but also what is called the coincidence problem i.e. why does dark energy become dominant quite late in the history of the universe ? \n models inspired by string theory like 4-form gauge models can describe the smallness of the dark energy but not the coincidence problem .",
+        "another conclusion is that the appearance of cosmological parameters as measured in the local universe is very recent i.e. the measurement of cosmological parameters at high redshift permits to distinguish between this model and other quintessence models .",
+        "it is evident that the model presented here can not be believed before investigating many issues .",
+        "this can affect the evolution of halos , star formation rate , ionization of igm etc .",
+        "and can be used to verify the model ."
+      ],
+      "generated_summary": "Candidate models for the cosmological constant and dark energy should not only explain the smallness of the cosmological constant, but also the coincidence problem, which is why dark energy becomes dominant late in the universe's history. Models inspired by string theory, such as 4-form gauge models, can describe the smallness of dark energy but not the coincidence problem. A new model, decaying dark matter, is proposed to address this issue, where a fraction of dark matter decays into a scalar field, leading to a quintessential matter behavior. This model naturally explains the dominance of dark energy over dark matter at each epoch and is consistent with cosmological observations.",
+      "scores": {
+        "bert": 0.8291416764259338,
+        "rouge1": 0.3557046979865772,
+        "rougeL": 0.20805369127516776,
+        "kir": 0.4,
+        "abstraction": 0.7924528301886793,
+        "compression": 0.13740306223901372,
+        "novel_ngrams": 0.5327102803738317,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All facts are verifiable in the SOURCE document.",
+          "completeness": 5,
+          "completeness_reason": "The GENERATED summary covers the main points of the SOURCE document.",
+          "conciseness": 5,
+          "conciseness_reason": "The GENERATED summary is fluid and not repetitive.",
+          "abstraction": 5,
+          "abstraction_reason": "The GENERATED summary rephrases the SOURCE content in a novel way."
+        }
+      }
+    },
+    {
+      "source": "since the mid 1970 s the existence of heavy hadronic molecules ( composed by a pair of heavy hadrons instead of a pair of heavy quarks ) has been theorized@xcite . \n this assumption was made based on the similarities between the heavy meson - heavy antimeson system and the deuteron . \n however , it was not until the discovery of the @xmath0@xcite by the belle collaboration , in 2003 , that the first experimental data that could fit into that molecular scheme was found . \n since then , many other...",
+      "reference": "in this work , we have used an effective field theory ( eft ) framework based on heavy quark spin ( hqss ) , heavy flavour ( hfs ) and heavy antiquark - diquark symmetries ( hads ) . using a standard lagrangian for the heavy meson - heavy antimeson system , we fit the counter - terms of the model to predict some promising experimental data that can be interpreted as heavy meson - heavy antimeson molecules , that is , the @xmath0 and the @xmath1 . \n next , and , taking advantage of hads , we use the same lagrangian to explore the consequences for heavy meson - doubly heavy baryon molecules , which can also be interpreted as triply heavy pentaquarks .",
+      "salient_sentences": [
+        "since the mid 1970 s the existence of heavy hadronic molecules ( composed by a pair of heavy hadrons instead of a pair of heavy quarks ) has been theorized@xcite .",
+        "we make use of them , along with the assumptions of the @xmath0 and the @xmath1 to be heavy hadronic molecules , to obtain a family of heavy meson - doubly heavy baryons that could also be interpreted as triply heavy pentaquarks .",
+        "the sources of error in the analysis are : the masses of the @xmath0 and @xmath22 resonances , the ratio of the @xmath0 amplitude decays ( calculated in @xcite ) and the two eft expansions used in this work .",
+        "as a summary , we can conclude that our analysis based on several qcd symmetries in the @xmath17 limit predicts the existence of several heavy meson - doubly heavy baryon molecular partners of the @xmath0 and the @xmath1 .",
+        "this same effective field theory approach could also be extended to study doubly heavy baryon - double heavy antibaryon molecular systems in the future ."
+      ],
+      "generated_summary": "Heavy hadronic molecules, composed of a pair of heavy hadrons instead of a pair of heavy quarks, have been theorized since the mid 1970s. The discovery of the @xmath0 by the Belle collaboration in 2003 provided experimental data that fit into the molecular scheme. The @xmath1 is also a natural candidate to have a molecular structure. The @xmath17 limit of QCD simplifies the theory, inducing symmetries such as HQSS, HFS, and HADS. These symmetries, along with the assumptions of @xmath0 and @xmath1, are used to obtain a family of heavy meson-doubly heavy baryons that could be interpreted as triply heavy pentaquarks. The analysis predicts the existence of several heavy meson-doubly heavy baryon molecular partners of @xmath0 and @xmath1, and the approach could be extended to study doubly heavy baryon-double heavy antibaryon molecular systems in the future.",
+      "scores": {
+        "bert": 0.8581750392913818,
+        "rouge1": 0.4769874476987448,
+        "rougeL": 0.24267782426778242,
+        "kir": 0.8,
+        "abstraction": 0.6268656716417911,
+        "compression": 0.1372299872935197,
+        "novel_ngrams": 0.42962962962962964,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All information in the generated summary is verifiable in the source document.",
+          "completeness": 5,
+          "completeness_reason": "The generated summary covers the main points of the source document, including the discovery of the @xmath0, the @xmath1, and the predictions of heavy meson-doubly heavy baryon molecular partners.",
+          "conciseness": 5,
+          "conciseness_reason": "The generated summary is concise and to the point, avoiding repetitive information.",
+          "abstraction": 5,
+          "abstraction_reason": "The generated summary rephrases the information in a clear and novel way, avoiding verbatim copying from the source document."
+        }
+      }
+    },
+    {
+      "source": "factorization of numbers into their prime factors is a hard non - polynomial problem for classical computers . \n it was shor @xcite who proposed a quantum algorithm which can solve the problem of factorization of numbers on a quantum computer with a tremendous speedup as compared to a classical computer . \n a practical demonstration of shor s algorithm has been carried out by factorizing the integer 15 @xcite , using nuclear magnetic resonance . \n however , quantum computers capable of implement...",
+      "reference": "truncated fourier , gauss , kummer and exponential sums can be used to factorize numbers : for a factor these sums equal unity in absolute value , whereas they nearly vanish for any other number . \n we show how this factorization algorithm can emerge from superpositions of classical light waves and we present a number of simple implementations in optics .",
+      "salient_sentences": [
+        "a practical demonstration of shor s algorithm has been carried out by factorizing the integer 15 @xcite , using nuclear magnetic resonance .",
+        "however , quantum computers capable of implementing shor s algorithm for larger numbers have not been developed yet .",
+        "several approaches to factorize numbers based on interference of multiple quantum paths have been proposed dowling , summhammer , merkel2006,mahesh , mehring , gilowski2008,bigourd2008,sadgrove2008,stefanak .",
+        "those schemes do not use quantum entanglement and do not capitalize on quantum parallelism .",
+        "in order to find the factors of a given number @xmath0 we use the following truncated sum : @xmath1where @xmath2 is an integer and @xmath3 is the number of terms in the sum ."
+      ],
+      "generated_summary": "Factorization of numbers into their prime factors is a hard problem for classical computers. Shor's algorithm, proposed by Shor, can solve this problem on a quantum computer with a significant speedup. A practical demonstration of Shor's algorithm has been carried out by factorizing the integer 15 using nuclear magnetic resonance. However, quantum computers capable of implementing Shor's algorithm for larger numbers have not been developed yet. Several approaches to factorize numbers based on interference of multiple quantum paths have been proposed, but they do not use quantum entanglement and do not capitalize on quantum parallelism. A truncated sum, where @xmath2 is an integer and @xmath3 is the number of terms, can be used to find the factors of a given number @xmath0. This sum can be used to factorize numbers, and its capability originates from the fact that for an integer factor @xmath7 of @xmath0, all phases in @xmath9 are integer multiples of @xmath10.",
+      "scores": {
+        "bert": 0.8293133974075317,
+        "rouge1": 0.27358490566037735,
+        "rougeL": 0.1320754716981132,
+        "kir": 1.0,
+        "abstraction": 0.42105263157894735,
+        "compression": 0.08686346205297422,
+        "novel_ngrams": 0.30718954248366015,
+        "judge": {
+          "faithfulness": 3,
+          "completeness": 3,
+          "conciseness": 3,
+          "abstraction": 3,
+          "faithfulness_reason": "Unable to evaluate",
+          "completeness_reason": "Unable to evaluate",
+          "conciseness_reason": "Unable to evaluate",
+          "abstraction_reason": "Unable to evaluate"
+        }
+      }
+    },
+    {
+      "source": "the lab for adaptive optics ( lao ) currently has a testbed dedicated to the development of two key ao technologies for large telescopes ( called multi - conjugate ao ( mcao)@xcite and multi - object ao ( moao ) ) . both of these technologies take advantage of tomographic reconstructions using multiple guidestars ( a.k.a . \n reference sources)@xcite . \n in particular , mcao attempts to achieve a high strehl over a large field of view ( fov ) by accounting for anisoplanatism , using multiple defo...",
+      "reference": "advances in micro deformable mirror ( dm ) technologies such as mems , have stimulated interest in the characteristics of systems that include a high stroke mirror in series with a high actuator count mirror . \n this arrangement is referred to as a woofer - tweeter system . in certain situations \n it may be desirable or necessary to operate the woofer dm in open - loop . \n we present a simple method for controlling a woofer dm in open loop provided the device behaves in an approximately linear fashion . \n we have tested a mirror that we believe meets our criterion , the alpao dm52 mirror . using our open - loop method we fit several test kolmogorov wavefronts with the mirror and \n have achieved an accuracy of approximately 25 @xmath0 @xmath1 surface deviation over the whole clear aperture , and 20 @xmath0 @xmath1 over 90% of the aperture . \n we have also flattened the mirror in open loop to approximately 11 @xmath0 @xmath1 residual .",
+      "salient_sentences": [
+        "it is important to note that these results are significant because they represent open - loop `` go - to '' control of the surface without the benefit of feedback from residual wavefront measurements .",
+        "keskin , o. hamptom , p. conan , r. bradley , c. hilton , c. & blain , c. _ proc .",
+        "of the first nasa / esa conference on adaptive hardware and systems _ ( 2006 ) .",
+        "the authors are grateful for funding from the gordon & betty moore foundation , whose generous gift enabled the construction of the laboratory for adaptive optics at the university of ca , santa cruz .",
+        "no . \n ast - 9876783 ."
+      ],
+      "generated_summary": "The Laboratory for Adaptive Optics (LAO) has a testbed for developing two key technologies: Multi-Conjugate Adaptive Optics (MCAO) and Multi-Object Adaptive Optics (MOAO). Both technologies use tomographic reconstructions with multiple guide stars to achieve high Strehl ratios. MCAO aims to achieve high Strehl over a large field of view by accounting for anisoplanatism with multiple deformable mirrors at optical conjugates. MOAO aims to achieve high Strehl over small fields embedded in larger uncorrected fields. The testbed uses three optically addressed spatial light modulators (SLMs) from Hamamatsu Photonics, allowing for nearly 600,000 control elements. The SLMs have been used with success in the biological sciences. A high-stroke mirror is being incorporated to eliminate phase-wrapping and test \"woofer-tweeter\" configurations, which pair a high-resolution DM with a low-resolution DM. Initial results show promising open-loop characteristics for the ALPAO DM52 as a woofer DM, and good agreement between the DM's surface and the predicted shape using tomography software when apertured down to 90% of the clear aperture.",
+      "scores": {
+        "bert": 0.8125538229942322,
+        "rouge1": 0.36419753086419754,
+        "rougeL": 0.17901234567901234,
+        "kir": 0.0,
+        "abstraction": 0.7453416149068324,
+        "compression": 0.2202404032570764,
+        "novel_ngrams": 0.5493827160493827,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All information in the generated summary is verifiable in the source document.",
+          "completeness": 5,
+          "completeness_reason": "The generated summary covers all main points from the source document.",
+          "conciseness": 4,
+          "conciseness_reason": "The generated summary is mostly concise, but could be slightly more fluid in some places.",
+          "abstraction": 5,
+          "abstraction_reason": "The generated summary rephrases the information from the source document in a novel way, avoiding verbatim copying."
+        }
+      }
+    },
+    {
+      "source": "gamma - ray bursts ( grb ) are cosmological explosions which produce an enormous amount of energy @xmath2erg within a few seconds to a few minutes by means of a highly relativistic jet . \n a grb light curve generally consists of a single or multiple broad pulses and rapid variability within the pulses on a timescale down to a few milliseconds.@xcite on the other hand , the spectrum is a continuum which is generally attributed to an optically thin synchrotron emission.@xcite interestingly , the s...",
+      "reference": "gamma - ray bursts ( grbs ) are cosmological explosions which carry valuable information from the distant past of the expanding universe . \n one of the greatest discoveries in modern cosmology is the finding of the accelerated expansion of the universe using type ia supernovae ( sn ia ) as standard candles . \n however , due to the interstellar extinction sn ia can be seen only up to a redshift @xmath0 . \n grbs are considered as the potential alternative to push this limit to as high as @xmath1 , a redshift regime corresponding to an epoch when the universe just started to form the first structures . there \n exist several correlations between the energy and an observable of a grb which can be used to derive luminosity distance . in recent works \n , we have studied spectral evolution within the individual pulses and obtained such correlations within the pulses . here \n we summarize our results of the pulse - wise grb correlation study . \n it is worth mentioning that all grb correlations are still empirical , and we can not use them in cosmology unless we understand the basic physics of grbs . to this end , we need to investigate the prompt emission spectrum which is so far generally described by the empirical band function . \n we shall discuss our current understanding of the radiation process particularly the finding of two blackbodies and a powerlaw ( the 2bbpl model ) as the generic spectral model and its implication . \n this is a work in progress and we expect to obtain the most fundamental grb correlation based on our improved spectral model .",
+      "salient_sentences": [
+        "gamma - ray bursts ( grb ) are cosmological explosions which produce an enormous amount of energy @xmath2erg within a few seconds to a few minutes by means of a highly relativistic jet .",
+        "we apply this model on grb 090618 and generate the individual pulses .",
+        "we derive various pulse properties e.g. , lightcurve and pulse width in various energies , spectral lag .",
+        "we then use this model for a set of _ fermi _ grbs with known redshift ( @xmath8 ) .",
+        "we find that the @xmath6 bears a strong correlation with the energy ( @xmath9 ) within the individual pulses with a pearson coefficient , @xmath10 and a chance probability , @xmath11 ."
+      ],
+      "generated_summary": "Gamma-ray bursts (GRBs) are cosmological explosions that produce an enormous amount of energy within a few seconds to a few minutes through a highly relativistic jet. The GRB light curve consists of a single or multiple broad pulses with rapid variability within the pulses on a timescale down to a few milliseconds. The spectrum is a continuum attributed to an optically thin synchrotron emission, showing a hard to soft evolution within individual pulses. A pulse-wise correlation study of GRBs reveals a strong correlation between the peak energy at the beginning of a pulse and the energy within the individual pulses. This correlation is stable across different redshift bins and is found to be consistent with the data in keV-MeV energies. The 2BBPL model, which describes a pulse simultaneously in energy and time domains, is found to be consistent with the data in keV-MeV energies and is used to study the GRB correlation. The model suggests that the power-law component of the 2BBPL model shares a common origin with the GeV emission, which is delayed and long-lasting compared to the keV-MeV emission.",
+      "scores": {
+        "bert": 0.829243004322052,
+        "rouge1": 0.41189931350114417,
+        "rougeL": 0.22425629290617852,
+        "kir": 0.8,
+        "abstraction": 0.5195530726256983,
+        "compression": 0.11764705882352941,
+        "novel_ngrams": 0.3388888888888889,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All facts are verifiable in the SOURCE document.",
+          "completeness": 5,
+          "completeness_reason": "The GENERATED summary covers all main points from the SOURCE document.",
+          "conciseness": 5,
+          "conciseness_reason": "The GENERATED summary is concise and fluid, not repetitive.",
+          "abstraction": 5,
+          "abstraction_reason": "The GENERATED summary rephrases the SOURCE content in a novel way, avoiding verbatim copying."
+        }
+      }
+    },
+    {
+      "source": "the existence and uniqueness of solutions to the differential equations of physics is seldom an issue . \n the very fact that these equations describe physical reality seems to argue that their solutions must exist and be unique . \n textbook examples of nonuniqueness , for example clairaut s equation ( ref . \n @xcite , p. 94 ) , seem like exceptional cases , which would not arise in physics in any case .    there is , however , a system of differential equations , arising as a limiting case of a ...",
+      "reference": "the possibility is considered that turbulence is described by differential equations for which uniqueness fails maximally , at least in some limit . the inviscid burgers equation , in the context of onsager s suggestion that turbulence should be described by a negative absolute temperature , is such a limit . \n in this picture , the onset of turbulence coincides with the proliferation of singularities which characterizes the failure of uniqueness . \n epsf    2",
+      "salient_sentences": [
+        "the existence and uniqueness of solutions to the differential equations of physics is seldom an issue .",
+        "the very fact that these equations describe physical reality seems to argue that their solutions must exist and be unique .",
+        "in this paper \n i argue that turbulence is a system that has a fragile ( maximally nonunique ) limiting case .",
+        "the limiting case is the burgers equation .",
+        "( on rather different grounds a resemblance between the problems of turbulence and laplacian growth has been noted by hastings and levitov @xcite ) ."
+      ],
+      "generated_summary": "The existence and uniqueness of solutions to differential equations in physics is often taken for granted, as their ability to describe physical reality suggests that their solutions must exist and be unique. However, a system of differential equations, singular Laplacian growth, exhibits maximal nonuniqueness, where solutions fail to exist and are nonunique at every time. This phenomenon is distinct from the usual behavior of differential equations and is characterized by the creation of new singularities. Turbulence is a candidate to be a fragile system, and it is argued that it has a fragile limiting case, the inviscid Burgers equation, where solutions may develop discontinuities, or shocks.",
+      "scores": {
+        "bert": 0.8357399702072144,
+        "rouge1": 0.41618497109826585,
+        "rougeL": 0.20809248554913293,
+        "kir": 1.0,
+        "abstraction": 0.75,
+        "compression": 0.0636141525653787,
+        "novel_ngrams": 0.5523809523809524,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All facts are verifiable in the SOURCE document.",
+          "completeness": 5,
+          "completeness_reason": "The GENERATED summary covers all main points from the SOURCE document.",
+          "conciseness": 5,
+          "conciseness_reason": "The GENERATED summary is fluid and not repetitive.",
+          "abstraction": 5,
+          "abstraction_reason": "The GENERATED summary rephrases the content in a novel way, avoiding verbatim copying."
+        }
+      }
+    },
+    {
+      "source": "over the past decade , the search for sources of ultra - high energy cosmic rays ( uhecrs ) has begun to focus upon small scale anisotropy in event arrival directions . \n this refers to statistically significant excesses occurring at the scale of @xmath1 . \n the interest in this sort of anisotropy has largely been fueled by the observations of the akeno giant air shower array ( agasa ) . in 1999 \n @xcite and again in 2001 @xcite , the agasa collaboration reported observing what eventually became...",
+      "reference": "in the past few years , small scale anisotropy has become a primary focus in the search for source of ultra - high energy cosmic rays ( uhecrs ) . the akeno giant air shower array ( agasa ) \n has reported the presence of clusters of event arrival directions in their highest energy data set . \n the high resolution fly s eye ( hires ) has accumulated an exposure in one of its monocular eyes at energies above @xmath0  ev comparable to that of agasa . however , monocular events observed with an air fluorescence detector are characterized by highly asymmetric angular resolution . \n a method is developed for measuring autocorrelation with asymmetric angular resolution . \n it is concluded that hires - i observations are consistent with no autocorrelation and that the sensitivity to clustering of the hires - i detector is comparable to that of the reported agasa data set . \n furthermore , we state with a 90% confidence level that no more than 13% of the observed hires - i events above @xmath0  ev could be sharing common arrival directions . however , because a measure of autocorrelation makes no assumption of the underlying astrophysical mechanism that results in clustering phenomena , we can not claim that the hires monocular analysis and the agasa analysis are inconsistent beyond a specified confidence level .    cosmic rays , anisotropy , clustering , autocorrelation , hires , agasa    98.70.sa , 95.55.vj , 96.40.pq , 13.85.tp",
+      "salient_sentences": [
+        "r.  u.  abbasi _ et al .",
+        "_ \n [ high resolution fly s eye collaboration ] , phys .",
+        "t.  abu - zayyad _ et al .",
+        "_ \n [ high resolution fly s eye collaboration ] , submitted for publication in _ astroparticle physics _",
+        "[ arxiv : astro - ph/0208301 ] ."
+      ],
+      "generated_summary": "The search for ultra-high energy cosmic rays (UHECRs) has focused on small-scale anisotropy in event arrival directions, with statistically significant excesses occurring at the scale of ~10 degrees. The Akeno Giant Air Shower Array (AGASA) collaboration reported observing seven clusters of UHECRs with estimated energies above 10^20 eV, with chance probabilities of 0.08 to 0.08. However, the High Resolution Fly's Eye (Hires) experiment's monocular analysis found that the level of autocorrelation observed in their sample is consistent with that expected from background coincidences. The Hires experiment has an energy-dependent aperture and exposure with seasonal variability, making it difficult to compare with AGASA. A data set of 52 events with energies greater than 10^19 eV was analyzed, with a cumulative exposure of 1.2 km^2 sr yr at 10^19 eV. The analysis found no evidence of clustering in the highest energy events, with a 90% confidence upper limit of 3.5 doublets above background coincidence. This suggests that no more than 13% of the observed Hires events could be sharing common arrival directions, assuming a 30% energy scale difference between the two experiments.",
+      "scores": {
+        "bert": 0.8495537638664246,
+        "rouge1": 0.5410628019323672,
+        "rougeL": 0.30434782608695654,
+        "kir": 0.4,
+        "abstraction": 0.6573033707865168,
+        "compression": 0.1619891008174387,
+        "novel_ngrams": 0.48044692737430167,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All information in the generated summary is verifiable in the source document.",
+          "completeness": 5,
+          "completeness_reason": "The generated summary covers all main points from the source document.",
+          "conciseness": 5,
+          "conciseness_reason": "The generated summary is concise and fluid, without repetition.",
+          "abstraction": 5,
+          "abstraction_reason": "The generated summary rephrases the source content in a novel way, without copying verbatim."
+        }
+      }
+    },
+    {
+      "source": "in june 2015 , the large hadron collider ( lhc ) has resumed its physics program with proton - proton ( pp ) collisions at @xmath4 = 13 tev . \n currently , this is the highest centre - of - mass energy reached in the laboratory . \n a full description of particle production in pp collisions can not be obtained from perturbative quantum chromodynamics and hence modelling efforts typically employ various empirical components that have to be adjusted based on experimental data . \n the measurement of...",
+      "reference": "the alice detector has excellent particle identification ( pid ) capabilities in the central barrel ( @xmath0 0.9 ) . \n this allows identified hadron production to be measured over a wide transverse momentum ( @xmath1 ) range , using different sub - detectors and techniques : their specific energy loss ( d@xmath2/d@xmath3 ) , the velocity determination via time - of - flight measurement , the cherenkov angle or their characteristic weak decay topology . \n results on identified light flavour hadron production at mid - rapidity measured by alice in proton - proton collisions at @xmath4 = 13 tev are presented and compared with previous measurements performed at lower energies . \n the results cover a wide range of particle species including long - lived hadrons , resonances and multi - strange baryons over the @xmath1 range from 150 mev/_c _ up to 20 gev/_c _ , depending on the particle species .",
+      "salient_sentences": [
+        "the measurement of light flavour particles production in pp collisions provides important input for event generators to model the soft parton interactions and the hadronization processes .",
+        "the @xmath1 dependence of the @xmath21 and @xmath16 is the same at lhc energies within our systematic errors .",
+        "above @xmath22 900 gev the @xmath21 and @xmath16 ratios are energy independent within systematic uncertainties .",
+        "the relative production of strange resonances ( @xmath19 and @xmath20 ) remains constant within a wide range of centre of mass energy .",
+        "multiplicity dependent studies in pp collisions at 13 tev will help disentangle the role of collision energy and event multiplicity in the identified particle production of pp collisions ."
+      ],
+      "generated_summary": "The Large Hadron Collider (LHC) resumed its physics program in June 2015 with proton-proton collisions at a centre-of-mass energy of 13 TeV, the highest reached in the laboratory. The measurement of light flavour particles production in pp collisions provides important input for event generators to model soft parton interactions and hadronization processes. The LHC data shows that the ratios of certain particles, such as the hyperon-to-pion ratio, exhibit a hint of increase at 13 TeV compared to lower collision energies, which may be related to the enhancement observed as a function of multiplicity in pp collisions at 7 TeV.",
+      "scores": {
+        "bert": 0.8215551972389221,
+        "rouge1": 0.32478632478632474,
+        "rougeL": 0.17094017094017094,
+        "kir": 0.4,
+        "abstraction": 0.5567010309278351,
+        "compression": 0.10325110276098677,
+        "novel_ngrams": 0.42857142857142855,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All facts are verifiable in the SOURCE document.",
+          "completeness": 5,
+          "completeness_reason": "The GENERATED summary covers the main points of the SOURCE document.",
+          "conciseness": 5,
+          "conciseness_reason": "The GENERATED summary is concise and fluid, without repetition.",
+          "abstraction": 5,
+          "abstraction_reason": "The GENERATED summary rephrases the content in a novel way, without copying the SOURCE verbatim."
+        }
+      }
+    },
+    {
+      "source": "observations of galaxies in optical wavebands are strongly influenced by selective extinction which is hard to take into account due to inhomogeneous distribution of dust . by this reason \n the maps of color and brightness may give distorted picture of photometrical structure of galaxies and distribution of star - formation tracers .    in paper \n @xcite it was proposed to use the combined color index @xmath1 whose value does nt depend on selective attennuation of light to trace the structure of...",
+      "reference": "we present the results of bvri photometry of two galaxies with active star formation : and . \n combined color index @xmath0 was used to investigate the photometrical structure of the galaxies . \n index @xmath0 is not affected by internal extinction and is sensitive to the presence of blue stars . \n ring - like region with active star formation at 15 \" from the center reveals itself in the @xmath0 map of . \n three - arm spiral structure is well - seen on the @xmath0 map of ngc 1134 . \n we propose to use the combined indexes @xmath0 and similarly defined indices as a tracers of star formation activity and structure of dusty galaxies .",
+      "salient_sentences": [
+        "regions in the center and in the sf - ring have the same @xmath0 which enables to conclude that they have similar fraction of young stars .",
+        "whereas color distribution is asymmetric in and due to internal absorption , their @xmath0 and @xmath1 maps are relatively symmetric and allow to reveal structure details hidden by the dust .",
+        "in a ring - like region evidently related to active star formation is clearly visible at q - maps .",
+        "in three armed spiral structure and active star formation \n reveal themselves in @xmath1 map of the galaxy .",
+        "very appreciates financial support of european space agency to participate to the 33rd eslab symposium ."
+      ],
+      "generated_summary": "Galaxies' optical observations are influenced by selective extinction due to inhomogeneous dust distribution, distorting color and brightness maps. To address this, a combined color index was proposed to trace galaxy structure, insensitive to extinction. The index, defined as a ratio of color excesses, was used to investigate the structure of galaxy M 51. Observations of two spiral galaxies, and, in BVRI colors revealed an asymmetric color distribution due to internal absorption, but their combined color index maps were relatively symmetric, allowing for structure details to be revealed. The index @xmath0, sensitive to blue stars, was used to localize regions of recent star formation, while @xmath1, weakly dependent on blue stars, revealed a three-armed spiral structure and active star formation.",
+      "scores": {
+        "bert": 0.8666671514511108,
+        "rouge1": 0.5112107623318386,
+        "rougeL": 0.26905829596412556,
+        "kir": 0.6,
+        "abstraction": 0.829059829059829,
+        "compression": 0.1213716348323056,
+        "novel_ngrams": 0.6440677966101694,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All facts are verifiable in the SOURCE.",
+          "completeness": 5,
+          "completeness_reason": "The GENERATED summary covers all main points from the SOURCE.",
+          "conciseness": 5,
+          "conciseness_reason": "The GENERATED summary is concise and fluid, without repetition.",
+          "abstraction": 5,
+          "abstraction_reason": "The GENERATED summary rephrases the original text in a novel way, without copying it verbatim."
+        }
+      }
+    },
+    {
+      "source": "flavor changing decays of heavy hadrons are of great interest in the heavy flavor physics due to their ability to provide useful information on the quark structure of the hadrons and reveal the nature of the weak interactions \n . in particular , the decay of the @xmath5-quark baryons can give us various charm related cabibbo - kobayashi - maskawa matrix elements , which are the main ingredients of the standard model . \n furthermore , a thorough understanding of the standard model itself needs a ...",
+      "reference": "with the renewed distribution amplitudes of @xmath0 , we present a reanalysis on the semi - leptonic decay @xmath1 by use of the light - cone sum rule approach with two kinds of interpolating currents . \n the form factors describing the decay process are obtained and used to predict the decay width . with the inclusion of up to twist-@xmath2 contributions \n the calculations give the decay width @xmath3 for chernyak - zhitnitsky - type(cz - type ) current and @xmath4 for ioffe - type current . \n the ioffe - type interpolating current is found to be better for the estimation of the decay rate from a comparison with experimental data .",
+      "salient_sentences": [
+        "flavor changing decays of heavy hadrons are of great interest in the heavy flavor physics due to their ability to provide useful information on the quark structure of the hadrons and reveal the nature of the weak interactions \n .",
+        "in particular , the decay of the @xmath5-quark baryons can give us various charm related cabibbo - kobayashi - maskawa matrix elements , which are the main ingredients of the standard model .",
+        "the generalization to the @xmath7 transition form factor was worked out in ref .",
+        "we have given the applications of lcsr on other @xmath8 octet baryons in refs . \n @xcite .",
+        "in this paper we will make use of the lcsr approach to study the decay process @xmath1 , which has been preliminarily studied in the previous work @xcite ."
+      ],
+      "generated_summary": "Flavor changing decays of heavy hadrons are of great interest in heavy flavor physics due to their ability to provide information on the quark structure of hadrons and reveal the nature of weak interactions. The decay of @xmath5-quark baryons can give various charm-related Cabibbo-Kobayashi-Maskawa matrix elements, which are main ingredients of the standard model. The authors aim to study the decay process @xmath1 using the light-cone sum rule (LCSR) approach, which has been successfully applied to various problems in heavy meson physics. The LCSR method is a non-perturbative approach that uses distribution amplitudes (DAs) of increasing twist to replace the short-distance Wilson OPE in the traditional QCD sum rules.",
+      "scores": {
+        "bert": 0.8222557902336121,
+        "rouge1": 0.36111111111111116,
+        "rougeL": 0.17592592592592593,
+        "kir": 0.6,
+        "abstraction": 0.5607476635514019,
+        "compression": 0.09612074672315636,
+        "novel_ngrams": 0.39814814814814814,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All facts are verifiable in the SOURCE document.",
+          "completeness": 5,
+          "completeness_reason": "The GENERATED summary covers the main points of the SOURCE document.",
+          "conciseness": 5,
+          "conciseness_reason": "The GENERATED summary is concise and fluid, without repetition.",
+          "abstraction": 5,
+          "abstraction_reason": "The GENERATED summary rephrases the content of the SOURCE document in a novel way."
+        }
+      }
+    },
+    {
+      "source": "the internal processes and morphological properties of solar active regions have been mostly subjects of case studies because of the earlier lack of detailed long term databases . \n several internal features of sunspot groups are of diagnostic importance about the development of active regions , their interaction with the surrounding velocity fields or the advancement of the dynamo mechanism . \n the investigation of these topics became possible with the appearance of new photospheric databases ....",
+      "reference": "the detailed sunspot catalogues , the dpd and sdd allow to study the leading and following parts of sunspot groups separately . \n we examine the equilibrium distance of the two parts , the speed of removal , the asymmetry of compactness and the area growth . \n the distributions of positive and negative tilts of sunspot groups are also examined .",
+      "salient_sentences": [
+        "the internal processes and morphological properties of solar active regions have been mostly subjects of case studies because of the earlier lack of detailed long term databases .",
+        "several internal features of sunspot groups are of diagnostic importance about the development of active regions , their interaction with the surrounding velocity fields or the advancement of the dynamo mechanism .",
+        "the upper panel of figure 1 shows the relationship between the total areas of sunspot groups and the distances between the centers of weight of their leading and following parts at the time of the largest total umbral area of the sunspot group .",
+        "to ensure that in fact the time of maximum is considered only those sunspot groups \n are taken into account whose entire life - span was observed on the visible disc .",
+        "this means a statistical sample of 272 active regions ."
+      ],
+      "generated_summary": "Solar active regions have been primarily studied through case studies due to the earlier lack of detailed long-term databases. Internal features of sunspot groups are crucial for understanding the development of active regions, their interaction with surrounding velocity fields, and the advancement of the dynamo mechanism. A new database, the SOHO/MDI-Debrecen Sunspot Data (SDD), has enabled the investigation of these topics. The SDD provides hourly data on sunspot position, area, and magnetic field, allowing for the highest resolution in both space and time. The relationship between sunspot group area and the distance between leading and following parts is linear but weak, suggesting a limited role of magnetic tension in active region size. The SDD also reveals that the leading part of sunspot groups tends to be smaller in number but larger in area than the following part, and that the magnetic axes of active regions exhibit a tilt with respect to the azimuthal direction, known as the Joy's Law.",
+      "scores": {
+        "bert": 0.8383098840713501,
+        "rouge1": 0.35944700460829493,
+        "rougeL": 0.20276497695852536,
+        "kir": 0.8,
+        "abstraction": 0.7515923566878981,
+        "compression": 0.1031843233312921,
+        "novel_ngrams": 0.5189873417721519,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All facts are verifiable in the SOURCE.",
+          "completeness": 5,
+          "completeness_reason": "The GENERATED summary covers all main points mentioned in the SOURCE.",
+          "conciseness": 5,
+          "conciseness_reason": "The GENERATED summary is concise and fluid, avoiding repetition.",
+          "abstraction": 5,
+          "abstraction_reason": "The GENERATED summary rephrases the SOURCE content in a novel and clear way."
+        }
+      }
+    },
+    {
+      "source": "the standard paradigm is that active regions form when a coherent flux tube from deep in the convection zone reaches the surface , typically modeled using the thin flux tube approximation @xcite . @xcite \n have shown how important the actual convective motions are to the rise of magnetic flux . \n recent simulations of active region formation have started from a coherent semi - torus of magnetic field placed in the surface layers of a model solar convection zone @xcite . \n our simulations show th...",
+      "reference": "magneto - convection can produce an active region without an initial coherent flux tube . \n a simulation was performed where uniform , untwisted , horizontal magnetic field of 1 kg strenght was advected into the bottom of a computational domain 48 mm wide by 20 mm deep . \n the up and down convective motions produce a hierarchy of magnetic loops with a wide range of scales , with smaller loops riding  piggy back \" in a serpentine fashion on larger loops . \n when a large loop approaches the surface it produces an small active region with a compact leading spot and more diffuse following spots .",
+      "salient_sentences": [
+        "the standard paradigm is that active regions form when a coherent flux tube from deep in the convection zone reaches the surface , typically modeled using the thin flux tube approximation @xcite .",
+        "the initial state was a snapshot of hydrodyanamic convection which had been relaxed for several turnover times ( about 2 days at 20 mm depth ) .",
+        "we then started advecting minimally structured , uniform , untwisted , horizontal magnetic field into the domain by inflows at the bottom .",
+        "the active region is not affected by the horizontal boundaries : first , because its size is 25 mm inside a 48 mm wide box , second , because it is spreading very slowly with time and , third , because the top boundary is close by ( at the temperature minimum ) so the magnetic field does not have room to spread out much in the atmosphere and interact with the mirror active regions produced by the horizontal periodicity .",
+        "thereafter the granules appear elongated along the magnetic field direction ."
+      ],
+      "generated_summary": "Active regions form when a coherent flux tube from deep in the convection zone reaches the surface, typically modeled using the thin flux tube approximation. However, simulations show that a coherent structure is not necessary for active region formation, as magneto-convection itself can produce rising flux tubes. The simulations used the Stagger code to model magneto-convection in a 48 mm wide by 20 mm deep domain, with a 10% depth of the solar convection zone and two-thirds of its pressure scale heights. The initial state was a snapshot of hydrodynamic convection relaxed for several turnover times, then a minimally structured, uniform, untwisted, horizontal magnetic field was introduced by inflows at the bottom. The active region's size is 25 mm inside a 48 mm wide box, allowing it to be confined and not affected by the horizontal boundaries. As the magnetic field emerges, it forms small bipoles with mixed polarity, which eventually give rise to a large flux bundle. The field emerges horizontally over granules and then vertically in intergranule lanes, with the vertical legs of the bipoles quickly separating.",
+      "scores": {
+        "bert": 0.8450056314468384,
+        "rouge1": 0.41428571428571426,
+        "rougeL": 0.20714285714285713,
+        "kir": 1.0,
+        "abstraction": 0.5819209039548023,
+        "compression": 0.13603473227206947,
+        "novel_ngrams": 0.42696629213483145,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All information in the generated summary is verifiable in the source document.",
+          "completeness": 5,
+          "completeness_reason": "The generated summary covers all main points from the source document.",
+          "conciseness": 4,
+          "conciseness_reason": "The generated summary is mostly concise, but has some minor repetition of similar information.",
+          "abstraction": 5,
+          "abstraction_reason": "The generated summary rephrases the information in a clear and concise manner, avoiding verbatim copying."
+        }
+      }
+    },
+    {
+      "source": "unlike the optical spectra of hot cspn , which are characterized by lines of hydrogen , helium and some light metals , the ultraviolet spectra are dominated by fe and ni lines ( schnberner & drilling 1985 ) . \n their observed strengths show large variations between different objects suggesting a possible spread in abundances . \n iron group lines are ideal temperature indicators ( fig.1 ) , which is important to set up a reliable temperature scale for the hottest cspn . \n effective temperatures o...",
+      "reference": "we report on an on - going analysis of high - resolution uv spectra of hot hydrogen - rich central stars of planetary nebulae ( cspn ) , obtained with the hubble space telescope and fuse . \n since uv spectra of many cspn are dominated by fe and ni lines , we intend to use them as temperature indicators to check the cspn temperature scale we have derived earlier from cno ionization balances . \n furthermore , the observed line strengths of heavy metals show large variations between different objects suggesting a possible spread in abundances \n . we will determine abundances of iron group elements by quantitative spectral analyses with non - lte model atmospheres .",
+      "salient_sentences": [
+        "effective temperatures of the hottest central stars are known with low accuracy only .",
+        "the iron abundance in ngc1360 is apparently close to solar .",
+        "kurucz , r. l. 1991 , in stellar atmospheres : beyond classical models , ed .",
+        "l.crivellari , i.hubeny , d.g.hummer , nato asi ser .",
+        "h.riffert & k.werner , journal of computational and applied mathematics , 109 , 65"
+      ],
+      "generated_summary": "The effective temperatures of the hottest central stars are known with low accuracy only. The iron abundance in NGC 1360 is apparently close to solar. The study of iron lines in ultraviolet spectra of hot central stars, specifically in the sample of seven very hot hydrogen-rich central stars, reveals large variations in iron line strengths, suggesting a possible spread in abundances. The iron group lines are ideal temperature indicators, and their relative strength is used to set up a reliable temperature scale for the hottest central stars.",
+      "scores": {
+        "bert": 0.8568933606147766,
+        "rouge1": 0.38947368421052636,
+        "rougeL": 0.2,
+        "kir": 0.4,
+        "abstraction": 0.5764705882352941,
+        "compression": 0.11705542478065482,
+        "novel_ngrams": 0.3953488372093023,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All facts are verifiable in the SOURCE.",
+          "completeness": 5,
+          "completeness_reason": "The GENERATED summary covers the main points of the SOURCE.",
+          "conciseness": 5,
+          "conciseness_reason": "The GENERATED summary is fluid and not repetitive.",
+          "abstraction": 5,
+          "abstraction_reason": "The GENERATED summary rephrases the SOURCE content in a novel way."
+        }
+      }
+    },
+    {
+      "source": "smc 3 is one of the symbiotic systems in the magellanic clouds . \n the system contains a wd and an m giant with an orbital period of 4.5 years ( eg . \n it is a supersoft x - ray source powered by a steady hydrogen burning on the surface of the white dwarf ( orio _ et al . \n _ 2007 ) . because the system contains a massive white dwarf ( m@xmath01.18 m@xmath1 ; orio _ et al . _ \n @xcite ) with a high accretion rate ( @xmath2  m@xmath1/yr ; kahabka @xcite ) it is considered as one of the most promi...",
+      "reference": "smc 3 is one of the most interesting symbiotic stars . \n this binary contains a bright k - type giant transferring mass to a massive white dwarf comanion , which makes it is a very promising sn ia candidate . \n we discuss the evolutionary status of the system using results of population synthesis code .",
+      "salient_sentences": [
+        "the obtained parameters of the system are presented in fig .",
+        "we predict that the system will not become a type ia supernova in contrary to what was suggested in the literature ( orio _ et al .",
+        "_ \n the caveat is that our predicted mass transfer rate is somewhat lower then the one expected for the steady hydrogen burning on the surface of the white dwarf ( nomoto _ et al .",
+        "_ \n a lower @xmath9 then expected could be due to the fact that our model underestimates the rg mass loss trough wind by treating it as in the single star scenario , whereas there is a strong observational evidence that this wind is significantly enhanced due to tidal interactions in syst ( mikoajewska _ et al .",
+        "_ \n large roche lobe filling factor suggests ellipsoidal variability in the system ."
+      ],
+      "generated_summary": "The system SMC 3 is a symbiotic system in the Magellanic Clouds, consisting of a white dwarf and an M giant with an orbital period of 4.5 years. It is a supersoft X-ray source powered by steady hydrogen burning on the white dwarf's surface. The system is considered a promising supernova Ia progenitor due to its massive white dwarf and high accretion rate. The mass of the red giant was estimated using its pulsation period of 110 days, resulting in a mass of 2.3 solar masses. The system's evolution was modeled using the StarTrack population synthesis code, which predicted that it will not become a type Ia supernova, contrary to previous suggestions.",
+      "scores": {
+        "bert": 0.8444182872772217,
+        "rouge1": 0.37125748502994005,
+        "rougeL": 0.2634730538922156,
+        "kir": 0.4,
+        "abstraction": 0.7272727272727273,
+        "compression": 0.2401906857352402,
+        "novel_ngrams": 0.5225225225225225,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All facts are verifiable in the SOURCE document.",
+          "completeness": 5,
+          "completeness_reason": "The GENERATED summary covers all main points from the SOURCE document.",
+          "conciseness": 5,
+          "conciseness_reason": "The GENERATED summary is concise and fluid, without repetitive information.",
+          "abstraction": 5,
+          "abstraction_reason": "The GENERATED summary rephrases the information from the SOURCE document in a novel way."
+        }
+      }
+    },
+    {
+      "source": "the distant globular cluster palomar 13 has been found to have a very high m / l ratio of @xmath0 and its profile can be well fitted either by a king profile with a power - law tail or a nfw model [ 1 ] with scale radius @xmath1pc and central density @xmath2 . \n a possible explanation is that this distant cluster @xmath3 is one of the numerous dark clumps predicted by cdm scenarios , which was not destroyed by the galactic tidal field . \n it may be a disrupted cluster as well , out of dynamical ...",
+      "reference": "the distant globular cluster palomar 13 has been found to have a very high mass - to - light ratio and its profile can be well fitted either by a king model with a tail , or with a nfw model [ 1 ] . \n this cluster may be the first case of the many clumps predicted by cdm simulations that would not be disrupted by the galactic halo potential . \n we make the hypothesis that pal 13 is made of neutralinos and run the darksuspect code to estimate the high - energy photon flux due to the annihilation of neutralinos through various channels in some benchmark scenarios . \n these low fluxes may be used as targets to be reached in proposals for future ground - based high altitude cerenkov telescopes .",
+      "salient_sentences": [
+        "the susy benchmark models have been proposed to provide a common way of comparing the discovery potential of future accelerators [ 2 ] .",
+        "these scenarios correspond to 13 configurations of the 5 msugra parameters with the trilinear coupling parameter @xmath5 set to 0 .",
+        "we calculate the @xmath4 fluxes for the benchmark models bcgil in the `` bulk '' region with our current mc simulation programs : darksusy [ 3 ] and suspect [ 4 ] .",
+        "an array of 5 hesses ( each including four 15-m class telescopes like in hess ) , operating in adjacent areas at 5000 m altitude , would reach a flux limit of @xmath11 at 25 gev in 400 h. * with that flux limit most of the neutralino parameter space in the galactic center could be explored .",
+        "this is roughly the instrument needed to demonstrate or disprove supersymmetry in astrophysics ."
+      ],
+      "generated_summary": "The distant globular cluster Palomar 13 has a high mass-to-light ratio and its profile can be fitted by a King profile with a power-law tail or an NFW model. A possible explanation is that it is a dark clump predicted by CDM scenarios, which was not destroyed by the galactic tidal field. The NFW profile is assumed to be the signature of a halo made of cold particles, specifically neutralinos, which are a natural candidate for CDM. The authors calculate the flux in high-energy gamma-rays due to neutralino annihilation in the halo of Palomar 13. They use the SUSY benchmark models, which correspond to 13 configurations of the 5 mSUGRA parameters with the trilinear coupling parameter set to 0, and calculate the fluxes for the benchmark models BCGL in the \"bulk\" region using the DarkSUSY and SuSpect programs.",
+      "scores": {
+        "bert": 0.8705693483352661,
+        "rouge1": 0.5530303030303031,
+        "rougeL": 0.393939393939394,
+        "kir": 0.4,
+        "abstraction": 0.6102941176470589,
+        "compression": 0.28142265193370164,
+        "novel_ngrams": 0.4306569343065693,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All facts are verifiable in the SOURCE.",
+          "completeness": 5,
+          "completeness_reason": "The GENERATED summary covers all main points from the SOURCE.",
+          "conciseness": 5,
+          "conciseness_reason": "The GENERATED summary is concise and fluid, without repetition.",
+          "abstraction": 5,
+          "abstraction_reason": "The GENERATED summary rephrases the SOURCE content in a novel way, without copying it verbatim."
+        }
+      }
+    },
+    {
+      "source": "the first of the four veritas telescopes has been in routine operation since january 2005 at the basecamp of the fred lawrence whipple observatory at mt . \n hopkins , arizona . \n the site is 1275 m above sea level . \n several tev gamma ray sources have been detected @xcite and the construction of the other telescopes is underway . \n a detailed description of the first veritas telescope , called _ telescope 1 _ in the following , can be found in @xcite , a full description of the veritas project ...",
+      "reference": "the very high energy radiation telescope array ( veritas ) is a system of four imaging cherenkov telescopes currently under construction at kitt peak , arizona , usa . the first telescope has been in operation at the mt . \n hopkins basecamp since january 2005 . \n we present here detailed monte carlo simulations of the telescope response to extensive air showers . \n the energy threshold for this stand - alone telescope is calculated to be 150 gev at trigger level , the @xmath0-ray trigger rate is 22 @xmath0s / min . \n image parameter distributions , and the quality of gamma - hadron discrimination are calculated and show good agreement with distributions from observations of background cosmic rays and high - energy gamma - rays from the crab nebula and markarian 421 . \n the energy spectrum of the crab is reconstructed as @xmath1 m@xmath2s@xmath3tev@xmath3 .",
+      "salient_sentences": [
+        "the first of the four veritas telescopes has been in routine operation since january 2005 at the basecamp of the fred lawrence whipple observatory at mt .",
+        "the site is 1275 m above sea level .",
+        "the crab data set is statistically limited due to the fact that the observation started very late in the season .",
+        "a complete chain of monte carlo simulations has been developed .",
+        "it consists of air shower simulations with corsika @xcite and a detailed simulation of the telescope response @xcite ."
+      ],
+      "generated_summary": "The first of the four Veritas telescopes has been in routine operation since January 2005 at the basecamp of the Fred Lawrence Whipple Observatory at Mt. Hopkins, Arizona, which is 1275 meters above sea level. A complete chain of Monte Carlo simulations has been developed, consisting of air shower simulations with CORSIKA and a detailed simulation of the telescope response. The crab data set is statistically limited due to the fact that the observation started very late in the season. The simulations reproduce the observed trigger rate with an accuracy of 15% and the effective area of the telescope after cuts is approximately 16 m^2.",
+      "scores": {
+        "bert": 0.8249260783195496,
+        "rouge1": 0.4745762711864407,
+        "rougeL": 0.2796610169491525,
+        "kir": 1.0,
+        "abstraction": 0.3495145631067961,
+        "compression": 0.056292263107051904,
+        "novel_ngrams": 0.22115384615384615,
+        "judge": {
+          "faithfulness": 3,
+          "completeness": 3,
+          "conciseness": 3,
+          "abstraction": 3,
+          "faithfulness_reason": "Unable to evaluate",
+          "completeness_reason": "Unable to evaluate",
+          "conciseness_reason": "Unable to evaluate",
+          "abstraction_reason": "Unable to evaluate"
+        }
+      }
+    },
+    {
+      "source": "the large hadron collider ( lhc ) at cern will open a new frontier in particle physics due to its higher collision energy and luminosity as compared to the existing accelerators . \n the general - purpose atlas and cms experiments at the lhc will employ precision tracking , calorimetry and muon measurements over a large solid angle to identify and measure electrons , muons , photons , jets and missing energy accurately . \n therefore , they have great physics potential in discovering many possible...",
+      "reference": "the lhc experiments have great potential in discovering many possible new particles up to the tev scale . \n the significance calculation of an observation of a physics signal with known location and shape is no longer valid when either the location or the shape of the signal is unknown . \n we find the current lhc significance calculation of new physics is over - estimated and strongly depends on the specifics of the method and the situation it applies to . \n we describe general procedures for significance calculation and comparing different search schemes . \n a new method uses maximum likelihood fits with floating parameters and scans the parameter space for the best fit to the entire sample . \n we find that the new method is significantly more sensitive than current method and is insensitive to the exact location of the new physics signal we search . \n 0.0 mm 0.0 mm 5 mm 170 mm 220 mm 0.0 mm",
+      "salient_sentences": [
+        "we find the results of the new analysis method is independent of the location of the new physics signal and significantly more sensitive in searching for new physics signal than the current `` sliding - window '' approaches . \n while the lhc experiments have great potential in discovering many possible new physics signals , we need to be extremely careful in evaluating the significance of an observation from the real lhc data .",
+        "for individual decay modes of new physics signals , the expected significances in observing the new physics signal will be much smaller than current expectations  @xcite .",
+        "combining independent decay modes of the same new physics signal will be essential to establish the discovery of the new physics signal .",
+        "significant observations of the same new particle in independent decay modes at consistent locations will be the most effective way to establish the discovery of this new particle \n .",
+        "careful evaluation of the observation significance in each individual decay mode following the general procedures described in this paper is the starting point , before we can evaluate the significance of the observations of independent decay modes ."
+      ],
+      "generated_summary": "The Large Hadron Collider (LHC) at CERN will open a new frontier in particle physics due to its higher collision energy and luminosity. The general-purpose ATLAS and CMS experiments will employ precision tracking, calorimetry, and muon measurements to identify and measure electrons, muons, photons, jets, and missing energy accurately, with great physics potential in discovering new particles, including the Standard Model Higgs boson, supersymmetric particles, and other new particles beyond the Standard Model. The significance calculation in searching for and observing a physics signal with known location and shape is no longer valid when either the location or shape of the signal is unknown, which will be the case for many possible new physics signals at the LHC. A new analysis method is proposed, which uses maximum likelihood fits with floating parameters and scans the parameter space for the best fit to the entire sample, resulting in a method that is independent of the location of the new physics signal and significantly more sensitive in searching for new physics signals than the current \"sliding-window\" approaches.",
+      "scores": {
+        "bert": 0.8620194792747498,
+        "rouge1": 0.593939393939394,
+        "rougeL": 0.4484848484848485,
+        "kir": 0.8,
+        "abstraction": 0.3988439306358381,
+        "compression": 0.12711011738401343,
+        "novel_ngrams": 0.28160919540229884,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All information in the generated summary is verifiable in the source document.",
+          "completeness": 5,
+          "completeness_reason": "The generated summary covers all main points from the source document.",
+          "conciseness": 5,
+          "conciseness_reason": "The generated summary is concise and fluid, without repetition.",
+          "abstraction": 5,
+          "abstraction_reason": "The generated summary rephrases the source content in a novel and clear way, without copying verbatim."
+        }
+      }
+    },
+    {
+      "source": "almost a century ago , in their pioneering research @xcite , kaluza and klein ( kk ) proposed unification of four dimensional gravity and electromagnetism in a five dimensional gravity framework . \n this proposal raised a fair amount of curiosity , interest and research activity among theoretical physicists , on the physics of extra dimensions . \n the idea of extra spatial dimensions appeared in a new incarnation with the advent of superstring theories @xcite . \n the theoretical existence of bra...",
+      "reference": "in this article , we explore the kinematics of timelike geodesic congruences in warped five dimensional bulk spacetimes , with and without thick or thin branes . beginning with geodesic flows in the randall  sundrum ads ( anti de sitter ) geometry without and with branes we find analytical expressions for the expansion scalar and comment on the effects of including thin branes on its evolution . \n later , we move on to congruences in more general warped bulk geometries with a cosmological thick brane and a time - dependent extra dimensional scale . using analytical expressions for the velocity field , we interpret the expansion , shear and rotation ( esr ) along the flows , as functions of the extra dimensional coordinate . the evolution of a cross - sectional area orthogonal to the congruence , as seen from a local observer s point of view , is also shown graphically . \n finally , the raychaudhuri and geodesic equations in backgrounds with a thick brane are solved numerically in order to figure out the role of initial conditions ( prescribed on the esr ) and spacetime curvature on the evolution of the esr .",
+      "salient_sentences": [
+        "for a de sitter universe , a decaying warp factor may fail to focus the geodesics ( due to the large negativity of the curvature term in the raychaudhuri equation ) , though this is not the case with a growing warp factor .",
+        "when the curvature effect is relatively small , a congruence singularity can still arise but for high enough negative initial expansion .",
+        "the effect of initial rotation , on the esr profiles , especially the expansion scalar , is found to be quantitative .",
+        "focusing without and with initial rotation yields similar results , though with large initial rotation , geodesics tend to spread for a while ( focusing at larger @xmath11 value ) .",
+        "( cambridge university press , uk , 1987 ) ; j. polchinski , _ string theory _ \n ( cambridge university press , uk , 1997 ) ."
+      ],
+      "generated_summary": "In the context of five-dimensional warped bulk spacetimes, the authors investigate the kinematics of geodesic flows with and without branes. They consider the Raychaudhuri equations, which describe the evolution of geodesic congruences, and analyze the effects of initial conditions on the expansion, shear, and rotation of geodesics. The authors find that a decaying warp factor may fail to focus geodesics in a de Sitter universe due to the large negativity of the curvature term in the Raychaudhuri equation, whereas a growing warp factor leads to a finite congruence singularity. They also observe that the effect of initial rotation on the expansion scalar is quantitative, and that large initial rotation causes geodesics to spread for a while, focusing at a larger value.",
+      "scores": {
+        "bert": 0.8464713096618652,
+        "rouge1": 0.48813559322033895,
+        "rougeL": 0.27118644067796605,
+        "kir": 0.8,
+        "abstraction": 0.6470588235294117,
+        "compression": 0.09109003629551575,
+        "novel_ngrams": 0.45,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All information in the generated summary is verifiable in the source document.",
+          "completeness": 5,
+          "completeness_reason": "The generated summary covers the main points of the source document, including the analysis of geodesic flows in warped bulk spacetimes, the effects of initial conditions on the expansion, shear, and rotation of geodesics, and the role of the warp factor in the evolution of geodesics.",
+          "conciseness": 5,
+          "conciseness_reason": "The generated summary is concise and to the point, avoiding repetitive information and focusing on the main findings of the source document.",
+          "abstraction": 5,
+          "abstraction_reason": "The generated summary rephrases the information from the source document in a clear and concise manner, rather than copying it verbatim."
+        }
+      }
+    },
+    {
+      "source": "the signatures of the strong interactions in the quark - gluon matter were found in heavy ion collisions experiments  @xcite . \n there are proposals  @xcite suggesting that color - magnetic monopoles contribution can explain this rather unexpected property . \n these proposals inspired a number of publications devoted to the properties and possible roles of the monopoles in the quark - gluon phase  @xcite . \n lattice gauge theory suggests a direct way to study fluctuations contributing to the euc...",
+      "reference": "the properties of the thermal abelian color - magnetic monopoles in the maximally abelian gauge are studied in the deconfinement phase of the lattice @xmath0 gluodynamics . to check universality of the monopole properties we employ the tadpole improved symanzik action . \n the simulated annealing algorithm combined with multiple gauge copies is applied for fixing the maximally abelian gauge to avoid effects of gribov copies . \n we compute the density , interaction parameters , thermal mass and chemical potential of the thermal abelian monopoles in the temperature range between @xmath1 and @xmath2 . in comparison with earlier findings our results for these quantities \n are improved either with respect to effects of gribov copies or with respect to lattice artifacts .",
+      "salient_sentences": [
+        "the signatures of the strong interactions in the quark - gluon matter were found in heavy ion collisions experiments  @xcite .",
+        "there are proposals  @xcite suggesting that color - magnetic monopoles contribution can explain this rather unexpected property .",
+        "these proposals inspired a number of publications devoted to the properties and possible roles of the monopoles in the quark - gluon phase  @xcite .",
+        "the results for parameters of inter - monopole interaction were found in agreement with lattice results  @xcite .",
+        "first numerical investigations of the wrapping monopole trajectories were performed in @xmath0 yang - mills theory at high temperatures in refs ."
+      ],
+      "generated_summary": "The signatures of strong interactions in quark-gluon matter were found in heavy ion collisions experiments. Proposals suggest that color-magnetic monopoles contribute to this unexpected property. These proposals led to studies on the properties and roles of monopoles in the quark-gluon phase. Lattice gauge theory suggests a way to study fluctuations contributing to the Euclidean space functional integral, including color-magnetic monopoles. Research found that nonperturbative properties of nonabelian gauge theories, such as confinement and chiral symmetry breaking, are related to abelian monopoles defined in the maximally abelian gauge, known as monopole dominance.",
+      "scores": {
+        "bert": 0.8277367949485779,
+        "rouge1": 0.35748792270531393,
+        "rougeL": 0.19323671497584538,
+        "kir": 0.8,
+        "abstraction": 0.696629213483146,
+        "compression": 0.06998752079866888,
+        "novel_ngrams": 0.4777777777777778,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All facts are verifiable in the SOURCE document.",
+          "completeness": 5,
+          "completeness_reason": "The GENERATED summary covers all main points mentioned in the SOURCE document.",
+          "conciseness": 5,
+          "conciseness_reason": "The GENERATED summary is concise and fluid, avoiding repetition.",
+          "abstraction": 5,
+          "abstraction_reason": "The GENERATED summary rephrases the content in a novel way, avoiding verbatim copying."
+        }
+      }
+    },
+    {
+      "source": "x - ray emission from agn is thought to be produced in the very central regions of accretion flow , close to the black hole , since this is where most of the gravitational potential energy is dissipated . \n observational evidences for this come from results of modeling of spectral features , often showing distortions consistent with those caused by doppler effects and gravitational redshift . in particular \n , broad profiles of the fe k@xmath0 line are currently the best evidences for the very c...",
+      "reference": "special relativistic and strong gravity effects are clearly seen in x - ray energy spectra from agn . \n most important here are the broad profiles of the fe k@xmath0 line observed in a large fraction of sources . \n these indicate that x - ray generation and reprocessing takes place very close to the central black hole . here \n we explore consequences of such effects on x - ray variability . \n we perform computations of a possible quasi - periodic signal from a keplerian motion of primary x - ray source . \n we also study in some details the light - bending model of variability of the x - ray reprocessed component , extending previous work on the subject .",
+      "salient_sentences": [
+        "we first computed time averaged profile of the fe k@xmath0 line in order to find the range of parameters where the profile match that observed in mcg6 - 30 - 15 .",
+        "then , we computed variability of the line vs.  that of the primary emission , as the source location changes .",
+        "our results are plotted in fig .",
+        "we find a significant reduction of line variability in model s , for a source moving radially very low above the disk surface .",
+        "source position changing between @xmath22@xmath23 produces line flux changes by a factor of @xmath9 compared to a factor of @xmath24 for the continuum ."
+      ],
+      "generated_summary": "The x-ray emission from Active Galactic Nuclei (AGN) is thought to be produced in the central regions of accretion flow, close to the black hole, where most of the gravitational potential energy is dissipated. Observational evidence supports this, with broad profiles of the Fe Kα line showing distortions consistent with Doppler effects and gravitational redshift. Geometrical models of x-ray emitting accretion flows include the accretion disk with a corona scenario and a hot flow scenario. The former scenario assumes a standard Keplerian accretion disk extending to the last stable orbit, with hard x-rays produced by an active corona above the disk. The hot flow scenario proposes an optically thin and hot flow, likely two-temperature, with proton temperature reaching the virial value. Observations suggest that the two scenarios operate in different ranges of mass accretion rate. The reprocessed component, such as the Fe Kα line and Compton reflected continuum, shows weaker variability and is uncorrelated with the primary emission, with a reduction of variability by a factor of 10^4 on a timescale of 10^-5 seconds, which is longer than the Keplerian timescale at the inner disk.",
+      "scores": {
+        "bert": 0.8271769881248474,
+        "rouge1": 0.3569023569023569,
+        "rougeL": 0.19528619528619529,
+        "kir": 0.6,
+        "abstraction": 0.644808743169399,
+        "compression": 0.1390604965613708,
+        "novel_ngrams": 0.45108695652173914,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All facts are verifiable in the SOURCE.",
+          "completeness": 5,
+          "completeness_reason": "The GENERATED summary covers all main points from the SOURCE.",
+          "conciseness": 5,
+          "conciseness_reason": "The GENERATED summary is fluid and not repetitive.",
+          "abstraction": 5,
+          "abstraction_reason": "The GENERATED summary rephrases the SOURCE content in a novel way."
+        }
+      }
+    },
+    {
+      "source": "the theory about the structure of space and time has been discussed from very long time not only among philosophers but also among physicists . \n it is very well known the correspondence between newton s disciple s. clark and leibniz about the absolute or relational character of space and time @xcite \n . the laws of mechanics and electromagnetism were written with the hypothesis of an absolute space and time but relational theories were unable to construct a consistent model of physical world an...",
+      "reference": "we present current theories about the structure of space and time , where the building blocks are some fundamental entities ( yes - no experiment , quantum processes , spin net - work , preparticles ) that do not presuppose the existence of space and time . \n the relations among these objects are the base for a pregeometry of discrete character , the continuous limit of which gives rise to the physical properties of the space and time .",
+      "salient_sentences": [
+        "the theory about the structure of space and time has been discussed from very long time not only among philosophers but also among physicists .",
+        "it is very well known the correspondence between newton s disciple s. clark and leibniz about the absolute or relational character of space and time @xcite \n .",
+        "the laws of mechanics and electromagnetism were written with the hypothesis of an absolute space and time but relational theories were unable to construct a consistent model of physical world and were abandoned .",
+        "we will identify those objects as events , processes , yes - no experiments , monads ( following leibniz s ideas ) and so on .",
+        "therefore the conceps of space and time are for these authors derived concepts in the logical as well in the ontological level ."
+      ],
+      "generated_summary": "The theory of space and time has been a topic of discussion among both philosophers and physicists for a long time, with a well-known correspondence between Newton's disciples, Clark and Leibniz, regarding the absolute or relational character of space and time. The laws of mechanics and electromagnetism were initially formulated with the hypothesis of an absolute space and time, but relational theories were unable to construct a consistent model of the physical world and were subsequently abandoned. However, relational theories have been revived in recent times, with some authors proposing that the concepts of space and time are derived concepts, emerging from the relations among fundamental objects, such as events, processes, yes-no experiments, and monads. These authors argue that the notion of space comes out as a convenience at the end, and that physical objects are not located in space, but rather, their relations with other objects give rise to a spatial structure.",
+      "scores": {
+        "bert": 0.8459634780883789,
+        "rouge1": 0.4017857142857143,
+        "rougeL": 0.21428571428571433,
+        "kir": 1.0,
+        "abstraction": 0.6158940397350994,
+        "compression": 0.09856899829880916,
+        "novel_ngrams": 0.46710526315789475,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "The generated summary accurately represents the main points and ideas from the source document, including the historical context, the revival of relational theories, and the concept of derived space and time.",
+          "completeness": 4,
+          "completeness_reason": "The generated summary covers the main points, but omits some details and specific examples from the source document, such as the discussion of quantum systems and the Ponzano-Regge model.",
+          "conciseness": 5,
+          "conciseness_reason": "The generated summary is concise and fluid, avoiding repetitive language and unnecessary details.",
+          "abstraction": 5,
+          "abstraction_reason": "The generated summary rephrases the original text in a novel and clear way, avoiding verbatim copying and providing a clear and concise overview of the main ideas."
+        }
+      }
+    },
+    {
+      "source": "the large area telescope ( lat ) , on board the _ fermi _  gamma - ray space telescope @xcite , is a pair - conversion @xmath0-ray telescope , sensitive to photon energies from about 20 mev up to @xmath1 gev . \n the lat consists of a tracker ( two sections , front and back ) , a calorimeter and an anti - coincidence system to reject the charged - particle background . \n _ fermi _  lat , working in all - sky survey mode , is an optimal hunter for high - energy flares , transients and new gamma - ...",
+      "reference": "the fermi flare advocate ( also known as gamma - ray sky watcher , fa - gsw ) service provides for a daily quicklook analysis and review of the high - energy gamma - ray sky seen by the fermi gamma - ray space telescope . \n the duty offers alerts for potentially new gamma - ray sources , interesting transients and relevant flares . a public weekly digest containing the main highlights about the gev gamma - ray sky \n is published in the web - based fermi sky blog . during the first 3 years of all - sky survey , \n more than 150 astronomical telegrams , several alerts to the tev cherenkov telescopes , and targets of opportunity to swift and other observatories have been distributed . \n this increased the rate of simultaneous multi - frequency observing campaigns and the level of international cooperation . \n many gamma - ray flares from blazars ( like the extraordinary outbursts of 3c 454.3 , intense flares of pks 1510 - 089 , 4c 21.35 , pks 1830 - 211 , ao 0235 + 164 , pks 1502 + 106 , 3c 279 , \n 3c 273 , pks 1622 - 253 ) , short / long flux duty cycles , unidentified transients near the galactic plane ( like j0910 - 5041 , j0109 + 6134 , the galactic center region ) , flares associated to galactic sources ( like the crab nebula , the nova v407 cyg , the microquasar cyg x-3 ) , emission of the quiet and active sun , were observed by fermi and communicated by fa - gsws .",
+      "salient_sentences": [
+        "[ fig:3c454 ] and @xcite large flares of pks 1510 - 089 , 4c 21.35 , pks 1830 - 211 , ao 0235 + 164 , pks 1502 + 106 , fig .",
+        "[ fig : pks1502 ] , 3c 279 , 3c 273 , pks 1622 - 253 , 3c 66a , etc . )",
+        "; short / long activity duty cycles of bright @xmath0-ray blazars ; unidentified transients near the galactic plane ( like j0910 - 5041 , j0109 + 6134 , galactic center region ) or associated to galactic sources ( like the crab nebula , the nova v407 cyg fig .",
+        "[ fig : v407cyg ] and @xcite , the microquasar cyg x-3 , the binary star system 1fgl j1018.6 - 5856 ) , intense mev emission from the quiet and active sun .",
+        "the all - sky variability monitor of _ fermi _  and the continuous day - by - day service performed by fa - gsws represents the liaison between the fermi lat collaboration and the mw astrophysical / astroparticle community , always invited to observe fermi lat sources and to propose mw collaborations ."
+      ],
+      "generated_summary": "The Large Area Telescope (LAT) on board the Fermi Gamma-Ray Space Telescope is a pair-conversion gamma-ray telescope sensitive to photon energies from 20 MeV to 1 GeV. It consists of a tracker, calorimeter, and anti-coincidence system to reject charged-particle background. The LAT, working in all-sky survey mode, is an optimal hunter for high-energy flares, transients, and new gamma-ray sources, thanks to its large peak effective area, wide field of view (2 sr), improved angular resolution, and sensitivity. The Flare Advocate (FA-GSW) service, a scientific service belonging to the LAT instrument science operations, performs a daily review of the gamma-ray sky observed by LAT, providing basic facts and information about the gamma-ray sky of potential interest for the LAT internal science groups. This service also communicates summaries about the sky surveyed and monitored by Fermi-LAT, transients, flaring, and new sources on six-hour and 1-day time intervals to the external multi-wavelength astrophysical community.",
+      "scores": {
+        "bert": 0.812648594379425,
+        "rouge1": 0.42297650130548303,
+        "rougeL": 0.1827676240208877,
+        "kir": 0.4,
+        "abstraction": 0.6845637583892618,
+        "compression": 0.14587468103203857,
+        "novel_ngrams": 0.5,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All information in the generated summary is verifiable in the source document.",
+          "completeness": 5,
+          "completeness_reason": "The generated summary covers all main points mentioned in the source document.",
+          "conciseness": 5,
+          "conciseness_reason": "The generated summary is concise and fluid, avoiding repetition.",
+          "abstraction": 5,
+          "abstraction_reason": "The generated summary rephrases the source content in a novel way, providing a clear and concise overview."
+        }
+      }
+    },
+    {
+      "source": "the calice ( _ _ * cal*__orimeter for a _ _ * li*__near _ _ * c*__ollider _ _ * e*__xperiment ) collaboration performed tests of new calorimeter technologies for the planned international linear collider ( ilc ) . \n several prototypes were investigated during the testbeam phase at desy ( 2006 ) , cern ( 2006 & 2007 ) and fnal ( 2008 & 2009 ) .    the analog hadron calorimeter ( ahcal , @xcite ) has been successfully used in all five test - beams . \n it is a sampling calorimeter with a size of @x...",
+      "reference": "using the high granular calice analog hadron calorimeter ( ahcal ) a tracking algorithm capable of identifying mip - like tracks within hadronic showers is presented . \n such an algorithm provides excellent tools for detector calibration and for studies of the substructure of hadronic showers . \n the properties of the identified tracks are used as observables for a monte - carlo to data comparison .",
+      "salient_sentences": [
+        "the calice ( _ _ * cal*__orimeter for a _ _ * li*__near _ _",
+        "* c*__ollider _ _ * e*__xperiment ) collaboration performed tests of new calorimeter technologies for the planned international linear collider ( ilc ) .",
+        "several prototypes were investigated during the testbeam phase at desy ( 2006 ) , cern ( 2006 & 2007 ) and fnal ( 2008 & 2009 ) .",
+        "the analog hadron calorimeter ( ahcal , @xcite ) has been successfully used in all five test - beams .",
+        "the tracking algorithm used for identification of single particle tracks is a local search method working layer by layer ."
+      ],
+      "generated_summary": "The Calice collaboration performed tests of new calorimeter technologies for the planned International Linear Collider (ILC) by investigating several prototypes during the testbeam phase at DESY (2006), CERN (2006 & 2007), and FNAL (2008 & 2009). The Analog Hadron Calorimeter (AHCal) was successfully used in all five test-beams. A local search method working layer by layer was used for the tracking algorithm to identify single particle tracks, which relies on isolated hits and uses intrinsic track properties such as track angle and track length for comparison with testbeam data and simulations created with various physics lists.",
+      "scores": {
+        "bert": 0.8296529650688171,
+        "rouge1": 0.3660130718954248,
+        "rougeL": 0.20915032679738563,
+        "kir": 1.0,
+        "abstraction": 0.5425531914893618,
+        "compression": 0.05943369778525372,
+        "novel_ngrams": 0.35789473684210527,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All facts are verifiable in the SOURCE document.",
+          "completeness": 5,
+          "completeness_reason": "The GENERATED summary covers all main points from the SOURCE document.",
+          "conciseness": 5,
+          "conciseness_reason": "The GENERATED summary is concise and fluid, without repetition.",
+          "abstraction": 5,
+          "abstraction_reason": "The GENERATED summary rephrases the content of the SOURCE document in a novel way, without copying verbatim."
+        }
+      }
+    },
+    {
+      "source": "the search for the last unobserved particle of the standard model ( sm ) , the higgs boson , has been a major goal of high energy physics for many years , and is a central part of fermilab s tevatron program . \n direct searches at the cern lep collider have set a 95% c.l . \n limit on the higgs boson mass of @xmath6  gev  @xcite . \n taking into account this limit , precision electroweak measurements indirectly constrain the sm higgs boson mass to be lower than 190  gev at the 95% c.l . \n @xcite ,...",
+      "reference": "0.3 in we combine results from cdf and d  searches for a standard model higgs boson ( @xmath0 ) in  collisions at the fermilab tevatron at @xmath1  tev . with 3.0   of data analyzed at cdf , and 3.0   at d , the 95% c.l . \n upper limits on higgs boson production are a factor of 1.2 , 1.0 and 1.3 higher than the sm cross section for a higgs boson mass of @xmath2165 , 170 and 175  gev / c@xmath3 , respectively . \n we exclude at 95% c.l . a standard model higgs boson of @xmath4 gev/@xmath5 . based on simulation , \n the ratios of the corresponding median expected upper limit to the standard model cross section are 1.2 , 1.4 and 1.7 . compared to the previous higgs tevatron combination , more data and refined analysis techniques \n have been used . \n these results extend significantly the individual limits of each experiment and provide new knowledge on the mass of the standard model higgs boson beyond the lep direct searches . + _ preliminary results _    0.5 in",
+      "salient_sentences": [
+        "the search for the last unobserved particle of the standard model ( sm ) , the higgs boson , has been a major goal of high energy physics for many years , and is a central part of fermilab s tevatron program .",
+        "in this note , we combine the most recent results of all such searches in  collisions at  which are sensitive to a high mass ( 155 - 200 gev / c@xmath3 )",
+        "a.  djouadi , j.  kalinowski and m.  spira , `` hdecay : a program for higgs boson decays in the standard model and its supersymmetric extension , '' comput . \n commun .",
+        "* 108 * , 56 ( 1998 )",
+        "[ arxiv : hep - ph/9704448 ] ."
+      ],
+      "generated_summary": "The search for the Higgs boson, a particle in the Standard Model, has been a major goal of high-energy physics for many years and is a central part of the Fermilab Tevatron program. Recent searches at the CERN LEP collider have set a 95% confidence limit on the Higgs boson mass of around 6 GeV. Combining the most recent results of searches in collisions at 1.96 TeV, which are sensitive to a high mass Higgs boson, the Higgs boson mass is constrained to be lower than 190 GeV at 95% confidence level.",
+      "scores": {
+        "bert": 0.8137757778167725,
+        "rouge1": 0.43773584905660373,
+        "rougeL": 0.2037735849056604,
+        "kir": 0.6,
+        "abstraction": 0.5,
+        "compression": 0.07533013205282113,
+        "novel_ngrams": 0.3516483516483517,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All information in the generated summary is verifiable in the source document.",
+          "completeness": 5,
+          "completeness_reason": "The generated summary covers all main points mentioned in the source document.",
+          "conciseness": 5,
+          "conciseness_reason": "The generated summary is concise and fluid, avoiding repetition.",
+          "abstraction": 5,
+          "abstraction_reason": "The generated summary rephrases the source content in a novel way, avoiding verbatim copying."
+        }
+      }
+    },
+    {
+      "source": "a data base has been created combining 1100 days of  observations with batse , from jd 2448387 to 2449480 ( to ) . \n it includes observations of fast variability ( 0.010.488 hz ) as well as flux measurements ( ) and energy spectral fits . \n the goal of this work is to look for correlations between various parameters derived from power spectral , flux , and energy spectral measurements . \n this work is part of a larger on - going project to systematically study the power spectral behavior of all ...",
+      "reference": "we have examined the power spectral behavior of  using approximately 1100 days of batse data . \n these data have been searched for correlations between different power spectral features , and for correlations between power spectral features and energy spectral parameters derived from batse occultation analysis .",
+      "salient_sentences": [
+        "these observations are similar to the results of belloni & hasinger ( @xcite ) based on 13 observations from the exosat archive at lower energies ( @xmath9 220 kev ) .",
+        "figure 3 shows a plot of fractional  amplitude vs. spectral index of a power law fit in the 45140 kev band .",
+        "280 , compton gamma - ray observatory .",
+        "280 , compton gamma - ray observatory .",
+        "aip press , new york , p.  1127"
+      ],
+      "generated_summary": "A database has been created combining 1100 days of observations with BATSE, from JD 2448387 to 2449480. The database includes observations of fast variability (0.01-0.488 Hz) and flux measurements. The goal is to look for correlations between various parameters derived from power spectral, flux, and energy spectral measurements. The study aims to systematically study the power spectral behavior of black-hole candidate sources observed with BATSE. The database was created by filtering out bursts and selecting segments with 512 contiguous time bins, then fitting each segment to a quadratic polynomial and converting the fit residuals to a power density spectrum. The power density spectrum was normalized to squared fractional amplitude per unit frequency. The results show a correlation between the break frequency and the amplitude, with the fractional amplitude monotonically decreasing as the break frequency increases. A similar correlation is observed between the fractional amplitude and the spectral index of a power law fit in the 45-140 keV band.",
+      "scores": {
+        "bert": 0.8480954766273499,
+        "rouge1": 0.2621359223300971,
+        "rougeL": 0.1359223300970874,
+        "kir": 0.2,
+        "abstraction": 0.6025641025641026,
+        "compression": 0.19962370649106304,
+        "novel_ngrams": 0.43312101910828027,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All facts are verifiable in the SOURCE.",
+          "completeness": 5,
+          "completeness_reason": "The GENERATED summary covers all main points from the SOURCE.",
+          "conciseness": 5,
+          "conciseness_reason": "The GENERATED summary is fluid and not repetitive.",
+          "abstraction": 5,
+          "abstraction_reason": "The GENERATED summary rephrases the SOURCE content in a novel way."
+        }
+      }
+    },
+    {
+      "source": "muons have been undispensible probes in fundamental ( and applied ) physics for a long time . \n their completely unexpected discovery is ascribed to anderson and neddermeyer.@xcite muons have already been seen earlier by kunze@xcite albeit without claiming detection of a new particle . \n actually muons were until the 1940s mostly considered to be the predicted and searched for pions . in 1960 muonium ( mu ) , the hydrogen - like bound state of a positive muon and an electron ( @xmath2e@xmath3 ) ...",
+      "reference": "the paul scherrer institut in switzerland operates the high intensity proton accelerator facility hipa . a 590mev kinetic energy proton beam of presently up to 2.4ma is sent to target stations producing pions , muons and neutrons for fundamental and applied physics . \n the beam power of 1.4mw provides the world s highest intensities of low momentum muons which can be stopped in low mass targets . \n rates of surface muons of up to about @xmath0/s are being provided to various unique precision particle physics experiments . \n two feasibility studies are ongoing to considerably improve the available muon beams . \n the high intensity muon beamline , himb , could deliver on the order of @xmath1/s surface muons and the stopped muon cooler , mucool , aims at a gain factor of @xmath1 in phase space quality while sacrificing only less than 3 orders of magnitude in intensity for low energy @xmath2 . \n these beams will allow a new generation of precision physics experiments with stopped muons and muonium atoms .",
+      "salient_sentences": [
+        "studies for himb already benefit conventional meson target designs.@xcite himb will provide @xmath20/s below 30mev /",
+        "the muse collaboration will compare muon and electron scattering on hydrogen at the @xmath13m1 beamline@xcite and decisively test the difference in rms charge radii obtained so far by electron scattering and ordinary hydrogen spectroscopy versus the muonic atom result.@xcite the crema collaboration has meanwhile finished data taking on the 2s-2p lamb shift transitions in @xmath21he and is now turning to the laser spectroscopy of the ground state hyperfine splitting in h and @xmath22he .",
+        "also spectroscopy of heavy muonic atoms is regaining interest , e.g. , the mux collaboration is setting out to measure the charge radii of @xmath23ra and other heavy , radioactive isotopes .",
+        "a lot of progress is also being made by the mucool collaboration with the development of a very high brightness beam of slow @xmath2.@xcite together with ref .",
+        "this development will allow for an improved measurement of the mu 1s-2s transition@xcite and pave the way for a test of the free fall of mu,@xcite the mass of which is dominated by the antimatter , second generation lepton ."
+      ],
+      "generated_summary": "Muons have been crucial probes in fundamental and applied physics for a long time, with their discovery attributed to Anderson and Nedermeyer. Initially, they were considered to be pions, but were later identified as a distinct particle. Muons and their bound state, muonium, have been used in precision tests of the standard model and searches for new physics. They can be produced in large quantities, live long enough for various applications, and decay in a parity-violating process, making them versatile.",
+      "scores": {
+        "bert": 0.8165240287780762,
+        "rouge1": 0.27983539094650206,
+        "rougeL": 0.1316872427983539,
+        "kir": 0.0,
+        "abstraction": 0.7948717948717949,
+        "compression": 0.0809010152284264,
+        "novel_ngrams": 0.6329113924050633,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All information in the generated summary is verifiable in the source document.",
+          "completeness": 4,
+          "completeness_reason": "The generated summary does not mention the discovery of muons by Kunze, the role of muons in condensed matter studies, or the development of the mucool collaboration.",
+          "conciseness": 5,
+          "conciseness_reason": "The generated summary is concise and to the point, avoiding repetition and unnecessary details.",
+          "abstraction": 5,
+          "abstraction_reason": "The generated summary rephrases the information in a clear and concise manner, rather than copying the source document verbatim."
+        }
+      }
+    },
+    {
+      "source": "quasars , and agn in general , are often supposed to be powered by accretion of gas into supermassive black holes ( bhs ) . in this case , \n large dormant bhs are expected in the nuclei of nearby galaxies ( soltan 1982 ; rees 1984 ; cavaliere & padovani 1986 ) . \n assuming accretion at a known fraction of the eddington rate and efficiency of radiation of 10% in units of @xmath0 , it is possible to estimate the expected mass function of dormant bhs . \n this mass function implies a number density ...",
+      "reference": "we show that the mass function of black holes expected from the past quasar activity ( both visible and obscured ) is consistent with the number of dormant black holes found in the bulges of nearby galaxies . \n the joint formation of quasars and bulges is addressed by means of an analytical model for galaxy formation , based on the hierarchical clustering of cold dark matter halos . \n the model is able to reproduce the main statistical properties of both populations under the hypotheses that ( i ) star formation and quasar shining follow an anti - hierarchical order , and ( ii ) galaxy morphology and final black hole mass are determined by the same physical process .",
+      "salient_sentences": [
+        "the mass of the bh formed during the shining phase is assumed to depend on the halo mass , and to be modulated by the same variable which determines the morphological type , so as to obtain a bh - bulge relation .",
+        "the model reproduces successfully the main observable quantities relative both to elliptical galaxies and quasars ; see monaco et al .",
+        "the results shown in this paper are for a flat cdm model with @xmath16 , cosmological constant and @xmath9 km / s / mpc .",
+        "2 shows the predicted mass function for the dark matter halos of ellipticals , compared with that inferred from the luminosity function and reasonable hypotheses on the mass - to - light ratios of ellipticals .",
+        "3 shows the comparison between the predicted and observed quasar luminosity functions at different redshifts ."
+      ],
+      "generated_summary": "The mass of the black hole formed during the shining phase is assumed to depend on the halo mass and be modulated by the same variable that determines the morphological type, resulting in a black hole-bulge relation. A model has been developed to jointly form ellipticals and quasars in the framework of hierarchical CDM models, which reproduces the main observable quantities of both elliptical galaxies and quasars. The results are based on a flat CDM model with a cosmological constant and a Hubble constant of 0.9 km/s/Mpc. The predicted mass function for dark matter halos of ellipticals is compared to that inferred from the luminosity function and mass-to-light ratios, and the predicted and observed quasar luminosity functions are compared at different redshifts.",
+      "scores": {
+        "bert": 0.8562222719192505,
+        "rouge1": 0.49361702127659574,
+        "rougeL": 0.24680851063829787,
+        "kir": 1.0,
+        "abstraction": 0.6,
+        "compression": 0.11313012895662368,
+        "novel_ngrams": 0.45454545454545453,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All information in the generated summary is verifiable in the source document.",
+          "completeness": 4,
+          "completeness_reason": "The generated summary does not mention the mass function of dormant black holes, the connection between quasar activity and the formation of galactic bulges, and the abundance of black holes in the bulges of spiral galaxies.",
+          "conciseness": 5,
+          "conciseness_reason": "The generated summary is concise and to the point, avoiding repetitive information.",
+          "abstraction": 5,
+          "abstraction_reason": "The generated summary rephrases the information from the source document in a novel way, using different wording and sentence structures."
+        }
+      }
+    },
+    {
+      "source": "corot is a space experiment devoted to asteroseismology and extrasolar planet search through the observations of planetary transits . \n it has recently discovered a hot jupiter , corot - exo-2b , orbiting with a period of 1.743 days around a main - sequence g7 star which displays a remarkable photospheric activity @xcite . given the late spectral type and short rotation period ( about 4.5 days ) of the star \n , its activity is regarded as the manifestation of magnetic fields in the atmosphere , ...",
+      "reference": "we present a preliminary analysis of the photospheric activity of corot - exo-2a , a young g7v star accompanied by a transiting hot jupiter recently discovered by corot . \n we apply spot modelling techniques developed for the analysis of the sun as a star and capable to extract from corot high precision light curves information on the variation of the total spotted area and the longitude of active regions along the 142 days of the observations . \n this preliminary analysis shows that the active regions form within two active longitudes separated by about @xmath0 and rotating with periods of 4.5221 and 4.5543 days , respectively , and that the total spotted area oscillates with a period of about 28.9 days . \n address = inaf - osservatorio astrofisico di catania , via s.  sofia , 78 , 95123 catania , italy     address = inaf - osservatorio astrofisico di catania , via s.  sofia , 78 , 95123 catania , italy     address = inaf - osservatorio astrofisico di catania , via s.  sofia , 78 , 95123 catania , italy     address = inaf - osservatorio astrofisico di catania , via s.  sofia , 78 , 95123 catania , italy     address = laboratoire dastrophysique de marseille , umr  6110 , cnrs , universit de provence , traverse du siphon , 13376 marseille , france     address = lesia , cnrs umr  8109 , observatoire de paris , 5 place j.  janssen , 92195 meudon , france",
+      "salient_sentences": [
+        "[ lanzaf3 ] and shows a cyclic oscillation with a period of @xmath13 days , as derived from lomb - scargle periodogram .",
+        "it is interesting to note that such a period is close to 10 times the synodic period of the planet as seen by the active longitude pattern rotating in 4.5221 days .",
+        "this may suggest a possible star - planet magnetic interaction ( see @xcite and @xcite for a possible interpretation ) .",
+        ", where @xmath2 is the spot covering factor and @xmath14 its maximum value , versus time and longitude for our me spot models .",
+        "] \n the present study is based on observations obtained with corot , a space project developed and operated by the french space agency , cnes , with partecipation of the science program of esa , estec / rssd , austria , belgium , brazil , germany and spain ."
+      ],
+      "generated_summary": "The study presents preliminary results on the spot modeling of the star Corot-Exo-2a, a young G7 star with a rotation period of about 4.5 days, displaying remarkable photospheric activity. The star is a good proxy for the young Sun, approximately 0.5 Gyr old. The light curve of Corot-Exo-2a was observed from May 16 to October 5, 2007, with a sampling of 512 s during the first week and 32 s thereafter. The data was filtered and processed to remove transits and noise, and the maximum entropy spot modeling method was applied to derive a stable and unique map of the star's surface. The model assumes 200 surface elements, each covered by cool spots, faculae, and unperturbed photosphere, with the fraction of the area covered by cool spots given by the filling factor. The study found a cyclic oscillation in the total spotted area with a period of @xmath13 days, close to 10 times the synodic period of the planet, suggesting a possible star-planet magnetic interaction.",
+      "scores": {
+        "bert": 0.7966586351394653,
+        "rouge1": 0.38933333333333336,
+        "rougeL": 0.19733333333333333,
+        "kir": 0.6,
+        "abstraction": 0.6748466257668712,
+        "compression": 0.13007478632478633,
+        "novel_ngrams": 0.4695121951219512,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All information in the generated summary is verifiable in the source document.",
+          "completeness": 5,
+          "completeness_reason": "The generated summary covers all main points from the source document.",
+          "conciseness": 5,
+          "conciseness_reason": "The generated summary is concise and fluid, without repetitive information.",
+          "abstraction": 5,
+          "abstraction_reason": "The generated summary rephrases the information from the source document in a novel way, without copying verbatim."
+        }
+      }
+    },
+    {
+      "source": "the issue of whether increasing the complexity of a network contributes to its dynamical instability has long been debated . \n this ` complexity vs stability ' debate is especially acute in the field of ecology @xcite , as it relates to the importance of diversity for the long - term survival of ecosystems . \n however , understanding the relation between the network structure and its stability ( with respect to dynamical perturbations ) is crucial , as it is related to the robustness of systems ...",
+      "reference": "according to the may - wigner stability theorem , increasing the complexity of a network inevitably leads to its destabilization , such that a small perturbation will be able to disrupt the entire system . \n one of the principal arguments against this observation is that it is valid only for random networks , and therefore does not apply to real - world networks , which presumably are structured . \n here we examine how the introduction of small - world topological structure into networks affect their stability . \n our results indicate that , in structured networks , the parameter values at which the stability - instability transition occurs with increasing complexity is identical to that predicted by the may - wigner criteria . however , the nature of the transition , as measured by the finite - size scaling exponent , appears to change as the network topology transforms from regular to random , with the small - world regime as the cross - over region . \n this behavior is related to the localization of the largest eigenvalues along the real axis in the eigenvalue plain with increasing regularity in the network . \n pacs numbers : 89.75.-k , 05.10.-a , 02.70.hm , 87.23.-n",
+      "salient_sentences": [
+        "the issue of whether increasing the complexity of a network contributes to its dynamical instability has long been debated .",
+        "some early studies seemed to suggest that introducing a hierarchical organization ( e.g. , by partitioning the adjacency matrix of the network into blocks @xcite or by having tree structures @xcite ) can increase the stability of a network under certain conditions .",
+        "however , no general consensus on this issue has yet been achieved .",
+        "the introduction of  small - world \" connection topology@xcite has allowed the possibility of having different kinds of structures in a network , other than a straightforward hierarchy of levels .",
+        "small - world networks have the global properties of a random network ( short average path length between the elements ) while at the local level they resemble regular networks with a high degree of clustering among neighbors ."
+      ],
+      "generated_summary": "The debate on whether increasing network complexity contributes to dynamical instability has been ongoing, particularly in ecology, where it relates to the importance of diversity for ecosystem survival. Pioneering studies suggested that increasing network complexity leads to destabilization, known as the May-Wigner stability theorem. However, this result has been challenged by research on the connection between network complexity and stability. The May-Wigner argument confines itself to analyzing local stability, ignoring explicit dynamics at nodes, and suggests that a network is almost certainly stable if a certain condition is met, and almost certainly unstable otherwise. Objections to this argument have centered around the assumption of a randomly connected network, which is not typical in nature. Some studies have suggested that introducing hierarchical organization or small-world connection topology can increase stability, but no consensus has been achieved. Small-world networks have global properties of random networks and local properties of regular networks, with a high degree of clustering among neighbors. Research has shown that the stability-instability transition occurs at the same critical value regardless of network structure, but the nature of this transition changes with topology, with regular networks destabilizing more smoothly than random networks.",
+      "scores": {
+        "bert": 0.840126633644104,
+        "rouge1": 0.46965699208443273,
+        "rougeL": 0.19525065963060687,
+        "kir": 1.0,
+        "abstraction": 0.7631578947368421,
+        "compression": 0.10858526677603313,
+        "novel_ngrams": 0.5235602094240838,
+        "judge": {
+          "faithfulness": 3,
+          "completeness": 3,
+          "conciseness": 3,
+          "abstraction": 3,
+          "faithfulness_reason": "Unable to evaluate",
+          "completeness_reason": "Unable to evaluate",
+          "conciseness_reason": "Unable to evaluate",
+          "abstraction_reason": "Unable to evaluate"
+        }
+      }
+    },
+    {
+      "source": "the atmospheric helium abundances of sdbs are poorly understood . from the typical abundance patterns of these stars , which show a depletion of light elements as well as an enrichment of heavy metals , it has been concluded that diffusion play an important role in their atmospheres . however , diffusion models predict an almost total depletion of helium in contrast to what is observed . \n the helium abundances of sdbs range from slightly above solar down to @xmath3 . \n mass loss caused by stell...",
+      "reference": "helium abundances and atmospheric parameters have been determined from high resolution spectra for a new sample of 46 bright hot subdwarf b ( sdb ) stars . \n the helium abundances have been measured with high accuracy . \n we confirm the correlation of helium abundance with temperature and the existence of two distinct sequences in helium abundance found previously . \n we focused on isotopic shifts of helium lines and found @xmath0he to be strongly enriched in 8 of our programme stars . \n most of these stars cluster in a small temperature range between @xmath1 and @xmath2 very similar to the known @xmath0he - rich main sequence b stars , which cluster at somewhat lower temperatures . \n this phenomenon is most probably related to diffusion processes in the atmosphere , but poses a challenge to diffusion models .",
+      "salient_sentences": [
+        "the atmospheric helium abundances of sdbs are poorly understood .",
+        "from the typical abundance patterns of these stars , which show a depletion of light elements as well as an enrichment of heavy metals , it has been concluded that diffusion play an important role in their atmospheres .",
+        "in the case of helium \n the light isotope @xmath0he can be enriched with respect to the usually much more abundant @xmath6he . \n such an enrichment has initially been found in main sequence b stars with subsolar helium abundance @xcite .",
+        "however , @xcite detected strong line shifts in the sdb star sb290 and the blue horizontal branch star phl25 indicating that basically the whole helium content of the atmosphere consists of @xmath0he .",
+        "later on @xcite and @xcite found another three sdbs , where @xmath0he is enriched in the atmosphere ."
+      ],
+      "generated_summary": "The atmospheric helium abundances of subdwarf B (sdb) stars are poorly understood, with diffusion playing a significant role in their atmospheres, as indicated by the typical abundance patterns of these stars, which show a depletion of light elements and an enrichment of heavy metals. The helium abundances of sdb stars range from slightly above solar to subsolar levels. A correlation between helium abundance and temperature has been found, with hotter sdb stars having more helium in their atmospheres. However, the helium abundances of sdb stars cannot be fully explained by diffusion models, which predict a nearly total depletion of helium. Mass loss and extra mixing in the atmosphere have been proposed to counteract gravitational settling and explain the observed helium abundances. Isotopic anomalies in the helium isotope ratio have been detected in some sdb stars, with the light isotope 3He being enriched with respect to the more abundant 4He.",
+      "scores": {
+        "bert": 0.8525944948196411,
+        "rouge1": 0.4598540145985402,
+        "rougeL": 0.2043795620437956,
+        "kir": 0.6,
+        "abstraction": 0.7210884353741497,
+        "compression": 0.08864624780235032,
+        "novel_ngrams": 0.4864864864864865,
+        "judge": {
+          "faithfulness": 3,
+          "completeness": 3,
+          "conciseness": 3,
+          "abstraction": 3,
+          "faithfulness_reason": "Unable to evaluate",
+          "completeness_reason": "Unable to evaluate",
+          "conciseness_reason": "Unable to evaluate",
+          "abstraction_reason": "Unable to evaluate"
+        }
+      }
+    },
+    {
+      "source": "the taurus tunable filter ( ttf ) instruments @xcite@xcite at the anglo - australian ( aat ) and william herschel telescopes ( wht ) have seen use in many key areas of astrophysics . low - redshift science has included studies of brown dwarf atmospheric variability and the identification of optical counterparts to galactic x - ray sources . at high - redshifts , \n science has been driven by measurement of the cosmic star - formation history , identification of galaxy clustering around high - red...",
+      "reference": "tunable imaging filters have been used for a variety of science programmes on the anglo - australian and william herschel telescopes during the last five years . \n this contribution describes these novel devices and reviews the science ( both galactic and extragalactic ) done with them . \n possible strategies for implementing a tunable filter at the vlt are also discussed . \n significant scientific potential exists for a tunable filter on the vlt , particularly in the years before such capability becomes available on 8  10  m - class telescopes elsewhere .",
+      "salient_sentences": [
+        "this red device operates in the range 6500  9500   at the aforementioned resolving powers , thereby giving an adjustable passband width of 6 to 65  .",
+        "two years later a second fabry - perot coated for 3700  6500   gave the potential for tunable imaging across the full optical range .",
+        "more details on the ttf instruments can be found at the aao s ttf home page ( http://www.aao.gov.au/ttf/ ) .",
+        "ttf is used in a cassegrain - mounted focal reducer ( taurus-2 ) , which consists of a simple camera - collimator arrangement with a straight - through optical path .",
+        "more discussion of the various options available can be found in @xcite ."
+      ],
+      "generated_summary": "The Taurus Tunable Filter (TTF) instruments at the Anglo-Australian Telescope and William Herschel Telescope have been used in various astrophysical studies. A TTF is a type of Fabry-Perot interferometer with three features: it can move its parallel glass plates over a large range, has anti-reflection coatings optimized over a broad range of wavelengths, and operates at much narrower plate spacings than traditional devices. This allows TTFs to operate at lower resolving powers (0 to 1000) than traditional instruments. The first TTF was introduced at the Anglo-Australian Observatory in 1996, operating in the range 6500-9500 with an adjustable passband width of 6 to 65. A second TTF coated for 3700-6500 was introduced two years later, enabling tunable imaging across the full optical range. TTFs are used in a Cassegrain-mounted focal reducer, Taurus-2, which consists of a simple camera-collimator arrangement with a straight-through optical path.",
+      "scores": {
+        "bert": 0.8110390901565552,
+        "rouge1": 0.28085106382978725,
+        "rougeL": 0.14468085106382977,
+        "kir": 0.6,
+        "abstraction": 0.7163120567375887,
+        "compression": 0.08893850590752628,
+        "novel_ngrams": 0.5352112676056338,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All information in the generated summary is verifiable in the source document.",
+          "completeness": 5,
+          "completeness_reason": "The generated summary covers the main points of the source document, including the characteristics of TTF instruments, their applications, and the potential for implementing a TTF at the VLT.",
+          "conciseness": 5,
+          "conciseness_reason": "The generated summary is concise and fluid, avoiding repetition and unnecessary details.",
+          "abstraction": 5,
+          "abstraction_reason": "The generated summary rephrases the source content in a novel way, using clear and concise language."
+        }
+      }
+    },
+    {
+      "source": "currently accepted theories and many experimental results suggest that hadronic matter changes to quark matter in high - density and/or high - temperature regimes by way of the deconfinement transition . \n the properties of quark matter have been actively studied theoretically in terms of the quark  gluon plasma , color superconductivity @xcite , magnetism @xcite , and experimentally in terms of relativistic heavy - ion collisions @xcite , and early - universe studies and compact stars @xcite . ...",
+      "reference": "the appearance of quark matter in the core of hybrid stars is a fundamental issue in such compact stars . \n the central density of these stars is sufficiently high such that nuclear matter undergoes a further change into other exotic phases that consist of hyperons and quarks . \n however , the equation of state ( eos ) for the high - density matter is still not clear and several recent observations have indicated the limitations of the eoss ; theoretical studies should try to elucidate the eoss . \n it is believed that the inner regions of the stars should consist of a mixed hadron - quark phase . \n we study the mixed hadron - quark phase , taking into account finite - size effects , and find that that the mixed phase should be restricted to a narrower region . \n therefore , a quark matter phase should appear in the central region .",
+      "salient_sentences": [
+        "we will then be able to provide more realistic results .",
+        "neutron stars have other important physics  magnetic fields .",
+        "however , the origin of these magnetic fields is still unknown .",
+        "there are ways to explain magnetic fields based on the spin - polarization of the quark matter @xcite .",
+        "however , whether the quark matter exists or not strongly depends on the eos ."
+      ],
+      "generated_summary": "Neutron stars have other important physics, specifically magnetic fields, whose origin is still unknown. The existence of quark matter in these stars depends on the equation of state (eos). Some theories suggest that magnetic fields can be explained by the spin-polarization of quark matter, but this is still speculative. The inclusion of magnetic fields in calculations can lead to interesting results regarding the rotation of the star, but this aspect was not considered in this study.",
+      "scores": {
+        "bert": 0.8489542603492737,
+        "rouge1": 0.32863849765258213,
+        "rougeL": 0.22535211267605632,
+        "kir": 1.0,
+        "abstraction": 0.8648648648648649,
+        "compression": 0.10078318219291015,
+        "novel_ngrams": 0.68,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All facts mentioned in the generated summary are verifiable in the SOURCE.",
+          "completeness": 4,
+          "completeness_reason": "The generated summary does not mention the appearance of quark matter in the core of hybrid stars, the mixed hadron-quark phase, and the study of finite-size effects.",
+          "conciseness": 5,
+          "conciseness_reason": "The generated summary is concise and to the point, avoiding repetitive information.",
+          "abstraction": 5,
+          "abstraction_reason": "The generated summary rephrases the information in a novel way, using different wording and sentence structure."
+        }
+      }
+    },
+    {
+      "source": "hierarchical semi - markov models such as hhmm @xcite and hscrf @xcite are deep generalisations of the hmm @xcite and the linear - chain crf @xcite , respectively . \n these models are suitable for data that follows nested markovian processes , in that a state in a sub - markov chain is also a markov chain at the child level . \n thus , in theory , we can model arbitrary depth of semantics for sequential data . \n the models are essentially members of the probabilistic context - free grammar family...",
+      "reference": "deep architecture such as hierarchical semi - markov models is an important class of models for nested sequential data . \n current exact inference schemes either cost cubic time in sequence length , or exponential time in model depth . \n these costs are prohibitive for large - scale problems with arbitrary length and depth . in this contribution \n , we propose a new approximation technique that may have the potential to achieve sub - cubic time complexity in length and linear time depth , at the cost of some loss of quality . \n the idea is based on two well - known methods : gibbs sampling and rao - blackwellisation . \n we provide some simulation - based evaluation of the quality of the rgbs with respect to run time and sequence length .",
+      "salient_sentences": [
+        "hierarchical semi - markov models such as hhmm @xcite and hscrf @xcite are deep generalisations of the hmm @xcite and the linear - chain crf @xcite , respectively .",
+        "in this contribution \n , we introduce an approximation technique using gibbs samplers that have a potential of achieving sub - cubic time complexity in sequence length and linear time in model depth .",
+        "second , the rbgs can be equipped with the contrastive divergence @xcite for stochastic gradient learning .",
+        "and finally , the ideas need to be tested on real , large - scale applications with arbitrary length and depth .",
+        "h.  h. bui , d.  q. phung , and s.  venkatesh ."
+      ],
+      "generated_summary": "Hierarchical semi-markov models, such as HHMM and HSCRF, are deep generalizations of HMM and linear-chain CRF, respectively. These models are suitable for data that follows nested Markovian processes, allowing for the modeling of arbitrary depth of semantics for sequential data. However, their inference complexity is cubic in sequence length, making them only suitable for short data sequences. A linearisation technique has been proposed to represent HHMM as a dynamic Bayesian network, but this approach cannot handle deep architectures. The proposed contribution introduces an approximation technique using Gibbs samplers, called Rao-Blackwellised Gibbs Sampling (RBGS), which has the potential to achieve sub-cubic time complexity in sequence length and linear time in model depth.",
+      "scores": {
+        "bert": 0.8525771498680115,
+        "rouge1": 0.5367965367965368,
+        "rougeL": 0.2943722943722944,
+        "kir": 0.6,
+        "abstraction": 0.7247706422018348,
+        "compression": 0.08120936951810959,
+        "novel_ngrams": 0.5727272727272728,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All facts are verifiable in the SOURCE document.",
+          "completeness": 5,
+          "completeness_reason": "The GENERATED summary covers all main points from the SOURCE document.",
+          "conciseness": 5,
+          "conciseness_reason": "The GENERATED summary is concise and fluid, not repetitive.",
+          "abstraction": 5,
+          "abstraction_reason": "The GENERATED summary rephrases the content in a novel way, avoiding verbatim copying."
+        }
+      }
+    },
+    {
+      "source": "if sufficient power is supplied to a granular system contained in a cylindrical container by a vertically vibrating wall , fluidization occurs . \n once a steady state is obtained , the energy input to the system by the wall is , on average , balanced by the energy dissipated in inelastic grain - grain and grain - wall collisions . \n this energy flux is responsible for various effects including non - linear temperature profiles , heap formation@xcite and convection @xcite . \n recent experiments u...",
+      "reference": "an event - driven molecular dynamics simulation of inelastic hard spheres contained in a cylinder and subject to strong vibration reproduces accurately experimental results@xcite for a system of vibrofluidized glass beads . \n in particular , we are able to obtain the velocity field and the density and temperature profiles observed experimentally . in addition \n , we show that the appearance of convection rolls is strongly influenced by the value of the sidewall - particle restitution coefficient . \n suggestions for observing more complex convection patterns are proposed .",
+      "salient_sentences": [
+        "if sufficient power is supplied to a granular system contained in a cylindrical container by a vertically vibrating wall , fluidization occurs .",
+        "once a steady state is obtained , the energy input to the system by the wall is , on average , balanced by the energy dissipated in inelastic grain - grain and grain - wall collisions .",
+        "this energy flux is responsible for various effects including non - linear temperature profiles , heap formation@xcite and convection @xcite .",
+        "we do not expect the behavior of the system to be strongly dependent on the form of the profile@xcite .",
+        "the equations describing the dynamics , which follow from conservation of momentum , for the particle side - wall , particle bottom - wall and particle particle collisions are : @xmath6 @xmath7 @xmath8\\hat{{\\bf n}}\\ ] ] respectively where @xmath9 is the velocity of particle @xmath10 in the @xmath11 plane , @xmath12 is the velocity of the bottom wall , @xmath13 is the @xmath14 vertical component of the velocity of particle @xmath10 , @xmath15 is the unit position vector of particle @xmath10 and @xmath16 is the unit center - to - center vector between the colliding pair @xmath10 and @xmath17 ."
+      ],
+      "generated_summary": "A granular system contained in a cylindrical container experiences fluidization when sufficient power is supplied by a vertically vibrating wall. Once a steady state is reached, the energy input from the wall is balanced by the energy dissipated in inelastic grain-grain and grain-wall collisions, leading to various effects such as non-linear temperature profiles, heap formation, and convection. The system's behavior is modeled using inelastic hard spheres, with the equations describing the dynamics following from conservation of momentum for particle-side wall, particle-bottom wall, and particle-particle collisions. The simulations reproduce the experimentally observed density and granular temperature profiles, and a velocity field with a toroidal convection roll is present, with the roll's direction and intensity depending on the particle-wall restitution coefficient.",
+      "scores": {
+        "bert": 0.8438403606414795,
+        "rouge1": 0.37499999999999994,
+        "rougeL": 0.21153846153846156,
+        "kir": 1.0,
+        "abstraction": 0.717948717948718,
+        "compression": 0.07019361007091068,
+        "novel_ngrams": 0.5169491525423728,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All information in the generated summary is verifiable in the SOURCE.",
+          "completeness": 5,
+          "completeness_reason": "The generated summary covers the main points of the SOURCE, including the system's behavior, the modeling approach, and the simulation results.",
+          "conciseness": 5,
+          "conciseness_reason": "The generated summary is concise and to the point, avoiding repetitive information.",
+          "abstraction": 5,
+          "abstraction_reason": "The generated summary rephrases the information from the SOURCE in a clear and concise manner, without copying verbatim."
+        }
+      }
+    },
+    {
+      "source": "the solar p - mode parameters have been demonstrated to vary with time and to be closely correlated with the solar activity proxies ( chaplin et al . [ 1 ] ; salabert et al . \n [ 2 , 3 ] ; komm et al . \n these temporal variations provide insights to infer the interior of the sun and its structural and dynamical changes throughout the solar cycle . \n however , clear differences between p - mode frequencies and solar activity during the unusually minimum of cycle  23 have been reported ( broomhall...",
+      "reference": "the parameters of the p - mode oscillations vary with solar activity . \n such temporal variations provide insights for the study of the structural and dynamical changes occurring in the sun s interior throughout the solar cycle . \n we present here a complete picture of the temporal variations of the global p - mode parameters ( excitation , damping , frequency , peak asymmetry , and rotational splitting ) over the entire solar cycle 23 and the beginning of cycle 24 as observed by the space - based , sun - as - a - star helioseismic golf and virgo instruments onboard soho .",
+      "salient_sentences": [
+        "the solar p - mode parameters have been demonstrated to vary with time and to be closely correlated with the solar activity proxies ( chaplin et al .",
+        "[ 1 ] ; salabert et al .",
+        "[ 9 ] ) onboard the _ solar and heliospheric observatory _ ( soho ) spacecraft .",
+        "golf measures the doppler velocity in the d1 and d2 sodium lines ( garca et al .",
+        "virgo is composed of three sun photometers ( spm ) at 402  nm ( blue ) , 500  nm ( green ) , and 862  nm ( red ) ."
+      ],
+      "generated_summary": "Solar p-mode parameters have been shown to vary with time and correlate with solar activity proxies. The solar p-mode parameters were analyzed using data from the Global Oscillations at Low Frequency (GOLF) and Variability of Solar Irradiance and Gravity Oscillations ( VIRGO) instruments onboard the SOHO spacecraft. GOLF measures Doppler velocity in the D1 and D2 sodium lines, while VIRGO consists of three sun photometers at 402 nm (blue), 500 nm (green), and 862 nm (red). The instruments observed over 14 years, with a total of 5202 and 5154 days of GOLF and VIRGO data, respectively. The data were split into 365-day subseries, and the power spectrum of each subseries was fitted to extract mode parameters. The temporal variations of the mode parameters were calculated, and linear regressions were performed between the variations and the 10.7-cm radio flux, which was used as a proxy for solar surface activity.",
+      "scores": {
+        "bert": 0.8222567439079285,
+        "rouge1": 0.43333333333333335,
+        "rougeL": 0.23333333333333334,
+        "kir": 0.8,
+        "abstraction": 0.6164383561643836,
+        "compression": 0.100447158905006,
+        "novel_ngrams": 0.41496598639455784,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All facts are verifiable in the SOURCE.",
+          "completeness": 5,
+          "completeness_reason": "The GENERATED summary covers all main points from the SOURCE.",
+          "conciseness": 5,
+          "conciseness_reason": "The GENERATED summary is fluid and not repetitive.",
+          "abstraction": 5,
+          "abstraction_reason": "The GENERATED summary rephrases the SOURCE content in a novel way."
+        }
+      }
+    },
+    {
+      "source": "the celebrated kortweg - de vries ( kdv ) equation is a well - studied non - linear dynamical system , first evoked for the description of _ solitary waves _ \n @xcite in shallow water @xcite . \n it has , since then , found much applications @xcite . \n an integrable model @xcite , it arises from the compatibility condition of two linear equations , the well - known lax - pair @xcite . \n the fact that one of them is the linear schrdinger operator , connects this non - linear equation to quantum me...",
+      "reference": "we demonstrate the existence of complex solitary wave and periodic solutions of the kortweg de - vries ( kdv ) and modified kortweg de - vries ( mkdv ) equations . \n the solutions of the kdv ( mkdv ) equation appear in complex - conjugate pairs and are even ( odd ) under the simultaneous actions of parity ( @xmath0 ) and time - reversal ( @xmath1 ) operations . \n the corresponding localized solitons are hydrodynamic analogs of bloch soliton in magnetic system , with asymptotically vanishing intensity . the @xmath2-odd complex soliton solution is shown to be iso - spectrally connected to the fundamental @xmath3 solution through supersymmetry .",
+      "salient_sentences": [
+        "the celebrated kortweg - de vries ( kdv ) equation is a well - studied non - linear dynamical system , first evoked for the description of _ solitary waves _ \n @xcite in shallow water @xcite .",
+        "it has , since then , found much applications @xcite .",
+        "the complex soliton solutions are analogs of bloch solitons in magnetic systems @xcite .",
+        "the @xmath2-symmetric soliton solution is shown to be isospectrally related to the fundamental solution @xmath10 , in the lax equation .",
+        "we start here with the kdv equation , @xmath11 where , @xmath12 , @xmath13 , @xmath14 and @xmath15 ."
+      ],
+      "generated_summary": "The Korteweg-de Vries (KdV) equation is a well-studied non-linear dynamical system first evoked for describing solitary waves in shallow water. It has found numerous applications and is an integrable model arising from the compatibility condition of two linear equations, the Lax pair. The KdV equation has both localized and periodic cnoidal wave solutions, which appear in the Lax equation as potentials, giving rise to bound states and band structure. The KdV equation is connected to the modified KdV (mKdV) equation through the Miura transformation, which has also found diverse physical applications.",
+      "scores": {
+        "bert": 0.8264753818511963,
+        "rouge1": 0.3825136612021858,
+        "rougeL": 0.2185792349726776,
+        "kir": 0.4,
+        "abstraction": 0.6853932584269663,
+        "compression": 0.06488222698072806,
+        "novel_ngrams": 0.4444444444444444,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All facts are verifiable in the SOURCE document.",
+          "completeness": 5,
+          "completeness_reason": "The GENERATED summary covers all main points mentioned in the SOURCE document.",
+          "conciseness": 5,
+          "conciseness_reason": "The GENERATED summary is fluid and not repetitive, effectively conveying the main ideas.",
+          "abstraction": 5,
+          "abstraction_reason": "The GENERATED summary rephrases the content in a novel way, avoiding verbatim copying."
+        }
+      }
+    },
+    {
+      "source": "in this contribution we present our results  @xcite for @xmath0-induced one pion production cross sections in mineral oil ( @xmath1 ) for neutrino energies below 2gev . \n these results are compared to the experimental data obtained by the miniboone collaboration  @xcite . \n our calculational starting point is the pion production model at the nucleon level of refs . \n @xcite , that we have extended from the @xmath2 region up to 2gev neutrino energies by the inclusion of the @xmath3 resonance . \n ...",
+      "reference": "we compare our pion production results with recent miniboone data measured in mineral oil . \n our total cross sections lie below experimental data for neutrino energies above 1gev . \n differential cross sections show our model produces too few high energy pions in the forward direction as compared to data . \n the agreement with experiment improves by artificially removing pion final state interaction .",
+      "salient_sentences": [
+        "in this contribution we present our results  @xcite for @xmath0-induced one pion production cross sections in mineral oil ( @xmath1 ) for neutrino energies below 2gev .",
+        "these results are compared to the experimental data obtained by the miniboone collaboration  @xcite .",
+        "our calculational starting point is the pion production model at the nucleon level of refs .",
+        "@xcite , that we have extended from the @xmath2 region up to 2gev neutrino energies by the inclusion of the @xmath3 resonance .",
+        "the contribution from the @xmath9 resonance only plays a role above @xmath10gev , making some 8% of the total at the highest neutrino energy ."
+      ],
+      "generated_summary": "This contribution presents results for one pion production cross sections in mineral oil induced by neutrinos with energies below 2 GeV. The results are compared to experimental data from the MINIBOONE collaboration. The calculational starting point is a pion production model at the nucleon level, extended from the @xmath2 region up to 2 GeV neutrino energies by including the @xmath3 resonance. The @xmath9 resonance contributes only above 1.8 GeV, making 8% of the total at the highest neutrino energy.",
+      "scores": {
+        "bert": 0.8455418944358826,
+        "rouge1": 0.3741007194244604,
+        "rougeL": 0.1870503597122302,
+        "kir": 1.0,
+        "abstraction": 0.6493506493506493,
+        "compression": 0.055415617128463476,
+        "novel_ngrams": 0.4230769230769231,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All facts are verifiable in the SOURCE.",
+          "completeness": 5,
+          "completeness_reason": "The GENERATED summary covers all main points from the SOURCE.",
+          "conciseness": 5,
+          "conciseness_reason": "The GENERATED summary is concise and fluid, without repetition.",
+          "abstraction": 5,
+          "abstraction_reason": "The GENERATED summary rephrases the SOURCE content in a novel way."
+        }
+      }
+    },
+    {
+      "source": "the polcor instrument is a combined imager , coronograph and polarimeter built for the nordic optical telescope ( not ) . \n polcor provides sharp images ( resolution down to 02 ) , has a well - defined psf ( resulting in a higher image contrast ) and a high - quality polarimeter . \n +    we observed three sources using polcor / not : the binary s - type agb star w  aql , and the two detached shell carbon stars u  cam and dr  ser . \n observations of the polarized light around the stars trace the ...",
+      "reference": "stellar light from an agb star is scattered by the circumstellar dust and polarized in the direction perpendicular to the source . \n therefore , images of circumstellar envelopes around agb stars in polarized light traces the dust distribution and can be used to search for asymmetries , and to achieve a better understanding of the mechanisms at play when agb stars are transformed into planetary nebulae . \n the polcor instrument is a combined imager , polarimeter , and coronograph providing images with an angular resolution down to 02 . \n we have used it to map the dust distribution around three agb stars : w  aql , and the detached shell sources dr  ser , and u  cam . \n w  aql is a binary and we find indications of a bi - polar dust distribution around the star . \n the observations of the latter two sources clearly reveal the detached shells , likely the result of a brief , strongly enhanced mass - loss rate during the late evolution of these stars . \n mapping the detached shells gives us clues to the symmetry of the mass loss and important evolutionary processes .",
+      "salient_sentences": [
+        "observations of the polarized light around the stars trace the circumstellar dust distribution and thus enables the search for structures and asymmetries in the circumstellar envelope .",
+        "though this study the geometry of the mass loss can be investigated which will give important clues not only to the processes at play , but also to the transition from the agb phase to the planetary nebula phase .",
+        "the circumstellar dust distribution around the binary star w aql is mapped and found to be asymmetric , both on large ( 10  ) and on smaller ( 1  ) scales ( fig .  1 ) .",
+        "the large - scale images show what appears to be a dust - density enhancement on the south - west side of the star and the inner region appears bi - polar through the coronographic mask .",
+        "these structures are in agreement with what could be expected from binary interaction ."
+      ],
+      "generated_summary": "The Polcor instrument is a combined imager, coronograph, and polarimeter that provides sharp images with a resolution down to 0.2 arcseconds, a well-defined point spread function, and high-quality polarimetry. Observations of polarized light around stars using Polcor enable the tracing of circumstellar dust distribution and the search for structures and asymmetries in the circumstellar envelope. This study investigates the geometry of mass loss, providing clues to processes and the transition from the asymptotic giant branch (AGB) phase to the planetary nebula phase. Observations of the binary star W Aql reveal an asymmetric circumstellar dust distribution on both large and small scales, with a dust-density enhancement on the south-west side and a bipolar inner region.",
+      "scores": {
+        "bert": 0.8545016050338745,
+        "rouge1": 0.5136986301369864,
+        "rougeL": 0.23972602739726026,
+        "kir": 0.8,
+        "abstraction": 0.75,
+        "compression": 0.603875968992248,
+        "novel_ngrams": 0.5752212389380531,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All information in the generated summary is verifiable in the source document.",
+          "completeness": 5,
+          "completeness_reason": "The generated summary covers all main points mentioned in the source document.",
+          "conciseness": 5,
+          "conciseness_reason": "The generated summary is concise and fluid, avoiding repetition.",
+          "abstraction": 5,
+          "abstraction_reason": "The generated summary rephrases the source content in a novel way, using different wording and sentence structures."
+        }
+      }
+    },
+    {
+      "source": "scale relativity allows one to give foundations to the postulates @xcite and motion equations @xcite of quantum mechanics , and to gauge theories of particle physics @xcite , in particular to electromagnetism @xcite , by providing them with a geometric interpretation in the framework of a fractal space - time . \n successive velocity doublings proceeding from the giving up of the differentiability assumption allows one to obtain the motion equations as geodesic equations of this fractal space - t...",
+      "reference": "klein - gordon and dirac equations are the motion equations for relativistic particles with spin 0 ( so - called scalar particles ) and 1/2 ( electron / positron ) respectively . for a free particle , \n the dirac equation is derived from the klein - gordon equation by taking its square root in a bi - quaternionic formalism fully justified by the first principles of the scale relativity theory . \n this is no more true when an external electro - magnetic field comes into play . \n if one tries to derive the electro - magnetic dirac equation in a manner analogous to the one used when this field is absent , one obtains an additional term which is the relativistic analogue of the spin - magnetic field coupling term encountered in the pauli equation , valid for a non - relativistic particle with spin 1/2 . \n there is however a method to recover the standard form of the electro - magnetic dirac equation , with no additional term , which amounts modifying the way both covariances involved here , quantum and scale , are implemented . without going into technical details , \n it will be shown how these results suggest this last method is based on more profound roots of the scale relativity theory since it encompasses naturally the spin - charge coupling .",
+      "salient_sentences": [
+        "spin is an intrinsic quantum property of the particles , component of the total angular momentum which is itself a constant of motion .",
+        "[ fig1 ] ) @xcite .    ) in a fractal space .",
+        "the electric charge , a mere property of the electron stemming from scale transformations , must be considered therefore of a less fundamental nature than the spin , itself a component of a first integral of motion .",
+        "we have seen that the internal nature of spin , intrinsically linked to the fractal geometry of space - time is more fundamental than that of the charges , which also stem from this fractality , but less directly .",
+        "therefore , strong covariance , which can be properly applied to recover the electromagnetic klein - gordon equation , since this equation does not imply spin , must be replaced by a weaker covariance in the case of the dirac equation where spin is involved ."
+      ],
+      "generated_summary": "Spin is an intrinsic quantum property of particles, a component of the total angular momentum that is a constant of motion, taking only integer or half-integer values. In scale relativity, spin can be interpreted as a quantum charge of the electron/positron, or as directly linked to the fractal geometry of space-time. The electric charge, stemming from scale transformations, is considered less fundamental than spin, which is intrinsically linked to the fractal geometry of space-time.",
+      "scores": {
+        "bert": 0.812028706073761,
+        "rouge1": 0.26086956521739135,
+        "rougeL": 0.13768115942028986,
+        "kir": 0.8,
+        "abstraction": 0.6111111111111112,
+        "compression": 0.05769685504847482,
+        "novel_ngrams": 0.4246575342465753,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All facts verifiable in SOURCE.",
+          "completeness": 5,
+          "completeness_reason": "Covers main points.",
+          "conciseness": 5,
+          "conciseness_reason": "Fluid and not repetitive.",
+          "abstraction": 5,
+          "abstraction_reason": "Rephrases and not verbatim."
+        }
+      }
+    },
+    {
+      "source": "quantum computation requires the mitigation of errors that occur due to faulty controls and unwanted interactions with the environment @xcite . \n fault - tolerant quantum error correction is one method for mitigating these errors with the advantage that provable arbitrary quantum computation is possible given constraints on the error rates and the error locality @xcite . \n there are many possible error correcting codes @xcite and the mapping of abstract models involving qubits on a completely co...",
+      "reference": "the gottesman - knill theorem allows for the efficient simulation of stabilizer - based quantum error - correction circuits . \n errors in these circuits are commonly modeled as depolarizing channels by using monte carlo methods to insert pauli gates randomly throughout the circuit . although convenient , these channels are poor approximations of common , realistic channels like amplitude damping . here \n we analyze a larger set of efficiently simulable error channels by allowing the random insertion of any one - qubit gate or measurement that can be efficiently simulated within the stabilizer formalism . \n our new error channels are shown to be a viable method for accurately approximating real error channels .",
+      "salient_sentences": [
+        "in many cases , symmetries of the underlying error channels will minimize the number of clifford operators that must be considered .",
+        "in future work , we will compare for a specific error correction circuit how the logical error rate compares for the models .",
+        "we expect in the case of multiple rounds of error correction a substantial difference between error models with distinct fixed points .",
+        "av and krb acknowledge support from the national science foundation through the quantum information for quantum chemistry center for chemical innovation ( che-1037992 ) .",
+        "disclaimer : the views and conclusions contained herein are those of the authors and should not be interpreted as necessarily representing the official policies or endorsements , either expressed or implied , of iarpa , doi / nbc , or the u.s ."
+      ],
+      "generated_summary": "Quantum computation requires mitigating errors caused by faulty controls and environmental interactions. Fault-tolerant quantum error correction is a method that enables provable arbitrary quantum computation under certain error rate and locality constraints. The stabilizer formalism allows for efficient simulation of operators from the Clifford group operating on states stabilized by Pauli operators. This formalism includes non-unital operators, such as measurement operations in the Pauli basis, and can be used to represent Kraus operators for error channels. The paper presents an extension to the random Pauli error model, which is compatible with efficient simulation using the Gottesman-Knill theorem and leads to a computationally tractable description of realistic error models like amplitude damping. The method can be extended to multi-qubit channels, but optimization becomes more difficult as the number of Clifford operators grows.",
+      "scores": {
+        "bert": 0.8529608845710754,
+        "rouge1": 0.4556962025316456,
+        "rougeL": 0.18565400843881857,
+        "kir": 0.6,
+        "abstraction": 0.5658914728682171,
+        "compression": 0.09889537307211338,
+        "novel_ngrams": 0.4,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All information in the generated summary is verifiable in the SOURCE.",
+          "completeness": 4,
+          "completeness_reason": "The generated summary does not mention the comparison of the new error models with the random error channels, but it covers the main points of the paper.",
+          "conciseness": 5,
+          "conciseness_reason": "The generated summary is concise and to the point, avoiding repetitive information.",
+          "abstraction": 5,
+          "abstraction_reason": "The generated summary rephrases the information in a novel way, using more general terms and concepts."
+        }
+      }
+    },
+    {
+      "source": "gamma - ray bursts ( grbs ) are the most powerful explosions in the universe , and are thus considered to be a possible source of ultra - high energy ( uhe ) cosmic rays . \n short - duration bursts are believed to be a result of the collision of two compact objects and long - duration bursts are thought to be beamed emission from the collapse of a high - mass star into a black hole . \n see  @xcite for reviews of the basic theories of grbs \n . in the widely - accepted fireball shock model , relat...",
+      "reference": "we set the first limits on the ultra - high energy ( uhe ) neutrino fluence at energies greater than @xmath0  gev from gamma - ray bursts ( grbs ) based on data from the second flight of the antarctic impulsive transient antenna ( anita ) . during the 31 day flight of anita - ii , \n 26 grbs were recorded by swift or fermi . of these \n , we analyzed the 12 grbs which occurred during quiet periods when the payload was away from anthropogenic activity . in a blind analysis , we observe 0 events on a total background of 0.0044 events in the combined prompt window for all 12 low - background bursts . \n we also observe 0 events from the remaining 14 bursts . \n we place a 90% confidence level limit on the @xmath1 prompt neutrino fluence between 10@xmath2  gev@xmath3e@xmath310@xmath4  gev of @xmath5=2.5@xmath6  gev@xmath7/@xmath8 from grb090107a . \n this is the first reported limit on the uhe neutrino fluence from grbs above 10@xmath9  gev , and the strongest limit above 10@xmath2  gev .",
+      "salient_sentences": [
+        "signals from each polarization of each antenna are recorded in a 100  ns window for each triggered event , allowing for directional determination on an event - by - event basis using interferometric techniques , also described at length in  @xcite .",
+        "anita is most sensitive to neutrinos which come from between the horizon and a payload elevation angle ( angle above the horizontal ) of @xmath14 .",
+        "we are able to construct a more sensitive search for uhe neutrinos from grbs compared to the previously reported diffuse uhe neutrino search with anita - ii  @xcite because the short time window given by the burst duration dramatically reduces background in the signal region , allowing us to lower our analysis threshold and look for very weak signals which also have a time and direction correlation with the observed grb .",
+        "there are two sources of background for an anita neutrino search .",
+        "8 , 122 gcn : the gamma - ray bursts coordinates network , http://gcn.gsfc.nasa.gov/ gorham , p. , _ et al ."
+      ],
+      "generated_summary": "Gamma-ray bursts (GRBs) are the most powerful explosions in the universe, considered a possible source of ultra-high energy (UHE) cosmic rays. The fireball shock model suggests that relativistic plasma in a jet collides with surrounding material, producing gamma-ray prompt emission through synchrotron and inverse Compton scattering of electrons. UHE protons are accelerated in these shocks, interacting with photons to produce charged pions, which decay into UHE neutrinos. The Anita experiment, a NASA long-duration balloon experiment, searches for coherent, impulsive, broadband radio emission from UHE neutrinos interacting in the Antarctic ice sheet. Signals from each polarization of each antenna are recorded in a 100 ns window for each triggered event, allowing for directional determination using interferometric techniques. Anita is most sensitive to neutrinos coming from between the horizon and a payload elevation angle of 14. The experiment's short time window reduces background in the signal region, enabling a more sensitive search for UHE neutrinos from GRBs.",
+      "scores": {
+        "bert": 0.8018848299980164,
+        "rouge1": 0.31804281345565755,
+        "rougeL": 0.17737003058103976,
+        "kir": 1.0,
+        "abstraction": 0.5816993464052287,
+        "compression": 0.19700292397660818,
+        "novel_ngrams": 0.43506493506493504,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All information in the generated summary is verifiable in the source document.",
+          "completeness": 5,
+          "completeness_reason": "The generated summary covers the main points of the source document, including the fireball shock model, the Anita experiment, and the search for UHE neutrinos from GRBs.",
+          "conciseness": 5,
+          "conciseness_reason": "The generated summary is concise and to the point, avoiding repetition and unnecessary details.",
+          "abstraction": 5,
+          "abstraction_reason": "The generated summary rephrases the original text in a clear and concise manner, using novel phrasing to convey the same information."
+        }
+      }
+    },
+    {
+      "source": "the majority of stars will evolve into a white dwarf and a significant fraction of white dwarfs harbours a magnetic field that ranges from a few kg to about 1000 mg @xcite . \n spectroscopic and spectropolarimetric surveys ( e.g. , * ? ? ? \n * ; * ? ? ? \n * ; * ? ? ? \n * ; * ? ? ? \n * ; * ? ? ? \n * ; * ? ? ? \n * ; * ? ? ? \n * ) of white dwarfs have been able to place constraints on the incidence of magnetism among white dwarfs . \n the incidence of magnetic white dwarfs in the local neighbourhood ...",
+      "reference": "we present an analysis of the close double degenerate nltt12758 , which is comprised of a magnetic white dwarf with a field of about 3.1 mg and an apparently non - magnetic white dwarf . \n we measured an orbital period of 1.154 days and found that the magnetic white dwarf is spinning around its axis with a period of 23 minutes . \n an analysis of the atmospheric parameters has revealed that the cooling ages of the two white dwarfs are comparable , suggesting that they formed within a short period of time from each other . \n our modelling indicates that the non - magnetic white dwarf is more massive ( @xmath0 ) than its magnetic companion ( @xmath1 ) and that the total mass of the system is higher than the chandrasekhar mass . \n although the stars will not come into contact over a hubble time , when they do come into contact , dynamically unstable mass transfer will take place leading to either an accretion induced collapse into a rapidly spinning neutron star or a type ia supernova . \n [ firstpage ]    stars : magnetic fields  stars : individual : nltt12758  white dwarfs  binaries : close",
+      "salient_sentences": [
+        "the majority of stars will evolve into a white dwarf and a significant fraction of white dwarfs harbours a magnetic field that ranges from a few kg to about 1000 mg @xcite .",
+        "spectroscopic and spectropolarimetric surveys ( e.g. , * ? ? ?",
+        "* ; * ? ? ? \n * ) of white dwarfs have been able to place constraints on the incidence of magnetism among white dwarfs .",
+        "the incidence of magnetic white dwarfs in the local neighbourhood has been estimated by @xcite to be around 20% .",
+        "the main reason for this proposal is that all magnetic white dwarfs appear to be either single or in interacting binaries ( the magnetic cataclysmic variables ) ."
+      ],
+      "generated_summary": "The majority of stars will evolve into a white dwarf, and a significant fraction of white dwarfs harbor a magnetic field, ranging from a few kg to about 1000 mg. Spectroscopic and spectropolarimetric surveys have constrained the incidence of magnetism among white dwarfs, with an estimated 20% of magnetic white dwarfs in the local neighborhood. The origin of large-scale magnetic fields in stars remains an unanswered question in astrophysics. Two main evolutionary scenarios explain magnetism in white dwarfs: the progenitors are either magnetic Ap and Bp stars or other main-sequence stars with magnetic fields below current detection limits or dynamo-generated in later stages.",
+      "scores": {
+        "bert": 0.8191602826118469,
+        "rouge1": 0.38028169014084506,
+        "rougeL": 0.22535211267605634,
+        "kir": 1.0,
+        "abstraction": 0.6138613861386139,
+        "compression": 0.06745913818722139,
+        "novel_ngrams": 0.45098039215686275,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All information in the generated summary is verifiable in the source document.",
+          "completeness": 5,
+          "completeness_reason": "The generated summary covers the main points of the source document, including the evolution of stars, the incidence of magnetism in white dwarfs, and the two main evolutionary scenarios.",
+          "conciseness": 5,
+          "conciseness_reason": "The generated summary is concise and fluid, avoiding repetition and unnecessary details.",
+          "abstraction": 5,
+          "abstraction_reason": "The generated summary rephrases the information in a novel way, using concise and clear language."
+        }
+      }
+    },
+    {
+      "source": "in a recent paper becker et al .   analysed spectra of the four highest redshift quasars discovered by sloan survey . \n the highest redshift ( @xmath1 ) quasar showed almost no transmitted flux just blueward of the quasar ly - alpha emission line , and on this bases becker et al \n .   concluded that reionization took place at a redshift @xmath2 [ a similar claim was also made by djorgovski et al . \n based on an extrapolation from a lower redshift observations ] . \n however , one should be cautio...",
+      "reference": "comparison of the observed evolution of the ly - alpha transmitted flux in the spectra of four highest redshift quasars discovered by sloan survey with the theoretical prediction for this evolution based on the state - of - the - art numerical simulations of cosmological reionization already allows one to constrain the redshift of reionization to @xmath0 , where systematic and random errors are given respectively . \n -0.5 in # 1/#1    # 1    [ firstpage ]    cosmology : theory - cosmology : large - scale structure of universe - galaxies : formation - galaxies : intergalactic medium",
+      "salient_sentences": [
+        "the reason for doing so is to obtain a constraint on the redshift of reionization which does not depend on a ( weakly constrained ) cosmological model .",
+        "with these two uncertainties \n included , i can derive a value for the redshift of reionization in the following form : @xmath23 which is the sole result of this paper .",
+        "sloan observations of @xmath2 quasars push the frontier of the observable universe right into the epoch of reionization .",
+        "combined with the most advanced simulations of cosmological reionization to date , \n the observational data yield a rather precise measurement of the redshift of reionization .",
+        "this measurement hinges on the assumption that the @xmath1 quasar ( sdssp 1030 + 0524 ) probes an average region of the universe , i.e.  that the cosmic variance in the measurement of the mean transmitted flux at @xmath25 is not larger than a factor of 3 - 5 ."
+      ],
+      "generated_summary": "The redshift of reionization is a quantity that can be defined as the moment corresponding to the peak rate of increase of the mean free path to ionizing radiation. The process of reionization is extended and occurs over a sizable redshift interval. To measure the redshift of reionization, simulations of cosmological reionization are combined with observational data from quasars. The simulations use a newly developed optically thin Eddington variable tensor approximation for modeling radiative transfer and include dark matter particles, baryonic cells, and stellar particles that form continuously during the simulation. The simulations are run with a flat cosmology and a Schmidt law for star formation, which introduces two free parameters: the star formation efficiency and the ionizing radiation efficiency. The redshift of reionization is strongly dependent on the ionizing radiation efficiency, which can be adjusted to fit the observational data.",
+      "scores": {
+        "bert": 0.8213413953781128,
+        "rouge1": 0.27927927927927926,
+        "rougeL": 0.17117117117117114,
+        "kir": 0.4,
+        "abstraction": 0.6402877697841727,
+        "compression": 0.08980241595655024,
+        "novel_ngrams": 0.4142857142857143,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All information in the generated summary is verifiable in the source document.",
+          "completeness": 5,
+          "completeness_reason": "The generated summary covers all main points from the source document.",
+          "conciseness": 5,
+          "conciseness_reason": "The generated summary is concise and fluid, without repetitive information.",
+          "abstraction": 5,
+          "abstraction_reason": "The generated summary rephrases the source content in a novel way, without copying verbatim."
+        }
+      }
+    },
+    {
+      "source": "when the high energy photons emitted by the x - ray source arrive to the earth , they have been scattered by the interstellar dust grains . \n therefore many galactic x - ray sources are observed to have faint and diffuse halos . \n this effect and its possible application was first discussed by overbeck ( 1965 ) , and the x - ray halo was first detected with einstein observatory ( rolf 1983 , catura 1983 ) . \n the investigation of the shape and strength of the haloes was done by several authors (...",
+      "reference": "we have developed a timing analysis method to determine the distances of variable galactic x - ray sources based on the method advanced by trmper and schnfelder in 1973 . \n the light - curve of the halo produced by the scattering of x - rays off the interstellar dust is delayed and smeared by the dust grains . \n this method utilizes the differences between the power density spectra of the point source and the halo . \n we present the details of this method and our first applications of this method to the chandra data of x - ray binary cyg x-3 . \n x - ray source distance , ism , scattering",
+      "salient_sentences": [
+        "predehl et al . \n ( 2000 ) used ts1973 method and obtained @xmath0 kpc , dickey ( 1983 ) found a lower limit of 9.2 kpc 1 using 21 cm wavelength absorption data , predehl & schmitt ( 1995 ) derived 8 kpc as distance through the galactic dust layer from their comparison of x - ray scattering and absorption .",
+        "our method and ts1973 method both determine the geometric distance instead of physical distance .",
+        "the physical distance depend on the estimation of many physical parameters , i.e. , absorption optical depth .",
+        "the uncertainties of the geometric distance determination come mainly from the dust density distribution along the line of sight .",
+        "in principle , it can be solved by carefully fitting the shape and strength of the halo ."
+      ],
+      "generated_summary": "The method of determining the distance of variable galactic X-ray sources using the time delay of scattered photons was first discussed by Trumper and Schnfelder in 1973. This method involves comparing the power density spectra of the point source and the halo at different radii to determine the time delay, which is related to the distance to the source. The shape and strength of the halo depend on the distance to the X-ray source, the geometric distribution, and the physical properties of interstellar dust grains. The power density spectrum of the halo can be calculated using the differential scattering cross-section of X-ray photons in interstellar dust. The authors applied this method to the Chandra data of X-ray binary Cyg X-3 and obtained a distance of at least 5 kpc, consistent with previous estimates. The method determines the geometric distance, which is different from the physical distance that depends on the estimation of many physical parameters, such as absorption optical depth.",
+      "scores": {
+        "bert": 0.8739866614341736,
+        "rouge1": 0.5767790262172284,
+        "rougeL": 0.38202247191011235,
+        "kir": 1.0,
+        "abstraction": 0.6455696202531646,
+        "compression": 0.13831544178364988,
+        "novel_ngrams": 0.44654088050314467,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All information in the generated summary is verifiable in the source document.",
+          "completeness": 5,
+          "completeness_reason": "The generated summary covers all main points mentioned in the source document.",
+          "conciseness": 5,
+          "conciseness_reason": "The generated summary is concise and fluid, without repetitive information.",
+          "abstraction": 5,
+          "abstraction_reason": "The generated summary rephrases the information in a novel way, without copying the source document verbatim."
+        }
+      }
+    },
+    {
+      "source": "more than thirty years after the discovery of radio pulsars , the problem of understanding the properties of condensed matter in the interior of neutron stars ( nss ) has remained largely unsolved . a promising way to obtain constraints on the equation of state of nss \n is represented by the study of thermal radiation ( peaking at x - ray energies ) from their surfaces . \n the observed spectra are expected to show , as a characteristic signature of radiative transfer effects induced by the atmos...",
+      "reference": "we have observed the radio - quiet x - ray pulsar 1e  1207.45209 with the high throughput epic cameras onboard xmm - newton . \n the spectrum of this peculiar source is characterized by two broad absorption features which present significant substructures and show a clear phase - dependence . \n we believe that these features represent a strong evidence for the presence of a magnetized atmosphere containing heavy elements . \n # 1_#1 _ # 1_#1 _ =    # 1 1.25 in .125 in .25 in",
+      "salient_sentences": [
+        "* panel 6 : for completeness , the residuals to an hydrogen atmosphere@xmath9lines fit are shown here .",
+        "indeed , hailey & mori ( 2002 ) suggested that the lines could be produced by he - like oxigen or neon , predicting the presence of substructures in the broad features .",
+        "a second \n , very deep ( 250 ksec ) xmm observation of 1e  1207.4 - 5209 has now been successfully performed ( august 2002 ) .",
+        "the new data will allow for a more detailed analysis of phase - resolved spectra .",
+        "this will yield important and maybe conclusive information on the atmosphere composition , hopefully providing firm constraints on the other neutron star parameters ."
+      ],
+      "generated_summary": "A neutron star, 1E 1207.45209, was observed to have a period of 424.13084 milliseconds, with a surprisingly low period derivative of (1.98±0.83)×10^(-15) s/s^(-1), in agreement with a previous Chandra estimate. The pulse shape does not show significant energy dependence, but the spectrum exhibits two broad absorption features at 0.7 and 1.4 keV. The features are not well described by a single Gaussian line, suggesting they may be due to the blending of several narrower lines. The features are also phase-dependent, with the line at 1.4 keV more pronounced during the pulse minimum and rising part, and almost invisible during the pulse peak.",
+      "scores": {
+        "bert": 0.8231568932533264,
+        "rouge1": 0.3368421052631579,
+        "rougeL": 0.17894736842105263,
+        "kir": 0.2,
+        "abstraction": 0.69,
+        "compression": 0.09521002210759028,
+        "novel_ngrams": 0.4752475247524752,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All facts are verifiable in the SOURCE.",
+          "completeness": 5,
+          "completeness_reason": "The GENERATED summary covers all main points from the SOURCE.",
+          "conciseness": 5,
+          "conciseness_reason": "The GENERATED summary is concise and fluid, without repetition.",
+          "abstraction": 5,
+          "abstraction_reason": "The GENERATED summary rephrases the SOURCE content in a novel way, without copying verbatim."
+        }
+      }
+    },
+    {
+      "source": "in an informative display of supernovae light curves ( fig.1 in physics today , july 2007 , p 17 ) it was clear that sn2006gy was about `` 10 times brighter than the peak luminosity of type ia '' . \n implied was a total radiated energy `` two orders of magnitude '' greater than ordinary supernovae . \n the first question that naturally arises is : with what certainty is its distance from the observer known ? \n the smith et al . \n paper@xmath0 mentions that the galaxy in which sn2006 appears is a ...",
+      "reference": "a recent supernova has been reported as exceeding `` the light output of an ordinary supernova by at least two orders of magnitude '' . it is noted that it falls in a minor galaxy in the perseus cluster . \n some evidence indicating a ten times closer distance for the perseus cluster than its redshift distance is discussed here .",
+      "salient_sentences": [
+        "supernovae of type ia are much discussed today because of their interpretation in terms of a universe that is expanding faster now than in the past - in other words , \n dark energy.",
+        "if intrinsic redshifts of younger material is operative , galaxies like the perseus cluster would need low particle masses@xmath5 to explain their apparent association with ngc 891 \n .",
+        "the smaller elementary particle masses would give smaller luminosities of objects in those galaxies .",
+        "all of these effects would combine in the direction of making the hubble constant appear lower in the past and lead to the impression that it was speeding up at present .",
+        "ironically , if we move sn2006gy to this closer distance it could reinstate supernovae i as , at least , approximate distance indicators ."
+      ],
+      "generated_summary": "The supernova SN2006gy is about 10 times brighter than the peak luminosity of Type Ia supernovae, implying a total radiated energy two orders of magnitude greater than ordinary supernovae. The galaxy in which SN2006gy appears, NGC 1260, is a minor member of the Perseus cluster, with a redshift of 5703 km/sec. The Perseus-Pisces cluster extends over a large region of the sky, with a structure of startlingly large size at its redshift distance of 74 megaparsecs. The strongest line of galaxies in this region consists mostly of E and S0 galaxies originating from the large SB (NGC 891) and ending on NGC 1260 and the supernova SN2006gy.",
+      "scores": {
+        "bert": 0.8496730923652649,
+        "rouge1": 0.36585365853658536,
+        "rougeL": 0.2560975609756098,
+        "kir": 0.2,
+        "abstraction": 0.5523809523809524,
+        "compression": 0.09795793029325964,
+        "novel_ngrams": 0.3584905660377358,
+        "judge": {
+          "faithfulness": 4,
+          "faithfulness_reason": "The generated summary is mostly faithful to the source content, but it does not mention the discussion about the redshift of NGC 891 and its implications for the distance to SN2006gy.",
+          "completeness": 4,
+          "completeness_reason": "The generated summary covers the main points, but it does not mention the study of the 20 brightest galaxies in apparent magnitude north of declination = 0 deg and the alignment of fainter, higher redshift galaxies with them.",
+          "conciseness": 4,
+          "conciseness_reason": "The generated summary is clear and concise, but it could be more concise by removing some of the transitional phrases.",
+          "abstraction": 3,
+          "abstraction_reason": "The generated summary rephrases some of the original text, but it does not provide a novel or abstract interpretation of the information."
+        }
+      }
+    },
+    {
+      "source": "since its discovery @xcite , the black - hole candidate ( bhc )  has been observed to spend long periods in outburst . although historically it was found to be mainly in the hard state ( maejima et al . \n 1984 ; ilovaisky et al . \n 1986 ; miyamoto et al . 1991 ) , since the launch of   the source has been monitored and complete sets of transitions have been observed and studied ( belloni et al . \n 2005 ; zdziarski et al . 2004 ; del santo et al . 2008 ) . \n unlike the bhc prototype cyg x1 , for ...",
+      "reference": "we report on x - ray and soft @xmath0-ray observations of the black - hole candidate  during its 2007 outburst , performed with the  and  satellites . \n the hardness - intensity diagram of all /pca data combined shows a _ q_-shaped track similar to that observed in previous outbursts.the evolution in the diagram suggested that a transition from hard - intermediate state to soft - intermediate state occurred , simultaneously with  observations performed in march . \n the transition is confirmed by the timing analysis presented in this work , which reveals that a weak type - a quasi - periodic oscillation ( qpo ) replaces a strong type - c qpo . at the same time , spectral analysis shows that the flux of the high - energy component shows a significant decrease in its flux . \n however , we observe a delay ( roughly one day ) between variations of the spectral parameters of the high - energy component and changes in the flux and timing properties . \n the changes in the high - energy component can be explained either in terms the high - energy cut - off or in terms of a variations in the reflection component . \n we compare our results with those from a similar transition during the 2004 outburst of . \n [ firstpage ]    x - ray : binaries  accretion : accretion discs  black hole : physics  stars : individual :",
+      "salient_sentences": [
+        "also , the high - energy cut - off that was present at @xmath170 kev before the transition was not detected later .",
+        "in 2006 \n monitoring of  revealed low - level x - ray activity ( bezayiff & smith 2006 ; swank et al . \n 2006 ) until december , when a new strong outburst started @xcite .",
+        "we activated our campaign with the aim to follow the source through a hims - sims transition .",
+        "unfortunately , we did not observe the main transition , as we did in 2004 , but managed to capture a secondary transition .",
+        "in this paper \n , we report the results of the timing and spectral analysis of our  data from 2007 march 46 and of the quasi - simultaneous interval of the  public data ."
+      ],
+      "generated_summary": "The black-hole candidate (BHC) has been observed to spend long periods in outburst, with historically being mainly in the hard state. However, since its launch, complete sets of transitions have been observed and studied, showing hysteresis in its relation between X-ray luminosity and spectral state. The source exhibits a lower limit for the source distance at 7 kpc. A rapid bright radio flare was observed during the 2002/2003 outburst, leading to the formation of a large-scale relativistic jet. The source showed fast changes in its timing properties during the hard-intermediate to soft-intermediate state transition, but almost none in the 3-20 keV energy spectrum.",
+      "scores": {
+        "bert": 0.8216549158096313,
+        "rouge1": 0.37820512820512814,
+        "rougeL": 0.1858974358974359,
+        "kir": 0.4,
+        "abstraction": 0.6039603960396039,
+        "compression": 0.14451363538758857,
+        "novel_ngrams": 0.43137254901960786,
+        "judge": {
+          "faithfulness": 5,
+          "faithfulness_reason": "All information in the generated summary is verifiable in the source document.",
+          "completeness": 5,
+          "completeness_reason": "The generated summary covers the main points of the source document, including the source's behavior, the 2002/2003 outburst, and the 2007 outburst.",
+          "conciseness": 5,
+          "conciseness_reason": "The generated summary is concise and to the point, avoiding repetitive information.",
+          "abstraction": 5,
+          "abstraction_reason": "The generated summary rephrases the information in a clear and concise manner, rather than copying the source document verbatim."
+        }
+      }
+    }
+  ]
+}
