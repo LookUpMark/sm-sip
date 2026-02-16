@@ -43,10 +43,7 @@ def load_llm(
     if quantization == "4bit":
         bnb_config = BitsAndBytesConfig(load_in_4bit=True)
     else:
-        bnb_config = BitsAndBytesConfig(
-            load_in_8bit=True,
-            llm_int8_enable_fp32_cpu_offload=True,
-        )
+        bnb_config = BitsAndBytesConfig(load_in_8bit=True)
 
     model = AutoModelForCausalLM.from_pretrained(
         model_id,
