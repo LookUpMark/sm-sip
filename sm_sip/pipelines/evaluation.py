@@ -74,13 +74,12 @@ def run_enhanced_evaluation(
         Tuple of (metrics_dict, samples_list).
     """
     from rouge_score import rouge_scorer
-    from bert_score import score as bert_score_fn
 
     scorer = rouge_scorer.RougeScorer(["rouge1", "rougeL"], use_stemmer=True)
 
     metrics = {
-        # Traditional
-        "bert": [], "rouge1": [], "rougeL": [], "kir": [],
+        # Traditional (bert computed in batch at end)
+        "rouge1": [], "rougeL": [], "kir": [],
         # Abstraction
         "abstraction": [], "compression": [], "novel_ngrams": [],
         # LLM Judge
@@ -102,12 +101,6 @@ def run_enhanced_evaluation(
             rouge_scores = scorer.score(item["reference"], gen_summary)
             metrics["rouge1"].append(rouge_scores["rouge1"].fmeasure)
             metrics["rougeL"].append(rouge_scores["rougeL"].fmeasure)
-
-            _, _, F1 = bert_score_fn(
-                [gen_summary], [item["reference"]], lang=lang, verbose=False
-            )
-            bert_sc = F1.mean().item()
-            metrics["bert"].append(bert_sc)
 
             # KIR
             kir_score = 0.0
@@ -143,14 +136,13 @@ def run_enhanced_evaluation(
                 metrics["judge_conciseness"].append(judge_scores.get("conciseness", 3))
                 metrics["judge_abstraction"].append(judge_scores.get("abstraction", 3))
 
-            # Store sample details
+            # Store sample details (bert_score filled after loop)
             samples.append({
                 "source": item["source"][:500] + "..." if len(item["source"]) > 500 else item["source"],
                 "reference": item["reference"],
                 "salient_sentences": salient_sents,
                 "generated_summary": gen_summary,
                 "scores": {
-                    "bert": float(bert_sc),
                     "rouge1": float(rouge_scores["rouge1"].fmeasure),
                     "rougeL": float(rouge_scores["rougeL"].fmeasure),
                     "kir": float(kir_score),
@@ -165,6 +157,23 @@ def run_enhanced_evaluation(
             print(f"    Error: {e}")
             continue
 
+    # === BERT-Score in batch on CPU (avoids GPU VRAM contention with LLM) ===
+    if samples:
+        from bert_score import score as bert_score_fn
+        import torch
+        predictions = [s["generated_summary"] for s in samples]
+        references = [s["reference"] for s in samples]
+        print("  Computing BERTScore on CPU (batch)...")
+        with torch.no_grad():
+            _, _, F1 = bert_score_fn(
+                predictions, references, lang=lang, verbose=False, device="cpu"
+            )
+        bert_scores = F1.numpy().tolist()
+        for i, sc in enumerate(bert_scores):
+            samples[i]["scores"]["bert"] = float(sc)
+    else:
+        bert_scores = []
+
     # Aggregate metrics
     aggregated = {}
     for key, values in metrics.items():
@@ -173,5 +182,10 @@ def run_enhanced_evaluation(
                 "mean": float(np.mean(values)),
                 "std": float(np.std(values)),
             }
+    if bert_scores:
+        aggregated["bert"] = {
+            "mean": float(np.mean(bert_scores)),
+            "std": float(np.std(bert_scores)),
+        }
 
     return aggregated, samples

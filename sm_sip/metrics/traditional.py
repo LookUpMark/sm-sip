@@ -26,7 +26,8 @@ def compute_bert_score(
     """
     from bert_score import score as bert_score_fn
 
-    _, _, F1 = bert_score_fn(predictions, references, lang=lang, verbose=False)
+    # Force CPU to avoid VRAM contention with LLM on GPU
+    _, _, F1 = bert_score_fn(predictions, references, lang=lang, verbose=False, device="cpu")
     scores = F1.numpy().tolist()
     return {
         "mean": float(np.mean(scores)),
