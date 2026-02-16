@@ -7,27 +7,45 @@ in source documents for use in guided summarization.
 
 from typing import List, Dict, Tuple, Optional
 import numpy as np
+import torch
 from transformers import AutoModelForTokenClassification, AutoTokenizer
 
 
 def load_sigext_model(
     model_id: str,
+    device: str = "cpu",
     max_length: int = 2048,
 ) -> Tuple[AutoModelForTokenClassification, AutoTokenizer]:
     """Load a SigExt token-classification model.
 
+    Loads on CPU by default to preserve GPU VRAM for the LLM.
+    Longformer is ~150MB, so CPU inference is fast enough for preprocessing.
+
     Args:
         model_id: HuggingFace model ID (e.g. 'LookUpMark/sigext-wits-it-10k-060t').
+        device: Device to load on ('cpu' or 'cuda'). Default: 'cpu'.
         max_length: Maximum sequence length.
 
     Returns:
         Tuple of (model, tokenizer).
     """
-    print(f"  Loading SigExt model: {model_id}...")
-    model = AutoModelForTokenClassification.from_pretrained(model_id).to("cuda")
+    print(f"  Loading SigExt model on {device}: {model_id}...")
+    model = AutoModelForTokenClassification.from_pretrained(model_id).to(device)
     tokenizer = AutoTokenizer.from_pretrained(model_id)
     model.eval()
     return model, tokenizer
+
+
+def unload_sigext_model(model, tokenizer=None):
+    """Explicitly delete SigExt model and free memory."""
+    del model
+    if tokenizer is not None:
+        del tokenizer
+    import gc
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
+    print("  SigExt model unloaded.")
 
 
 def extract_salient_sentences(
@@ -51,7 +69,6 @@ def extract_salient_sentences(
     Returns:
         Tuple of (salient_sentences, keyphrases_string).
     """
-    import torch
     from sm_sip.data.preprocessing import extract_sentences
 
     sentences = extract_sentences(text, lang=lang)
