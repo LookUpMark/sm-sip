@@ -1,5 +1,66 @@
-.venv
+# === Python ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# === Virtual Environments ===
+.venv/
+venv/
+ENV/
+env/
+bin/
+include/
+lib/
+share/
+
+# === Jupyter Notebooks ===
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+# IPython
+.ipython/
+
+# === Environment & Secrets ===
 .env
-*.jsonl
-checkpoints*
+.venv
+.env.test
+.env.local
+
+# === OS & IDE ===
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.vscode/
+.idea/
+
+# === Project Specific ===
+data/*.jsonl
+models/
 models*
+checkpoints*
+*.log
+
+# Allow keeping results JSON/plots but ignore large caches if any
+# results/ (Optional: uncomment if you want to ignore all local results)

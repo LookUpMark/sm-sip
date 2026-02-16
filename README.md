@@ -5,27 +5,29 @@ Extension of the SigExt framework for controllable abstractive summarization wit
 ## Project Structure
 
 ```
-DNLPProj/
-├── extension-italian-wits-semantic/     # Italian Wikipedia (WITS)
-│   ├── training/
-│   │   └── training-standard.ipynb      # SigExt model training
-│   └── inference/
-│       ├── inference-standard.ipynb     # Standard inference (16 configs)
-│       ├── inference-prompt-enhanced.ipynb # Enhanced + LLM-as-Judge
-│       ├── inference-wits-summarization.ipynb # Abstractive summarization pipeline
-│       └── inference-evaluation.ipynb   # Bulk evaluation and metrics
-├── extension-english-arxiv-semantic/    # English ArXiv
-│   ├── training/
-│   │   └── training-standard.ipynb      # SigExt model training (English)
-│   └── inference/
-│       ├── inference-standard.ipynb     # Standard ArXiv inference
-│       ├── inference-prompt-enhanced.ipynb # Enhanced ArXiv prompts
-│       └── inference-judge.ipynb        # Qwen-based G-Eval judge pipeline
-├── results/                             # Consolidated results
-│   ├── italian/                         # Metrics, plots, decoding
-│   └── english/                         # metrics and JSON outputs
-└── overleaf/                            # Research artifacts
-    └── paper-draft.tex                  # Paper manuscript
+sm-sip/
+├── sm_sip/                        # Core Python package (pip install -e .)
+│   ├── config.py                  # Centralized dataclass configurations
+│   ├── data/                      # Data loading & preprocessing
+│   ├── models/                    # SigExt + LLM loading
+│   ├── prompts/                   # Summarization & judge templates (IT/EN)
+│   ├── metrics/                   # BERT-Score, ROUGE-1/L, KIR, abstraction, judge
+│   ├── pipelines/                 # Training, inference, evaluation orchestration
+│   ├── analysis/                  # Results aggregation, LaTeX tables, plots
+│   └── utils/                     # GPU, I/O, reproducibility (seed=42)
+├── notebooks/
+│   ├── training/                  # SigExt model training (IT/EN)
+│   ├── inference/                 # Summary generation (IT/EN)
+│   ├── evaluation/                # Full evaluation with judge (IT/EN)
+│   └── ablation/                  # 5 ablation studies
+├── scripts/analyze_results.py     # Unified CLI analysis
+├── results/                       # Consolidated JSON results
+│   ├── italian/
+│   └── english/
+├── data/                          # Training data (wits_train_25k.jsonl)
+├── overleaf/                      # Paper drafts
+├── setup.py                       # Package installer
+└── requirements.txt               # Dependencies
 ```
 
 ## Key Results
@@ -69,9 +71,19 @@ DNLPProj/
 ## Quick Start
 
 ```bash
-# Italian WITS inference
-jupyter notebook extension-italian-wits-semantic/inference/inference-prompt-enhanced.ipynb
+# Install the package
+pip install -e .
 
-# English ArXiv inference
-jupyter notebook extension-english-arxiv-semantic/inference/inference-prompt-enhanced.ipynb
+# Run Italian inference (on Colab/GPU)
+jupyter notebook notebooks/inference/infer_italian_wits.ipynb
+
+# Run English evaluation
+jupyter notebook notebooks/evaluation/eval_english_arxiv.ipynb
+
+# Analyze existing results (CLI)
+python scripts/analyze_results.py --lang all --latex
 ```
+
+## Reproducibility
+
+All experiments use `seed=42` by default (configurable). Seeds are set for Python, NumPy, PyTorch, CUDA, and CUBLAS to ensure fully deterministic results.
