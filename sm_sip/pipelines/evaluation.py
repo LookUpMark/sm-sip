@@ -21,12 +21,14 @@ from sm_sip.metrics.judge import llm_judge_evaluate
 def run_evaluation(
     results: List[Dict],
     lang: str = "it",
+    bert_model_type: str = None,
 ) -> Dict:
     """Compute traditional metrics on generated summaries.
 
     Args:
         results: List of dicts with 'reference', 'generated_summary', 'salient_sentences'.
         lang: Language for BERT-Score.
+        bert_model_type: Override BERTScore model (e.g. 'microsoft/mdeberta-v3-base').
 
     Returns:
         Dict with aggregated metrics.
@@ -35,7 +37,7 @@ def run_evaluation(
     references = [r["reference"] for r in results]
     salient = [r.get("salient_sentences", []) for r in results]
 
-    bert = compute_bert_score(predictions, references, lang=lang)
+    bert = compute_bert_score(predictions, references, lang=lang, model_type=bert_model_type)
     rouge = compute_rouge(predictions, references, metrics=["rouge1", "rougeL"])
     kir = compute_kir(predictions, salient)
 
@@ -54,6 +56,7 @@ def run_enhanced_evaluation(
     judge_chain=None,
     lang: str = "it",
     response_separator: str = "assistant<|end_header_id|>",
+    bert_model_type: str = None,
 ) -> Tuple[Dict, List[Dict]]:
     """Run full enhanced evaluation: generation + all metrics + judge.
 
@@ -163,11 +166,17 @@ def run_enhanced_evaluation(
         import torch
         predictions = [s["generated_summary"] for s in samples]
         references = [s["reference"] for s in samples]
-        print("  Computing BERTScore on CPU (batch)...")
+        model_label = bert_model_type or f"default ({lang})"
+        print(f"  Computing BERTScore on CPU (batch) with model: {model_label}...")
         with torch.no_grad():
-            _, _, F1 = bert_score_fn(
-                predictions, references, lang=lang, verbose=False, device="cpu"
-            )
+            if bert_model_type:
+                _, _, F1 = bert_score_fn(
+                    predictions, references, model_type=bert_model_type, verbose=False, device="cpu"
+                )
+            else:
+                _, _, F1 = bert_score_fn(
+                    predictions, references, lang=lang, verbose=False, device="cpu"
+                )
         bert_scores = F1.numpy().tolist()
         for i, sc in enumerate(bert_scores):
             samples[i]["scores"]["bert"] = float(sc)

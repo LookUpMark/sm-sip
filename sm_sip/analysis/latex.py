@@ -18,7 +18,7 @@ def generate_table(
     """Generate a LaTeX table from results.
 
     Args:
-        results: Dict of result key → data.
+        results: Dict of result key -> data.
         group_filter: Optional filter dimension (e.g. "inference_type").
         filter_value: Value to filter on (e.g. "few-shot").
         caption: Table caption.

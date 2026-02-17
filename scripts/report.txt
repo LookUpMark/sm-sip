@@ -1,0 +1,168 @@
+
+--- ENGLISH DISCREPANCIES ---
+Sample 1: [Unable to Evaluate] ROUGE: N/A, F: N/A, C: N/A
+  Reason: Unable to evaluate
+Sample 5: [Unable to Evaluate] ROUGE: N/A, F: N/A, C: N/A
+  Reason: Unable to evaluate
+Sample 18: [Unable to Evaluate] ROUGE: N/A, F: N/A, C: N/A
+  Reason: Unable to evaluate
+Sample 27: [Low ROUGE / High Judge] ROUGE: 0.1359223300970874, F: 5, C: 5
+  Reason: All facts are verifiable in the SOURCE.
+Sample 28: [Low ROUGE / High Judge] ROUGE: 0.1316872427983539, F: 5, C: 4
+  Reason: All information in the generated summary is verifiable in the source document.
+Sample 31: [Unable to Evaluate] ROUGE: N/A, F: N/A, C: N/A
+  Reason: Unable to evaluate
+Sample 32: [Unable to Evaluate] ROUGE: N/A, F: N/A, C: N/A
+  Reason: Unable to evaluate
+Sample 33: [Low ROUGE / High Judge] ROUGE: 0.14468085106382977, F: 5, C: 5
+  Reason: All information in the generated summary is verifiable in the source document.
+Sample 41: [Low ROUGE / High Judge] ROUGE: 0.13768115942028986, F: 5, C: 5
+  Reason: All facts verifiable in SOURCE.
+
+--- ITALIAN DISCREPANCIES ---
+Sample 1: [Low ROUGE / High Judge] ROUGE: 0.08294930875576037, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 2: [Low ROUGE / High Judge] ROUGE: 0.03115264797507788, F: 5, C: 5
+  Reason: All information in the generated summary is verifiable in the SOURCE document.
+Sample 4: [Low ROUGE / High Judge] ROUGE: 0.03076923076923077, F: 5, C: 5
+  Reason: All information in the generated summary is verifiable in the source document.
+Sample 6: [Low ROUGE / High Judge] ROUGE: 0.12785388127853883, F: 5, C: 5
+  Reason: All facts are verifiable in the SOURCE document.
+Sample 7: [Low ROUGE / High Judge] ROUGE: 0.04926108374384236, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 8: [Low ROUGE / High Judge] ROUGE: 0.035398230088495575, F: 5, C: 5
+  Reason: The generated summary accurately reflects the content of the source document, including all the diff
+Sample 9: [Low ROUGE / High Judge] ROUGE: 0.13559322033898305, F: 4, C: 4
+  Reason: Most facts are verified in the SOURCE, but some are not explicitly mentioned.
+Sample 10: [Low ROUGE / High Judge] ROUGE: 0.13372093023255813, F: 5, C: 5
+  Reason: All facts are verifiable in the SOURCE document.
+Sample 11: [Low ROUGE / High Judge] ROUGE: 0.11764705882352942, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 12: [Low ROUGE / High Judge] ROUGE: 0.11650485436893204, F: 5, C: 4
+  Reason: All information in the GENERATED summary is verifiable in the SOURCE document.
+Sample 14: [Low ROUGE / High Judge] ROUGE: 0.09375, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 15: [Low ROUGE / High Judge] ROUGE: 0.1217391304347826, F: 5, C: 5
+  Reason: All information in the GENERATED summary is verifiable in the SOURCE document.
+Sample 17: [Low ROUGE / High Judge] ROUGE: 0.12820512820512822, F: 5, C: 5
+  Reason: All information in the generated summary is verifiable in the source document.
+Sample 18: [Low ROUGE / High Judge] ROUGE: 0.07048458149779736, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 20: [Low ROUGE / High Judge] ROUGE: 0.1, F: 5, C: 5
+  Reason: All information in the generated summary is verifiable in the source document.
+Sample 23: [Low ROUGE / High Judge] ROUGE: 0.12385321100917432, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 24: [Low ROUGE / High Judge] ROUGE: 0.05660377358490567, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 25: [Low ROUGE / High Judge] ROUGE: 0.09999999999999999, F: 4, C: 5
+  Reason: Incorrect number of tracks and incorrect date of release
+Sample 26: [Low ROUGE / High Judge] ROUGE: 0.06818181818181819, F: 5, C: 5
+  Reason: All information in the GENERATED summary is verifiable in the SOURCE.
+Sample 27: [Low ROUGE / High Judge] ROUGE: 0.05479452054794521, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 28: [Low ROUGE / High Judge] ROUGE: 0.08928571428571427, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 29: [Low ROUGE / High Judge] ROUGE: 0.12500000000000003, F: 5, C: 5
+  Reason: All information in the generated summary is verifiable in the SOURCE document.
+Sample 30: [Low ROUGE / High Judge] ROUGE: 0.11214953271028039, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 32: [Low ROUGE / High Judge] ROUGE: 0.09785932721712538, F: 5, C: 5
+  Reason: The generated summary is a faithful reproduction of the source content, including all relevant infor
+Sample 33: [Low ROUGE / High Judge] ROUGE: 0.08888888888888889, F: 5, C: 5
+  Reason: All information in the generated summary is verifiable in the SOURCE document.
+Sample 34: [Low ROUGE / High Judge] ROUGE: 0.08310249307479224, F: 5, C: 5
+  Reason: All information in the generated summary is verifiable in the SOURCE document.
+Sample 35: [Low ROUGE / High Judge] ROUGE: 0.11846689895470383, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 36: [Low ROUGE / High Judge] ROUGE: 0.1282051282051282, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 37: [Low ROUGE / High Judge] ROUGE: 0.06734006734006734, F: 5, C: 5
+  Reason: The generated summary is a faithful reproduction of the source content, with all information verifia
+Sample 38: [Low ROUGE / High Judge] ROUGE: 0.078125, F: 5, C: 5
+  Reason: All information in the GENERATED summary is verifiable in the SOURCE document.
+Sample 39: [Low ROUGE / High Judge] ROUGE: 0.05952380952380952, F: 5, C: 5
+  Reason: The generated summary is a faithful representation of the source content, with all information verif
+Sample 40: [Low ROUGE / High Judge] ROUGE: 0.0881057268722467, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 41: [Low ROUGE / High Judge] ROUGE: 0.055045871559633024, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 43: [Low ROUGE / High Judge] ROUGE: 0.0816326530612245, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 44: [Low ROUGE / High Judge] ROUGE: 0.14189189189189189, F: 5, C: 5
+  Reason: All information in the GENERATED summary is verifiable in the SOURCE document.
+Sample 45: [Low ROUGE / High Judge] ROUGE: 0.061068702290076333, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 46: [Low ROUGE / High Judge] ROUGE: 0.13071895424836602, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 47: [Low ROUGE / High Judge] ROUGE: 0.0784313725490196, F: 5, C: 5
+  Reason: All information in the GENERATED SUMMARY is verifiable in the SOURCE.
+Sample 48: [Low ROUGE / High Judge] ROUGE: 0.13877551020408163, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 49: [Low ROUGE / High Judge] ROUGE: 0.07619047619047618, F: 5, C: 5
+  Reason: All information in the GENERATED summary is verifiable in the SOURCE document.
+Sample 51: [Low ROUGE / High Judge] ROUGE: 0.06818181818181819, F: 5, C: 5
+  Reason: All information in the GENERATED summary is verifiable in the SOURCE.
+Sample 52: [Low ROUGE / High Judge] ROUGE: 0.13559322033898305, F: 5, C: 5
+  Reason: All information in the generated summary is verifiable in the source document.
+Sample 53: [Low ROUGE / High Judge] ROUGE: 0.1443298969072165, F: 5, C: 5
+  Reason: All information in the generated summary is verifiable in the source document.
+Sample 54: [Low ROUGE / High Judge] ROUGE: 0.11304347826086958, F: 5, C: 5
+  Reason: All information in the GENERATED summary is verifiable in the SOURCE document.
+Sample 57: [Low ROUGE / High Judge] ROUGE: 0.14545454545454545, F: 5, C: 4
+  Reason: All information is verifiable in the SOURCE document.
+Sample 59: [Low ROUGE / High Judge] ROUGE: 0.0970873786407767, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 60: [Low ROUGE / High Judge] ROUGE: 0.11594202898550725, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 61: [Low ROUGE / High Judge] ROUGE: 0.13186813186813187, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 62: [Low ROUGE / High Judge] ROUGE: 0.13333333333333333, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 64: [Low ROUGE / High Judge] ROUGE: 0.1142857142857143, F: 5, C: 5
+  Reason: All information in the generated summary is verifiable in the source document.
+Sample 65: [Low ROUGE / High Judge] ROUGE: 0.125, F: 5, C: 5
+  Reason: The generated summary is a faithful reproduction of the source content, with all facts verifiable in
+Sample 66: [Low ROUGE / High Judge] ROUGE: 0.126984126984127, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 68: [Low ROUGE / High Judge] ROUGE: 0.057971014492753624, F: 5, C: 5
+  Reason: The generated summary is a faithful reproduction of the source content, including all verifiable fac
+Sample 69: [Low ROUGE / High Judge] ROUGE: 0.11504424778761063, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 72: [Low ROUGE / High Judge] ROUGE: 0.1206896551724138, F: 5, C: 5
+  Reason: All information in the generated summary is verifiable in the source document.
+Sample 73: [Low ROUGE / High Judge] ROUGE: 0.13333333333333333, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 74: [Low ROUGE / High Judge] ROUGE: 0.05217391304347826, F: 5, C: 5
+  Reason: All information in the GENERATED summary is verifiable in the SOURCE document.
+Sample 75: [Low ROUGE / High Judge] ROUGE: 0.04819277108433735, F: 5, C: 5
+  Reason: All information in the GENERATED summary is verifiable in the SOURCE document.
+Sample 76: [Low ROUGE / High Judge] ROUGE: 0.12121212121212123, F: 4, C: 4
+  Reason: The generated summary includes some information not present in the source, such as the mention of 'R
+Sample 77: [Low ROUGE / High Judge] ROUGE: 0.06837606837606838, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 78: [Low ROUGE / High Judge] ROUGE: 0.10989010989010989, F: 5, C: 5
+  Reason: All information in the GENERATED summary is verifiable in the SOURCE document.
+Sample 79: [Low ROUGE / High Judge] ROUGE: 0.11594202898550722, F: 5, C: 5
+  Reason: The generated summary is a faithful reproduction of the source content, with all information verifia
+Sample 80: [Low ROUGE / High Judge] ROUGE: 0.14678899082568808, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 83: [Low ROUGE / High Judge] ROUGE: 0.11267605633802817, F: 5, C: 5
+  Reason: All information in the GENERATED summary is verifiable in the SOURCE document.
+Sample 85: [Low ROUGE / High Judge] ROUGE: 0.1339712918660287, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 86: [Low ROUGE / High Judge] ROUGE: 0.13793103448275862, F: 5, C: 5
+  Reason: All information in the GENERATED summary is verifiable in the SOURCE document.
+Sample 89: [Low ROUGE / High Judge] ROUGE: 0.13333333333333333, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 90: [Low ROUGE / High Judge] ROUGE: 0.03731343283582089, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 91: [Low ROUGE / High Judge] ROUGE: 0.12834224598930483, F: 5, C: 5
+  Reason: All information in the GENERATED summary is verifiable in the SOURCE.
+Sample 93: [Low ROUGE / High Judge] ROUGE: 0.13333333333333333, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 94: [Low ROUGE / High Judge] ROUGE: 0.126984126984127, F: 5, C: 5
+  Reason: The generated summary is a faithful representation of the source content, including specific example
+Sample 96: [Low ROUGE / High Judge] ROUGE: 0.11864406779661017, F: 5, C: 5
+  Reason: All information is verifiable in the SOURCE document.
+Sample 99: [Low ROUGE / High Judge] ROUGE: 0.1267605633802817, F: 5, C: 5
+  Reason: All information in the GENERATED summary is verifiable in the SOURCE document.

@@ -110,11 +110,11 @@ def group_by(
     """Group results by a dimension from run_info.
 
     Args:
-        results: Dict of result key → data.
+        results: Dict of result key -> data.
         dimension: Dimension to group by (e.g. "config", "quantization", "inference_type").
 
     Returns:
-        Dict mapping dimension value → list of extracted metrics.
+        Dict mapping dimension value -> list of extracted metrics.
     """
     groups = {}
     for key, data in results.items():
@@ -143,10 +143,10 @@ def find_best_configs(
     """Find best configurations for each metric.
 
     Args:
-        results: Dict of result key → data.
+        results: Dict of result key -> data.
 
     Returns:
-        Dict mapping metric name → (best_config_key, best_value).
+        Dict mapping metric name -> (best_config_key, best_value).
     """
     best = {}
 

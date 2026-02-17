@@ -13,13 +13,16 @@ def compute_bert_score(
     predictions: List[str],
     references: List[str],
     lang: str = "it",
+    model_type: str = None,
 ) -> Dict[str, float]:
     """Compute BERTScore F1 between predictions and references.
 
     Args:
         predictions: List of generated summaries.
         references: List of reference summaries.
-        lang: Language code for BERTScore model selection.
+        lang: Language code for BERTScore model selection (ignored if model_type is set).
+        model_type: Explicit model name (e.g. 'microsoft/mdeberta-v3-base') to override
+                     the default language-based selection. Enables fair cross-lingual comparison.
 
     Returns:
         Dict with 'mean', 'std', and 'scores' (per-sample F1).
@@ -27,7 +30,14 @@ def compute_bert_score(
     from bert_score import score as bert_score_fn
 
     # Force CPU to avoid VRAM contention with LLM on GPU
-    _, _, F1 = bert_score_fn(predictions, references, lang=lang, verbose=False, device="cpu")
+    if model_type:
+        _, _, F1 = bert_score_fn(
+            predictions, references, model_type=model_type, verbose=False, device="cpu"
+        )
+    else:
+        _, _, F1 = bert_score_fn(
+            predictions, references, lang=lang, verbose=False, device="cpu"
+        )
     scores = F1.numpy().tolist()
     return {
         "mean": float(np.mean(scores)),

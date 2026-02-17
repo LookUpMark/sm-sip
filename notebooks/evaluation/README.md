@@ -7,7 +7,7 @@ This report provides a detailed diagnostic analysis of the SigExt + LLM summariz
 | Metric | English (ArXiv) | Italian (WITS) | Diagnostic Interpretation |
 | :--- | :---: | :---: | :--- |
 | **ROUGE-1 (Mean)** | 0.4010 | 0.2033 | **Ground Truth Bias**: ArXiv references are abstractive; WITS references are often single-sentence "snippets". |
-| **BERTScore (Mean)** | 0.8357 | 0.6617 | **Semantic Shift**: English models (Llama-3.1) show tighter semantic packaging in native English contexts. |
+| **BERTScore (Mean)** | 0.8357 | 0.6617 | **Model Disparity**: EN uses `roberta-large` (355M params); IT uses `bert-base-multilingual-cased` (110M params). Absolute values are **not cross-lingua comparable** — see §2.D. |
 | **KIR (Mean)** | 0.6680 | 0.4397 | **Salience Mismatch**: Italian summaries often prioritize narrative flow over verbatim "Keyphrase" retention. |
 | **Judge Abstraction** | **4.76** | **4.92** | **Fluidity**: Italian summaries often receive higher style marks for natural phrasing. |
 | **Refusal Rate** | **~10% (EN)** | **<1% (IT)** | **Technical Fragility**: Mathematical placeholders in ArXiv occasionally trigger judge refusals. |
@@ -22,18 +22,27 @@ Through a systematic audit of 1000+ samples, we have identified three critical r
 
 ### A. The "Concise Reference" Paradox (Italian WITS)
 **Pattern**: Extremely low ROUGE (0.03 - 0.12) + Perfect Judge Scores (5/5).
-- **Cause**: WITS references are often single-sentence snippets or metadata points, while the pipeline generates comprehensive, high-quality encyclopedic summaries.
+- **Cause**: WITS references are often single-sentence snippets, especially for **Disambiguation Pages** (e.g., "San Juan", "Santa Fe"). The reference is just the header, while the LLM generates a full, high-quality summary of the entire list.
+- **Fact**: In over 40% of Italian discrepancy cases, the reference was less than 20% of the length of the generated summary.
 - **Example**: [Sample #1311 (Dave Sim)](file:///home/marcantoniolopez/Documenti/github/projects/sm-sip/notebooks/evaluation/results/italian/eval_enhanced.json#L1302-1331) receives a ROUGE-L of **0.05** but a Judge score of **5/5** for Completeness and Faithfulness.
 
 ### B. Technical Placeholder Fragility (English ArXiv)
 **Pattern**: "Unable to evaluate" verdict from the LLM Judge.
 - **Cause**: High density of symbolic placeholders (e.g., `@xmath1`, `@xmath3`) in the source text.
-- **Finding**: Refusals correlate strongly with highly formula-heavy ArXiv abstracts. The judge LLM (Llama-3.1-8B) occasionally fails to parse these "tokenized" representations of math.
+- **Finding**: Refusals correlate strongly with formula-heavy abstracts. The judge (Llama-3.1-8B) struggles to interpret sentences where math tokens replace core technical concepts.
 
 ### C. The "SigExt Mismatch" (Salience Divergence)
 **Pattern**: KIR Score of 0.0 + High Utility Summary.
 - **Cause**: The SigExt model extracts raw technical entities (e.g., administrative lists), but the LLM intelligently decides to ignore them in favor of a cohesive narrative.
 - **Finding**: LLM Intelligence > Simple Extraction; the model prioritizes user-readable flow over verbatim keyword retention.
+
+### D. BERTScore Model Disparity (Cross-Lingual)
+**Pattern**: BERTScore(EN) ≈ 0.84 vs BERTScore(IT) ≈ 0.66 — a gap of ~0.17.
+- **Cause**: The `bert-score` library auto-selects different underlying models based on `lang`:
+  - **English** -> `roberta-large` (355M parameters, English-only, high-quality embeddings)
+  - **Italian** -> `bert-base-multilingual-cased` (110M parameters, 104 languages, lower-resolution embeddings)
+- **Consequence**: The 0.17 gap reflects **model capacity**, not summary quality. Comparing absolute BERTScore values across languages is methodologically invalid.
+- **Solution**: A dedicated [Cross-Lingual Ablation](file:///home/marcantoniolopez/Documenti/github/projects/sm-sip/notebooks/ablation/ablation-cross-lingual.ipynb) uses a unified model (`microsoft/mdeberta-v3-base`) for both languages, producing comparable scores.
 
 ---
 
@@ -82,7 +91,7 @@ The LLM-as-Judge (Qwen2.5-14B) is effective but has identifiable biases and occa
 
 ## 4. Conclusions and Recommendations
 
-1.  **Metric Reliability**: For the **Italian (WITS)** project, traditional metrics like ROUGE are **not a reliable proxy** for quality due to reference brevity. **Judge Scores and BERTScore** should be the primary evaluation pillars.
+1.  **Metric Reliability**: For **Italian (WITS)**, ROUGE is **invalid** as a quality proxy due to reference brevity. BERTScore absolute values are **not cross-lingua comparable** due to model disparity (see §2.D). Use the [Cross-Lingual Ablation](file:///home/marcantoniolopez/Documenti/github/projects/sm-sip/notebooks/ablation/ablation-cross-lingual.ipynb) with unified `mdeberta-v3-base` for fair comparison. **Judge Scores** remain the most reliable evaluation pillar.
 2.  **English Technical Limits**: The pipeline is highly stable for English narrative science, but accuracy/evaluation stability drops in **formula-heavy** papers where `@xmath` placeholders dominate.
 3.  **Instruction Alignment**: The "Source-Aware" prompt effectively manages the "More Complete Than Reference" feature, ensuring that additions are grounded in the source text rather than external hallucinations.
 4.  **Judge Strategy**: To eliminate "Reasoning False Negatives," we recommend a **Majority Vote** judge system or upgrading the judge to a larger model (e.g., Llama-3-70B) for mission-critical audit batches.

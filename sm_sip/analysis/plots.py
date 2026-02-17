@@ -20,7 +20,7 @@ def plot_comparison(
     """Create a bar chart comparing a metric across groups.
 
     Args:
-        groups: Dict from group_by(), mapping group name → list of metrics dicts.
+        groups: Dict from group_by(), mapping group name -> list of metrics dicts.
         metric: Metric key to plot (e.g. "bert", "rouge", "kir").
         title: Plot title.
         ylabel: Y-axis label (defaults to metric name).

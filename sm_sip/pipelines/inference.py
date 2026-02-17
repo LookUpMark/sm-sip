@@ -1,8 +1,8 @@
 """
 Inference pipeline: generates summaries using SigExt + LLM.
 
-Orchestrates the full generation flow: load data → extract
-salient sentences → generate summaries via LangChain chain.
+Orchestrates the full generation flow: load data -> extract
+salient sentences -> generate summaries via LangChain chain.
 """
 
 from typing import List, Dict, Optional

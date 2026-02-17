@@ -13,7 +13,6 @@ langchain-huggingface
 huggingface_hub
 numpy<2.0
 scipy>1.10
-alignscorevllm
 tqdm
 matplotlib
 pandas
