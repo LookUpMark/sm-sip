@@ -11,6 +11,7 @@ base model, avoiding redundant computation.
 
 import json
 import os
+import pickle
 from collections import defaultdict
 from typing import Dict, List, Optional, Tuple
 
@@ -69,11 +70,24 @@ def _load_raw_dataset(dataset_name: str, num_samples: int) -> List[Dict[str, str
 def _precompute_similarities(
     entries: List[Dict[str, str]],
     lang: str,
+    cache_dir: str = "cache",
 ) -> List[Tuple[List[str], np.ndarray, str]]:
     """Pre-compute SBERT similarities for all entries (once per language group).
 
+    Results are persisted to disk so that a kernel restart does NOT
+    require re-running SBERT.  The cache file is keyed by language and
+    number of samples.
+
     Returns list of (sentences, similarities, source_text) tuples.
     """
+    os.makedirs(cache_dir, exist_ok=True)
+    cache_path = os.path.join(cache_dir, f"similarities_{lang}_{len(entries)}.pkl")
+
+    if os.path.exists(cache_path):
+        print(f"  Loading cached similarities from {cache_path}...")
+        with open(cache_path, "rb") as f:
+            return pickle.load(f)
+
     from sentence_transformers import SentenceTransformer
 
     print(f"  Pre-computing similarities ({len(entries)} samples, lang={lang})...")
@@ -88,6 +102,11 @@ def _precompute_similarities(
 
     del sbert
     clear_gpu_memory()
+
+    with open(cache_path, "wb") as f:
+        pickle.dump(results, f)
+    print(f"  Similarities cached to {cache_path}")
+
     return results
 
 
