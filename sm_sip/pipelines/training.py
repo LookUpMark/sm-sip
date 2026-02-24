@@ -9,9 +9,11 @@ are cached and reused across configs that share the same language or
 base model, avoiding redundant computation.
 """
 
+import glob
 import json
 import os
 import pickle
+import re
 from collections import defaultdict
 from typing import Dict, List, Optional, Tuple
 
@@ -83,18 +85,42 @@ def _precompute_similarities(
     os.makedirs(cache_dir, exist_ok=True)
     cache_path = os.path.join(cache_dir, f"similarities_{lang}_{len(entries)}.pkl")
 
-    # Load existing (possibly partial) cache
+    # --- Improved Cache Discovery ---
+    pattern = os.path.join(cache_dir, f"similarities_{lang}_*.pkl")
+    existing_files = glob.glob(pattern)
+    
+    best_path = None
+    max_found = -1
+    
+    for path in existing_files:
+        match = re.search(rf"similarities_{lang}_(\d+)\.pkl", os.path.basename(path))
+        if match:
+            count = int(match.group(1))
+            if count > max_found:
+                max_found = count
+                best_path = path
+
     results: List[Tuple[List[str], np.ndarray, str]] = []
-    if os.path.exists(cache_path):
-        with open(cache_path, "rb") as f:
+    
+    # If the exact file exists, we'll use it. 
+    # Otherwise, if we found a "best" alternative, we load it.
+    load_path = cache_path if os.path.exists(cache_path) else best_path
+
+    if load_path:
+        print(f"  Loading existing cache: {os.path.basename(load_path)}")
+        with open(load_path, "rb") as f:
             results = pickle.load(f)
-
-    if len(results) >= len(entries):
-        print(f"  Similarities fully cached ({len(results)} samples) — skipping SBERT.")
-        return results
-
-    if results:
-        print(f"  Resuming from cached {len(results)}/{len(entries)} samples...")
+            
+        if len(results) >= len(entries):
+            print(f"  Cache has {len(results)} samples (needed {len(entries)}). Truncating.")
+            results = results[:len(entries)]
+            # If we loaded from a different file, save it to the current target path
+            if load_path != cache_path:
+                with open(cache_path, "wb") as f:
+                    pickle.dump(results, f)
+            return results
+        else:
+            print(f"  Resuming from {len(results)}/{len(entries)} samples...")
 
     from sentence_transformers import SentenceTransformer
 
