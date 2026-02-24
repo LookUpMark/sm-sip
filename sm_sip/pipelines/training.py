@@ -250,6 +250,18 @@ def _train_single(
         model.parameters(), lr=config.learning_rate, weight_decay=0.01,
     )
 
+    # --- Compute class weights (inverse frequency) ---
+    counts = torch.zeros(2)
+    for sample_labels in train_dataset.labels:
+        for lbl in sample_labels:
+            if lbl >= 0:  # skip -100 padding
+                counts[lbl] += 1
+    class_weights = (counts.sum() / (2 * counts)).to(device)
+    print(f"  Class distribution: non-salient={int(counts[0])}, salient={int(counts[1])}")
+    print(f"  Class weights: [{class_weights[0]:.2f}, {class_weights[1]:.2f}]")
+
+    loss_fn = torch.nn.CrossEntropyLoss(weight=class_weights, ignore_index=-100)
+
     # Mixed precision (FP16)
     use_amp = device == "cuda"
     scaler = torch.amp.GradScaler("cuda", enabled=use_amp)
@@ -265,11 +277,13 @@ def _train_single(
         model.train()
         train_loss = 0
         for batch in tqdm(train_loader, desc=f"  Epoch {epoch + 1}/{config.epochs} [train]"):
+            labels = batch.pop("labels").to(device)
             batch = {k: v.to(device) for k, v in batch.items()}
 
             with torch.amp.autocast("cuda", enabled=use_amp):
                 outputs = model(**batch)
-                loss = outputs.loss
+                logits = outputs.logits  # (batch, seq_len, 2)
+                loss = loss_fn(logits.view(-1, 2), labels.view(-1))
 
             scaler.scale(loss).backward()
             scaler.step(optimizer)
@@ -284,10 +298,13 @@ def _train_single(
         val_loss = 0
         with torch.no_grad():
             for batch in val_loader:
+                labels = batch.pop("labels").to(device)
                 batch = {k: v.to(device) for k, v in batch.items()}
                 with torch.amp.autocast("cuda", enabled=use_amp):
                     outputs = model(**batch)
-                val_loss += outputs.loss.item()
+                    logits = outputs.logits
+                    loss = loss_fn(logits.view(-1, 2), labels.view(-1))
+                val_loss += loss.item()
 
         avg_val = val_loss / len(val_loader)
         improved = avg_val < best_val_loss
