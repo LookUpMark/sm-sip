@@ -19,6 +19,14 @@ from sm_sip.data.preprocessing import compute_semantic_labels, extract_sentences
 from sm_sip.utils.gpu import clear_gpu_memory
 
 
+def get_dataset_keys(entry: dict):
+    """Heuristic to find source and summary keys."""
+    keys = entry.keys()
+    source_key = next((k for k in ["article", "source", "text", "document"] if k in keys), "source")
+    summary_key = next((k for k in ["abstract", "summary", "target", "label"] if k in keys), "summary")
+    return source_key, summary_key
+
+
 def prepare_training_data(
     config: TrainingConfig,
     dataset_entries: list,
@@ -35,15 +43,21 @@ def prepare_training_data(
     Returns:
         SigExtDataset ready for DataLoader.
     """
-    tokenizer = AutoTokenizer.from_pretrained(config.base_model_id)
+    tokenizer = AutoTokenizer.from_pretrained(config.base_model_id, use_fast=False)
     lang = config.lang
 
     all_texts = []
     all_labels = []
 
+    # Find keys from first entry
+    if dataset_entries:
+        source_key, summary_key = get_dataset_keys(dataset_entries[0])
+    else:
+        source_key, summary_key = "source", "summary"
+
     for entry in tqdm(dataset_entries[:config.num_samples], desc="Preparing training data"):
-        source = entry["source"]
-        summary = entry["summary"]
+        source = entry[source_key]
+        summary = entry[summary_key]
 
         sentences, labels = compute_semantic_labels(
             source, summary,
@@ -153,7 +167,7 @@ def train_sigext(config: TrainingConfig, dataset_entries: Optional[list] = None)
         print(f"  Epoch {epoch + 1} loss: {total_loss / len(dataloader):.4f}")
 
     # Save / Push to hub
-    tokenizer = AutoTokenizer.from_pretrained(config.base_model_id)
+    tokenizer = AutoTokenizer.from_pretrained(config.base_model_id, use_fast=False)
     if config.push_to_hub:
         print(f"  Pushing to HuggingFace Hub: {config.output_model_name}...")
         model.push_to_hub(config.output_model_name)
