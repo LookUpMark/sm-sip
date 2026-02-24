@@ -192,9 +192,11 @@ def _build_dataset(
 
 def _train_single(
     config: TrainingConfig,
-    dataset: SigExtDataset,
+    train_dataset: SigExtDataset,
+    val_dataset: SigExtDataset,
 ) -> None:
-    """Train a single SigExt model on a pre-built dataset."""
+    """Train a single SigExt model with early stopping on validation loss."""
+    import copy
     from sm_sip.utils.seed import set_seed
 
     set_seed(config.seed)
@@ -202,14 +204,16 @@ def _train_single(
     print(f"\n{'=' * 60}")
     print(f"TRAINING: {config.output_model_name} (seed={config.seed})")
     print(f"  Base: {config.base_model_id}")
-    print(f"  Threshold: {config.similarity_threshold}, Samples: {len(dataset)}")
+    print(f"  Threshold: {config.similarity_threshold}")
+    print(f"  Train: {len(train_dataset)}, Val: {len(val_dataset)}")
+    print(f"  Early stopping: patience={config.patience}, max_epochs={config.epochs}")
     print(f"{'=' * 60}")
 
-    g = torch.Generator()
-    g.manual_seed(config.seed)
-    dataloader = DataLoader(
-        dataset, batch_size=config.batch_size, shuffle=True, generator=g,
+    train_loader = DataLoader(
+        train_dataset, batch_size=config.batch_size, shuffle=True,
+        generator=torch.Generator().manual_seed(config.seed),
     )
+    val_loader = DataLoader(val_dataset, batch_size=config.batch_size, shuffle=False)
 
     device = "cuda" if torch.cuda.is_available() else "cpu"
     model = AutoModelForTokenClassification.from_pretrained(
@@ -220,14 +224,21 @@ def _train_single(
         model.parameters(), lr=config.learning_rate, weight_decay=0.01,
     )
 
-    # Mixed precision (FP16) for faster training and lower VRAM usage
+    # Mixed precision (FP16)
     use_amp = device == "cuda"
     scaler = torch.amp.GradScaler("cuda", enabled=use_amp)
 
-    model.train()
+    # --- Early stopping state ---
+    best_val_loss = float("inf")
+    best_weights = None
+    epochs_no_improve = 0
+    best_epoch = 0
+
     for epoch in range(config.epochs):
-        total_loss = 0
-        for batch in tqdm(dataloader, desc=f"  Epoch {epoch + 1}/{config.epochs}"):
+        # --- Training ---
+        model.train()
+        train_loss = 0
+        for batch in tqdm(train_loader, desc=f"  Epoch {epoch + 1}/{config.epochs} [train]"):
             batch = {k: v.to(device) for k, v in batch.items()}
 
             with torch.amp.autocast("cuda", enabled=use_amp):
@@ -238,8 +249,42 @@ def _train_single(
             scaler.step(optimizer)
             scaler.update()
             optimizer.zero_grad()
-            total_loss += loss.item()
-        print(f"  Epoch {epoch + 1} loss: {total_loss / len(dataloader):.4f}")
+            train_loss += loss.item()
+
+        avg_train = train_loss / len(train_loader)
+
+        # --- Validation ---
+        model.eval()
+        val_loss = 0
+        with torch.no_grad():
+            for batch in val_loader:
+                batch = {k: v.to(device) for k, v in batch.items()}
+                with torch.amp.autocast("cuda", enabled=use_amp):
+                    outputs = model(**batch)
+                val_loss += outputs.loss.item()
+
+        avg_val = val_loss / len(val_loader)
+        improved = avg_val < best_val_loss
+
+        print(f"  Epoch {epoch + 1}  train_loss={avg_train:.4f}  val_loss={avg_val:.4f}"
+              f"  {'✓ improved' if improved else ''}")
+
+        if improved:
+            best_val_loss = avg_val
+            best_weights = copy.deepcopy(model.state_dict())
+            best_epoch = epoch + 1
+            epochs_no_improve = 0
+        else:
+            epochs_no_improve += 1
+            if epochs_no_improve >= config.patience:
+                print(f"  Early stopping at epoch {epoch + 1} "
+                      f"(best epoch: {best_epoch}, best val_loss: {best_val_loss:.4f})")
+                break
+
+    # Restore best weights
+    if best_weights is not None:
+        model.load_state_dict(best_weights)
+        print(f"  Restored best weights from epoch {best_epoch}")
 
     # Save / Push to hub
     tokenizer = AutoTokenizer.from_pretrained(config.base_model_id, use_fast=False)
@@ -253,7 +298,7 @@ def _train_single(
         model.save_pretrained(save_path)
         tokenizer.save_pretrained(save_path)
 
-    del model, optimizer, scaler
+    del model, optimizer, scaler, best_weights
     clear_gpu_memory()
     print("  Done.")
 
@@ -315,11 +360,13 @@ def run_training_matrix(
         print(f"# Models to train: {len(group_configs)}")
         print(f"{'#' * 70}")
 
-        # 1. Load dataset once (max samples needed in this group)
+        # 1. Load dataset once (max samples needed + extra for validation)
         max_samples = max(c.num_samples for c in group_configs)
-        raw_entries = _load_raw_dataset(dataset_name, max_samples)
+        max_val = max(int(c.num_samples * c.val_split) for c in group_configs)
+        total_needed = max_samples + max_val
+        raw_entries = _load_raw_dataset(dataset_name, total_needed)
 
-        # 2. Pre-compute similarities once
+        # 2. Pre-compute similarities once (for all samples including val)
         sim_data = _precompute_similarities(raw_entries, lang)
 
         # 3. Group by base_model_id for tokenizer reuse
@@ -336,17 +383,22 @@ def run_training_matrix(
                     print(f"  Skip {config.output_model_name} (already completed)")
                     continue
 
-                # Slice similarity data to num_samples
-                sliced_sim = sim_data[:config.num_samples]
+                # Train: first num_samples | Val: next val_size samples (no overlap)
+                val_size = max(1, int(config.num_samples * config.val_split))
+                train_sim = sim_data[:config.num_samples]
+                val_sim = sim_data[config.num_samples:config.num_samples + val_size]
 
-                # Build dataset (threshold + tokenize — fast, no SBERT)
-                dataset = _build_dataset(
-                    sliced_sim, config.similarity_threshold,
+                train_dataset = _build_dataset(
+                    train_sim, config.similarity_threshold,
+                    tokenizer, config.max_length,
+                )
+                val_dataset = _build_dataset(
+                    val_sim, config.similarity_threshold,
                     tokenizer, config.max_length,
                 )
 
                 try:
-                    _train_single(config, dataset)
+                    _train_single(config, train_dataset, val_dataset)
                     completed.append(config.output_model_name)
                     _save_checkpoint(checkpoint_file, completed)
                 except Exception as e:

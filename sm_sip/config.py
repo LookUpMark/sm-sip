@@ -144,7 +144,9 @@ class TrainingConfig:
     dataset_name: str = "silvia-casola/WITS"  # HuggingFace dataset
     num_samples: int = 5000
     similarity_threshold: float = 0.60
-    epochs: int = 3
+    epochs: int = 10  # Max epochs (early stopping will likely stop sooner)
+    patience: int = 2  # Stop after N epochs without val loss improvement
+    val_split: float = 0.1  # Fraction of data for validation
     learning_rate: float = 2e-5
     batch_size: int = 8
     max_length: int = 2048
