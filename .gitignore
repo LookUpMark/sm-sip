@@ -59,6 +59,9 @@ Thumbs.db
 data/*.jsonl
 /models/
 checkpoints*
+!training_checkpoint.json
+cache/
+*.pkl
 *.log
 
 # Allow keeping results JSON/plots but ignore large caches if any
