@@ -71,38 +71,53 @@ def _precompute_similarities(
     entries: List[Dict[str, str]],
     lang: str,
     cache_dir: str = "cache",
+    save_every: int = 500,
 ) -> List[Tuple[List[str], np.ndarray, str]]:
     """Pre-compute SBERT similarities for all entries (once per language group).
 
     Results are persisted to disk so that a kernel restart does NOT
-    require re-running SBERT.  The cache file is keyed by language and
-    number of samples.
+    require re-running SBERT.  Partial results are saved every
+    `save_every` samples, allowing safe resumption from any point.
 
     Returns list of (sentences, similarities, source_text) tuples.
     """
     os.makedirs(cache_dir, exist_ok=True)
     cache_path = os.path.join(cache_dir, f"similarities_{lang}_{len(entries)}.pkl")
 
+    # Load existing (possibly partial) cache
+    results: List[Tuple[List[str], np.ndarray, str]] = []
     if os.path.exists(cache_path):
-        print(f"  Loading cached similarities from {cache_path}...")
         with open(cache_path, "rb") as f:
-            return pickle.load(f)
+            results = pickle.load(f)
+
+    if len(results) >= len(entries):
+        print(f"  Similarities fully cached ({len(results)} samples) — skipping SBERT.")
+        return results
+
+    if results:
+        print(f"  Resuming from cached {len(results)}/{len(entries)} samples...")
 
     from sentence_transformers import SentenceTransformer
 
-    print(f"  Pre-computing similarities ({len(entries)} samples, lang={lang})...")
+    print(f"  Pre-computing similarities ({len(entries) - len(results)} remaining, lang={lang})...")
     sbert = SentenceTransformer("sentence-transformers/all-mpnet-base-v2")
 
-    results = []
-    for entry in tqdm(entries, desc="  Computing similarities"):
+    for i, entry in enumerate(tqdm(entries[len(results):], desc="  Computing similarities",
+                                    initial=len(results), total=len(entries))):
         sents, sims = compute_similarities(
             entry["source"], entry["summary"], lang=lang, sbert_model=sbert,
         )
         results.append((sents, sims, entry["source"]))
 
+        # Incremental save
+        if (len(results)) % save_every == 0:
+            with open(cache_path, "wb") as f:
+                pickle.dump(results, f)
+
     del sbert
     clear_gpu_memory()
 
+    # Final save
     with open(cache_path, "wb") as f:
         pickle.dump(results, f)
     print(f"  Similarities cached to {cache_path}")
