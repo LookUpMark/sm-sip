@@ -170,7 +170,16 @@ def _build_dataset(
         all_texts, truncation=True, max_length=max_length,
         padding=True, return_tensors="pt",
     )
-    return SigExtDataset(encodings, all_labels)
+
+    # Pad labels to match the padded sequence length
+    # Using -100 so they are ignored by CrossEntropyLoss
+    max_seq_len = encodings.input_ids.shape[1]
+    padded_labels = []
+    for labels in all_labels:
+        pad_len = max_seq_len - len(labels)
+        padded_labels.append(labels + [-100] * pad_len)
+
+    return SigExtDataset(encodings, padded_labels)
 
 
 # ---------------------------------------------------------------------------
