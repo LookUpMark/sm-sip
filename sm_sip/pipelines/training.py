@@ -44,7 +44,7 @@ def _get_dataset_keys(entry: dict) -> Tuple[str, str]:
     return source_key, summary_key
 
 
-def _load_raw_dataset(dataset_name: str, num_samples: int) -> List[Dict[str, str]]:
+def load_raw_dataset(dataset_name: str, num_samples: int) -> List[Dict[str, str]]:
     """Load raw entries from HuggingFace and normalize keys to source/summary."""
     from datasets import load_dataset as hf_load_dataset
 
@@ -68,7 +68,7 @@ def _load_raw_dataset(dataset_name: str, num_samples: int) -> List[Dict[str, str
 # Similarity pre-computation
 # ---------------------------------------------------------------------------
 
-def _precompute_similarities(
+def precompute_similarities_data(
     entries: List[Dict[str, str]],
     lang: str,
     cache_dir: str = "cache",
@@ -154,7 +154,7 @@ def _precompute_similarities(
 # Token-level label alignment
 # ---------------------------------------------------------------------------
 
-def _build_dataset(
+def build_sigext_dataset(
     sim_data: List[Tuple[List[str], np.ndarray, str]],
     threshold: float,
     tokenizer,
@@ -407,10 +407,10 @@ def run_training_matrix(
         max_samples = max(c.num_samples for c in group_configs)
         max_val = max(int(c.num_samples * c.val_split) for c in group_configs)
         total_needed = max_samples + max_val
-        raw_entries = _load_raw_dataset(dataset_name, total_needed)
+        raw_entries = load_raw_dataset(dataset_name, total_needed)
 
         # 2. Pre-compute similarities once (for all samples including val)
-        sim_data = _precompute_similarities(raw_entries, lang)
+        sim_data = precompute_similarities_data(raw_entries, lang)
 
         # 3. Group by base_model_id for tokenizer reuse
         model_groups: Dict[str, List[TrainingConfig]] = defaultdict(list)
@@ -431,11 +431,11 @@ def run_training_matrix(
                 train_sim = sim_data[:config.num_samples]
                 val_sim = sim_data[config.num_samples:config.num_samples + val_size]
 
-                train_dataset = _build_dataset(
+                train_dataset = build_sigext_dataset(
                     train_sim, config.similarity_threshold,
                     tokenizer, config.max_length,
                 )
-                val_dataset = _build_dataset(
+                val_dataset = build_sigext_dataset(
                     val_sim, config.similarity_threshold,
                     tokenizer, config.max_length,
                 )
