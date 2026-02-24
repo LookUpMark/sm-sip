@@ -25,7 +25,6 @@ from sm_sip.config import TrainingConfig
 from sm_sip.data.dataset import SigExtDataset
 from sm_sip.data.preprocessing import (
     compute_similarities,
-    extract_sentences,
     labels_from_similarities,
 )
 from sm_sip.utils.gpu import clear_gpu_memory
@@ -142,13 +141,18 @@ def _build_dataset(
     all_texts = []
     all_labels = []
 
+    # Use the FAST tokenizer for offset_mapping (slow tokenizers don't support it)
+    fast_tokenizer = AutoTokenizer.from_pretrained(
+        tokenizer.name_or_path, use_fast=True,
+    )
+
     for sentences, similarities, source in sim_data:
         if len(similarities) == 0:
             continue
 
         labels = labels_from_similarities(similarities, threshold)
 
-        encoding = tokenizer(
+        encoding = fast_tokenizer(
             source, truncation=True, max_length=max_length,
             return_offsets_mapping=True,
         )
