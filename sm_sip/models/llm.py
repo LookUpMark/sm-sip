@@ -8,11 +8,6 @@ creates LangChain chains for both summary generation and G-Eval judging.
 from typing import Dict, Optional, Tuple
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, pipeline, set_seed as hf_set_seed
 from langchain_huggingface import HuggingFacePipeline
-from langchain_openai import ChatOpenAI
-try:
-    from langchain_google_genai import ChatGoogleGenerativeAI
-except ImportError:
-    ChatGoogleGenerativeAI = None
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
@@ -99,62 +94,6 @@ def create_judge_chain(gen_pipe, judge_template: str):
         LangChain chain (prompt | llm | parser).
     """
     llm = HuggingFacePipeline(pipeline=gen_pipe)
-    prompt = PromptTemplate(
-        template=judge_template,
-        input_variables=["source", "reference", "generated"],
-    )
-    return prompt | llm | StrOutputParser()
-def load_remote_llm(
-    model_id: str,
-    temperature: float = 0.1,
-    seed: int = DEFAULT_SEED,
-):
-    """Load a remote LLM (OpenRouter/OpenAI/Gemini) for generation.
-    
-    Requires OPENROUTER_API_KEY (or GEMINI_API_KEY) in the environment.
-    """
-    import os
-    
-    # --- Native Gemini Support ---
-    if model_id.lower().startswith("gemini"):
-        api_key = os.getenv("GEMINI_API_KEY")
-        if not api_key:
-            raise ValueError("GEMINI_API_KEY not found in environment for Gemini models.")
-        if ChatGoogleGenerativeAI is None:
-            raise ImportError("Please install `langchain-google-genai` to use native Gemini models.")
-            
-        print(f"  Connecting to Native Gemini: {model_id}...")
-        return ChatGoogleGenerativeAI(
-            model=model_id,
-            temperature=temperature,
-            google_api_key=api_key,
-            max_output_tokens=512,
-        )
-        
-    # --- OpenRouter Support ---
-    api_key = os.getenv("OPENROUTER_API_KEY")
-    if not api_key:
-        raise ValueError("OPENROUTER_API_KEY not found in environment for OpenRouter models.")
-        
-    print(f"  Connecting to OpenRouter: {model_id}...")
-    return ChatOpenAI(
-        model=model_id,
-        temperature=temperature,
-        openai_api_base="https://openrouter.ai/api/v1",
-        openai_api_key=api_key,
-        max_tokens=512,
-        model_kwargs={
-            "seed": seed,
-            "extra_headers": {
-                "HTTP-Referer": "https://github.com/marcantoniolopez/sm-sip",
-                "X-Title": "SigExt Summarization Evaluation",
-            }
-        }
-    )
-
-
-def create_remote_judge_chain(llm, judge_template: str):
-    """Create a LangChain chain for remote LLM-as-Judge evaluation."""
     prompt = PromptTemplate(
         template=judge_template,
         input_variables=["source", "reference", "generated"],

@@ -102,7 +102,7 @@ def run_ablation_experiment(
             proc = preprocess_dataset(data, sm, st, lang=lang)
             unload_sigext_model(sm, st)
 
-            from sm_sip.models import create_judge_chain, create_remote_judge_chain, load_remote_llm
+            from sm_sip.models import create_judge_chain
             from sm_sip.prompts import get_judge_prompt
             from sm_sip.metrics.judge import llm_judge_evaluate
 
@@ -114,16 +114,8 @@ def run_ablation_experiment(
             for judge_id in judge_models:
                 key = f"{lang}_{judge_id.split('/')[-1]}"
                 print(f'\n  -> Judge: {key}')
-                
-                # Heuristic for remote models (OpenRouter/OpenAI)
-                is_remote = any(x in judge_id.lower() for x in ["gpt-", "claude", "gemini", "deepseek", "openai/", "anthropic/"])
-                
-                if is_remote:
-                    jllm = load_remote_llm(judge_id)
-                    jchain = create_remote_judge_chain(jllm, get_judge_prompt(lang))
-                else:
-                    _, _, jpipe = load_llm(judge_id, quantization)
-                    jchain = create_judge_chain(jpipe, get_judge_prompt(lang))
+                _, _, jpipe = load_llm(judge_id, quantization)
+                jchain = create_judge_chain(jpipe, get_judge_prompt(lang))
 
                 scores = {"faithfulness": [], "completeness": [], "conciseness": [], "abstraction": []}
                 from tqdm.auto import tqdm
