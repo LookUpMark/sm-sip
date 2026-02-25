@@ -5,6 +5,7 @@ Supports quantized loading (4-bit / 8-bit) via BitsAndBytes and
 creates LangChain chains for both summary generation and G-Eval judging.
 """
 
+import torch
 from typing import Dict, Optional, Tuple
 from transformers import AutoModelForCausalLM, AutoTokenizer, BitsAndBytesConfig, pipeline, set_seed as hf_set_seed
 from langchain_huggingface import HuggingFacePipeline
@@ -35,15 +36,24 @@ def load_llm(
     Returns:
         Tuple of (model, tokenizer, hf_pipeline).
     """
-    # Set all seeds for reproducibility
+    # Clear GPU memory before loading a large LLM
+    from sm_sip.utils.gpu import clear_gpu_memory
+    clear_gpu_memory()
+    
     set_seed(seed)
     hf_set_seed(seed)
     print(f"  Loading LLM ({quantization}, seed={seed}): {model_id}...")
 
     if quantization == "4bit":
-        bnb_config = BitsAndBytesConfig(load_in_4bit=True)
+        bnb_config = BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_compute_dtype=torch.float16,
+        )
     else:
-        bnb_config = BitsAndBytesConfig(load_in_8bit=True)
+        bnb_config = BitsAndBytesConfig(
+            load_in_8bit=True,
+            llm_int8_enable_fp32_cpu_offload=True,
+        )
 
     model = AutoModelForCausalLM.from_pretrained(
         model_id,
