@@ -148,7 +148,8 @@ class TrainingConfig:
     patience: int = 2  # Stop after N epochs without val loss improvement
     val_split: float = 0.1  # Fraction of data for validation
     learning_rate: float = 2e-5
-    batch_size: int = 8
+    batch_size: int = 4
+    gradient_accumulation_steps: int = 2
     max_length: int = 2048
     output_model_name: str = "sigext-wits-it-xlmr-5k-060t"
     push_to_hub: bool = True

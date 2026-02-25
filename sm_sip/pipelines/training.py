@@ -276,7 +276,7 @@ def _train_single(
         # --- Training ---
         model.train()
         train_loss = 0
-        for batch in tqdm(train_loader, desc=f"  Epoch {epoch + 1}/{config.epochs} [train]"):
+        for i, batch in enumerate(tqdm(train_loader, desc=f"  Epoch {epoch + 1}/{config.epochs} [train]")):
             labels = batch.pop("labels").to(device)
             batch = {k: v.to(device) for k, v in batch.items()}
 
@@ -284,12 +284,17 @@ def _train_single(
                 outputs = model(**batch)
                 logits = outputs.logits  # (batch, seq_len, 2)
                 loss = loss_fn(logits.view(-1, 2), labels.view(-1))
+                # Normalize loss for accumulation
+                loss = loss / config.gradient_accumulation_steps
 
             scaler.scale(loss).backward()
-            scaler.step(optimizer)
-            scaler.update()
-            optimizer.zero_grad()
-            train_loss += loss.item()
+
+            if (i + 1) % config.gradient_accumulation_steps == 0 or (i + 1) == len(train_loader):
+                scaler.step(optimizer)
+                scaler.update()
+                optimizer.zero_grad()
+
+            train_loss += loss.item() * config.gradient_accumulation_steps
 
         avg_train = train_loss / len(train_loader)
 
