@@ -314,7 +314,8 @@ def _train_single(
 
         if improved:
             best_val_loss = avg_val
-            best_weights = copy.deepcopy(model.state_dict())
+            # Store weights on CPU to avoid doubling GPU VRAM usage
+            best_weights = {k: v.cpu().clone() for k, v in model.state_dict().items()}
             best_epoch = epoch + 1
             epochs_no_improve = 0
         else:
@@ -328,6 +329,10 @@ def _train_single(
     if best_weights is not None:
         model.load_state_dict(best_weights)
         print(f"  Restored best weights from epoch {best_epoch}")
+
+    # Move model to CPU before saving to free GPU VRAM immediately
+    model.cpu()
+    clear_gpu_memory()
 
     # Save / Push to hub
     tokenizer = AutoTokenizer.from_pretrained(config.base_model_id, use_fast=False)
@@ -446,8 +451,10 @@ def run_training_matrix(
                     _save_checkpoint(checkpoint_file, completed)
                 except Exception as e:
                     print(f"  FAILED: {e}")
+                finally:
+                    # Always clean up datasets and GPU between models
+                    del train_dataset, val_dataset
                     clear_gpu_memory()
-                    continue
 
             del tokenizer
 
